@@ -42,6 +42,8 @@ next-env.d.ts
 
 /generated/prisma
 
+# OS files
 *.db
 
-/.vscode
+# editor
+.vscode/

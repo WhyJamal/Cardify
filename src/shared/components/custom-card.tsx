@@ -6,6 +6,7 @@ import { useDrag, useDrop, useDragLayer } from "react-dnd";
 import { getEmptyImage } from "react-dnd-html5-backend";
 import Image from "next/image";
 import { CardData } from "@/shared/types";
+import { TooltipAction } from "./custom-tooltip";
 
 interface CardProps {
   card: CardData;
@@ -53,11 +54,15 @@ export function CardContent({ card, onClickCard }: { card: CardData; onClickCard
           <div className="relative flex items-start group">
             <div className="round-sm absolute left-0 top-0.5 opacity-0 group-hover:opacity-100 transition-all duration-200">
               <div className="relative">
-                <input type="checkbox" id={`checkbox-${card.id}`} onClick={(e) => e.stopPropagation()} className="peer cursor-pointer" />
-                <label htmlFor={`checkbox-${card.id}`} onClick={(e) => e.stopPropagation()} />
-                <span className="absolute top-4 left-5 whitespace-nowrap bg-white/90 text-black text-xs font-semibold px-2 py-1 rounded shadow-lg opacity-0 peer-hover:opacity-100 transition z-50 pointer-events-none">
-                  Отметь как выполнение
-                </span>
+                <TooltipAction
+                  tooltip="Отметь как выполнение"
+                  side="top"
+                >
+                  <div className="flex items-center">
+                    <input type="checkbox" id={`checkbox-${card.id}`} onClick={(e) => e.stopPropagation()} className="peer cursor-pointer" />
+                    <label htmlFor={`checkbox-${card.id}`} onClick={(e) => e.stopPropagation()} />
+                  </div>
+                </TooltipAction>
               </div>
             </div>
             <p className="text-[#b6c2cf] text-sm leading-snug mb-2 pr-5 transition-all duration-200 group-hover:pl-4">

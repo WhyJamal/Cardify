@@ -4,11 +4,13 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 
 import { Suspense } from "react";
-import { AuthProvider } from "@/app/providers/AuthProvider";
-
+import { AppProviders } from "@/app/providers";
 import CustomLoading from "@/shared/components/custom-loading";
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
+});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,11 +36,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={cn("font-sans", inter.variable)}>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
         <Suspense fallback={<CustomLoading />}>
-          <AuthProvider session={undefined}>
+          <AppProviders session={session}>
             {children}
-          </AuthProvider>
+          </AppProviders>
         </Suspense>
       </body>
     </html>

@@ -2,21 +2,23 @@
 
 import { Search, Bell, HelpCircle, LayoutGrid, Plus } from "lucide-react";
 import { useSession } from "next-auth/react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { AccountDropdown } from "./account-dropdown";
 import { CreateMenu } from "./create-menu";
 import { CreateBoardPanel } from "@/features/board/create-board-panel";
+import { TooltipAction } from "./custom-tooltip";
 
 type PanelState = "closed" | "menu" | "createBoard";
 
 export function Header() {
   const { data: session, status } = useSession();
+  const inputRef = useRef<HTMLInputElement>(null);
   const [panelState, setPanelState] = useState<PanelState>("closed");
   const [searchVal, setSearchVal] = useState("");
   const createBtnRef = useRef<HTMLButtonElement>(null);
-
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const handleCreateBtnClick = () => {
     setPanelState((s) => (s === "closed" ? "menu" : "closed"));
   };
@@ -32,6 +34,18 @@ export function Header() {
   };
 
   const initials = session?.user?.name ? getInitials(session.user.name) : null;
+
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "/") {
+        e.preventDefault();
+        inputRef.current?.focus(); 
+      }
+    };
+
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, []);
 
   return (
     <header className="flex items-center h-12 px-1 gap-2 bg-[#1d2125] border-b border-[#2c333a] shrink-0">
@@ -70,15 +84,22 @@ export function Header() {
       </nav> */}
 
       <div className="flex-1 flex justify-center mx-2 gap-3">
-        <div className="sm:flex hidden relative w-full max-w-xl">
-          <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#9fadbc]" />
-          <input
-            value={searchVal}
-            onChange={(e) => setSearchVal(e.target.value)}
-            placeholder="Поиск"
-            className="w-full bg-[#2c333a] border border-[#3d4954] rounded pl-9 pr-3 py-1.5 text-sm text-white placeholder-[#9fadbc] focus:outline-none focus:border-[#388bff] focus:bg-[#1d2125] transition-colors"
-          />
-        </div>
+        <TooltipAction
+          tooltip="Поиск"
+          shortcut="/"
+          side="bottom"
+        >
+          <div className="sm:flex hidden relative w-full max-w-xl">
+            <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#9fadbc]" />
+            <input
+              ref={inputRef}
+              value={searchVal}
+              onChange={(e) => setSearchVal(e.target.value)}
+              placeholder="Поиск"
+              className="w-full bg-[#2c333a] border border-[#3d4954] rounded pl-9 pr-3 py-1.5 text-sm text-white placeholder-[#9fadbc] focus:outline-none focus:border-[#388bff] focus:bg-[#1d2125] transition-colors"
+            />
+          </div>
+        </TooltipAction>
       </div>
 
       <div className="flex items-center gap-1">
@@ -117,11 +138,23 @@ export function Header() {
 
         {session?.user ? (
           <div className="size-full flex items-center justify-center bg-[#1d2125]">
-            <AccountDropdown session={session}>
-              <button className="w-8 h-8 rounded-full bg-linear-to-br from-[#4bce97] to-[#0052cc] flex items-center justify-center text-white text-xs font-bold ml-1">
-                {initials}
-              </button>
-            </AccountDropdown>
+            <div className="relative">
+              <TooltipAction
+                tooltip="Учетная запись"
+                side="bottom"
+              >
+                <button
+                  onClick={() => setDropdownOpen((prev) => !prev)}
+                  className="w-8 h-8 rounded-full bg-linear-to-br from-[#4bce97] to-[#0052cc] flex items-center justify-center text-white text-xs font-bold ml-1"
+                >
+                  {initials}
+                </button>
+              </TooltipAction>
+              {dropdownOpen && (
+                <AccountDropdown session={session} onClose={() => setDropdownOpen(false)} />
+              )}
+            </div>
+
           </div>
         ) : (
           <Link

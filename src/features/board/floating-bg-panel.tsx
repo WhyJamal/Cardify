@@ -9,12 +9,11 @@ import Image from "next/image";
 const PANEL_WIDTH = 320;
 
 const PHOTOS = [
-  "https://images.unsplash.com/photo-1574797668796-3c321fee0d01?w=300&q=80",
-  "https://images.unsplash.com/photo-1599551528722-6b6d968512a2?w=300&q=80",
-  "https://images.unsplash.com/photo-1678393834156-f8aed69b05f2?w=300&q=80",
-  "https://images.unsplash.com/photo-1598439473183-42c9301db5dc?w=300&q=80",
-  "https://images.unsplash.com/photo-1650234409957-7609e577a0b5?w=300&q=80",
-  "https://images.unsplash.com/photo-1668778026441-250fd7fb87f5?w=300&q=80",
+    "/images/board-backgrounds/tropical-beach-samoa.webp",
+    "/images/board-backgrounds/messy-office-desk-still-life.webp",
+    "/images/board-backgrounds/beautiful-shot-himalayas-mountains-clouds.webp",
+    "/images/board-backgrounds/laptop-coffee-cups-notepads-black-background-top-view.webp",
+    "/images/board-backgrounds/nature-landscape-with-black-sand-beach.webp",
 ];
 
 const GRADIENT_COLORS = [

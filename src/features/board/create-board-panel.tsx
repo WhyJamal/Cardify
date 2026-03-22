@@ -12,10 +12,10 @@ const PANEL_WIDTH = 370;
 const PANEL_HEIGHT = 590;
 
 const PHOTO_THUMBS = [
-  "https://images.unsplash.com/photo-1574797668796-3c321fee0d01?w=200&q=80",
-  "https://images.unsplash.com/photo-1599551528722-6b6d968512a2?w=200&q=80",
-  "https://images.unsplash.com/photo-1678393834156-f8aed69b05f2?w=200&q=80",
-  "https://images.unsplash.com/photo-1598439473183-42c9301db5dc?w=200&q=80",
+  "/images/board-backgrounds/tropical-beach-samoa.webp",
+  "/images/board-backgrounds/laptop-coffee-cups-notepads-black-background-top-view.webp",
+  "/images/board-backgrounds/beautiful-shot-himalayas-mountains-clouds.webp",
+  "/images/board-backgrounds/messy-office-desk-still-life.webp",
 ];
 
 const GRADIENT_COLORS = [

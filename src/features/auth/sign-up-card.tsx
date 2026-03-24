@@ -14,6 +14,8 @@ export function SignUpCard() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
 
+  const [loading, setLoading] = useState(false);
+
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
@@ -75,6 +77,8 @@ export function SignUpCard() {
 
     if (!validateStep2()) return;
 
+    setLoading(true);
+
     const res = await fetch("/api/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -89,6 +93,8 @@ export function SignUpCard() {
       setErrors({ email: "Пользователь уже существует" });
       return;
     }
+
+    setLoading(false);
 
     const result = await signIn("credentials", {
       email: form.email,
@@ -117,7 +123,14 @@ export function SignUpCard() {
 
   return (
     <div className="w-full rounded-[28px] bg-[#151414] shadow-2xl overflow-hidden min-h-[455]">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
+      <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-0">
+        
+        {loading && (
+          <div className="absolute top-0 left-0 right-0 h-0.75 z-50 overflow-hidden">
+            <div className="h-full w-full bg-[#8ab4f8] animate-loading-bar" />
+          </div>
+        )}
+
         <div className="p-8 sm:p-10 lg:p-12 flex flex-col justify-start">
           <div className="mb-10">
             <Image

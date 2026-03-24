@@ -11,20 +11,31 @@ export function SignInCard() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    setLoading(true);
 
     await signIn("credentials", {
       email,
       password,
       callbackUrl: "/",
     });
+
+    setLoading(false);
   };
 
   return (
     <div className="w-full rounded-[28px] bg-[#151414] shadow-2xl overflow-hidden">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
+      <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-0">
+
+        {loading && (
+          <div className="absolute top-0 left-0 right-0 h-0.75 z-50 overflow-hidden">
+            <div className="h-full w-full bg-[#8ab4f8] animate-loading-bar" />
+          </div>
+        )}
 
         <div className="p-8 sm:p-10 lg:p-12 flex flex-col justify-start">
           <div className="mb-10">
@@ -54,7 +65,7 @@ export function SignInCard() {
                 label="Имя пользователя или Email"
                 type="email"
                 value={email}
-                onChange={setEmail} 
+                onChange={setEmail}
               />
             </div>
 

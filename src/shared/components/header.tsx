@@ -9,6 +9,7 @@ import { AccountDropdown } from "./account-dropdown";
 import { CreateMenu } from "./create-menu";
 import { CreateBoardPanel } from "@/features/board/create-board-panel";
 import { TooltipAction } from "./custom-tooltip";
+import CardifyLogo from "./logo";
 
 type PanelState = "closed" | "menu" | "createBoard";
 
@@ -57,7 +58,7 @@ export function Header() {
 
         <Link href={'/'}>
           <button className="flex items-center gap-1 px-1 py-1 rounded hover:bg-white/10 transition-colors">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1 justify-center">
               <Image
                 src="/cardify11.png"
                 alt="cardify"
@@ -65,7 +66,9 @@ export function Header() {
                 height={30}
                 className="object-contain"
               />
-              <span className="text-white font-semibold text-[15px]">Cardify</span>
+              
+              <CardifyLogo size="sm"/>
+              {/* <span className="text-white font-semibold text-[15px]">Cardify</span> */}
             </div>
           </button>
         </Link>

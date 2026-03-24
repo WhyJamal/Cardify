@@ -28,7 +28,7 @@ export default function BoardPage() {
     <DndProvider backend={HTML5Backend}>
       <ColumnDragPreview columns={columns} />
       <CardDragPreview columns={columns} />
-
+      
       <div
         className="h-screen w-screen flex flex-col overflow-hidden"
         style={{

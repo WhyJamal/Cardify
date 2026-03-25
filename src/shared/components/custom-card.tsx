@@ -7,6 +7,7 @@ import { getEmptyImage } from "react-dnd-html5-backend";
 import Image from "next/image";
 import { CardData } from "@/shared/types";
 import { TooltipAction } from "./custom-tooltip";
+import Link from "next/link";
 
 interface CardProps {
   card: CardData;
@@ -41,68 +42,70 @@ export function CardContent({ card, onClickCard }: { card: CardData; onClickCard
         </div>
       )}
 
-      <div className="p-2 pb-2" onClick={() => onClickCard?.(card.id)}>
-        {card.labels && card.labels.length > 0 && (
-          <div className="flex flex-wrap gap-1 mb-2">
-            {card.labels.map((label) => (
-              <span key={label.id} className="h-2 min-w-8 rounded-full" style={{ backgroundColor: label.color }} title={label.text} />
-            ))}
-          </div>
-        )}
-
-        {card.title && (
-          <div className="relative flex items-start group">
-            <div className="round-sm absolute left-0 top-0.5 opacity-0 group-hover:opacity-100 transition-all duration-200">
-              <div className="relative">
-                <TooltipAction
-                  tooltip="Отметь как выполнение"
-                  side="top"
-                >
-                  <div className="flex items-center">
-                    <input type="checkbox" id={`checkbox-${card.id}`} onClick={(e) => e.stopPropagation()} className="peer cursor-pointer" />
-                    <label htmlFor={`checkbox-${card.id}`} onClick={(e) => e.stopPropagation()} />
-                  </div>
-                </TooltipAction>
-              </div>
+      <Link href={`/c/${card.id}/${card.title}`}>
+        <div className="p-2 pb-2">
+          {card.labels && card.labels.length > 0 && (
+            <div className="flex flex-wrap gap-1 mb-2">
+              {card.labels.map((label) => (
+                <span key={label.id} className="h-2 min-w-8 rounded-full" style={{ backgroundColor: label.color }} title={label.text} />
+              ))}
             </div>
-            <p className="text-[#b6c2cf] text-sm leading-snug mb-2 pr-5 transition-all duration-200 group-hover:pl-4">
-              {card.title}
-            </p>
-          </div>
-        )}
+          )}
 
-        {card.links && card.links.length > 0 && (
-          <div className="flex flex-col gap-1 mb-2">
-            {card.links.map((link, i) => (
-              <div key={i} className="flex items-center gap-1.5 text-[#579dff] text-xs hover:underline cursor-pointer">
-                {link.icon && <span className="w-4 h-4 rounded bg-blue-500/20 flex items-center justify-center text-[8px] text-blue-400">✦</span>}
-                <span>{link.text}</span>
-                <ExternalLink size={10} className="opacity-50" />
+          {card.title && (
+            <div className="relative flex items-start group">
+              <div className="round-sm absolute left-0 top-0.5 opacity-0 group-hover:opacity-100 transition-all duration-200">
+                <div className="relative">
+                  <TooltipAction
+                    tooltip="Отметь как выполнение"
+                    side="top"
+                  >
+                    <div className="flex items-center">
+                      <input type="checkbox" id={`checkbox-${card.id}`} onClick={(e) => e.stopPropagation()} className="peer cursor-pointer" />
+                      <label htmlFor={`checkbox-${card.id}`} onClick={(e) => e.stopPropagation()} />
+                    </div>
+                  </TooltipAction>
+                </div>
               </div>
-            ))}
-          </div>
-        )}
+              <p className="text-[#b6c2cf] text-sm leading-snug mb-2 pr-5 transition-all duration-200 group-hover:pl-4">
+                {card.title}
+              </p>
+            </div>
+          )}
 
-        {(card.watching || card.hasDescription || card.checklist || card.attachments || card.assignee) && (
-          <div className="flex items-center justify-between mt-1">
-            <div className="flex items-center gap-2 flex-wrap">
-              {card.watching && <span className="flex items-center gap-1 text-[#9fadbc] text-xs"><Eye size={12} /></span>}
-              {card.hasDescription && <span className="flex items-center gap-1 text-[#9fadbc] text-xs"><AlignLeft size={12} /></span>}
-              {card.attachments && <span className="flex items-center gap-1 text-[#9fadbc] text-xs"><Paperclip size={12} />{card.attachments}</span>}
-              {card.checklist && (
-                <span className={`flex items-center gap-1 text-xs px-1 rounded ${card.checklist.done === card.checklist.total && card.checklist.total > 0 ? "bg-green-700/60 text-green-300" : "text-[#9fadbc]"}`}>
-                  <CheckSquare size={12} />{card.checklist.done}/{card.checklist.total}
-                </span>
+          {card.links && card.links.length > 0 && (
+            <div className="flex flex-col gap-1 mb-2">
+              {card.links.map((link, i) => (
+                <div key={i} className="flex items-center gap-1.5 text-[#579dff] text-xs hover:underline cursor-pointer">
+                  {link.icon && <span className="w-4 h-4 rounded bg-blue-500/20 flex items-center justify-center text-[8px] text-blue-400">✦</span>}
+                  <span>{link.text}</span>
+                  <ExternalLink size={10} className="opacity-50" />
+                </div>
+              ))}
+            </div>
+          )}
+
+          {(card.watching || card.hasDescription || card.checklist || card.attachments || card.assignee) && (
+            <div className="flex items-center justify-between mt-1">
+              <div className="flex items-center gap-2 flex-wrap">
+                {card.watching && <span className="flex items-center gap-1 text-[#9fadbc] text-xs"><Eye size={12} /></span>}
+                {card.hasDescription && <span className="flex items-center gap-1 text-[#9fadbc] text-xs"><AlignLeft size={12} /></span>}
+                {card.attachments && <span className="flex items-center gap-1 text-[#9fadbc] text-xs"><Paperclip size={12} />{card.attachments}</span>}
+                {card.checklist && (
+                  <span className={`flex items-center gap-1 text-xs px-1 rounded ${card.checklist.done === card.checklist.total && card.checklist.total > 0 ? "bg-green-700/60 text-green-300" : "text-[#9fadbc]"}`}>
+                    <CheckSquare size={12} />{card.checklist.done}/{card.checklist.total}
+                  </span>
+                )}
+              </div>
+              {card.assignee && (
+                <div className="w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold text-white" style={{ backgroundColor: card.assignee.color }}>
+                  {card.assignee.initials}
+                </div>
               )}
             </div>
-            {card.assignee && (
-              <div className="w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold text-white" style={{ backgroundColor: card.assignee.color }}>
-                {card.assignee.initials}
-              </div>
-            )}
-          </div>
-        )}
-      </div>
+          )}
+        </div>
+      </Link>
     </>
   );
 }

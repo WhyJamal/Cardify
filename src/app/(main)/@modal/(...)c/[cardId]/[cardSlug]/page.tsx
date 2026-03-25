@@ -14,6 +14,7 @@ import {
   Smile,
   ChevronDown,
 } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 interface Comment {
   id: number;
@@ -25,11 +26,8 @@ interface Comment {
   activityText?: string;
 }
 
-interface CardModalProps {
-  onClose: () => void;
-}
-
-export default function CardModal({ onClose }: CardModalProps) {
+export default function CardModal() {
+  const router = useRouter();
   const [comment, setComment] = useState("");
   const [description, setDescription] = useState("Описание");
   const [isEditingDesc, setIsEditingDesc] = useState(false);
@@ -60,7 +58,10 @@ export default function CardModal({ onClose }: CardModalProps) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/60 flex items-start justify-center z-50 p-4">
+    <div 
+      onClick={() => router.back()}
+      className="fixed inset-0 bg-black/60 flex items-start justify-center z-50 p-4"
+    >
       <div
         className="bg-[#1d2125] top-10 rounded-2xl w-full max-w-5xl max-h-[90vh] overflow-hidden shadow-2xl relative"
         
@@ -82,7 +83,7 @@ export default function CardModal({ onClose }: CardModalProps) {
               <MoreHorizontal size={18} />
             </button>
             <button
-              onClick={onClose}
+              onClick={() => router.back()}
               className="hover:text-white hover:bg-[#2c333a] p-1.5 rounded transition-colors"
             >
               <X size={18} />

@@ -1,7 +1,12 @@
+"use client";
+
 import CardifyLogo from "@/shared/components/logo";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 export default function NotFound() {
+    const pathname = usePathname();
+
     return (
         <div className="min-h-screen bg-[#202124] flex items-center justify-center font-sans px-6">
             <div className="flex flex-col md:flex-row items-center gap-16">
@@ -19,7 +24,7 @@ export default function NotFound() {
                     <p className="text-[#bdc1c6] text-sm mb-2 leading-relaxed">
                         The requested URL{" "}
                         <code className="bg-[#2d2f31] px-2 py-0.5 rounded text-[#8ab4f8] text-sm">
-                            /content/
+                            {pathname}
                         </code>{" "}
                         was not found on this server.
                     </p>

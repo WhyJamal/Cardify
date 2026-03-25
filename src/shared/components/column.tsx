@@ -112,10 +112,6 @@ export function Column({
     //alert("1");
   }
 
-  function handleClickCard(id: string) {
-    setshowCardModal(true);
-  }
-
   function handleClose() {
     setshowCardModal(false);
   }
@@ -152,7 +148,6 @@ export function Column({
             index={index}
             columnId={column.id}
             onEdit={onEdit}
-            onClickCard={() => handleClickCard(card.id)}
             onDropCard={onDropCard}
           />
         ))}

@@ -23,6 +23,9 @@ export async function GET() {
   const boards = await prisma.board.findMany({
     where: { ownerId: dbUser.id },
     orderBy: { createdAt: "desc" },
+    // include: {
+    //   labels: true,
+    // },
   });
 
   return NextResponse.json({ boards });
@@ -57,12 +60,28 @@ export async function POST(req: NextRequest) {
     );
   }
 
+  const defaultLabels = [
+    { color: "#10B981", name: "" },
+    { color: "#FACC15", name: "" },
+    { color: "#F97316", name: "" },
+    { color: "#EF4444", name: "" },
+    { color: "#A855F7", name: "" },
+    { color: "#3B82F6", name: "" },
+  ];
+
   const board = await prisma.board.create({
     data: {
       title,
       bg,
       isPhoto,
       ownerId: dbUser.id,
+      labels: {
+        create: defaultLabels.map((label, idx) => ({
+          color: label.color,
+          name: label.name,
+          position: idx,
+        })),
+      },
     },
   });
 

@@ -113,6 +113,7 @@ export function SignInCard() {
 
             <div className="flex items-center justify-between gap-3 pt-6">
               <Button
+                type="button"
                 variant="link"
                 className="text-white"
                 onClick={() =>

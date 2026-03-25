@@ -9,7 +9,9 @@
 * 🟢 You can import this file directly.
 */
 
+export const CardTimelineType = {
+  COMMENT: 'COMMENT',
+  ACTIVITY: 'ACTIVITY'
+} as const
 
-
-// This file is empty because there are no enums in the schema.
-export {}
+export type CardTimelineType = (typeof CardTimelineType)[keyof typeof CardTimelineType]

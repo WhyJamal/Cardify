@@ -34,11 +34,26 @@ model Board {
   owner     User     @relation(fields: [ownerId], references: [id], onDelete: Cascade)
 
   columns   Column[]
+  labels    BoardLabel[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@index([ownerId])
+}
+
+model BoardLabel {
+  id        String   @id @default(cuid())
+  boardId   Int
+  color     String
+  name      String?
+  position  Int      @default(0)
+  createdAt DateTime @default(now())
+
+  board     Board    @relation(fields: [boardId], references: [id], onDelete: Cascade)
+  cards     CardBoardLabel[]
+
+  @@index([boardId])
 }
 
 model Column {
@@ -72,25 +87,26 @@ model Card {
   position         Int      @default(0)
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
-
+  dueDate          DateTime?
+  
   column           Column     @relation(fields: [columnId], references: [id], onDelete: Cascade)
-  labels           CardLabel[]
+  labels           CardBoardLabel[]
   links            CardLink[]
+  comments         CardTimeline[]
 
   @@index([columnId, position])
 }
 
-model CardLabel {
-  id        String   @id @default(cuid())
-  cardId    String
-  color     String
-  name      String?
-  position  Int      @default(0)
-  createdAt DateTime @default(now())
+model CardBoardLabel {
+  id           String     @id @default(cuid())
+  cardId       String
+  boardLabelId String
 
-  card      Card     @relation(fields: [cardId], references: [id], onDelete: Cascade)
+  card         Card       @relation(fields: [cardId], references: [id], onDelete: Cascade)
+  boardLabel   BoardLabel @relation(fields: [boardLabelId], references: [id])
 
-  @@index([cardId])
+  @@unique([cardId, boardLabelId])
+  @@index([cardId, boardLabelId])
 }
 
 model CardLink {
@@ -105,4 +121,25 @@ model CardLink {
   card      Card     @relation(fields: [cardId], references: [id], onDelete: Cascade)
 
   @@index([cardId])
+}
+
+enum CardTimelineType {
+  COMMENT
+  ACTIVITY
+}
+
+model CardTimeline {
+  id           String           @id @default(cuid())
+  cardId       String
+  type         CardTimelineType @default(COMMENT)
+  authorName   String
+  initials     String?
+  text         String?
+  activityText String?
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+
+  card         Card             @relation(fields: [cardId], references: [id], onDelete: Cascade)
+
+  @@index([cardId, createdAt])
 }

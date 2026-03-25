@@ -1,7 +1,7 @@
 import { getSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 
-export async function apiFetch(input: RequestInfo, init: RequestInit = {}) {
+export async function clientFetch(input: RequestInfo, init: RequestInit = {}) {
   const session = await getSession();
   const token = session?.user?.id;
 

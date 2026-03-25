@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { useBoardView } from "@/app/providers/BoardProvider";
-import { apiFetch } from "@/lib/api";
+import { clientFetch } from "@/lib/client-api";
 
 export function useBoardActions() {
   const { board, columns, setColumns } = useBoardView();
@@ -59,7 +59,7 @@ export function useBoardActions() {
 
     if (!changed) return;
 
-    await apiFetch("/api/cards/reorder", {
+    await clientFetch("/api/cards/reorder", {
       method: "PATCH",
       body: JSON.stringify({
         boardId: board?.id,
@@ -77,7 +77,7 @@ export function useBoardActions() {
     const trimmed = title.trim();
     if (!trimmed) return;
 
-    const result = await apiFetch("/api/cards", {
+    const result = await clientFetch("/api/cards", {
       method: "POST",
       body: JSON.stringify({ columnId, title: trimmed }),
     }).catch((err) => { console.error(err); return null; });
@@ -116,7 +116,7 @@ export function useBoardActions() {
       return next;
     });
 
-    await apiFetch("/api/columns/reorder", {
+    await clientFetch("/api/columns/reorder", {
       method: "PATCH",
       body: JSON.stringify({
         boardId: board?.id,
@@ -129,7 +129,7 @@ export function useBoardActions() {
     const trimmed = title.trim();
     if (!trimmed || !board?.id) return false;
 
-    const result = await apiFetch("/api/columns", {
+    const result = await clientFetch("/api/columns", {
       method: "POST",
       body: JSON.stringify({ boardId: board.id, title: trimmed }),
     }).catch((err) => { console.error(err); return null; });

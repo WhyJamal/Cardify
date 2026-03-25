@@ -386,10 +386,12 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 export const ModelName = {
   User: 'User',
   Board: 'Board',
+  BoardLabel: 'BoardLabel',
   Column: 'Column',
   Card: 'Card',
-  CardLabel: 'CardLabel',
-  CardLink: 'CardLink'
+  CardBoardLabel: 'CardBoardLabel',
+  CardLink: 'CardLink',
+  CardTimeline: 'CardTimeline'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -405,7 +407,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "board" | "column" | "card" | "cardLabel" | "cardLink"
+    modelProps: "user" | "board" | "boardLabel" | "column" | "card" | "cardBoardLabel" | "cardLink" | "cardTimeline"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -557,6 +559,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    BoardLabel: {
+      payload: Prisma.$BoardLabelPayload<ExtArgs>
+      fields: Prisma.BoardLabelFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BoardLabelFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardLabelPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BoardLabelFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardLabelPayload>
+        }
+        findFirst: {
+          args: Prisma.BoardLabelFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardLabelPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BoardLabelFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardLabelPayload>
+        }
+        findMany: {
+          args: Prisma.BoardLabelFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardLabelPayload>[]
+        }
+        create: {
+          args: Prisma.BoardLabelCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardLabelPayload>
+        }
+        createMany: {
+          args: Prisma.BoardLabelCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.BoardLabelCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardLabelPayload>[]
+        }
+        delete: {
+          args: Prisma.BoardLabelDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardLabelPayload>
+        }
+        update: {
+          args: Prisma.BoardLabelUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardLabelPayload>
+        }
+        deleteMany: {
+          args: Prisma.BoardLabelDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BoardLabelUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.BoardLabelUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardLabelPayload>[]
+        }
+        upsert: {
+          args: Prisma.BoardLabelUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardLabelPayload>
+        }
+        aggregate: {
+          args: Prisma.BoardLabelAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBoardLabel>
+        }
+        groupBy: {
+          args: Prisma.BoardLabelGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BoardLabelGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BoardLabelCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BoardLabelCountAggregateOutputType> | number
+        }
+      }
+    }
     Column: {
       payload: Prisma.$ColumnPayload<ExtArgs>
       fields: Prisma.ColumnFieldRefs
@@ -705,77 +781,77 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    CardLabel: {
-      payload: Prisma.$CardLabelPayload<ExtArgs>
-      fields: Prisma.CardLabelFieldRefs
+    CardBoardLabel: {
+      payload: Prisma.$CardBoardLabelPayload<ExtArgs>
+      fields: Prisma.CardBoardLabelFieldRefs
       operations: {
         findUnique: {
-          args: Prisma.CardLabelFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CardLabelPayload> | null
+          args: Prisma.CardBoardLabelFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CardBoardLabelPayload> | null
         }
         findUniqueOrThrow: {
-          args: Prisma.CardLabelFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CardLabelPayload>
+          args: Prisma.CardBoardLabelFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CardBoardLabelPayload>
         }
         findFirst: {
-          args: Prisma.CardLabelFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CardLabelPayload> | null
+          args: Prisma.CardBoardLabelFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CardBoardLabelPayload> | null
         }
         findFirstOrThrow: {
-          args: Prisma.CardLabelFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CardLabelPayload>
+          args: Prisma.CardBoardLabelFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CardBoardLabelPayload>
         }
         findMany: {
-          args: Prisma.CardLabelFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CardLabelPayload>[]
+          args: Prisma.CardBoardLabelFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CardBoardLabelPayload>[]
         }
         create: {
-          args: Prisma.CardLabelCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CardLabelPayload>
+          args: Prisma.CardBoardLabelCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CardBoardLabelPayload>
         }
         createMany: {
-          args: Prisma.CardLabelCreateManyArgs<ExtArgs>
+          args: Prisma.CardBoardLabelCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
         createManyAndReturn: {
-          args: Prisma.CardLabelCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CardLabelPayload>[]
+          args: Prisma.CardBoardLabelCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CardBoardLabelPayload>[]
         }
         delete: {
-          args: Prisma.CardLabelDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CardLabelPayload>
+          args: Prisma.CardBoardLabelDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CardBoardLabelPayload>
         }
         update: {
-          args: Prisma.CardLabelUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CardLabelPayload>
+          args: Prisma.CardBoardLabelUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CardBoardLabelPayload>
         }
         deleteMany: {
-          args: Prisma.CardLabelDeleteManyArgs<ExtArgs>
+          args: Prisma.CardBoardLabelDeleteManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateMany: {
-          args: Prisma.CardLabelUpdateManyArgs<ExtArgs>
+          args: Prisma.CardBoardLabelUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateManyAndReturn: {
-          args: Prisma.CardLabelUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CardLabelPayload>[]
+          args: Prisma.CardBoardLabelUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CardBoardLabelPayload>[]
         }
         upsert: {
-          args: Prisma.CardLabelUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CardLabelPayload>
+          args: Prisma.CardBoardLabelUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CardBoardLabelPayload>
         }
         aggregate: {
-          args: Prisma.CardLabelAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateCardLabel>
+          args: Prisma.CardBoardLabelAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCardBoardLabel>
         }
         groupBy: {
-          args: Prisma.CardLabelGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.CardLabelGroupByOutputType>[]
+          args: Prisma.CardBoardLabelGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CardBoardLabelGroupByOutputType>[]
         }
         count: {
-          args: Prisma.CardLabelCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.CardLabelCountAggregateOutputType> | number
+          args: Prisma.CardBoardLabelCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CardBoardLabelCountAggregateOutputType> | number
         }
       }
     }
@@ -853,6 +929,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    CardTimeline: {
+      payload: Prisma.$CardTimelinePayload<ExtArgs>
+      fields: Prisma.CardTimelineFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CardTimelineFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CardTimelinePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CardTimelineFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CardTimelinePayload>
+        }
+        findFirst: {
+          args: Prisma.CardTimelineFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CardTimelinePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CardTimelineFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CardTimelinePayload>
+        }
+        findMany: {
+          args: Prisma.CardTimelineFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CardTimelinePayload>[]
+        }
+        create: {
+          args: Prisma.CardTimelineCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CardTimelinePayload>
+        }
+        createMany: {
+          args: Prisma.CardTimelineCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CardTimelineCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CardTimelinePayload>[]
+        }
+        delete: {
+          args: Prisma.CardTimelineDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CardTimelinePayload>
+        }
+        update: {
+          args: Prisma.CardTimelineUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CardTimelinePayload>
+        }
+        deleteMany: {
+          args: Prisma.CardTimelineDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CardTimelineUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CardTimelineUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CardTimelinePayload>[]
+        }
+        upsert: {
+          args: Prisma.CardTimelineUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CardTimelinePayload>
+        }
+        aggregate: {
+          args: Prisma.CardTimelineAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCardTimeline>
+        }
+        groupBy: {
+          args: Prisma.CardTimelineGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CardTimelineGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CardTimelineCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CardTimelineCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -914,6 +1064,18 @@ export const BoardScalarFieldEnum = {
 export type BoardScalarFieldEnum = (typeof BoardScalarFieldEnum)[keyof typeof BoardScalarFieldEnum]
 
 
+export const BoardLabelScalarFieldEnum = {
+  id: 'id',
+  boardId: 'boardId',
+  color: 'color',
+  name: 'name',
+  position: 'position',
+  createdAt: 'createdAt'
+} as const
+
+export type BoardLabelScalarFieldEnum = (typeof BoardLabelScalarFieldEnum)[keyof typeof BoardLabelScalarFieldEnum]
+
+
 export const ColumnScalarFieldEnum = {
   id: 'id',
   boardId: 'boardId',
@@ -942,22 +1104,20 @@ export const CardScalarFieldEnum = {
   assigneeColor: 'assigneeColor',
   position: 'position',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  dueDate: 'dueDate'
 } as const
 
 export type CardScalarFieldEnum = (typeof CardScalarFieldEnum)[keyof typeof CardScalarFieldEnum]
 
 
-export const CardLabelScalarFieldEnum = {
+export const CardBoardLabelScalarFieldEnum = {
   id: 'id',
   cardId: 'cardId',
-  color: 'color',
-  name: 'name',
-  position: 'position',
-  createdAt: 'createdAt'
+  boardLabelId: 'boardLabelId'
 } as const
 
-export type CardLabelScalarFieldEnum = (typeof CardLabelScalarFieldEnum)[keyof typeof CardLabelScalarFieldEnum]
+export type CardBoardLabelScalarFieldEnum = (typeof CardBoardLabelScalarFieldEnum)[keyof typeof CardBoardLabelScalarFieldEnum]
 
 
 export const CardLinkScalarFieldEnum = {
@@ -971,6 +1131,21 @@ export const CardLinkScalarFieldEnum = {
 } as const
 
 export type CardLinkScalarFieldEnum = (typeof CardLinkScalarFieldEnum)[keyof typeof CardLinkScalarFieldEnum]
+
+
+export const CardTimelineScalarFieldEnum = {
+  id: 'id',
+  cardId: 'cardId',
+  type: 'type',
+  authorName: 'authorName',
+  initials: 'initials',
+  text: 'text',
+  activityText: 'activityText',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CardTimelineScalarFieldEnum = (typeof CardTimelineScalarFieldEnum)[keyof typeof CardTimelineScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1020,6 +1195,13 @@ export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'In
  * Reference to a field of type 'Boolean'
  */
 export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+/**
+ * Reference to a field of type 'CardTimelineType'
+ */
+export type EnumCardTimelineTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CardTimelineType'>
     
 
 
@@ -1126,10 +1308,12 @@ export type PrismaClientOptions = ({
 export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
   board?: Prisma.BoardOmit
+  boardLabel?: Prisma.BoardLabelOmit
   column?: Prisma.ColumnOmit
   card?: Prisma.CardOmit
-  cardLabel?: Prisma.CardLabelOmit
+  cardBoardLabel?: Prisma.CardBoardLabelOmit
   cardLink?: Prisma.CardLinkOmit
+  cardTimeline?: Prisma.CardTimelineOmit
 }
 
 /* Types for Logging */

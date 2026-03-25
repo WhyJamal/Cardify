@@ -28,6 +28,11 @@ export type User = Prisma.UserModel
  */
 export type Board = Prisma.BoardModel
 /**
+ * Model BoardLabel
+ * 
+ */
+export type BoardLabel = Prisma.BoardLabelModel
+/**
  * Model Column
  * 
  */
@@ -38,12 +43,17 @@ export type Column = Prisma.ColumnModel
  */
 export type Card = Prisma.CardModel
 /**
- * Model CardLabel
+ * Model CardBoardLabel
  * 
  */
-export type CardLabel = Prisma.CardLabelModel
+export type CardBoardLabel = Prisma.CardBoardLabelModel
 /**
  * Model CardLink
  * 
  */
 export type CardLink = Prisma.CardLinkModel
+/**
+ * Model CardTimeline
+ * 
+ */
+export type CardTimeline = Prisma.CardTimelineModel

@@ -10,8 +10,10 @@
  */
 export type * from './models/User'
 export type * from './models/Board'
+export type * from './models/BoardLabel'
 export type * from './models/Column'
 export type * from './models/Card'
-export type * from './models/CardLabel'
+export type * from './models/CardBoardLabel'
 export type * from './models/CardLink'
+export type * from './models/CardTimeline'
 export type * from './commonInputTypes'

@@ -53,10 +53,12 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   User: 'User',
   Board: 'Board',
+  BoardLabel: 'BoardLabel',
   Column: 'Column',
   Card: 'Card',
-  CardLabel: 'CardLabel',
-  CardLink: 'CardLink'
+  CardBoardLabel: 'CardBoardLabel',
+  CardLink: 'CardLink',
+  CardTimeline: 'CardTimeline'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -97,6 +99,18 @@ export const BoardScalarFieldEnum = {
 export type BoardScalarFieldEnum = (typeof BoardScalarFieldEnum)[keyof typeof BoardScalarFieldEnum]
 
 
+export const BoardLabelScalarFieldEnum = {
+  id: 'id',
+  boardId: 'boardId',
+  color: 'color',
+  name: 'name',
+  position: 'position',
+  createdAt: 'createdAt'
+} as const
+
+export type BoardLabelScalarFieldEnum = (typeof BoardLabelScalarFieldEnum)[keyof typeof BoardLabelScalarFieldEnum]
+
+
 export const ColumnScalarFieldEnum = {
   id: 'id',
   boardId: 'boardId',
@@ -125,22 +139,20 @@ export const CardScalarFieldEnum = {
   assigneeColor: 'assigneeColor',
   position: 'position',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  dueDate: 'dueDate'
 } as const
 
 export type CardScalarFieldEnum = (typeof CardScalarFieldEnum)[keyof typeof CardScalarFieldEnum]
 
 
-export const CardLabelScalarFieldEnum = {
+export const CardBoardLabelScalarFieldEnum = {
   id: 'id',
   cardId: 'cardId',
-  color: 'color',
-  name: 'name',
-  position: 'position',
-  createdAt: 'createdAt'
+  boardLabelId: 'boardLabelId'
 } as const
 
-export type CardLabelScalarFieldEnum = (typeof CardLabelScalarFieldEnum)[keyof typeof CardLabelScalarFieldEnum]
+export type CardBoardLabelScalarFieldEnum = (typeof CardBoardLabelScalarFieldEnum)[keyof typeof CardBoardLabelScalarFieldEnum]
 
 
 export const CardLinkScalarFieldEnum = {
@@ -154,6 +166,21 @@ export const CardLinkScalarFieldEnum = {
 } as const
 
 export type CardLinkScalarFieldEnum = (typeof CardLinkScalarFieldEnum)[keyof typeof CardLinkScalarFieldEnum]
+
+
+export const CardTimelineScalarFieldEnum = {
+  id: 'id',
+  cardId: 'cardId',
+  type: 'type',
+  authorName: 'authorName',
+  initials: 'initials',
+  text: 'text',
+  activityText: 'activityText',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CardTimelineScalarFieldEnum = (typeof CardTimelineScalarFieldEnum)[keyof typeof CardTimelineScalarFieldEnum]
 
 
 export const SortOrder = {

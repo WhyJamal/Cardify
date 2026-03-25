@@ -219,6 +219,7 @@ export default function CardClient({
                                 <DatePicker
                                     triggerRef={addBtnRef}
                                     cardId={card.id}
+                                    cardDueDate={card.dueDate}
                                     onClose={handleCloseDatePicker}
                                     onChange={(newDueDate) =>
                                         setCard(prev => prev ? { ...prev, dueDate: newDueDate ? new Date(newDueDate) : undefined } : prev)

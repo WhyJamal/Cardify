@@ -7,6 +7,7 @@ import { clientFetch } from '@/lib/client-api';
 interface DatePickerProps {
   triggerRef: React.RefObject<HTMLElement | null>;
   cardId: string;
+  cardDueDate: Date | undefined;
   onClose?: () => void;
   onChange?: (dueDate: string | null) => void;
 }
@@ -21,7 +22,7 @@ const formatTimeValue = (date: Date) => {
   return `${pad(date.getHours())}:${pad(date.getMinutes())}`;
 };
 
-export function DatePicker({ triggerRef, cardId, onClose, onChange }: DatePickerProps) {
+export function DatePicker({ triggerRef, cardId, cardDueDate, onClose, onChange }: DatePickerProps) {
   const today = new Date();
 
   const [currentDate, setCurrentDate] = useState(
@@ -29,10 +30,22 @@ export function DatePicker({ triggerRef, cardId, onClose, onChange }: DatePicker
   ); // current month
   const [selectedDate, setSelectedDate] = useState<Date | null>(today);
   const [startDate, setStartDate] = useState('');
-  const [deadlineDate, setDeadlineDate] = useState(formatDateValue(today));
-  const [deadlineTime, setDeadlineTime] = useState(formatTimeValue(today));
+  const [deadlineDate, setDeadlineDate] = useState('');
+  const [deadlineTime, setDeadlineTime] = useState('');
   const [repeatOption, setRepeatOption] = useState('Никогда');
   const [reminderOption, setReminderOption] = useState('за 1 день');
+
+  useEffect(() => {
+    if (cardDueDate) {
+      setDeadlineDate(formatDateValue(cardDueDate));
+      setDeadlineTime(formatTimeValue(cardDueDate));
+      setSelectedDate(cardDueDate);
+    } else {
+      setDeadlineDate(formatDateValue(today));
+      setDeadlineTime(formatTimeValue(today));
+      setSelectedDate(today);
+    }
+  }, [cardDueDate]);
 
   const PANEL_WIDTH = 350;
   const PANEL_HEIGHT = 640;
@@ -195,7 +208,7 @@ export function DatePicker({ triggerRef, cardId, onClose, onChange }: DatePicker
           return;
         }
       } else if (action === "delete") {
-        dueDate = null; 
+        dueDate = null;
         setDeadlineDate("");
         setDeadlineTime("");
       }

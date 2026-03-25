@@ -13,17 +13,13 @@ export default async function CardDeepLinkPage({
 }) {
     const { cardId, cardSlug } = await params;
 
-    try {
-        const card = await serverFetch(`/api/cards/${cardId}/location`);
+    const card = await serverFetch(`/api/cards/${cardId}/location`);
 
-        if (!card?.boardId || !card?.boardSlug) {
-            notFound();
-        }
-
-        redirect(
-            `/b/${card.boardId}/${card.boardSlug}?openCardPath=/c/${cardId}/${cardSlug}`
-        );
-    } catch {
+    if (!card?.boardId || !card?.boardSlug) {
         notFound();
     }
+
+    redirect(
+        `/b/${card.boardId}/${card.boardSlug}?openCardPath=/c/${cardId}/${cardSlug}`
+    );
 }

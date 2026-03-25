@@ -1,4 +1,5 @@
 import Image from "next/image";
+import CardifyLogo from "./logo";
 
 function Shimmer({ className = "" }: { className?: string }) {
     return (
@@ -20,7 +21,7 @@ export default function CustomLoading() {
                 }
             `}
             </style>
-            <nav className="h-12 bg-white/10 backdrop-blur-sm flex items-center px-3 gap-2 shrink-0">
+            <nav className="h-14 bg-white/10 backdrop-blur-sm flex items-center px-3 gap-2 shrink-0">
                 <div className="flex items-center gap-2">
                     <Shimmer className="h-7 w-9 rounded" />
                     <div className="flex items-center gap-1">
@@ -31,7 +32,8 @@ export default function CustomLoading() {
                             height={50}
                             className="h-9 w-9 rounded filter grayscale"
                         />
-                        <span className="text-gray-300 font-bold">Cardify</span>
+                        <CardifyLogo size="sm"/>
+                        {/* <span className="text-gray-300 font-bold">Cardify</span> */}
                     </div>
                 </div>
                 <div className="flex items-center gap-2 justify-center relative w-full mx-auto">

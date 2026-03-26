@@ -180,6 +180,7 @@ export type CardBoardLabelOrderByWithRelationInput = {
 
 export type CardBoardLabelWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  cardId_boardLabelId?: Prisma.CardBoardLabelCardIdBoardLabelIdCompoundUniqueInput
   AND?: Prisma.CardBoardLabelWhereInput | Prisma.CardBoardLabelWhereInput[]
   OR?: Prisma.CardBoardLabelWhereInput[]
   NOT?: Prisma.CardBoardLabelWhereInput | Prisma.CardBoardLabelWhereInput[]
@@ -187,7 +188,7 @@ export type CardBoardLabelWhereUniqueInput = Prisma.AtLeast<{
   boardLabelId?: Prisma.StringFilter<"CardBoardLabel"> | string
   card?: Prisma.XOR<Prisma.CardScalarRelationFilter, Prisma.CardWhereInput>
   boardLabel?: Prisma.XOR<Prisma.BoardLabelScalarRelationFilter, Prisma.BoardLabelWhereInput>
-}, "id">
+}, "id" | "cardId_boardLabelId">
 
 export type CardBoardLabelOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -255,6 +256,11 @@ export type CardBoardLabelListRelationFilter = {
 
 export type CardBoardLabelOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type CardBoardLabelCardIdBoardLabelIdCompoundUniqueInput = {
+  cardId: string
+  boardLabelId: string
 }
 
 export type CardBoardLabelCountOrderByAggregateInput = {

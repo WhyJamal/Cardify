@@ -7,7 +7,7 @@ import { clientFetch } from '@/lib/client-api';
 interface DatePickerProps {
   triggerRef: React.RefObject<HTMLElement | null>;
   cardId: string;
-  cardDueDate: Date | undefined;
+  cardDueDate: Date | string | undefined;
   onClose?: () => void;
   onChange?: (dueDate: string | null) => void;
 }
@@ -30,16 +30,17 @@ export function DatePicker({ triggerRef, cardId, cardDueDate, onClose, onChange 
   ); // current month
   const [selectedDate, setSelectedDate] = useState<Date | null>(today);
   const [startDate, setStartDate] = useState('');
-  const [deadlineDate, setDeadlineDate] = useState('');
-  const [deadlineTime, setDeadlineTime] = useState('');
+  const [deadlineDate, setDeadlineDate] = useState("");
+  const [deadlineTime, setDeadlineTime] = useState("");
   const [repeatOption, setRepeatOption] = useState('Никогда');
   const [reminderOption, setReminderOption] = useState('за 1 день');
 
   useEffect(() => {
     if (cardDueDate) {
-      setDeadlineDate(formatDateValue(cardDueDate));
-      setDeadlineTime(formatTimeValue(cardDueDate));
-      setSelectedDate(cardDueDate);
+      const date = new Date(cardDueDate);
+      setDeadlineDate(formatDateValue(date));
+      setDeadlineTime(formatTimeValue(date));
+      setSelectedDate(date);
     } else {
       setDeadlineDate(formatDateValue(today));
       setDeadlineTime(formatTimeValue(today));

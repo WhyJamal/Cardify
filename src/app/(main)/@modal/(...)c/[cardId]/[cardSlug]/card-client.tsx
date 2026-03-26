@@ -141,6 +141,20 @@ export default function CardClient({
         setShowDatePicker(false);
     }
 
+
+    const getDueDateStatus = (dueDate: Date | string | undefined, isCompleted: boolean) => {
+        if (isCompleted) return { label: "Выполнено", color: "bg-[#17ca2c]" };
+
+        if (dueDate) {
+            const due = new Date(dueDate);
+            if (due < new Date()) return { label: "Просрочено", color: "bg-[#c9372c]" };
+        }
+
+        return { label: "В работе", color: "bg-[#0079bf]" };
+    };
+
+    const status = getDueDateStatus(card.dueDate, card.isCompleted);
+
     return (
         <div
             className="fixed inset-0 bg-black/60 flex items-start justify-center z-50 p-4"
@@ -295,8 +309,8 @@ export default function CardClient({
                                     >
                                         <div className="flex items-center gap-1.5 bg-[#2c333a] hover:bg-[#38414a] text-[#9fadbc] text-sm px-3 py-1.5 rounded transition-colors">
                                             {formatDate(card.dueDate)}
-                                            <span className="bg-[#17ca2c] text-white text-xs px-2 py-1 rounded flex items-center gap-1">
-                                                Статус
+                                            <span className={`${status.color} text-white text-xs px-2 py-1 rounded flex items-center gap-1`}>
+                                                {status.label}
                                             </span>
                                             <ChevronDown size={11} />
                                         </div>

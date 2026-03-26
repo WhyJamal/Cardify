@@ -43,6 +43,7 @@ export interface CardData {
   column: ColumnInt;
   numberBadge?: number;
   dueDate?: Date;
+  isCompleted: boolean;
 }
 
 export interface ColumnInt {

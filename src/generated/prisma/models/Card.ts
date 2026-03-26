@@ -60,6 +60,7 @@ export type CardMinAggregateOutputType = {
   createdAt: Date | null
   updatedAt: Date | null
   dueDate: Date | null
+  isCompleted: boolean | null
 }
 
 export type CardMaxAggregateOutputType = {
@@ -80,6 +81,7 @@ export type CardMaxAggregateOutputType = {
   createdAt: Date | null
   updatedAt: Date | null
   dueDate: Date | null
+  isCompleted: boolean | null
 }
 
 export type CardCountAggregateOutputType = {
@@ -100,6 +102,7 @@ export type CardCountAggregateOutputType = {
   createdAt: number
   updatedAt: number
   dueDate: number
+  isCompleted: number
   _all: number
 }
 
@@ -138,6 +141,7 @@ export type CardMinAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   dueDate?: true
+  isCompleted?: true
 }
 
 export type CardMaxAggregateInputType = {
@@ -158,6 +162,7 @@ export type CardMaxAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   dueDate?: true
+  isCompleted?: true
 }
 
 export type CardCountAggregateInputType = {
@@ -178,6 +183,7 @@ export type CardCountAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   dueDate?: true
+  isCompleted?: true
   _all?: true
 }
 
@@ -285,6 +291,7 @@ export type CardGroupByOutputType = {
   createdAt: Date
   updatedAt: Date
   dueDate: Date | null
+  isCompleted: boolean
   _count: CardCountAggregateOutputType | null
   _avg: CardAvgAggregateOutputType | null
   _sum: CardSumAggregateOutputType | null
@@ -328,6 +335,7 @@ export type CardWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Card"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Card"> | Date | string
   dueDate?: Prisma.DateTimeNullableFilter<"Card"> | Date | string | null
+  isCompleted?: Prisma.BoolFilter<"Card"> | boolean
   column?: Prisma.XOR<Prisma.ColumnScalarRelationFilter, Prisma.ColumnWhereInput>
   labels?: Prisma.CardBoardLabelListRelationFilter
   links?: Prisma.CardLinkListRelationFilter
@@ -352,6 +360,7 @@ export type CardOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   dueDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  isCompleted?: Prisma.SortOrder
   column?: Prisma.ColumnOrderByWithRelationInput
   labels?: Prisma.CardBoardLabelOrderByRelationAggregateInput
   links?: Prisma.CardLinkOrderByRelationAggregateInput
@@ -379,6 +388,7 @@ export type CardWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Card"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Card"> | Date | string
   dueDate?: Prisma.DateTimeNullableFilter<"Card"> | Date | string | null
+  isCompleted?: Prisma.BoolFilter<"Card"> | boolean
   column?: Prisma.XOR<Prisma.ColumnScalarRelationFilter, Prisma.ColumnWhereInput>
   labels?: Prisma.CardBoardLabelListRelationFilter
   links?: Prisma.CardLinkListRelationFilter
@@ -403,6 +413,7 @@ export type CardOrderByWithAggregationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   dueDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  isCompleted?: Prisma.SortOrder
   _count?: Prisma.CardCountOrderByAggregateInput
   _avg?: Prisma.CardAvgOrderByAggregateInput
   _max?: Prisma.CardMaxOrderByAggregateInput
@@ -431,6 +442,7 @@ export type CardScalarWhereWithAggregatesInput = {
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Card"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Card"> | Date | string
   dueDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Card"> | Date | string | null
+  isCompleted?: Prisma.BoolWithAggregatesFilter<"Card"> | boolean
 }
 
 export type CardCreateInput = {
@@ -450,6 +462,7 @@ export type CardCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   dueDate?: Date | string | null
+  isCompleted?: boolean
   column: Prisma.ColumnCreateNestedOneWithoutCardsInput
   labels?: Prisma.CardBoardLabelCreateNestedManyWithoutCardInput
   links?: Prisma.CardLinkCreateNestedManyWithoutCardInput
@@ -474,6 +487,7 @@ export type CardUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   dueDate?: Date | string | null
+  isCompleted?: boolean
   labels?: Prisma.CardBoardLabelUncheckedCreateNestedManyWithoutCardInput
   links?: Prisma.CardLinkUncheckedCreateNestedManyWithoutCardInput
   comments?: Prisma.CardTimelineUncheckedCreateNestedManyWithoutCardInput
@@ -496,6 +510,7 @@ export type CardUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   column?: Prisma.ColumnUpdateOneRequiredWithoutCardsNestedInput
   labels?: Prisma.CardBoardLabelUpdateManyWithoutCardNestedInput
   links?: Prisma.CardLinkUpdateManyWithoutCardNestedInput
@@ -520,6 +535,7 @@ export type CardUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   labels?: Prisma.CardBoardLabelUncheckedUpdateManyWithoutCardNestedInput
   links?: Prisma.CardLinkUncheckedUpdateManyWithoutCardNestedInput
   comments?: Prisma.CardTimelineUncheckedUpdateManyWithoutCardNestedInput
@@ -543,6 +559,7 @@ export type CardCreateManyInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   dueDate?: Date | string | null
+  isCompleted?: boolean
 }
 
 export type CardUpdateManyMutationInput = {
@@ -562,6 +579,7 @@ export type CardUpdateManyMutationInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type CardUncheckedUpdateManyInput = {
@@ -582,6 +600,7 @@ export type CardUncheckedUpdateManyInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type CardListRelationFilter = {
@@ -612,6 +631,7 @@ export type CardCountOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   dueDate?: Prisma.SortOrder
+  isCompleted?: Prisma.SortOrder
 }
 
 export type CardAvgOrderByAggregateInput = {
@@ -640,6 +660,7 @@ export type CardMaxOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   dueDate?: Prisma.SortOrder
+  isCompleted?: Prisma.SortOrder
 }
 
 export type CardMinOrderByAggregateInput = {
@@ -660,6 +681,7 @@ export type CardMinOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   dueDate?: Prisma.SortOrder
+  isCompleted?: Prisma.SortOrder
 }
 
 export type CardSumOrderByAggregateInput = {
@@ -788,6 +810,7 @@ export type CardCreateWithoutColumnInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   dueDate?: Date | string | null
+  isCompleted?: boolean
   labels?: Prisma.CardBoardLabelCreateNestedManyWithoutCardInput
   links?: Prisma.CardLinkCreateNestedManyWithoutCardInput
   comments?: Prisma.CardTimelineCreateNestedManyWithoutCardInput
@@ -810,6 +833,7 @@ export type CardUncheckedCreateWithoutColumnInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   dueDate?: Date | string | null
+  isCompleted?: boolean
   labels?: Prisma.CardBoardLabelUncheckedCreateNestedManyWithoutCardInput
   links?: Prisma.CardLinkUncheckedCreateNestedManyWithoutCardInput
   comments?: Prisma.CardTimelineUncheckedCreateNestedManyWithoutCardInput
@@ -861,6 +885,7 @@ export type CardScalarWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Card"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Card"> | Date | string
   dueDate?: Prisma.DateTimeNullableFilter<"Card"> | Date | string | null
+  isCompleted?: Prisma.BoolFilter<"Card"> | boolean
 }
 
 export type CardCreateWithoutLabelsInput = {
@@ -880,6 +905,7 @@ export type CardCreateWithoutLabelsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   dueDate?: Date | string | null
+  isCompleted?: boolean
   column: Prisma.ColumnCreateNestedOneWithoutCardsInput
   links?: Prisma.CardLinkCreateNestedManyWithoutCardInput
   comments?: Prisma.CardTimelineCreateNestedManyWithoutCardInput
@@ -903,6 +929,7 @@ export type CardUncheckedCreateWithoutLabelsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   dueDate?: Date | string | null
+  isCompleted?: boolean
   links?: Prisma.CardLinkUncheckedCreateNestedManyWithoutCardInput
   comments?: Prisma.CardTimelineUncheckedCreateNestedManyWithoutCardInput
 }
@@ -940,6 +967,7 @@ export type CardUpdateWithoutLabelsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   column?: Prisma.ColumnUpdateOneRequiredWithoutCardsNestedInput
   links?: Prisma.CardLinkUpdateManyWithoutCardNestedInput
   comments?: Prisma.CardTimelineUpdateManyWithoutCardNestedInput
@@ -963,6 +991,7 @@ export type CardUncheckedUpdateWithoutLabelsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   links?: Prisma.CardLinkUncheckedUpdateManyWithoutCardNestedInput
   comments?: Prisma.CardTimelineUncheckedUpdateManyWithoutCardNestedInput
 }
@@ -984,6 +1013,7 @@ export type CardCreateWithoutLinksInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   dueDate?: Date | string | null
+  isCompleted?: boolean
   column: Prisma.ColumnCreateNestedOneWithoutCardsInput
   labels?: Prisma.CardBoardLabelCreateNestedManyWithoutCardInput
   comments?: Prisma.CardTimelineCreateNestedManyWithoutCardInput
@@ -1007,6 +1037,7 @@ export type CardUncheckedCreateWithoutLinksInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   dueDate?: Date | string | null
+  isCompleted?: boolean
   labels?: Prisma.CardBoardLabelUncheckedCreateNestedManyWithoutCardInput
   comments?: Prisma.CardTimelineUncheckedCreateNestedManyWithoutCardInput
 }
@@ -1044,6 +1075,7 @@ export type CardUpdateWithoutLinksInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   column?: Prisma.ColumnUpdateOneRequiredWithoutCardsNestedInput
   labels?: Prisma.CardBoardLabelUpdateManyWithoutCardNestedInput
   comments?: Prisma.CardTimelineUpdateManyWithoutCardNestedInput
@@ -1067,6 +1099,7 @@ export type CardUncheckedUpdateWithoutLinksInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   labels?: Prisma.CardBoardLabelUncheckedUpdateManyWithoutCardNestedInput
   comments?: Prisma.CardTimelineUncheckedUpdateManyWithoutCardNestedInput
 }
@@ -1088,6 +1121,7 @@ export type CardCreateWithoutCommentsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   dueDate?: Date | string | null
+  isCompleted?: boolean
   column: Prisma.ColumnCreateNestedOneWithoutCardsInput
   labels?: Prisma.CardBoardLabelCreateNestedManyWithoutCardInput
   links?: Prisma.CardLinkCreateNestedManyWithoutCardInput
@@ -1111,6 +1145,7 @@ export type CardUncheckedCreateWithoutCommentsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   dueDate?: Date | string | null
+  isCompleted?: boolean
   labels?: Prisma.CardBoardLabelUncheckedCreateNestedManyWithoutCardInput
   links?: Prisma.CardLinkUncheckedCreateNestedManyWithoutCardInput
 }
@@ -1148,6 +1183,7 @@ export type CardUpdateWithoutCommentsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   column?: Prisma.ColumnUpdateOneRequiredWithoutCardsNestedInput
   labels?: Prisma.CardBoardLabelUpdateManyWithoutCardNestedInput
   links?: Prisma.CardLinkUpdateManyWithoutCardNestedInput
@@ -1171,6 +1207,7 @@ export type CardUncheckedUpdateWithoutCommentsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   labels?: Prisma.CardBoardLabelUncheckedUpdateManyWithoutCardNestedInput
   links?: Prisma.CardLinkUncheckedUpdateManyWithoutCardNestedInput
 }
@@ -1192,6 +1229,7 @@ export type CardCreateManyColumnInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   dueDate?: Date | string | null
+  isCompleted?: boolean
 }
 
 export type CardUpdateWithoutColumnInput = {
@@ -1211,6 +1249,7 @@ export type CardUpdateWithoutColumnInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   labels?: Prisma.CardBoardLabelUpdateManyWithoutCardNestedInput
   links?: Prisma.CardLinkUpdateManyWithoutCardNestedInput
   comments?: Prisma.CardTimelineUpdateManyWithoutCardNestedInput
@@ -1233,6 +1272,7 @@ export type CardUncheckedUpdateWithoutColumnInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   labels?: Prisma.CardBoardLabelUncheckedUpdateManyWithoutCardNestedInput
   links?: Prisma.CardLinkUncheckedUpdateManyWithoutCardNestedInput
   comments?: Prisma.CardTimelineUncheckedUpdateManyWithoutCardNestedInput
@@ -1255,6 +1295,7 @@ export type CardUncheckedUpdateManyWithoutColumnInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 
@@ -1324,6 +1365,7 @@ export type CardSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   createdAt?: boolean
   updatedAt?: boolean
   dueDate?: boolean
+  isCompleted?: boolean
   column?: boolean | Prisma.ColumnDefaultArgs<ExtArgs>
   labels?: boolean | Prisma.Card$labelsArgs<ExtArgs>
   links?: boolean | Prisma.Card$linksArgs<ExtArgs>
@@ -1349,6 +1391,7 @@ export type CardSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   createdAt?: boolean
   updatedAt?: boolean
   dueDate?: boolean
+  isCompleted?: boolean
   column?: boolean | Prisma.ColumnDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["card"]>
 
@@ -1370,6 +1413,7 @@ export type CardSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   createdAt?: boolean
   updatedAt?: boolean
   dueDate?: boolean
+  isCompleted?: boolean
   column?: boolean | Prisma.ColumnDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["card"]>
 
@@ -1391,9 +1435,10 @@ export type CardSelectScalar = {
   createdAt?: boolean
   updatedAt?: boolean
   dueDate?: boolean
+  isCompleted?: boolean
 }
 
-export type CardOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "columnId" | "title" | "image" | "numberBadge" | "description" | "hasDescription" | "watching" | "attachments" | "checklistDone" | "checklistTotal" | "assigneeInitials" | "assigneeColor" | "position" | "createdAt" | "updatedAt" | "dueDate", ExtArgs["result"]["card"]>
+export type CardOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "columnId" | "title" | "image" | "numberBadge" | "description" | "hasDescription" | "watching" | "attachments" | "checklistDone" | "checklistTotal" | "assigneeInitials" | "assigneeColor" | "position" | "createdAt" | "updatedAt" | "dueDate" | "isCompleted", ExtArgs["result"]["card"]>
 export type CardInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   column?: boolean | Prisma.ColumnDefaultArgs<ExtArgs>
   labels?: boolean | Prisma.Card$labelsArgs<ExtArgs>
@@ -1434,6 +1479,7 @@ export type $CardPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     createdAt: Date
     updatedAt: Date
     dueDate: Date | null
+    isCompleted: boolean
   }, ExtArgs["result"]["card"]>
   composites: {}
 }
@@ -1878,6 +1924,7 @@ export interface CardFieldRefs {
   readonly createdAt: Prisma.FieldRef<"Card", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Card", 'DateTime'>
   readonly dueDate: Prisma.FieldRef<"Card", 'DateTime'>
+  readonly isCompleted: Prisma.FieldRef<"Card", 'Boolean'>
 }
     
 

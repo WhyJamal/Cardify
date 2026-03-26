@@ -140,7 +140,8 @@ export const CardScalarFieldEnum = {
   position: 'position',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  dueDate: 'dueDate'
+  dueDate: 'dueDate',
+  isCompleted: 'isCompleted'
 } as const
 
 export type CardScalarFieldEnum = (typeof CardScalarFieldEnum)[keyof typeof CardScalarFieldEnum]

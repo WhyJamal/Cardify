@@ -15,13 +15,12 @@ import {
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-import { clientFetch } from "@/lib/client-api";
-import { TooltipAction } from "@/shared/components/custom-tooltip";
 import type { CardData, CardTimeline } from "@/shared/types";
-import { DatePicker } from "@/shared/components/ui/data-picker";
-import { AddToCardMenu } from "@/shared/components/add-to-card-menu";
-import { LabelsMenu } from "@/shared/components/labels-menu";
-import { Button } from "@/shared/components";
+import { Button, DatePicker, AddToCardMenu, LabelsMenu } from "@/shared/components";
+import { TooltipAction } from "@/shared/components/custom-tooltip";
+import { cardApi } from "@/features/card/api/card-api";
+import { useEscapeKey } from "@/shared/hooks/use-escape-key";
+import { formatCardDate, getDueDateStatus } from "@/shared/utils/date";
 
 interface Comment {
     id: number;
@@ -35,17 +34,16 @@ interface Comment {
 
 export default function CardClient({
     cardId,
-    initialCard
+    initialCard,
 }: {
     cardId: string;
     initialCard: CardData;
 }) {
     const router = useRouter();
-
     const addBtnRef = useRef<HTMLButtonElement>(null);
 
     const [comment, setComment] = useState("");
-    const [description, setDescription] = useState("");
+    const [description, setDescription] = useState(initialCard.description);
     const [isEditingDesc, setIsEditingDesc] = useState(false);
     const [tempDesc, setTempDesc] = useState(initialCard.description);
     const [card, setCard] = useState<CardData>(initialCard);
@@ -55,6 +53,8 @@ export default function CardClient({
     const [showDatePicker, setShowDatePicker] = useState(false);
     const [showLabels, setShowLabels] = useState(false);
 
+    useEscapeKey(() => router.back(), true);
+
     const handleOpenDates = () => {
         setShowMenu(false);
         setShowDatePicker(true);
@@ -63,41 +63,24 @@ export default function CardClient({
     const handleOpenLabels = () => {
         setShowLabels(true);
         setShowMenu(false);
-    }
+    };
 
     const handleCloseDatePicker = () => {
         setShowDatePicker(false);
-        // setShowMenu(true);
     };
 
     const handleCloseLabels = () => {
         setShowLabels(false);
-        // setShowMenu(true);
     };
 
     const handleSendComment = async () => {
         const text = comment.trim();
         if (!text) return;
 
-        const created = await clientFetch(`/api/cards/${cardId}/timeline`, {
-            method: "POST",
-            body: JSON.stringify({ text }),
-        });
-
+        const created = await cardApi.addTimelineComment(cardId, text);
         setTimeline((prev) => [...prev, created]);
         setComment("");
     };
-
-    useEffect(() => {
-        const handler = (e: KeyboardEvent) => {
-            if (e.key === "Escape") {
-                router.back()
-            }
-        };
-
-        window.addEventListener("keydown", handler);
-        return () => window.removeEventListener("keydown", handler);
-    }, []);
 
     const comments: Comment[] = [
         {
@@ -119,15 +102,11 @@ export default function CardClient({
     ];
 
     const handleSaveDesc = async () => {
-        if (!card) return;
+        if (!cardId) return;
 
         try {
-            const updated = await clientFetch(`/api/cards/${cardId}`, {
-                method: "PATCH",
-                body: JSON.stringify({ description: tempDesc }),
-            });
-
-            setCard((prev) => prev ? { ...prev, description: updated.description } : prev);
+            const updated = await cardApi.updateDescription(cardId, tempDesc ?? '');
+            setCard((prev) => (prev ? { ...prev, description: updated.description } : prev));
             setDescription(updated.description);
             setIsEditingDesc(false);
         } catch (err) {
@@ -135,74 +114,35 @@ export default function CardClient({
         }
     };
 
-    function formatDate(dateString: string | Date) {
-        const date = new Date(dateString);
-
-        return new Intl.DateTimeFormat('ru-RU', {
-            day: '2-digit',
-            month: 'short',  // "мес."
-            year: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit',
-            hour12: false,
-        }).format(date);
-    }
-
     function add() {
-        setShowMenu(prev => !prev);
+        setShowMenu((prev) => !prev);
         setShowDatePicker(false);
     }
-
-
-    const getDueDateStatus = (dueDate: Date | string | undefined, isCompleted: boolean) => {
-        if (isCompleted) return { label: "Выполнено", color: "bg-[#17ca2c]" };
-
-        if (dueDate) {
-            const due = new Date(dueDate);
-            if (due < new Date()) return { label: "Просрочено", color: "bg-[#c9372c]" };
-        }
-
-        return { label: "В работе", color: "bg-[#0079bf]" };
-    };
 
     const status = getDueDateStatus(card.dueDate, card.isCompleted);
 
     return (
-        <div
-            className="fixed inset-0 bg-black/60 flex items-start justify-center z-50 p-4"
-        >
-            <div
-                className="bg-[#1d2125] top-10 rounded-2xl w-full max-w-5xl max-h-[90vh] overflow-hidden shadow-2xl relative"
-            >
+        <div className="fixed inset-0 bg-black/60 flex items-start justify-center z-50 p-4">
+            <div className="bg-[#1d2125] top-10 rounded-2xl w-full max-w-5xl max-h-[90vh] overflow-hidden shadow-2xl relative">
                 <div className="flex items-center justify-between px-5 pt-4 pb-2 border-b border-white/10">
                     <div className="flex items-center gap-2 text-[#9fadbc] text-sm">
                         <span className="bg-[#2c333a] rounded px-2 py-0.5 flex items-center gap-1 cursor-pointer hover:bg-[#38414a]">
                             {card.column.title} <ChevronDown size={13} />
                         </span>
                     </div>
+
                     <div className="flex items-center gap-3 text-[#9fadbc]">
-                        <Button
-                            variant={"ghost"}
-                            className="hover:text-white hover:bg-[#2c333a] p-1.5 rounded transition-colors">
+                        <Button variant={"ghost"} className="hover:text-white hover:bg-[#2c333a] p-1.5 rounded transition-colors">
                             <Image size={18} />
                         </Button>
-                        <Button
-                            variant={"ghost"}
-                            className="hover:text-white hover:bg-[#2c333a] p-1.5 rounded transition-colors">
+                        <Button variant={"ghost"} className="hover:text-white hover:bg-[#2c333a] p-1.5 rounded transition-colors">
                             <Eye size={18} />
                         </Button>
-                        <Button
-                            variant={"ghost"}
-                            className="hover:text-white hover:bg-[#2c333a] p-1.5 rounded transition-colors">
+                        <Button variant={"ghost"} className="hover:text-white hover:bg-[#2c333a] p-1.5 rounded transition-colors">
                             <MoreHorizontal size={18} />
                         </Button>
 
-
-                        <TooltipAction
-                            tooltip={"Закрыть"}
-                            shortcut="Esc"
-                            side="bottom"
-                        >
+                        <TooltipAction tooltip={"Закрыть"} shortcut="Esc" side="bottom">
                             <Button
                                 variant={"ghost"}
                                 onClick={() => router.back()}
@@ -215,21 +155,15 @@ export default function CardClient({
                 </div>
 
                 <div className="flex overflow-y-auto h-full">
-
                     <div className="flex-1 px-6 pb-6 pt-2 min-w-0">
                         <div className="flex items-start gap-3 mb-5">
-                            <div
-                                className="round-sm top-1.5">
+                            <div className="round-sm top-1.5">
                                 <input
                                     type="checkbox"
                                     id={`checkbox`}
                                     onClick={(e) => e.stopPropagation()}
                                 />
-                                <label
-                                    htmlFor={`checkbox`}
-                                    onClick={(e) => e.stopPropagation()}
-                                >
-                                </label>
+                                <label htmlFor={`checkbox`} onClick={(e) => e.stopPropagation()} />
                             </div>
                             <h2 className="text-white text-xl font-semibold leading-snug">{card.title}</h2>
                         </div>
@@ -237,7 +171,7 @@ export default function CardClient({
                         <div className="flex gap-2 mb-6 flex-wrap">
                             <button
                                 ref={addBtnRef}
-                                onClick={() => add()}
+                                onClick={add}
                                 className="flex items-center gap-1.5 bg-[#2c333a] hover:bg-[#38414a] text-[#9fadbc] hover:text-white text-sm px-3 py-1.5 rounded transition-colors"
                             >
                                 <Plus size={14} />
@@ -256,6 +190,7 @@ export default function CardClient({
                                     onOpenLabels={handleOpenLabels}
                                 />
                             )}
+
                             {showDatePicker && (
                                 <DatePicker
                                     triggerRef={addBtnRef}
@@ -263,10 +198,13 @@ export default function CardClient({
                                     cardDueDate={card.dueDate}
                                     onClose={handleCloseDatePicker}
                                     onChange={(newDueDate) =>
-                                        setCard(prev => prev ? { ...prev, dueDate: newDueDate ? new Date(newDueDate) : undefined } : prev)
+                                        setCard((prev) =>
+                                            prev ? { ...prev, dueDate: newDueDate ? new Date(newDueDate) : undefined } : prev
+                                        )
                                     }
                                 />
                             )}
+
                             {showLabels && (
                                 <LabelsMenu
                                     triggerRef={addBtnRef}
@@ -279,7 +217,8 @@ export default function CardClient({
                                                 ? {
                                                     ...prev,
                                                     labels: newLabels.filter((l) => l.checked),
-                                                } : prev
+                                                }
+                                                : prev
                                         );
                                     }}
                                     onClose={handleCloseLabels}
@@ -288,7 +227,6 @@ export default function CardClient({
                         </div>
 
                         <div className="flex gap-6 mb-6 flex-wrap">
-
                             <div>
                                 <p className="text-[#9fadbc] text-xs mb-2">Участники</p>
                                 <div className="flex items-center gap-1">
@@ -330,12 +268,9 @@ export default function CardClient({
                             {card.dueDate && (
                                 <div>
                                     <p className="text-[#9fadbc] text-xs mb-2">Срок</p>
-                                    <div
-                                        onClick={() => setShowDatePicker(prev => !prev)}
-                                        className="flex items-center gap-2"
-                                    >
+                                    <div onClick={() => setShowDatePicker((prev) => !prev)} className="flex items-center gap-2">
                                         <div className="flex items-center gap-1.5 bg-[#2c333a] hover:bg-[#38414a] text-[#9fadbc] text-sm px-3 py-1.5 rounded transition-colors">
-                                            {formatDate(card.dueDate)}
+                                            {formatCardDate(card.dueDate)}
                                             <span className={`${status.color} text-white text-[11px] px-2 rounded flex items-center gap-1`}>
                                                 {status.label}
                                             </span>
@@ -364,6 +299,7 @@ export default function CardClient({
                                     </button>
                                 )}
                             </div>
+
                             {isEditingDesc ? (
                                 <div className="ml-6">
                                     <textarea
@@ -394,7 +330,6 @@ export default function CardClient({
                     </div>
 
                     <div className="w-112.5 shrink-0 border-l border-[#2c333a] px-5 pb-6 pt-2 bg-[#0f1313]">
-
                         <div className="flex items-center justify-between mb-4">
                             <div className="flex items-center gap-2 text-white text-sm font-medium">
                                 <MessageSquare size={15} className="text-[#9fadbc]" />
@@ -404,7 +339,6 @@ export default function CardClient({
                                 Показать подробности
                             </button>
                         </div>
-
 
                         <div className="mb-5">
                             <input
@@ -425,8 +359,7 @@ export default function CardClient({
                                     <div className="flex-1 min-w-0">
                                         {c.isActivity ? (
                                             <p className="text-[#b6c2cf] text-sm leading-snug">
-                                                <span className="text-white font-medium">{c.author}</span>{" "}
-                                                {c.activityText}
+                                                <span className="text-white font-medium">{c.author}</span> {c.activityText}
                                             </p>
                                         ) : (
                                             <>

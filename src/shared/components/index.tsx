@@ -20,3 +20,6 @@ export { Header } from "./header";
 export { SubHeader } from "./sub-header";
 export { default as Sidebar } from "@/shared/components/sidebar"
 
+export { DatePicker } from "./ui/data-picker";
+export { AddToCardMenu } from "./add-to-card-menu";
+export { LabelsMenu } from "./labels-menu";

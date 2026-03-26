@@ -1,4 +1,6 @@
-import { X, Tag, Clock, CheckSquare, User, Paperclip, Settings } from 'lucide-react';
+"use client"
+
+import { X, Tag, Clock, User } from 'lucide-react';
 import { useEffect, useRef } from 'react';
 import { calcBelowPosition } from '@/shared/utils/floatingPosition';
 import { createPortal } from "react-dom";

@@ -4,10 +4,12 @@ import { MoreHorizontal, Plus, ExternalLink, X } from "lucide-react";
 import { useRef, useState, useEffect, useCallback } from "react";
 import { useDrop, useDrag, useDragLayer } from "react-dnd";
 import { getEmptyImage } from "react-dnd-html5-backend";
+
 import { CustomCard } from "./custom-card";
 import { CardData } from "@/shared/types";
-
 import { CardModal } from "@/features/card/card-modal";
+import { useBoardView } from "@/app/providers/BoardProvider";
+import { useEditableColumnTitle } from "@/features/board/hooks/use-editable-column-title";
 
 interface ColumnProps {
   column: { id: string; title: string; cards: CardData[] };
@@ -30,12 +32,32 @@ export function Column({
   onDropCard,
   onDropColumn,
   showLabelName,
-  toggleLabel
+  toggleLabel,
 }: ColumnProps) {
+  const { setColumns } = useBoardView();
+
   const [showCardModal, setshowCardModal] = useState(false);
   const [addingCard, setAddingCard] = useState(false);
   const [newCardTitle, setNewCardTitle] = useState("");
   const headerRef = useRef<HTMLDivElement>(null);
+
+  const {
+    isEditingTitle,
+    editableTitle,
+    setEditableTitle,
+    titleInputRef,
+    handleTitleClick,
+    handleTitleKeyDown,
+    handleTitleBlur,
+  } = useEditableColumnTitle({
+    columnId: column.id,
+    initialTitle: column.title,
+    onTitleUpdated: (columnId, title) => {
+      setColumns((prev) =>
+        prev.map((col) => (col.id === columnId ? { ...col, title } : col))
+      );
+    },
+  });
 
   const [{ isCardOver }, cardDrop] = useDrop({
     accept: "CARD",
@@ -68,20 +90,24 @@ export function Column({
   const [, drag, dragPreview] = useDrag({
     type: "COLUMN",
     item: { id: column.id },
+    canDrag: () => !isEditingTitle,
     collect: (monitor) => ({ isDragging: monitor.isDragging() }),
   });
 
-  const isDragging = useDragLayer((monitor) =>
-    monitor.isDragging() &&
-    monitor.getItemType() === "COLUMN" &&
-    (monitor.getItem() as { id: string })?.id === column.id
+  const isDragging = useDragLayer(
+    (monitor) =>
+      monitor.isDragging() &&
+      monitor.getItemType() === "COLUMN" &&
+      (monitor.getItem() as { id: string })?.id === column.id
   );
 
   useEffect(() => {
     dragPreview(getEmptyImage(), { captureDraggingState: true });
   }, [dragPreview]);
 
-  drag(headerRef);
+  useEffect(() => {
+    if (headerRef.current) drag(headerRef);
+  }, [drag]);
 
   const combinedDropRef = useCallback(
     (node: HTMLDivElement | null) => {
@@ -91,14 +117,13 @@ export function Column({
     [cardDrop, columnDrop]
   );
 
-  const isOver = isCardOver || isColumnOver;
-
   const handleAddCard = () => {
-    if (newCardTitle.trim()) {
-      onAddCard(column.id, newCardTitle.trim());
-      setNewCardTitle("");
-      setAddingCard(false);
-    }
+    const title = newCardTitle.trim();
+    if (!title) return;
+
+    onAddCard(column.id, title);
+    setNewCardTitle("");
+    setAddingCard(false);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -106,36 +131,50 @@ export function Column({
       e.preventDefault();
       handleAddCard();
     }
+
     if (e.key === "Escape") {
       setAddingCard(false);
       setNewCardTitle("");
     }
   };
 
-  function onEdit() {
-    //alert("1");
-  }
-
-  function handleClose() {
-    setshowCardModal(false);
-  }
-
+  const onEdit = () => {
+    // unchanged placeholder
+  };
 
   return (
     <div
       ref={combinedDropRef}
-      className={`shrink-0 w-64 flex flex-col rounded-xl bg-[#101204] transition-all duration-150 ${isDragging ? "opacity-40 scale-95" : "opacity-100"
-        } ${isColumnOver ? "ring-2 ring-blue-400/60 scale-[1.01]" : ""} ${isCardOver ? "ring-2 ring-blue-400/60 bg-[#161b22]" : ""
-        }`}
+      className={`shrink-0 w-64 flex flex-col rounded-xl bg-[#101204] transition-all duration-150 ${
+        isDragging ? "opacity-40 scale-95" : "opacity-100"
+      } ${isColumnOver ? "ring-2 ring-blue-400/60 scale-[1.01]" : ""} ${
+        isCardOver ? "ring-2 ring-blue-400/60 bg-[#161b22]" : ""
+      }`}
       style={{ maxHeight: "calc(100vh - 180px)" }}
     >
       <div
         ref={headerRef}
         className="flex items-center justify-between px-3 pt-2.5 pb-1 cursor-grab active:cursor-grabbing select-none"
       >
-        <h3 className="text-[#b6c2cf] text-sm font-semibold flex-1 truncate pr-2">
-          {column.title}
-        </h3>
+        {isEditingTitle ? (
+          <input
+            ref={titleInputRef}
+            value={editableTitle}
+            onChange={(e) => setEditableTitle(e.target.value)}
+            onKeyDown={handleTitleKeyDown}
+            onBlur={handleTitleBlur}
+            autoFocus
+            className="flex-1 text-sm font-semibold text-[#b6c2cf] bg-[#232321] border border-[#41423e] outline-none px-1 py-0.5 rounded"
+          />
+        ) : (
+          <h3
+            className="text-[#b6c2cf] text-sm font-semibold flex-1 truncate pr-2"
+            onClick={handleTitleClick}
+          >
+            {column.title}
+          </h3>
+        )}
+
         <button
           className="p-1 rounded hover:bg-white/10 text-[#9fadbc] transition-colors"
           onPointerDown={(e) => e.stopPropagation()}
@@ -205,11 +244,7 @@ export function Column({
         </div>
       )}
 
-      {showCardModal && (
-        <CardModal onClose={handleClose} />
-      )}
-
+      {showCardModal && <CardModal onClose={() => setshowCardModal(false)} />}
     </div>
-
   );
 }

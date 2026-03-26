@@ -1,3 +1,5 @@
+import { BoardProvider } from "../providers/BoardProvider";
+
 export default function MainBoardLayout({
     children,
     modal
@@ -6,9 +8,12 @@ export default function MainBoardLayout({
     modal: React.ReactNode;
 }) {
     return (
-        <>
+        <BoardProvider
+            initialBoard={null}
+            initialColumns={[]}
+        >
             {children}
             {modal}
-        </>
+        </BoardProvider>
     );
 }

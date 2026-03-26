@@ -20,7 +20,6 @@ import type { CardData, CardTimeline } from "@/shared/types";
 import { DatePicker } from "@/shared/components/ui/data-picker";
 import { AddToCardMenu } from "@/shared/components/add-to-card-menu";
 import { LabelsMenu } from "@/shared/components/labels-menu";
-import { useBoardStore } from "@/app/store/board-store";
 
 interface Comment {
     id: number;
@@ -40,10 +39,9 @@ export default function CardClient({
     initialCard: CardData;
 }) {
     const router = useRouter();
-    const updateCardLabels = useBoardStore((s) => s.updateCardLabels);
 
     const addBtnRef = useRef<HTMLButtonElement>(null);
-
+    
     const [comment, setComment] = useState("");
     const [description, setDescription] = useState("");
     const [isEditingDesc, setIsEditingDesc] = useState(false);
@@ -248,9 +246,13 @@ export default function CardClient({
                                     boardLabels={card.boardLabels ?? []}
                                     selectedLabels={card.labels ?? []}
                                     onChange={(newLabels) => {
-                                        const filtered = newLabels.filter((l) => l.checked);
-                                        setCard((prev) => prev ? { ...prev, labels: filtered } : prev);
-                                        updateCardLabels(cardId, filtered); // ✅ parallel route'dan ham ishlaydi
+                                        setCard((prev) =>
+                                            prev
+                                                ? {
+                                                    ...prev,
+                                                    labels: newLabels.filter((l) => l.checked),
+                                                } : prev
+                                        );
                                     }}
                                     onClose={handleCloseLabels}
                                 />

@@ -228,6 +228,26 @@ export function DatePicker({ triggerRef, cardId, cardDueDate, onClose, onChange 
     }
   };
 
+
+  const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let value = e.target.value.replace(/\D/g, "");
+
+    if (value.length > 8) value = value.slice(0, 8);
+
+    if (value.length >= 5) {
+      value =
+        value.slice(0, 2) +
+        "." +
+        value.slice(2, 4) +
+        "." +
+        value.slice(4);
+    } else if (value.length >= 3) {
+      value = value.slice(0, 2) + "." + value.slice(2);
+    }
+
+    setDeadlineDate(value);
+  };
+
   return createPortal(
     <div
       ref={panelRef}
@@ -323,14 +343,16 @@ export function DatePicker({ triggerRef, cardId, cardDueDate, onClose, onChange 
             <input
               type="text"
               value={deadlineDate}
-              onChange={(e) => setDeadlineDate(e.target.value)}
+              onChange={handleDateChange}
+              placeholder="DD.MM.YYYY"
+              maxLength={10}
               className="bg-[#1f1f1f] border border-gray-600 rounded px-3 py-1.5 text-sm outline-none focus:border-blue-500 flex-1"
             />
             <input
-              type="text"
+              type="time"
               value={deadlineTime}
               onChange={(e) => setDeadlineTime(e.target.value)}
-              className="bg-[#1f1f1f] border border-gray-600 rounded px-3 py-1.5 text-sm outline-none focus:border-blue-500 w-20"
+              className="bg-[#1f1f1f] border border-gray-600 rounded px-3 py-1.5 text-sm outline-none focus:border-blue-500"
             />
           </div>
         </div>

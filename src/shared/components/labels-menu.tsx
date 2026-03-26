@@ -118,6 +118,7 @@ export function LabelsMenu({ onClose, onChange, triggerRef, cardId, boardLabels 
                                 className="w-4 h-4 accent-blue-500 shrink-0"
                             />
                             <div
+                                onClick={() => toggleLabel(label.id)}
                                 className="flex-1 rounded px-3 py-2 min-h-9"
                                 style={{
                                     background: label.color,

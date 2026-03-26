@@ -20,6 +20,8 @@ interface ColumnProps {
     insertAfter?: boolean
   ) => void;
   onDropColumn: (draggedColumnId: string, targetColumnId: string) => void;
+  showLabelName: boolean;
+  toggleLabel: () => void;
 }
 
 export function Column({
@@ -27,6 +29,8 @@ export function Column({
   onAddCard,
   onDropCard,
   onDropColumn,
+  showLabelName,
+  toggleLabel
 }: ColumnProps) {
   const [showCardModal, setshowCardModal] = useState(false);
   const [addingCard, setAddingCard] = useState(false);
@@ -149,6 +153,8 @@ export function Column({
             columnId={column.id}
             onEdit={onEdit}
             onDropCard={onDropCard}
+            showLabelName={showLabelName}
+            toggleLabel={toggleLabel}
           />
         ))}
 

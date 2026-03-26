@@ -8,11 +8,13 @@ import { Plus, X } from "lucide-react";
 import { Column, BottomNav, ColumnDragPreview } from "@/shared/components";
 import { CardDragPreview } from "@/shared/components/card-drag-preview";
 import { useBoardView } from "@/app/providers/BoardProvider";
-import { useBoardActions } from "@/shared/hooks/useBoardActions";
+import { useBoardActions } from "@/shared/hooks/use-board-actions";
 
 export default function BoardPage() {
   const { board, columns } = useBoardView();
   const { dropCard, addCard, dropColumn, addColumn } = useBoardActions();
+
+  const [showLabelName, setShowLabelName] = useState(false);
 
   const [addingColumn, setAddingColumn] = useState(false);
   const [newColumnTitle, setNewColumnTitle] = useState("");
@@ -37,6 +39,11 @@ export default function BoardPage() {
     }, [router, searchParams]);
 
     return null;
+  }
+
+
+  function toggleLabel() {
+    setShowLabelName(prev => !prev);
   }
 
   return (
@@ -67,6 +74,8 @@ export default function BoardPage() {
                   onAddCard={addCard}
                   onDropCard={dropCard}
                   onDropColumn={dropColumn}
+                  showLabelName={showLabelName}
+                  toggleLabel={toggleLabel}
                 />
               ))}
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
     X,
     Eye,
@@ -16,10 +16,12 @@ import {
 import { useRouter } from "next/navigation";
 
 import { clientFetch } from "@/lib/client-api";
+import { TooltipAction } from "@/shared/components/custom-tooltip";
 import type { CardData, CardTimeline } from "@/shared/types";
 import { DatePicker } from "@/shared/components/ui/data-picker";
 import { AddToCardMenu } from "@/shared/components/add-to-card-menu";
 import { LabelsMenu } from "@/shared/components/labels-menu";
+import { Button } from "@/shared/components";
 
 interface Comment {
     id: number;
@@ -41,7 +43,7 @@ export default function CardClient({
     const router = useRouter();
 
     const addBtnRef = useRef<HTMLButtonElement>(null);
-    
+
     const [comment, setComment] = useState("");
     const [description, setDescription] = useState("");
     const [isEditingDesc, setIsEditingDesc] = useState(false);
@@ -85,6 +87,17 @@ export default function CardClient({
         setTimeline((prev) => [...prev, created]);
         setComment("");
     };
+
+    useEffect(() => {
+        const handler = (e: KeyboardEvent) => {
+            if (e.key === "Escape") {
+                router.back()
+            }
+        };
+
+        window.addEventListener("keydown", handler);
+        return () => window.removeEventListener("keydown", handler);
+    }, []);
 
     const comments: Comment[] = [
         {
@@ -168,21 +181,36 @@ export default function CardClient({
                         </span>
                     </div>
                     <div className="flex items-center gap-3 text-[#9fadbc]">
-                        <button className="hover:text-white hover:bg-[#2c333a] p-1.5 rounded transition-colors">
+                        <Button
+                            variant={"ghost"}
+                            className="hover:text-white hover:bg-[#2c333a] p-1.5 rounded transition-colors">
                             <Image size={18} />
-                        </button>
-                        <button className="hover:text-white hover:bg-[#2c333a] p-1.5 rounded transition-colors">
+                        </Button>
+                        <Button
+                            variant={"ghost"}
+                            className="hover:text-white hover:bg-[#2c333a] p-1.5 rounded transition-colors">
                             <Eye size={18} />
-                        </button>
-                        <button className="hover:text-white hover:bg-[#2c333a] p-1.5 rounded transition-colors">
+                        </Button>
+                        <Button
+                            variant={"ghost"}
+                            className="hover:text-white hover:bg-[#2c333a] p-1.5 rounded transition-colors">
                             <MoreHorizontal size={18} />
-                        </button>
-                        <button
-                            onClick={() => router.back()}
-                            className="hover:text-white hover:bg-[#2c333a] p-1.5 rounded transition-colors"
+                        </Button>
+
+
+                        <TooltipAction
+                            tooltip={"Закрыть"}
+                            shortcut="Esc"
+                            side="bottom"
                         >
-                            <X size={18} />
-                        </button>
+                            <Button
+                                variant={"ghost"}
+                                onClick={() => router.back()}
+                                className="hover:text-white hover:bg-[#2c333a] p-1.5 rounded transition-colors"
+                            >
+                                <X size={18} />
+                            </Button>
+                        </TooltipAction>
                     </div>
                 </div>
 

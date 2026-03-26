@@ -1,7 +1,7 @@
 "use client";
 
 import { Eye, Paperclip, CheckSquare, AlignLeft, ExternalLink, Pencil } from "lucide-react";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { useDrag, useDrop, useDragLayer } from "react-dnd";
 import { getEmptyImage } from "react-dnd-html5-backend";
 import Image from "next/image";
@@ -22,9 +22,17 @@ interface CardProps {
     targetCardId: string | null,
     insertAfter?: boolean
   ) => void;
+  showLabelName: boolean;
+  toggleLabel: () => void;
 }
 
-export function CardContent({ card, onClickCard }: { card: CardData; onClickCard?: (cardId: string) => void }) {
+export function CardContent({ card, onClickCard, showLabelName, toggleLabel }: { card: CardData; onClickCard?: (cardId: string) => void, showLabelName: boolean, toggleLabel: () => void }) {
+  function handleToggleLabel(e: React.MouseEvent<HTMLSpanElement>) {
+    e.preventDefault();     
+    e.stopPropagation();    
+    toggleLabel();
+  }
+
   return (
     <>
       {card.coverColor && (
@@ -47,11 +55,14 @@ export function CardContent({ card, onClickCard }: { card: CardData; onClickCard
           {card.labels && card.labels.length > 0 && (
             <div className="flex flex-wrap gap-1 mb-2">
               {card.labels.map((label) => (
-                <span 
-                  key={label.id} 
-                  className="min-h-2 min-w-8 text-xs px-1 text-white rounded-full" 
-                  style={{ backgroundColor: label.color }} 
-                >{label.name}</span>
+                <span
+                  key={label.id}
+                  onClick={handleToggleLabel}
+                  className="min-h-2 min-w-8 text-xs px-1.5 py-0.5 text-white rounded-sm hover:scale-105"
+                  style={{ backgroundColor: label.color }}
+                >
+                  {showLabelName ? label.name : null}
+                </span>
               ))}
             </div>
           )}
@@ -114,7 +125,7 @@ export function CardContent({ card, onClickCard }: { card: CardData; onClickCard
   );
 }
 
-export function CustomCard({ card, columnId, index, onEdit, onClickCard, onDropCard }: CardProps) {
+export function CustomCard({ card, columnId, index, onEdit, onClickCard, onDropCard, showLabelName, toggleLabel }: CardProps) {
   const ref = useRef<HTMLDivElement>(null);
 
   const [, drag, dragPreview] = useDrag({
@@ -176,7 +187,7 @@ export function CustomCard({ card, columnId, index, onEdit, onClickCard, onDropC
       >
         <Pencil size={12} />
       </button>
-      <CardContent card={card} onClickCard={onClickCard} />
+      <CardContent card={card} onClickCard={onClickCard} showLabelName={showLabelName} toggleLabel={toggleLabel} />
     </div>
   );
 }

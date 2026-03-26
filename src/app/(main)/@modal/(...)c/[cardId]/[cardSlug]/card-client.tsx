@@ -284,10 +284,10 @@ export default function CardClient({
                                         {card.labels?.map((label) => (
                                             <div
                                                 key={label.id}
-                                                className="flex px-2 py-1 rounded justify-center items-center shrink-0 min-w-14 min-h-8"
+                                                className="flex px-1 py-1 rounded justify-center items-center shrink-0 min-w-14 min-h-8"
                                                 style={{ background: label.color }}
                                             >
-                                                <span className="text-sm font-bold text-white">{label.name}</span>
+                                                <span className="text-xs font-bold text-white">{label.name}</span>
                                             </div>
                                         ))}
                                         <button
@@ -309,7 +309,7 @@ export default function CardClient({
                                     >
                                         <div className="flex items-center gap-1.5 bg-[#2c333a] hover:bg-[#38414a] text-[#9fadbc] text-sm px-3 py-1.5 rounded transition-colors">
                                             {formatDate(card.dueDate)}
-                                            <span className={`${status.color} text-white text-xs px-2 py-1 rounded flex items-center gap-1`}>
+                                            <span className={`${status.color} text-white text-[11px] px-2 rounded flex items-center gap-1`}>
                                                 {status.label}
                                             </span>
                                             <ChevronDown size={11} />

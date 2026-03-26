@@ -47,7 +47,11 @@ export function CardContent({ card, onClickCard }: { card: CardData; onClickCard
           {card.labels && card.labels.length > 0 && (
             <div className="flex flex-wrap gap-1 mb-2">
               {card.labels.map((label) => (
-                <span key={label.id} className="h-2 min-w-8 rounded-full" style={{ backgroundColor: label.color }} title={label.text} />
+                <span 
+                  key={label.id} 
+                  className="min-h-2 min-w-8 text-xs px-1 text-white rounded-full" 
+                  style={{ backgroundColor: label.color }} 
+                >{label.name}</span>
               ))}
             </div>
           )}

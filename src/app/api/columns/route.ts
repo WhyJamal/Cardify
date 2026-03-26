@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { BoardLabel, Card, CardBoardLabel, Column } from "@/generated/prisma/client";
 
 /* ------------------ GET ------------------ */
 
@@ -38,7 +39,7 @@ export async function GET(req: NextRequest) {
               position: "asc",
             },
             include: {
-              labels: true,
+              labels: { include: { boardLabel: true } },
               links: true,
             },
           },
@@ -51,9 +52,36 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "Board not found or unauthorized" }, { status: 404 });
   }
 
-  return NextResponse.json({ columns: board.columns });
-}
+  type FlattenedCard = Card & {
+    labels: { id: string; name?: string; color: string; checked: boolean }[];
+    links: any[];
+  };
 
+  type FlattenedColumn = Column & {
+    cards: FlattenedCard[];
+  };
+
+  const columns: FlattenedColumn[] = board.columns.map(
+    (col: Column & { cards: (Card & { labels: (CardBoardLabel & { boardLabel: BoardLabel })[]; links: any[] })[] }) => ({
+      ...col,
+      cards: col.cards.map(
+        (card: Card & { labels: (CardBoardLabel & { boardLabel: BoardLabel })[]; links: any[] }) => ({
+          ...card,
+          labels: card.labels.map(
+            (item: CardBoardLabel & { boardLabel: BoardLabel }) => ({
+              id: item.boardLabel.id,
+              name: item.boardLabel.name,
+              color: item.boardLabel.color,
+              checked: true,
+            })
+          ),
+        })
+      ),
+    })
+  );
+
+  return NextResponse.json({ columns });
+}
 /* ------------------ POST ------------------ */
 
 export async function POST(req: NextRequest) {

@@ -23,7 +23,8 @@ interface ColumnProps {
   ) => void;
   onDropColumn: (draggedColumnId: string, targetColumnId: string) => void;
   showLabelName: boolean;
-  toggleLabel: () => void;
+  onToggleLabel: () => void;
+  onToggleIsCompleted: (cardId: string, isComplate: boolean) => void;
 }
 
 export function Column({
@@ -32,7 +33,8 @@ export function Column({
   onDropCard,
   onDropColumn,
   showLabelName,
-  toggleLabel,
+  onToggleLabel,
+  onToggleIsCompleted,
 }: ColumnProps) {
   const { setColumns } = useBoardView();
 
@@ -193,7 +195,8 @@ export function Column({
             onEdit={onEdit}
             onDropCard={onDropCard}
             showLabelName={showLabelName}
-            toggleLabel={toggleLabel}
+            onToggleLabel={onToggleLabel}
+            onToggleIsCompleted={onToggleIsCompleted}
           />
         ))}
 

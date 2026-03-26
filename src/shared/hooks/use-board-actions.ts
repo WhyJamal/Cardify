@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { useBoardView } from "@/app/providers/BoardProvider";
 import { clientFetch } from "@/lib/client-api";
+import { cardApi } from "@/features/card/api/card-api";
 
 export function useBoardActions() {
   const { board, columns, setColumns } = useBoardView();
@@ -39,8 +40,8 @@ export function useBoardActions() {
 
         const insertAt =
           targetIdx === -1 ? fromCol.cards.length
-          : insertAfter     ? targetIdx + 1
-          :                   targetIdx;
+            : insertAfter ? targetIdx + 1
+              : targetIdx;
 
         fromCol.cards.splice(insertAt, 0, draggedCard);
       } else {
@@ -140,5 +141,36 @@ export function useBoardActions() {
     return true;
   }
 
-  return { dropCard, addCard, dropColumn, addColumn };
+  async function toggleIsCompleted(cardId: string, isComplete: boolean) {
+    setColumns((prev) =>
+      prev.map((col) => ({
+        ...col,
+        cards: col.cards.map((c) =>
+          c.id === cardId ? { ...c, isCompleted: isComplete } : c
+        ),
+      }))
+    );
+
+    // 2️⃣ backend update
+    try {
+      const result = await cardApi.updateIsCompleted(cardId, isComplete);
+      if (!result) throw new Error("Update failed");
+      return true;
+    } catch (err) {
+      console.error(err);
+      // agar backend xato qaytarsa, rollback qilishingiz mumkin:
+      setColumns((prev) =>
+        prev.map((col) => ({
+          ...col,
+          cards: col.cards.map((c) =>
+            c.id === cardId ? { ...c, isCompleted: !isComplete } : c
+          ),
+        }))
+      );
+      return false;
+    }
+  }
+
+  return { dropCard, addCard, dropColumn, addColumn, toggleIsCompleted };
 }
+

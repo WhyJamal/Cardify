@@ -74,3 +74,18 @@ export function getDueDateStatus(
 
   return { label: "В работе", color: "bg-[#0079bf]" };
 }
+
+export function formatDueDate(date: string | Date): string {
+  if (!date) return "";
+
+  const due = date instanceof globalThis.Date ? date : new Date(date); 
+  const now = new Date();
+
+  const months = ["янв.", "фев.", "мар.", "апр.", "май", "июн.", "июл.", "авг.", "сен.", "окт.", "ноя.", "дек."];
+
+  const day = due.getDate();
+  const month = months[due.getMonth()];
+  const year = due.getFullYear();
+
+  return year === now.getFullYear() ? `${day} ${month}` : `${day} ${month} ${year}г.`;
+}

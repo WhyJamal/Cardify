@@ -23,5 +23,11 @@ export const cardApi = {
     clientFetch(`/api/cards/${cardId}/timeline`, {
       method: "POST",
       body: JSON.stringify({ text }),
-    }),
+  }),
+
+  updateIsCompleted: (cardId: string, isCompleted: boolean) =>
+    clientFetch(`/api/cards/${cardId}`, {
+      method: "PATCH",
+      body: JSON.stringify({ isCompleted }),
+  }),
 };

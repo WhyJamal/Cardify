@@ -1,6 +1,6 @@
 "use client";
 
-import { Eye, Paperclip, CheckSquare, AlignLeft, ExternalLink, Pencil } from "lucide-react";
+import { Eye, Paperclip, CheckSquare, AlignLeft, ExternalLink, Pencil, Clock } from "lucide-react";
 import { useRef, useEffect, useState } from "react";
 import { useDrag, useDrop, useDragLayer } from "react-dnd";
 import { getEmptyImage } from "react-dnd-html5-backend";
@@ -8,6 +8,8 @@ import Image from "next/image";
 import { CardData } from "@/shared/types";
 import { TooltipAction } from "./custom-tooltip";
 import Link from "next/link";
+import { formatDueDate } from "../utils/date";
+import { shadeColor } from "../utils/labels";
 
 interface CardProps {
   card: CardData;
@@ -23,14 +25,23 @@ interface CardProps {
     insertAfter?: boolean
   ) => void;
   showLabelName: boolean;
-  toggleLabel: () => void;
+  onToggleLabel: () => void;
+  onToggleIsCompleted: (cardId: string, isComplate: boolean) => void;
 }
 
-export function CardContent({ card, onClickCard, showLabelName, toggleLabel }: { card: CardData; onClickCard?: (cardId: string) => void, showLabelName: boolean, toggleLabel: () => void }) {
+export function CardContent({ card, onClickCard, showLabelName, onToggleLabel, onToggleIsCompleted }: { card: CardData; onClickCard?: (cardId: string) => void, showLabelName: boolean, onToggleLabel: () => void, onToggleIsCompleted: (cardId: string, isComplate: boolean) => void }) {
+  const [hovered, setHovered] = useState(false);
+
   function handleToggleLabel(e: React.MouseEvent<HTMLSpanElement>) {
-    e.preventDefault();     
-    e.stopPropagation();    
-    toggleLabel();
+    e.preventDefault();
+    e.stopPropagation();
+    onToggleLabel();
+  }
+
+  function handleToggleIsComplated(cardId: string, isComplate: boolean) {
+    // e.preventDefault();
+    // e.stopPropagation();
+    onToggleIsCompleted(cardId, isComplate);
   }
 
   return (
@@ -58,8 +69,10 @@ export function CardContent({ card, onClickCard, showLabelName, toggleLabel }: {
                 <span
                   key={label.id}
                   onClick={handleToggleLabel}
+                  onMouseEnter={() => setHovered(true)}
+                  onMouseLeave={() => setHovered(false)}
                   className="min-h-2 min-w-8 text-xs px-1.5 py-0.5 text-white rounded-sm hover:scale-105"
-                  style={{ backgroundColor: label.color }}
+                  style={{ backgroundColor: hovered ? shadeColor(label.color, -20) : label.color }}
                 >
                   {showLabelName ? label.name : null}
                 </span>
@@ -69,22 +82,42 @@ export function CardContent({ card, onClickCard, showLabelName, toggleLabel }: {
 
           {card.title && (
             <div className="relative flex items-start group">
-              <div className="round-sm absolute left-0 top-0.5 opacity-0 group-hover:opacity-100 transition-all duration-200">
+              <div
+                className={`round-sm relative flex items-center ${card.isCompleted
+                    ? "mr-2" 
+                    : "absolute left-0 top-0.5 opacity-0 group-hover:opacity-100 transition-all duration-200"
+                  }`}
+              >
                 <div className="relative">
-                  <TooltipAction
-                    tooltip="Отметь как выполнение"
-                    side="top"
-                  >
+                  <TooltipAction tooltip="Отметь как выполнение" side="top">
                     <div className="flex items-center">
-                      <input type="checkbox" id={`checkbox-${card.id}`} onClick={(e) => e.stopPropagation()} className="peer cursor-pointer" />
+                      <input
+                        type="checkbox"
+                        id={`checkbox-${card.id}`}
+                        checked={card.isCompleted}
+                        onChange={(e) => handleToggleIsComplated(card.id, e.target.checked)}
+                        onClick={(e) => e.stopPropagation()}
+                        className="peer cursor-pointer"
+                      />
                       <label htmlFor={`checkbox-${card.id}`} onClick={(e) => e.stopPropagation()} />
                     </div>
                   </TooltipAction>
                 </div>
               </div>
-              <p className="text-[#b6c2cf] text-sm leading-snug mb-2 pr-5 transition-all duration-200 group-hover:pl-4">
+
+              <p
+                className={`text-[#b6c2cf] text-sm leading-snug mb-2 pr-5 ${card.isCompleted ? "" : "transition-all duration-200 group-hover:pl-2"
+                  }`}
+              >
                 {card.title}
               </p>
+            </div>
+          )}
+
+          {card.dueDate && (
+            <div className="inline-flex items-center gap-1 bg-green-700 px-1 text-black font-medium rounded-sm">
+              <Clock className="w-4 h-4" />
+              <span className="text-sm">{formatDueDate(card.dueDate)}</span>
             </div>
           )}
 
@@ -125,7 +158,7 @@ export function CardContent({ card, onClickCard, showLabelName, toggleLabel }: {
   );
 }
 
-export function CustomCard({ card, columnId, index, onEdit, onClickCard, onDropCard, showLabelName, toggleLabel }: CardProps) {
+export function CustomCard({ card, columnId, index, onEdit, onClickCard, onDropCard, showLabelName, onToggleLabel, onToggleIsCompleted }: CardProps) {
   const ref = useRef<HTMLDivElement>(null);
 
   const [, drag, dragPreview] = useDrag({
@@ -187,7 +220,7 @@ export function CustomCard({ card, columnId, index, onEdit, onClickCard, onDropC
       >
         <Pencil size={12} />
       </button>
-      <CardContent card={card} onClickCard={onClickCard} showLabelName={showLabelName} toggleLabel={toggleLabel} />
+      <CardContent card={card} onClickCard={onClickCard} showLabelName={showLabelName} onToggleLabel={onToggleLabel} onToggleIsCompleted={onToggleIsCompleted} />
     </div>
   );
 }

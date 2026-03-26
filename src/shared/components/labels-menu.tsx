@@ -14,6 +14,7 @@ import {
   type BoardLabel,
   type SelectedLabel,
   type LabelWithChecked,
+  shadeColor,
 } from "@/shared/utils/labels";
 
 interface LabelsMenuProps {
@@ -37,6 +38,8 @@ export function LabelsMenu({
 
   const [searchQuery, setSearchQuery] = useState("");
   const [labels, setLabels] = useState<LabelWithChecked[]>([]);
+
+  const [hoveredLabels, setHoveredLabels] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
     setLabels(mergeLabelsWithChecked(boardLabels, selectedLabels));
@@ -129,26 +132,38 @@ export function LabelsMenu({
       <div className="px-4 pb-4">
         <h3 className="text-xs text-gray-400 mb-3 uppercase">Метки</h3>
         <div className="space-y-2">
-          {filteredLabels.map((label) => (
-            <div key={label.id} className="flex items-center gap-2 group">
-              <input
-                type="checkbox"
-                checked={label.checked}
-                onChange={() => toggleLabel(label.id)}
-                className="w-4 h-4 accent-blue-500 shrink-0"
-              />
-              <div
-                onClick={() => toggleLabel(label.id)}
-                className="flex-1 rounded px-3 py-2 min-h-9"
-                style={{ background: label.color }}
-              >
-                {label.name}
+          {filteredLabels.map((label) => {
+            const isHovered = hoveredLabels[label.id] || false;
+
+            return (
+              <div key={label.id} className="flex items-center gap-2 group">
+                <input
+                  type="checkbox"
+                  checked={label.checked}
+                  onChange={() => toggleLabel(label.id)}
+                  className="w-4 h-4 accent-blue-500 shrink-0"
+                />
+                <div
+                  onClick={() => toggleLabel(label.id)}
+                  className="flex-1 rounded px-3 py-2 min-h-9 transition-colors"
+                  onMouseEnter={() =>
+                    setHoveredLabels((prev) => ({ ...prev, [label.id]: true }))
+                  }
+                  onMouseLeave={() =>
+                    setHoveredLabels((prev) => ({ ...prev, [label.id]: false }))
+                  }
+                  style={{
+                    background: isHovered ? shadeColor(label.color, -20) : label.color,
+                  }}
+                >
+                  {label.name}
+                </div>
+                <button className="opacity-0 group-hover:opacity-100 hover:bg-gray-700 p-1.5 rounded transition-all">
+                  <Pencil className="w-4 h-4" />
+                </button>
               </div>
-              <button className="opacity-0 group-hover:opacity-100 hover:bg-gray-700 p-1.5 rounded transition-all">
-                <Pencil className="w-4 h-4" />
-              </button>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
 

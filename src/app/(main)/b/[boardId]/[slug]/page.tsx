@@ -15,7 +15,7 @@ export default function BoardPage() {
   useOpenCardFromQuery();
 
   const { board, columns } = useBoardView();
-  const { dropCard, addCard, dropColumn, addColumn } = useBoardActions();
+  const { dropCard, addCard, dropColumn, addColumn, toggleIsCompleted } = useBoardActions();
 
   const [showLabelName, setShowLabelName] = useState(false);
   const [addingColumn, setAddingColumn] = useState(false);
@@ -58,7 +58,8 @@ export default function BoardPage() {
                 onDropCard={dropCard}
                 onDropColumn={dropColumn}
                 showLabelName={showLabelName}
-                toggleLabel={toggleLabel}
+                onToggleLabel={toggleLabel}
+                onToggleIsCompleted={toggleIsCompleted}
               />
             ))}
 

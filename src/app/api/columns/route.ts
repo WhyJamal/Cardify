@@ -124,10 +124,18 @@ export async function POST(req: NextRequest) {
     );
   }
 
+  const lastColumn = await prisma.column.findFirst({
+    where: { boardId },
+    orderBy: { position: 'desc' },
+  });
+
+  const newPosition = lastColumn ? lastColumn.position + 1 : 1;
+
   const column = await prisma.column.create({
     data: {
       title,
       boardId,
+      position: newPosition,
     },
     include: {
       cards: {

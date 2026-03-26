@@ -57,4 +57,5 @@ export interface Board {
   title: string;
   bg: string;
   isPhoto: boolean;
+  columns: ColumnInt[];
 }

@@ -1,57 +1,23 @@
 "use client";
-
-import {
-  createContext,
-  useContext,
-  useMemo,
-  useState,
-  Dispatch,
-  SetStateAction,
-} from "react";
+import { useEffect } from "react";
+import { useBoardStore } from "@/app/store/board-store";
 import { Board, ColumnInt } from "@/shared/types";
 
-type BoardViewContextType = {
-  board: Board | null;
-  setBoard: Dispatch<SetStateAction<Board | null>>;
-  columns: ColumnInt[];
-  setColumns: Dispatch<SetStateAction<ColumnInt[]>>;
-};
-
-const BoardViewContext = createContext<BoardViewContextType | null>(null);
-
-export function BoardProvider({
-  children,
-  initialBoard,
-  initialColumns,
-}: {
-  children: React.ReactNode;
-  initialBoard: Board | null;
-  initialColumns: ColumnInt[];
+export function BoardProvider({ children, initialBoard, initialColumns }: {
+    children: React.ReactNode;
+    initialBoard: Board | null;
+    initialColumns: ColumnInt[];
 }) {
-  const [board, setBoard] = useState<Board | null>(initialBoard);
-  const [columns, setColumns] = useState<ColumnInt[]>(initialColumns);
+    const { setBoard, setColumns } = useBoardStore();
 
-  const value = useMemo(
-    () => ({
-      board,
-      setBoard,
-      columns,
-      setColumns,
-    }),
-    [board, columns]
-  );
+    useEffect(() => {
+        setBoard(initialBoard);
+        setColumns(initialColumns);
+    }, [initialBoard, initialColumns]);
 
-  return (
-    <BoardViewContext.Provider value={value}>
-      {children}
-    </BoardViewContext.Provider>
-  );
+    return <>{children}</>;
 }
 
 export function useBoardView() {
-  const ctx = useContext(BoardViewContext);
-  if (!ctx) {
-    throw new Error("useBoardView must be used inside BoardProvider");
-  }
-  return ctx;
+    return useBoardStore();
 }

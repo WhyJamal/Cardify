@@ -30,4 +30,10 @@ export const cardApi = {
       method: "PATCH",
       body: JSON.stringify({ isCompleted }),
   }),
+
+  updateTitleCard: (cardId: string, title: string) =>
+    clientFetch(`/api/cards/${cardId}`, {
+      method: "PATCH",
+      body: JSON.stringify({ title }),
+  }),
 };

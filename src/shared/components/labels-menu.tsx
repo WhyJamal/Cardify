@@ -5,8 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
 import { calcBelowPosition } from "../utils/floatingPosition";
-import { useBoardView } from "@/app/providers/BoardProvider";
-import { cardApi } from "@/features/card/api/card-api";
+// import { useCardActions } from "@/shared/hooks/use-card-actions";
 import { useOutsideClick } from "@/shared/hooks/use-outside-click";
 import {
   mergeLabelsWithChecked,
@@ -19,7 +18,6 @@ import {
 
 interface LabelsMenuProps {
   triggerRef: React.RefObject<HTMLElement | null>;
-  cardId: string;
   boardLabels: BoardLabel[];
   selectedLabels: SelectedLabel[];
   onClose: () => void;
@@ -30,11 +28,10 @@ export function LabelsMenu({
   onClose,
   onChange,
   triggerRef,
-  cardId,
   boardLabels = [],
   selectedLabels = [],
 }: LabelsMenuProps) {
-  const { setColumns, board, setBoard } = useBoardView();
+  // const { updateLabels } = useCardActions();
 
   const [searchQuery, setSearchQuery] = useState("");
   const [labels, setLabels] = useState<LabelWithChecked[]>([]);
@@ -68,30 +65,12 @@ export function LabelsMenu({
     );
 
     setLabels(newLabels);
-    onChange?.(newLabels);
 
     const checkedLabels = getCheckedLabels(newLabels);
 
-    try {
-      await cardApi.updateLabels(
-        cardId,
-        checkedLabels.map((label) => ({ id: label.id }))
-      );
+    onChange?.(checkedLabels);
 
-      if (!board) return;
-
-      const updatedColumns = board.columns.map((column) => ({
-        ...column,
-        cards: column.cards.map((card) =>
-          card.id === cardId ? { ...card, labels: checkedLabels } : card
-        ),
-      }));
-
-      setBoard({ ...board, columns: updatedColumns });
-      setColumns(updatedColumns);
-    } catch (err) {
-      console.error("Failed to update labels:", err);
-    }
+    // await updateLabels(cardId, checkedLabels);
   };
 
   const filteredLabels = labels.filter((label) => {

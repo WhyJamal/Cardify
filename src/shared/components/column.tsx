@@ -166,7 +166,7 @@ export function Column({
             onKeyDown={handleTitleKeyDown}
             onBlur={handleTitleBlur}
             autoFocus
-            className="flex-1 text-sm font-semibold text-[#b6c2cf] bg-[#232321] border border-[#41423e] outline-none px-1 py-0.5 rounded"
+            className="text-white text-sm font-semibold leading-snug bg-[#22272b] px-2 py-1 rounded outline-none"
           />
         ) : (
           <h3

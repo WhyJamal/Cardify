@@ -10,12 +10,14 @@ import { CardDragPreview } from "@/shared/components/card-drag-preview";
 import { useBoardView } from "@/app/providers/BoardProvider";
 import { useBoardActions } from "@/shared/hooks/use-board-actions";
 import { useOpenCardFromQuery } from "@/shared/hooks/use-open-card-from-query";
+import { useCardActions } from "@/shared/hooks/use-card-actions";
 
 export default function BoardPage() {
   useOpenCardFromQuery();
 
   const { board, columns } = useBoardView();
-  const { dropCard, addCard, dropColumn, addColumn, toggleIsCompleted } = useBoardActions();
+  const { dropCard, addCard, dropColumn, addColumn } = useBoardActions();
+  const { toggleIsCompleted } = useCardActions();
 
   const [showLabelName, setShowLabelName] = useState(false);
   const [addingColumn, setAddingColumn] = useState(false);

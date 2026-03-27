@@ -141,36 +141,6 @@ export function useBoardActions() {
     return true;
   }
 
-  async function toggleIsCompleted(cardId: string, isComplete: boolean) {
-    setColumns((prev) =>
-      prev.map((col) => ({
-        ...col,
-        cards: col.cards.map((c) =>
-          c.id === cardId ? { ...c, isCompleted: isComplete } : c
-        ),
-      }))
-    );
-
-    // 2️⃣ backend update
-    try {
-      const result = await cardApi.updateIsCompleted(cardId, isComplete);
-      if (!result) throw new Error("Update failed");
-      return true;
-    } catch (err) {
-      console.error(err);
-      // agar backend xato qaytarsa, rollback qilishingiz mumkin:
-      setColumns((prev) =>
-        prev.map((col) => ({
-          ...col,
-          cards: col.cards.map((c) =>
-            c.id === cardId ? { ...c, isCompleted: !isComplete } : c
-          ),
-        }))
-      );
-      return false;
-    }
-  }
-
-  return { dropCard, addCard, dropColumn, addColumn, toggleIsCompleted };
+  return { dropCard, addCard, dropColumn, addColumn };
 }
 

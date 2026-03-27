@@ -5,7 +5,7 @@ import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, X } from "lucid
 import { createPortal } from "react-dom";
 
 import { calcSidePosition } from "@/shared/utils/floatingPosition";
-import { cardApi } from "@/features/card/api/card-api";
+// import { useCardActions } from "@/shared/hooks/use-card-actions";
 import {
   MONTH_NAMES,
   WEEK_DAYS,
@@ -31,6 +31,7 @@ export function DatePicker({
   onClose,
   onChange,
 }: DatePickerProps) {
+  // const { handleChangeDueDate } = useCardActions();
   const today = new Date();
 
   const [currentDate, setCurrentDate] = useState(
@@ -184,7 +185,9 @@ export function DatePicker({
         setDeadlineTime("");
       }
 
-      await cardApi.updateDueDate(cardId, dueDate);
+      // handleChangeDueDate(cardId, dueDate)
+      // await cardApi.updateDueDate(cardId, dueDate);
+      
       onChange?.(dueDate);
       onClose?.();
     } catch (err) {

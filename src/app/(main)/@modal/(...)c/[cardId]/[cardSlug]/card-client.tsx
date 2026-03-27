@@ -21,6 +21,7 @@ import { TooltipAction } from "@/shared/components/custom-tooltip";
 import { cardApi } from "@/features/card/api/card-api";
 import { useEscapeKey } from "@/shared/hooks/use-escape-key";
 import { formatCardDate, getDueDateStatus } from "@/shared/utils/date";
+import { useCardActions } from "@/shared/hooks/use-card-actions";
 
 interface Comment {
     id: number;
@@ -39,14 +40,22 @@ export default function CardClient({
     cardId: string;
     initialCard: CardData;
 }) {
+    const { changeTitleCard, toggleIsCompleted, updateLabels, handleChangeDueDate } = useCardActions();
     const router = useRouter();
     const addBtnRef = useRef<HTMLButtonElement>(null);
+
+
+    const [card, setCard] = useState<CardData>(initialCard);
+
+    const [isEditingTitle, setIsEditingTitle] = useState(false);
+    const [tempTitle, setTempTitle] = useState(card.title);
+    const titleInputRef = useRef<HTMLInputElement>(null);
 
     const [comment, setComment] = useState("");
     const [description, setDescription] = useState(initialCard.description);
     const [isEditingDesc, setIsEditingDesc] = useState(false);
     const [tempDesc, setTempDesc] = useState(initialCard.description);
-    const [card, setCard] = useState<CardData>(initialCard);
+    
     const [timeline, setTimeline] = useState<CardTimeline[]>([]);
 
     const [showMenu, setShowMenu] = useState(false);
@@ -54,6 +63,19 @@ export default function CardClient({
     const [showLabels, setShowLabels] = useState(false);
 
     useEscapeKey(() => router.back(), true);
+
+    const handleSaveTitle = () => {
+        if (!tempTitle?.trim()) return;
+
+        changeTitleCard(cardId, tempTitle.trim());
+        setCard((prev) => (prev ? { ...prev, title: tempTitle.trim() } : prev));
+        setIsEditingTitle(false);
+    };
+
+    const handleCancelTitle = () => {
+        setTempTitle(card.title);
+        setIsEditingTitle(false);
+    };
 
     const handleOpenDates = () => {
         setShowMenu(false);
@@ -161,11 +183,37 @@ export default function CardClient({
                                 <input
                                     type="checkbox"
                                     id={`checkbox`}
-                                    onClick={(e) => e.stopPropagation()}
+                                    checked={card.isCompleted}
+                                    onChange={(e) => toggleIsCompleted(card.id, e.target.checked)}
                                 />
                                 <label htmlFor={`checkbox`} onClick={(e) => e.stopPropagation()} />
                             </div>
-                            <h2 className="text-white text-xl font-semibold leading-snug">{card.title}</h2>
+
+                            {isEditingTitle ? (
+                                <input
+                                    ref={titleInputRef}
+                                    type="text"
+                                    value={tempTitle}
+                                    onChange={(e) => setTempTitle(e.target.value)}
+                                    onBlur={handleSaveTitle} 
+                                    onKeyDown={(e) => {
+                                        if (e.key === "Enter") handleSaveTitle();
+                                        if (e.key === "Escape") handleCancelTitle();
+                                    }}
+                                    className="text-white text-xl font-semibold leading-snug bg-[#22272b] px-2 py-1 rounded outline-none"
+                                    autoFocus
+                                />
+                            ) : (
+                                <h2
+                                    className="text-white text-xl font-semibold leading-snug cursor-text"
+                                    onClick={() => {
+                                        setTempTitle(card.title);
+                                        setIsEditingTitle(true);
+                                    }}
+                                >
+                                    {card.title}
+                                </h2>
+                            )}
                         </div>
 
                         <div className="flex gap-2 mb-6 flex-wrap">
@@ -197,30 +245,16 @@ export default function CardClient({
                                     cardId={card.id}
                                     cardDueDate={card.dueDate}
                                     onClose={handleCloseDatePicker}
-                                    onChange={(newDueDate) =>
-                                        setCard((prev) =>
-                                            prev ? { ...prev, dueDate: newDueDate ? new Date(newDueDate) : undefined } : prev
-                                        )
-                                    }
+                                    onChange={(newDueDate) => handleChangeDueDate(card.id, newDueDate)}
                                 />
                             )}
 
                             {showLabels && (
                                 <LabelsMenu
                                     triggerRef={addBtnRef}
-                                    cardId={cardId}
                                     boardLabels={card.boardLabels ?? []}
                                     selectedLabels={card.labels ?? []}
-                                    onChange={(newLabels) => {
-                                        setCard((prev) =>
-                                            prev
-                                                ? {
-                                                    ...prev,
-                                                    labels: newLabels.filter((l) => l.checked),
-                                                }
-                                                : prev
-                                        );
-                                    }}
+                                    onChange={(newLabels) => updateLabels(cardId, newLabels)}
                                     onClose={handleCloseLabels}
                                 />
                             )}

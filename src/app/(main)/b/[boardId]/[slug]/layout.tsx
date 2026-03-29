@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { Header, SubHeader } from "@/shared/components";
-import { BoardProvider } from "@/app/providers/BoardProvider";
 import { serverFetch } from "@/lib/server-api";
+import { BoardInitializer } from "./board-initializer"; 
 import Loading from "./loading";
 
 async function fetchBoardView(boardId: number) {
@@ -45,7 +45,7 @@ async function BoardDataLoader({
     const data = await fetchBoardView(boardId);
 
     return (
-        <BoardProvider initialBoard={data.board} initialColumns={data.columns}>
+        <BoardInitializer board={data.board} columns={data.columns}>
             <div className="h-screen w-screen flex flex-col overflow-hidden">
                 <Header />
                 <div className="flex flex-col flex-1 overflow-hidden">
@@ -53,6 +53,6 @@ async function BoardDataLoader({
                     {children}
                 </div>
             </div>
-        </BoardProvider>
+        </BoardInitializer>
     );
 }

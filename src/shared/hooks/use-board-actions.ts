@@ -1,7 +1,6 @@
 import { useRef } from "react";
 import { useBoardView } from "@/app/providers/BoardProvider";
 import { clientFetch } from "@/lib/client-api";
-import { cardApi } from "@/features/card/api/card-api";
 
 export function useBoardActions() {
   const { board, columns, setColumns } = useBoardView();

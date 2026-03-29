@@ -4,7 +4,6 @@ import { useCallback } from "react";
 import { useBoardView } from "@/app/providers/BoardProvider";
 import { cardApi } from "@/features/card/api/card-api";
 import type { CardData, CardLabel } from "@/shared/types";
-import type { SelectedLabel } from "@/shared/utils/labels";
 
 export function useCardActions() {
     const { board, setColumns } = useBoardView();
@@ -37,6 +36,7 @@ export function useCardActions() {
     const changeTitleCard = useCallback(
         async (cardId: string, title: string) => {
             const prevCard = findCard(cardId);
+            
             syncCardInState(cardId, { title });
 
             try {
@@ -55,6 +55,7 @@ export function useCardActions() {
     const toggleIsCompleted = useCallback(
         async (cardId: string, isComplete: boolean) => {
             const prevCard = findCard(cardId);
+
             syncCardInState(cardId, { isCompleted: isComplete });
 
             try {
@@ -73,6 +74,7 @@ export function useCardActions() {
     const handleChangeDueDate = useCallback(
         async (cardId: string, dueDate: string | null) => {
             const prevCard = findCard(cardId);
+    
             syncCardInState(cardId, {
                 dueDate: dueDate ? new Date(dueDate) : undefined,
             });
@@ -97,7 +99,7 @@ export function useCardActions() {
     const updateLabels = useCallback(
         async (cardId: string, labels: CardLabel[]) => {
             const prevCard = findCard(cardId);
-            syncCardInState(cardId, { labels });
+            syncCardInState(cardId, { labels: labels });
 
             try {
                 const result = await cardApi.updateLabels(

@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 import {
     X,
     Eye,
@@ -13,15 +12,12 @@ import {
     Smile,
     ChevronDown,
 } from "lucide-react";
-import { useRouter } from "next/navigation";
 
-import type { CardData, CardTimeline } from "@/shared/types";
+import type { CardData } from "@/shared/types";
 import { Button, DatePicker, AddToCardMenu, LabelsMenu } from "@/shared/components";
 import { TooltipAction } from "@/shared/components/custom-tooltip";
-import { cardApi } from "@/features/card/api/card-api";
-import { useEscapeKey } from "@/shared/hooks/use-escape-key";
-import { formatCardDate, getDueDateStatus } from "@/shared/utils/date";
-import { useCardActions } from "@/shared/hooks/use-card-actions";
+import { formatCardDate } from "@/shared/utils/date";
+import { useCardClient } from "@/features/card/hooks/use-card-client";
 
 interface Comment {
     id: number;
@@ -40,69 +36,44 @@ export default function CardClient({
     cardId: string;
     initialCard: CardData;
 }) {
-    const { changeTitleCard, toggleIsCompleted, updateLabels, handleChangeDueDate } = useCardActions();
-    const router = useRouter();
-    const addBtnRef = useRef<HTMLButtonElement>(null);
+    const {
+        card,
+        isEditingTitle,
+        setIsEditingTitle,
+        tempTitle,
+        setTempTitle,
+        titleInputRef,
+        handleSaveTitle,
+        handleCancelTitle,
 
+        isEditingDesc,
+        setIsEditingDesc,
+        tempDesc,
+        setTempDesc,
+        handleSaveDesc,
 
-    const [card, setCard] = useState<CardData>(initialCard);
+        comment,
+        setComment,
+        handleSendComment,
+        timeline,
 
-    const [isEditingTitle, setIsEditingTitle] = useState(false);
-    const [tempTitle, setTempTitle] = useState(card.title);
-    const titleInputRef = useRef<HTMLInputElement>(null);
+        addBtnRef,
+        showMenu,
+        addMenu,
+        showDatePicker,
+        handleOpenDates,
+        handleCloseDatePicker,
+        showLabels,
+        handleOpenLabels,
+        handleCloseLabels,
 
-    const [comment, setComment] = useState("");
-    const [description, setDescription] = useState(initialCard.description);
-    const [isEditingDesc, setIsEditingDesc] = useState(false);
-    const [tempDesc, setTempDesc] = useState(initialCard.description);
-    
-    const [timeline, setTimeline] = useState<CardTimeline[]>([]);
+        handleToggleCompleted,
+        handleUpdateLabels,
+        handleUpdateDueDate,
 
-    const [showMenu, setShowMenu] = useState(false);
-    const [showDatePicker, setShowDatePicker] = useState(false);
-    const [showLabels, setShowLabels] = useState(false);
-
-    useEscapeKey(() => router.back(), true);
-
-    const handleSaveTitle = () => {
-        if (!tempTitle?.trim()) return;
-
-        changeTitleCard(cardId, tempTitle.trim());
-        setCard((prev) => (prev ? { ...prev, title: tempTitle.trim() } : prev));
-        setIsEditingTitle(false);
-    };
-
-    const handleCancelTitle = () => {
-        setTempTitle(card.title);
-        setIsEditingTitle(false);
-    };
-
-    const handleOpenDates = () => {
-        setShowMenu(false);
-        setShowDatePicker(true);
-    };
-
-    const handleOpenLabels = () => {
-        setShowLabels(true);
-        setShowMenu(false);
-    };
-
-    const handleCloseDatePicker = () => {
-        setShowDatePicker(false);
-    };
-
-    const handleCloseLabels = () => {
-        setShowLabels(false);
-    };
-
-    const handleSendComment = async () => {
-        const text = comment.trim();
-        if (!text) return;
-
-        const created = await cardApi.addTimelineComment(cardId, text);
-        setTimeline((prev) => [...prev, created]);
-        setComment("");
-    };
+        status,
+        router,
+    } = useCardClient(initialCard, cardId);
 
     const comments: Comment[] = [
         {
@@ -123,28 +94,8 @@ export default function CardClient({
         },
     ];
 
-    const handleSaveDesc = async () => {
-        if (!cardId) return;
-
-        try {
-            const updated = await cardApi.updateDescription(cardId, tempDesc ?? '');
-            setCard((prev) => (prev ? { ...prev, description: updated.description } : prev));
-            setDescription(updated.description);
-            setIsEditingDesc(false);
-        } catch (err) {
-            console.error("Ошибка при сохранении описания:", err);
-        }
-    };
-
-    function add() {
-        setShowMenu((prev) => !prev);
-        setShowDatePicker(false);
-    }
-
-    const status = getDueDateStatus(card.dueDate, card.isCompleted);
-
     return (
-        <div className="fixed inset-0 bg-black/60 flex items-start justify-center z-50 p-4">
+        <div className="fixed inset-0 bg-black/60 grid items-start justify-center z-50 p-4">
             <div className="bg-[#1d2125] top-10 rounded-2xl w-full max-w-5xl max-h-[90vh] overflow-hidden shadow-2xl relative">
                 <div className="flex items-center justify-between px-5 pt-4 pb-2 border-b border-white/10">
                     <div className="flex items-center gap-2 text-[#9fadbc] text-sm">
@@ -154,19 +105,28 @@ export default function CardClient({
                     </div>
 
                     <div className="flex items-center gap-3 text-[#9fadbc]">
-                        <Button variant={"ghost"} className="hover:text-white hover:bg-[#2c333a] p-1.5 rounded transition-colors">
+                        <Button
+                            variant="ghost"
+                            className="hover:text-white hover:bg-[#2c333a] p-1.5 rounded transition-colors"
+                        >
                             <Image size={18} />
                         </Button>
-                        <Button variant={"ghost"} className="hover:text-white hover:bg-[#2c333a] p-1.5 rounded transition-colors">
+                        <Button
+                            variant="ghost"
+                            className="hover:text-white hover:bg-[#2c333a] p-1.5 rounded transition-colors"
+                        >
                             <Eye size={18} />
                         </Button>
-                        <Button variant={"ghost"} className="hover:text-white hover:bg-[#2c333a] p-1.5 rounded transition-colors">
+                        <Button
+                            variant="ghost"
+                            className="hover:text-white hover:bg-[#2c333a] p-1.5 rounded transition-colors"
+                        >
                             <MoreHorizontal size={18} />
                         </Button>
 
-                        <TooltipAction tooltip={"Закрыть"} shortcut="Esc" side="bottom">
+                        <TooltipAction tooltip="Закрыть" shortcut="Esc" side="bottom">
                             <Button
-                                variant={"ghost"}
+                                variant="ghost"
                                 onClick={() => router.back()}
                                 className="hover:text-white hover:bg-[#2c333a] p-1.5 rounded transition-colors"
                             >
@@ -182,11 +142,14 @@ export default function CardClient({
                             <div className="round-sm top-1.5">
                                 <input
                                     type="checkbox"
-                                    id={`checkbox`}
+                                    id={`checkbox-${card.id}`}
                                     checked={card.isCompleted}
-                                    onChange={(e) => toggleIsCompleted(card.id, e.target.checked)}
+                                    onChange={(e) => handleToggleCompleted(e.target.checked)}
                                 />
-                                <label htmlFor={`checkbox`} onClick={(e) => e.stopPropagation()} />
+                                <label
+                                    htmlFor={`checkbox-${card.id}`}
+                                    onClick={(e) => e.stopPropagation()}
+                                />
                             </div>
 
                             {isEditingTitle ? (
@@ -195,7 +158,7 @@ export default function CardClient({
                                     type="text"
                                     value={tempTitle}
                                     onChange={(e) => setTempTitle(e.target.value)}
-                                    onBlur={handleSaveTitle} 
+                                    onBlur={handleSaveTitle}
                                     onKeyDown={(e) => {
                                         if (e.key === "Enter") handleSaveTitle();
                                         if (e.key === "Escape") handleCancelTitle();
@@ -219,12 +182,13 @@ export default function CardClient({
                         <div className="flex gap-2 mb-6 flex-wrap">
                             <button
                                 ref={addBtnRef}
-                                onClick={add}
+                                onClick={addMenu}
                                 className="flex items-center gap-1.5 bg-[#2c333a] hover:bg-[#38414a] text-[#9fadbc] hover:text-white text-sm px-3 py-1.5 rounded transition-colors"
                             >
                                 <Plus size={14} />
                                 Добавить
                             </button>
+
                             <button className="flex items-center gap-1.5 bg-[#2c333a] hover:bg-[#38414a] text-[#9fadbc] hover:text-white text-sm px-3 py-1.5 rounded transition-colors">
                                 <Paperclip size={14} />
                                 Вложение
@@ -233,7 +197,7 @@ export default function CardClient({
                             {showMenu && (
                                 <AddToCardMenu
                                     triggerRef={addBtnRef}
-                                    onClose={() => setShowMenu(false)}
+                                    onClose={() => addMenu()}
                                     onOpenDates={handleOpenDates}
                                     onOpenLabels={handleOpenLabels}
                                 />
@@ -245,7 +209,7 @@ export default function CardClient({
                                     cardId={card.id}
                                     cardDueDate={card.dueDate}
                                     onClose={handleCloseDatePicker}
-                                    onChange={(newDueDate) => handleChangeDueDate(card.id, newDueDate)}
+                                    onChange={handleUpdateDueDate}
                                 />
                             )}
 
@@ -254,7 +218,7 @@ export default function CardClient({
                                     triggerRef={addBtnRef}
                                     boardLabels={card.boardLabels ?? []}
                                     selectedLabels={card.labels ?? []}
-                                    onChange={(newLabels) => updateLabels(cardId, newLabels)}
+                                    onChange={handleUpdateLabels}
                                     onClose={handleCloseLabels}
                                 />
                             )}
@@ -277,20 +241,22 @@ export default function CardClient({
                                 <div>
                                     <p className="text-[#9fadbc] text-xs mb-2">Метки</p>
                                     <div
-                                        onClick={() => handleOpenLabels()}
+                                        onClick={handleOpenLabels}
                                         className="flex flex-wrap gap-1 max-h-24 px-1 py-1"
                                     >
-                                        {card.labels?.map((label) => (
+                                        {card.labels.map((label) => (
                                             <div
                                                 key={label.id}
                                                 className="flex px-1 py-1 rounded justify-center items-center shrink-0 min-w-14 min-h-8"
                                                 style={{ background: label.color }}
                                             >
-                                                <span className="text-xs font-bold text-white">{label.name}</span>
+                                                <span className="text-xs font-bold text-white">
+                                                    {label.name}
+                                                </span>
                                             </div>
                                         ))}
                                         <button
-                                            onClick={() => handleOpenLabels()}
+                                            onClick={handleOpenLabels}
                                             className="w-8 h-8 rounded bg-[#2c333a] flex items-center justify-center text-[#9fadbc] hover:text-white hover:bg-[#38414a] shrink-0"
                                         >
                                             <Plus size={14} />
@@ -302,10 +268,15 @@ export default function CardClient({
                             {card.dueDate && (
                                 <div>
                                     <p className="text-[#9fadbc] text-xs mb-2">Срок</p>
-                                    <div onClick={() => setShowDatePicker((prev) => !prev)} className="flex items-center gap-2">
+                                    <div
+                                        onClick={() => handleOpenDates()}
+                                        className="flex items-center gap-2"
+                                    >
                                         <div className="flex items-center gap-1.5 bg-[#2c333a] hover:bg-[#38414a] text-[#9fadbc] text-sm px-3 py-1.5 rounded transition-colors">
                                             {formatCardDate(card.dueDate)}
-                                            <span className={`${status.color} text-white text-[11px] px-2 rounded flex items-center gap-1`}>
+                                            <span
+                                                className={`${status.color} text-white text-[11px] px-2 rounded flex items-center gap-1`}
+                                            >
                                                 {status.label}
                                             </span>
                                             <ChevronDown size={11} />
@@ -324,7 +295,7 @@ export default function CardClient({
                                 {!isEditingDesc && (
                                     <button
                                         onClick={() => {
-                                            setTempDesc(description);
+                                            setTempDesc(card.description ?? "");
                                             setIsEditingDesc(true);
                                         }}
                                         className="bg-[#2c333a] hover:bg-[#38414a] text-[#9fadbc] hover:text-white text-sm px-3 py-1.5 rounded transition-colors"
@@ -338,7 +309,7 @@ export default function CardClient({
                                 <div className="ml-6">
                                     <textarea
                                         className="w-full bg-[#22272b] text-[#b6c2cf] text-sm p-3 rounded-lg resize-none outline-none focus:ring-2 focus:ring-blue-500 min-h-20"
-                                        value={tempDesc}
+                                        value={tempDesc ?? ""}
                                         onChange={(e) => setTempDesc(e.target.value)}
                                         autoFocus
                                     />
@@ -358,7 +329,9 @@ export default function CardClient({
                                     </div>
                                 </div>
                             ) : (
-                                <p className="ml-6 text-[#b6c2cf] text-sm">{card.description}</p>
+                                <p className="ml-6 text-[#b6c2cf] text-sm">
+                                    {card.description || "Описание отсутствует"}
+                                </p>
                             )}
                         </div>
                     </div>
@@ -374,14 +347,27 @@ export default function CardClient({
                             </button>
                         </div>
 
-                        <div className="mb-5">
+                        <div className="mb-3">
                             <input
-                                type="text"
                                 placeholder="Напишите комментарий..."
                                 value={comment}
                                 onChange={(e) => setComment(e.target.value)}
+                                onKeyDown={(e) => {
+                                    if (e.key === "Enter" && !e.shiftKey) {
+                                        e.preventDefault();
+                                        handleSendComment();
+                                    }
+                                }}
                                 className="w-full bg-[#22272b] text-[#b6c2cf] placeholder-[#596773] text-sm px-3 py-2.5 rounded-lg outline-none focus:ring-2 focus:ring-blue-500"
                             />
+                            {/* <div className="flex justify-start mt-2">
+                                <Button
+                                    onClick={handleSendComment}
+                                    className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-black text-sm px-3 py-2 rounded-sm transition-colors"
+                                >
+                                    Сохранить
+                                </Button>
+                            </div> */}
                         </div>
 
                         <div className="space-y-4">
@@ -393,11 +379,16 @@ export default function CardClient({
                                     <div className="flex-1 min-w-0">
                                         {c.isActivity ? (
                                             <p className="text-[#b6c2cf] text-sm leading-snug">
-                                                <span className="text-white font-medium">{c.author}</span> {c.activityText}
+                                                <span className="text-white font-medium">
+                                                    {c.author}
+                                                </span>{" "}
+                                                {c.activityText}
                                             </p>
                                         ) : (
                                             <>
-                                                <p className="text-white text-sm font-medium mb-0.5">{c.author}</p>
+                                                <p className="text-white text-sm font-medium mb-0.5">
+                                                    {c.author}
+                                                </p>
                                                 <div className="bg-[#22272b] text-[#b6c2cf] text-sm px-3 py-2 rounded-lg mb-1">
                                                     {c.text}
                                                 </div>
@@ -421,6 +412,22 @@ export default function CardClient({
                                 </div>
                             ))}
                         </div>
+
+                        {timeline.length > 0 && (
+                            <div className="mt-6 border-t border-white/10 pt-4">
+                                <p className="text-[#9fadbc] text-xs mb-3">Timeline</p>
+                                <div className="space-y-3">
+                                    {timeline.map((item: any) => (
+                                        <div
+                                            key={item.id}
+                                            className="text-sm text-[#b6c2cf] bg-[#22272b] rounded-lg px-3 py-2"
+                                        >
+                                            {item.text || item.message || "Событие"}
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>

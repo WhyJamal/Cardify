@@ -1,5 +1,5 @@
 import { headers } from "next/headers";
-import { redirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 export async function serverFetch(path: string) {
   const h = await headers();
@@ -21,7 +21,8 @@ export async function serverFetch(path: string) {
 
   if (!res.ok) {
     const text = await res.text();
-    throw new Error(`API Error ${res.status}: ${text}`);
+    notFound()
+    // throw new Error(`API Error ${res.status}: ${text}`);
   }
 
   return res.json();

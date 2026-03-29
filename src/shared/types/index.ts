@@ -1,3 +1,36 @@
+export interface Workspace {
+  id: string;
+  name: string;
+  ownerId: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export type WorkspaceRole =
+  | "OWNER"
+  | "ADMIN"
+  | "MEMBER"
+  | "VIEWER";
+
+export type WorkspaceMemberStatus =
+  | "PENDING"
+  | "ACCEPTED"
+  | "DECLINED";
+
+export interface WorkspaceMember {
+  id: string;
+  workspaceId: string;
+  userId: string;
+  role: WorkspaceRole;
+  status: WorkspaceMemberStatus;
+}
+
+export interface User {
+  id: string;
+  name: string | null;
+  email: string;
+}
+
 export interface BoardLabel {
   id: string;
   color: string;
@@ -25,24 +58,40 @@ export interface CardTimeline {
   updatedAt: string;
 }
 
+export interface CardMember {
+  id: string;
+  user: User;
+}
+
 export interface CardData {
   id: string;
   title?: string;
   description?: string;
   image?: string;
-  coverColor?: string;
-  labels?: CardLabel[];
-  boardLabels?: BoardLabel[];
-  checklist?: { done: number; total: number };
-  attachments?: number;
+
+  numberBadge?: number;
+
   hasDescription?: boolean;
   watching?: boolean;
-  assignee?: { initials: string; color: string };
+
+  attachments?: number;
+
+  checklist?: {
+    done: number;
+    total: number;
+  };
+
+  labels?: CardLabel[];
+  boardLabels?: BoardLabel[];
+
+  members?: CardMember[]; 
+
   links?: CardLink[];
-  comments?:CardTimeline[],
+  comments?: CardTimeline[];
+
   column: ColumnInt;
-  numberBadge?: number;
-  dueDate?: Date;
+
+  dueDate?: string | null;
   isCompleted: boolean;
 }
 
@@ -57,5 +106,6 @@ export interface Board {
   title: string;
   bg: string;
   isPhoto: boolean;
+  workspaceId: string;
   columns: ColumnInt[];
 }

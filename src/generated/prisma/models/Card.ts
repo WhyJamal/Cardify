@@ -340,6 +340,7 @@ export type CardWhereInput = {
   labels?: Prisma.CardBoardLabelListRelationFilter
   links?: Prisma.CardLinkListRelationFilter
   comments?: Prisma.CardTimelineListRelationFilter
+  members?: Prisma.CardMemberListRelationFilter
 }
 
 export type CardOrderByWithRelationInput = {
@@ -365,6 +366,7 @@ export type CardOrderByWithRelationInput = {
   labels?: Prisma.CardBoardLabelOrderByRelationAggregateInput
   links?: Prisma.CardLinkOrderByRelationAggregateInput
   comments?: Prisma.CardTimelineOrderByRelationAggregateInput
+  members?: Prisma.CardMemberOrderByRelationAggregateInput
 }
 
 export type CardWhereUniqueInput = Prisma.AtLeast<{
@@ -393,6 +395,7 @@ export type CardWhereUniqueInput = Prisma.AtLeast<{
   labels?: Prisma.CardBoardLabelListRelationFilter
   links?: Prisma.CardLinkListRelationFilter
   comments?: Prisma.CardTimelineListRelationFilter
+  members?: Prisma.CardMemberListRelationFilter
 }, "id">
 
 export type CardOrderByWithAggregationInput = {
@@ -467,6 +470,7 @@ export type CardCreateInput = {
   labels?: Prisma.CardBoardLabelCreateNestedManyWithoutCardInput
   links?: Prisma.CardLinkCreateNestedManyWithoutCardInput
   comments?: Prisma.CardTimelineCreateNestedManyWithoutCardInput
+  members?: Prisma.CardMemberCreateNestedManyWithoutCardInput
 }
 
 export type CardUncheckedCreateInput = {
@@ -491,6 +495,7 @@ export type CardUncheckedCreateInput = {
   labels?: Prisma.CardBoardLabelUncheckedCreateNestedManyWithoutCardInput
   links?: Prisma.CardLinkUncheckedCreateNestedManyWithoutCardInput
   comments?: Prisma.CardTimelineUncheckedCreateNestedManyWithoutCardInput
+  members?: Prisma.CardMemberUncheckedCreateNestedManyWithoutCardInput
 }
 
 export type CardUpdateInput = {
@@ -515,6 +520,7 @@ export type CardUpdateInput = {
   labels?: Prisma.CardBoardLabelUpdateManyWithoutCardNestedInput
   links?: Prisma.CardLinkUpdateManyWithoutCardNestedInput
   comments?: Prisma.CardTimelineUpdateManyWithoutCardNestedInput
+  members?: Prisma.CardMemberUpdateManyWithoutCardNestedInput
 }
 
 export type CardUncheckedUpdateInput = {
@@ -539,6 +545,7 @@ export type CardUncheckedUpdateInput = {
   labels?: Prisma.CardBoardLabelUncheckedUpdateManyWithoutCardNestedInput
   links?: Prisma.CardLinkUncheckedUpdateManyWithoutCardNestedInput
   comments?: Prisma.CardTimelineUncheckedUpdateManyWithoutCardNestedInput
+  members?: Prisma.CardMemberUncheckedUpdateManyWithoutCardNestedInput
 }
 
 export type CardCreateManyInput = {
@@ -793,6 +800,20 @@ export type CardUpdateOneRequiredWithoutCommentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CardUpdateToOneWithWhereWithoutCommentsInput, Prisma.CardUpdateWithoutCommentsInput>, Prisma.CardUncheckedUpdateWithoutCommentsInput>
 }
 
+export type CardCreateNestedOneWithoutMembersInput = {
+  create?: Prisma.XOR<Prisma.CardCreateWithoutMembersInput, Prisma.CardUncheckedCreateWithoutMembersInput>
+  connectOrCreate?: Prisma.CardCreateOrConnectWithoutMembersInput
+  connect?: Prisma.CardWhereUniqueInput
+}
+
+export type CardUpdateOneRequiredWithoutMembersNestedInput = {
+  create?: Prisma.XOR<Prisma.CardCreateWithoutMembersInput, Prisma.CardUncheckedCreateWithoutMembersInput>
+  connectOrCreate?: Prisma.CardCreateOrConnectWithoutMembersInput
+  upsert?: Prisma.CardUpsertWithoutMembersInput
+  connect?: Prisma.CardWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CardUpdateToOneWithWhereWithoutMembersInput, Prisma.CardUpdateWithoutMembersInput>, Prisma.CardUncheckedUpdateWithoutMembersInput>
+}
+
 export type CardCreateWithoutColumnInput = {
   id?: string
   title?: string | null
@@ -814,6 +835,7 @@ export type CardCreateWithoutColumnInput = {
   labels?: Prisma.CardBoardLabelCreateNestedManyWithoutCardInput
   links?: Prisma.CardLinkCreateNestedManyWithoutCardInput
   comments?: Prisma.CardTimelineCreateNestedManyWithoutCardInput
+  members?: Prisma.CardMemberCreateNestedManyWithoutCardInput
 }
 
 export type CardUncheckedCreateWithoutColumnInput = {
@@ -837,6 +859,7 @@ export type CardUncheckedCreateWithoutColumnInput = {
   labels?: Prisma.CardBoardLabelUncheckedCreateNestedManyWithoutCardInput
   links?: Prisma.CardLinkUncheckedCreateNestedManyWithoutCardInput
   comments?: Prisma.CardTimelineUncheckedCreateNestedManyWithoutCardInput
+  members?: Prisma.CardMemberUncheckedCreateNestedManyWithoutCardInput
 }
 
 export type CardCreateOrConnectWithoutColumnInput = {
@@ -909,6 +932,7 @@ export type CardCreateWithoutLabelsInput = {
   column: Prisma.ColumnCreateNestedOneWithoutCardsInput
   links?: Prisma.CardLinkCreateNestedManyWithoutCardInput
   comments?: Prisma.CardTimelineCreateNestedManyWithoutCardInput
+  members?: Prisma.CardMemberCreateNestedManyWithoutCardInput
 }
 
 export type CardUncheckedCreateWithoutLabelsInput = {
@@ -932,6 +956,7 @@ export type CardUncheckedCreateWithoutLabelsInput = {
   isCompleted?: boolean
   links?: Prisma.CardLinkUncheckedCreateNestedManyWithoutCardInput
   comments?: Prisma.CardTimelineUncheckedCreateNestedManyWithoutCardInput
+  members?: Prisma.CardMemberUncheckedCreateNestedManyWithoutCardInput
 }
 
 export type CardCreateOrConnectWithoutLabelsInput = {
@@ -971,6 +996,7 @@ export type CardUpdateWithoutLabelsInput = {
   column?: Prisma.ColumnUpdateOneRequiredWithoutCardsNestedInput
   links?: Prisma.CardLinkUpdateManyWithoutCardNestedInput
   comments?: Prisma.CardTimelineUpdateManyWithoutCardNestedInput
+  members?: Prisma.CardMemberUpdateManyWithoutCardNestedInput
 }
 
 export type CardUncheckedUpdateWithoutLabelsInput = {
@@ -994,6 +1020,7 @@ export type CardUncheckedUpdateWithoutLabelsInput = {
   isCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   links?: Prisma.CardLinkUncheckedUpdateManyWithoutCardNestedInput
   comments?: Prisma.CardTimelineUncheckedUpdateManyWithoutCardNestedInput
+  members?: Prisma.CardMemberUncheckedUpdateManyWithoutCardNestedInput
 }
 
 export type CardCreateWithoutLinksInput = {
@@ -1017,6 +1044,7 @@ export type CardCreateWithoutLinksInput = {
   column: Prisma.ColumnCreateNestedOneWithoutCardsInput
   labels?: Prisma.CardBoardLabelCreateNestedManyWithoutCardInput
   comments?: Prisma.CardTimelineCreateNestedManyWithoutCardInput
+  members?: Prisma.CardMemberCreateNestedManyWithoutCardInput
 }
 
 export type CardUncheckedCreateWithoutLinksInput = {
@@ -1040,6 +1068,7 @@ export type CardUncheckedCreateWithoutLinksInput = {
   isCompleted?: boolean
   labels?: Prisma.CardBoardLabelUncheckedCreateNestedManyWithoutCardInput
   comments?: Prisma.CardTimelineUncheckedCreateNestedManyWithoutCardInput
+  members?: Prisma.CardMemberUncheckedCreateNestedManyWithoutCardInput
 }
 
 export type CardCreateOrConnectWithoutLinksInput = {
@@ -1079,6 +1108,7 @@ export type CardUpdateWithoutLinksInput = {
   column?: Prisma.ColumnUpdateOneRequiredWithoutCardsNestedInput
   labels?: Prisma.CardBoardLabelUpdateManyWithoutCardNestedInput
   comments?: Prisma.CardTimelineUpdateManyWithoutCardNestedInput
+  members?: Prisma.CardMemberUpdateManyWithoutCardNestedInput
 }
 
 export type CardUncheckedUpdateWithoutLinksInput = {
@@ -1102,6 +1132,7 @@ export type CardUncheckedUpdateWithoutLinksInput = {
   isCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   labels?: Prisma.CardBoardLabelUncheckedUpdateManyWithoutCardNestedInput
   comments?: Prisma.CardTimelineUncheckedUpdateManyWithoutCardNestedInput
+  members?: Prisma.CardMemberUncheckedUpdateManyWithoutCardNestedInput
 }
 
 export type CardCreateWithoutCommentsInput = {
@@ -1125,6 +1156,7 @@ export type CardCreateWithoutCommentsInput = {
   column: Prisma.ColumnCreateNestedOneWithoutCardsInput
   labels?: Prisma.CardBoardLabelCreateNestedManyWithoutCardInput
   links?: Prisma.CardLinkCreateNestedManyWithoutCardInput
+  members?: Prisma.CardMemberCreateNestedManyWithoutCardInput
 }
 
 export type CardUncheckedCreateWithoutCommentsInput = {
@@ -1148,6 +1180,7 @@ export type CardUncheckedCreateWithoutCommentsInput = {
   isCompleted?: boolean
   labels?: Prisma.CardBoardLabelUncheckedCreateNestedManyWithoutCardInput
   links?: Prisma.CardLinkUncheckedCreateNestedManyWithoutCardInput
+  members?: Prisma.CardMemberUncheckedCreateNestedManyWithoutCardInput
 }
 
 export type CardCreateOrConnectWithoutCommentsInput = {
@@ -1187,6 +1220,7 @@ export type CardUpdateWithoutCommentsInput = {
   column?: Prisma.ColumnUpdateOneRequiredWithoutCardsNestedInput
   labels?: Prisma.CardBoardLabelUpdateManyWithoutCardNestedInput
   links?: Prisma.CardLinkUpdateManyWithoutCardNestedInput
+  members?: Prisma.CardMemberUpdateManyWithoutCardNestedInput
 }
 
 export type CardUncheckedUpdateWithoutCommentsInput = {
@@ -1210,6 +1244,119 @@ export type CardUncheckedUpdateWithoutCommentsInput = {
   isCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   labels?: Prisma.CardBoardLabelUncheckedUpdateManyWithoutCardNestedInput
   links?: Prisma.CardLinkUncheckedUpdateManyWithoutCardNestedInput
+  members?: Prisma.CardMemberUncheckedUpdateManyWithoutCardNestedInput
+}
+
+export type CardCreateWithoutMembersInput = {
+  id?: string
+  title?: string | null
+  image?: string | null
+  numberBadge?: number | null
+  description?: string | null
+  hasDescription?: boolean
+  watching?: boolean
+  attachments?: number
+  checklistDone?: number
+  checklistTotal?: number
+  assigneeInitials?: string | null
+  assigneeColor?: string | null
+  position?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  dueDate?: Date | string | null
+  isCompleted?: boolean
+  column: Prisma.ColumnCreateNestedOneWithoutCardsInput
+  labels?: Prisma.CardBoardLabelCreateNestedManyWithoutCardInput
+  links?: Prisma.CardLinkCreateNestedManyWithoutCardInput
+  comments?: Prisma.CardTimelineCreateNestedManyWithoutCardInput
+}
+
+export type CardUncheckedCreateWithoutMembersInput = {
+  id?: string
+  columnId: string
+  title?: string | null
+  image?: string | null
+  numberBadge?: number | null
+  description?: string | null
+  hasDescription?: boolean
+  watching?: boolean
+  attachments?: number
+  checklistDone?: number
+  checklistTotal?: number
+  assigneeInitials?: string | null
+  assigneeColor?: string | null
+  position?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  dueDate?: Date | string | null
+  isCompleted?: boolean
+  labels?: Prisma.CardBoardLabelUncheckedCreateNestedManyWithoutCardInput
+  links?: Prisma.CardLinkUncheckedCreateNestedManyWithoutCardInput
+  comments?: Prisma.CardTimelineUncheckedCreateNestedManyWithoutCardInput
+}
+
+export type CardCreateOrConnectWithoutMembersInput = {
+  where: Prisma.CardWhereUniqueInput
+  create: Prisma.XOR<Prisma.CardCreateWithoutMembersInput, Prisma.CardUncheckedCreateWithoutMembersInput>
+}
+
+export type CardUpsertWithoutMembersInput = {
+  update: Prisma.XOR<Prisma.CardUpdateWithoutMembersInput, Prisma.CardUncheckedUpdateWithoutMembersInput>
+  create: Prisma.XOR<Prisma.CardCreateWithoutMembersInput, Prisma.CardUncheckedCreateWithoutMembersInput>
+  where?: Prisma.CardWhereInput
+}
+
+export type CardUpdateToOneWithWhereWithoutMembersInput = {
+  where?: Prisma.CardWhereInput
+  data: Prisma.XOR<Prisma.CardUpdateWithoutMembersInput, Prisma.CardUncheckedUpdateWithoutMembersInput>
+}
+
+export type CardUpdateWithoutMembersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numberBadge?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasDescription?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  watching?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  attachments?: Prisma.IntFieldUpdateOperationsInput | number
+  checklistDone?: Prisma.IntFieldUpdateOperationsInput | number
+  checklistTotal?: Prisma.IntFieldUpdateOperationsInput | number
+  assigneeInitials?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assigneeColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  position?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  column?: Prisma.ColumnUpdateOneRequiredWithoutCardsNestedInput
+  labels?: Prisma.CardBoardLabelUpdateManyWithoutCardNestedInput
+  links?: Prisma.CardLinkUpdateManyWithoutCardNestedInput
+  comments?: Prisma.CardTimelineUpdateManyWithoutCardNestedInput
+}
+
+export type CardUncheckedUpdateWithoutMembersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  columnId?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numberBadge?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasDescription?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  watching?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  attachments?: Prisma.IntFieldUpdateOperationsInput | number
+  checklistDone?: Prisma.IntFieldUpdateOperationsInput | number
+  checklistTotal?: Prisma.IntFieldUpdateOperationsInput | number
+  assigneeInitials?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assigneeColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  position?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  labels?: Prisma.CardBoardLabelUncheckedUpdateManyWithoutCardNestedInput
+  links?: Prisma.CardLinkUncheckedUpdateManyWithoutCardNestedInput
+  comments?: Prisma.CardTimelineUncheckedUpdateManyWithoutCardNestedInput
 }
 
 export type CardCreateManyColumnInput = {
@@ -1253,6 +1400,7 @@ export type CardUpdateWithoutColumnInput = {
   labels?: Prisma.CardBoardLabelUpdateManyWithoutCardNestedInput
   links?: Prisma.CardLinkUpdateManyWithoutCardNestedInput
   comments?: Prisma.CardTimelineUpdateManyWithoutCardNestedInput
+  members?: Prisma.CardMemberUpdateManyWithoutCardNestedInput
 }
 
 export type CardUncheckedUpdateWithoutColumnInput = {
@@ -1276,6 +1424,7 @@ export type CardUncheckedUpdateWithoutColumnInput = {
   labels?: Prisma.CardBoardLabelUncheckedUpdateManyWithoutCardNestedInput
   links?: Prisma.CardLinkUncheckedUpdateManyWithoutCardNestedInput
   comments?: Prisma.CardTimelineUncheckedUpdateManyWithoutCardNestedInput
+  members?: Prisma.CardMemberUncheckedUpdateManyWithoutCardNestedInput
 }
 
 export type CardUncheckedUpdateManyWithoutColumnInput = {
@@ -1307,12 +1456,14 @@ export type CardCountOutputType = {
   labels: number
   links: number
   comments: number
+  members: number
 }
 
 export type CardCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   labels?: boolean | CardCountOutputTypeCountLabelsArgs
   links?: boolean | CardCountOutputTypeCountLinksArgs
   comments?: boolean | CardCountOutputTypeCountCommentsArgs
+  members?: boolean | CardCountOutputTypeCountMembersArgs
 }
 
 /**
@@ -1346,6 +1497,13 @@ export type CardCountOutputTypeCountCommentsArgs<ExtArgs extends runtime.Types.E
   where?: Prisma.CardTimelineWhereInput
 }
 
+/**
+ * CardCountOutputType without action
+ */
+export type CardCountOutputTypeCountMembersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CardMemberWhereInput
+}
+
 
 export type CardSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1370,6 +1528,7 @@ export type CardSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   labels?: boolean | Prisma.Card$labelsArgs<ExtArgs>
   links?: boolean | Prisma.Card$linksArgs<ExtArgs>
   comments?: boolean | Prisma.Card$commentsArgs<ExtArgs>
+  members?: boolean | Prisma.Card$membersArgs<ExtArgs>
   _count?: boolean | Prisma.CardCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["card"]>
 
@@ -1444,6 +1603,7 @@ export type CardInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   labels?: boolean | Prisma.Card$labelsArgs<ExtArgs>
   links?: boolean | Prisma.Card$linksArgs<ExtArgs>
   comments?: boolean | Prisma.Card$commentsArgs<ExtArgs>
+  members?: boolean | Prisma.Card$membersArgs<ExtArgs>
   _count?: boolean | Prisma.CardCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CardIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1460,6 +1620,7 @@ export type $CardPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     labels: Prisma.$CardBoardLabelPayload<ExtArgs>[]
     links: Prisma.$CardLinkPayload<ExtArgs>[]
     comments: Prisma.$CardTimelinePayload<ExtArgs>[]
+    members: Prisma.$CardMemberPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1878,6 +2039,7 @@ export interface Prisma__CardClient<T, Null = never, ExtArgs extends runtime.Typ
   labels<T extends Prisma.Card$labelsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Card$labelsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CardBoardLabelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   links<T extends Prisma.Card$linksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Card$linksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CardLinkPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   comments<T extends Prisma.Card$commentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Card$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CardTimelinePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  members<T extends Prisma.Card$membersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Card$membersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CardMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2393,6 +2555,30 @@ export type Card$commentsArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.CardTimelineScalarFieldEnum | Prisma.CardTimelineScalarFieldEnum[]
+}
+
+/**
+ * Card.members
+ */
+export type Card$membersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CardMember
+   */
+  select?: Prisma.CardMemberSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CardMember
+   */
+  omit?: Prisma.CardMemberOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CardMemberInclude<ExtArgs> | null
+  where?: Prisma.CardMemberWhereInput
+  orderBy?: Prisma.CardMemberOrderByWithRelationInput | Prisma.CardMemberOrderByWithRelationInput[]
+  cursor?: Prisma.CardMemberWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CardMemberScalarFieldEnum | Prisma.CardMemberScalarFieldEnum[]
 }
 
 /**

@@ -12,7 +12,7 @@ import { getDueDateStatus } from "@/shared/utils/date";
 export function useCardClient(initialCard: CardData, cardId: string) {
     const router = useRouter();
     const { changeTitleCard, toggleIsCompleted, updateLabels, handleChangeDueDate } = useCardActions();
-    const { columns } = useBoardView(); 
+    const { board, columns } = useBoardView(); 
 
     const addBtnRef = useRef<HTMLButtonElement>(null);
     const titleInputRef = useRef<HTMLInputElement>(null);
@@ -23,6 +23,8 @@ export function useCardClient(initialCard: CardData, cardId: string) {
 
     const [isEditingDesc, setIsEditingDesc] = useState(false);
     const [tempDesc, setTempDesc] = useState(initialCard.description ?? "");
+
+    const [showInvite, setShowInvite] = useState(false);
 
     const [comment, setComment] = useState("");
     const [timeline, setTimeline] = useState<CardTimeline[]>([]);
@@ -166,6 +168,10 @@ export function useCardClient(initialCard: CardData, cardId: string) {
         tempDesc,
         setTempDesc,
         handleSaveDesc,
+
+        showInvite,
+        setShowInvite,
+        board,
 
         comment,
         setComment,

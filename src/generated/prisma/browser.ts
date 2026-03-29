@@ -23,10 +23,30 @@ export * from './enums';
  */
 export type User = Prisma.UserModel
 /**
+ * Model Workspace
+ * 
+ */
+export type Workspace = Prisma.WorkspaceModel
+/**
+ * Model WorkspaceMember
+ * 
+ */
+export type WorkspaceMember = Prisma.WorkspaceMemberModel
+/**
+ * Model Notification
+ * 
+ */
+export type Notification = Prisma.NotificationModel
+/**
  * Model Board
  * 
  */
 export type Board = Prisma.BoardModel
+/**
+ * Model BoardMember
+ * 
+ */
+export type BoardMember = Prisma.BoardMemberModel
 /**
  * Model BoardLabel
  * 
@@ -57,3 +77,8 @@ export type CardLink = Prisma.CardLinkModel
  * 
  */
 export type CardTimeline = Prisma.CardTimelineModel
+/**
+ * Model CardMember
+ * 
+ */
+export type CardMember = Prisma.CardMemberModel

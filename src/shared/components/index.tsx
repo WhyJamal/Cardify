@@ -20,6 +20,15 @@ export { Header } from "./header";
 export { SubHeader } from "./sub-header";
 export { default as Sidebar } from "@/shared/components/sidebar"
 
-export { DatePicker } from "./ui/data-picker";
-export { AddToCardMenu } from "./add-to-card-menu";
-export { LabelsMenu } from "./labels-menu";
+export { DatePicker } from "../../features/board/data-picker";
+export { AddToCardMenu } from "../../features/board/add-to-card-menu";
+export { LabelsMenu } from "../../features/board/labels-menu";
+
+export { AccountDropdown } from "./account-dropdown";
+export { CreateMenu } from "./create-menu";
+export { TooltipAction } from "./custom-tooltip"
+export { NotificationDropdown } from "./notification-dropdown"; 
+
+export { default as CardifyLogo } from "./logo";
+
+export { default as WorkspaceSidebar } from "./workspace-sidebar";

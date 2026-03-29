@@ -1,15 +1,14 @@
 "use client";
 
+import Image from "next/image";
+import Link from "next/link";
+
 import { Search, Bell, HelpCircle, LayoutGrid, Plus } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { AccountDropdown } from "./account-dropdown";
-import { CreateMenu } from "./create-menu";
+
+import { AccountDropdown, CreateMenu, TooltipAction, CardifyLogo, Button, NotificationDropdown } from ".";
 import { CreateBoardPanel } from "@/features/board/create-board-panel";
-import { TooltipAction } from "./custom-tooltip";
-import CardifyLogo from "./logo";
 
 type PanelState = "closed" | "menu" | "createBoard";
 
@@ -36,11 +35,23 @@ export function Header() {
 
   const initials = session?.user?.name ? getInitials(session.user.name) : null;
 
+  const bellRef = useRef<HTMLButtonElement>(null);
+  const [notifOpen, setNotifOpen] = useState(false);
+
+  const [unreadCount, setUnreadCount] = useState(0);
+
+  useEffect(() => {
+    if (!session?.user) return;
+    fetch("/api/notifications")
+      .then((r) => r.json())
+      .then((d) => setUnreadCount(d.unreadCount ?? 0));
+  }, [session]);
+
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if (e.key === "/") {
         e.preventDefault();
-        inputRef.current?.focus(); 
+        inputRef.current?.focus();
       }
     };
 
@@ -66,8 +77,8 @@ export function Header() {
                 height={30}
                 className="object-contain"
               />
-              
-              <CardifyLogo size="sm"/>
+
+              <CardifyLogo size="sm" />
               {/* <span className="text-white font-semibold text-[15px]">Cardify</span> */}
             </div>
           </button>
@@ -106,23 +117,44 @@ export function Header() {
       </div>
 
       <div className="flex items-center gap-1">
-        <button
+        <Button
+          size={"xl"}
+          variant={"custom"}
           ref={createBtnRef}
           onClick={handleCreateBtnClick}
-          className={`bg-[#0052cc] text-white px-3 py-1.5 rounded text-sm font-medium flex items-center gap-1 transition-colors ${panelState !== "closed"
+          className={`flex items-center gap-1 transition-colors ${panelState !== "closed"
             ? "bg-blue-400 text-white"
-            : "bg-blue-600 hover:bg-blue-500 text-white"
-            }`}
+            : ""}`}
         >
           <Plus size={16} />
           <span className="hidden sm:inline font-bold">Создать</span>
-        </button>
-        <button className="p-1.5 rounded hover:bg-white/10 text-[#9fadbc] transition-colors">
+        </Button>
+        <Button
+          ref={bellRef}
+          variant={"ghost"}
+          onClick={() => setNotifOpen((v) => !v)}
+          className="p-1.5 rounded hover:bg-white/10 text-[#9fadbc] transition-colors relative"
+        >
           <Bell size={18} />
-        </button>
-        <button className="p-1.5 rounded hover:bg-white/10 text-[#9fadbc] transition-colors">
+          {unreadCount > 0 && (
+            <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-red-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center">
+              {unreadCount > 9 ? "9+" : unreadCount}
+            </span>
+          )}
+        </Button>
+
+        {notifOpen && (
+          <NotificationDropdown
+            triggerRef={bellRef}
+            onClose={() => setNotifOpen(false)}
+          />
+        )}
+        <Button
+          variant={"ghost"}
+          className="p-1.5 rounded hover:bg-white/10 text-[#9fadbc] transition-colors"
+        >
           <HelpCircle size={18} />
-        </button>
+        </Button>
 
         {panelState === "menu" && (
           <CreateMenu

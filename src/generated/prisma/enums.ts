@@ -9,6 +9,52 @@
 * 🟢 You can import this file directly.
 */
 
+export const WorkspaceMemberRole = {
+  OWNER: 'OWNER',
+  ADMIN: 'ADMIN',
+  MEMBER: 'MEMBER',
+  VIEWER: 'VIEWER'
+} as const
+
+export type WorkspaceMemberRole = (typeof WorkspaceMemberRole)[keyof typeof WorkspaceMemberRole]
+
+
+export const WorkspaceMemberStatus = {
+  PENDING: 'PENDING',
+  ACCEPTED: 'ACCEPTED',
+  DECLINED: 'DECLINED'
+} as const
+
+export type WorkspaceMemberStatus = (typeof WorkspaceMemberStatus)[keyof typeof WorkspaceMemberStatus]
+
+
+export const NotificationType = {
+  BOARD_INVITE: 'BOARD_INVITE',
+  BOARD_INVITE_ACCEPTED: 'BOARD_INVITE_ACCEPTED',
+  BOARD_INVITE_DECLINED: 'BOARD_INVITE_DECLINED'
+} as const
+
+export type NotificationType = (typeof NotificationType)[keyof typeof NotificationType]
+
+
+export const BoardMemberStatus = {
+  PENDING: 'PENDING',
+  ACCEPTED: 'ACCEPTED',
+  DECLINED: 'DECLINED'
+} as const
+
+export type BoardMemberStatus = (typeof BoardMemberStatus)[keyof typeof BoardMemberStatus]
+
+
+export const BoardMemberRole = {
+  OWNER: 'OWNER',
+  MEMBER: 'MEMBER',
+  VIEWER: 'VIEWER'
+} as const
+
+export type BoardMemberRole = (typeof BoardMemberRole)[keyof typeof BoardMemberRole]
+
+
 export const CardTimelineType = {
   COMMENT: 'COMMENT',
   ACTIVITY: 'ACTIVITY'

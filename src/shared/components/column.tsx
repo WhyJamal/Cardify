@@ -10,6 +10,7 @@ import { CardData } from "@/shared/types";
 import { CardModal } from "@/features/card/card-modal";
 import { useBoardView } from "@/app/providers/BoardProvider";
 import { useEditableColumnTitle } from "@/features/board/hooks/use-editable-column-title";
+import { Button } from "./ui/button";
 
 interface ColumnProps {
   column: { id: string; title: string; cards: CardData[] };
@@ -212,13 +213,16 @@ export function Column({
               rows={3}
             />
             <div className="flex items-center gap-2 mt-1">
-              <button
+              <Button
+                size={"sm"}
+                variant={"custom"}
                 onClick={handleAddCard}
-                className="bg-[#579dff] hover:bg-[#388bff] text-[#1d2125] text-xs font-medium px-3 py-1.5 rounded transition-colors"
               >
-                Добавить карточку
-              </button>
-              <button
+                Добавить  карточку
+              </Button>
+              <Button
+                size={"icon-sm"}
+                variant={"ghost"}
                 onClick={() => {
                   setAddingCard(false);
                   setNewCardTitle("");
@@ -226,7 +230,7 @@ export function Column({
                 className="text-[#9fadbc] hover:text-white p-1 rounded hover:bg-white/10 transition-colors"
               >
                 <X size={16} />
-              </button>
+              </Button>
             </div>
           </div>
         )}

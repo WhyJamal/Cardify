@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useRef, RefObject } from "react";
 import { createPortal } from "react-dom";
 import { LayoutDashboard, Users, Copy } from "lucide-react";

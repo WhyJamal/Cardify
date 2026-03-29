@@ -4,7 +4,7 @@ import { X, Pencil } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
-import { calcBelowPosition } from "../utils/floatingPosition";
+import { calcBelowPosition } from "../../shared/utils/floatingPosition";
 // import { useCardActions } from "@/shared/hooks/use-card-actions";
 import { useOutsideClick } from "@/shared/hooks/use-outside-click";
 import {

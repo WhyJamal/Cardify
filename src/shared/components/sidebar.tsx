@@ -1,12 +1,17 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { LayoutDashboard, FileText, Home, ChevronDown } from "lucide-react";
 import Link from "next/link";
+
+import { useEffect, useState } from "react";
+import { LayoutDashboard, FileText, Home, Plus } from "lucide-react";
+
 import { usePathname } from "next/navigation";
-import { TooltipAction } from "./custom-tooltip";
+import { TooltipAction, Button, WorkspaceSidebar } from "./";
 import { ChevronRight } from "lucide-react";
-import { Button } from "./ui/button";
+import { Workspace } from "../types";
+
+import CreateWorkspaceCard from "@/features/workspace/create-workspace-card";
+import WorkspaceModal from "@/features/workspace/modal/workpace-modal";
 
 type NavItem = {
   id: string;
@@ -14,6 +19,30 @@ type NavItem = {
   icon: any;
   url?: string;
 };
+
+export const workspaces: Workspace[] = [
+  {
+    id: "w1",
+    name: "Marketing Team",
+    ownerId: "u1",
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  },
+  {
+    id: "w2",
+    name: "Development Team",
+    ownerId: "u2",
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  },
+  {
+    id: "w3",
+    name: "Design Team",
+    ownerId: "u3",
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  },
+];
 
 const navItems: NavItem[] = [
   { id: "boards", label: "Доски", icon: LayoutDashboard, url: `/u/user/boards` },
@@ -23,7 +52,7 @@ const navItems: NavItem[] = [
 
 export default function Sidebar() {
   const pathname = usePathname();
-  const [workspaceOpen, setWorkspaceOpen] = useState(true);
+  const [showCreateWorksppace, setShowCreateWorksppace] = useState(true);
   const [collapsed, setCollapsed] = useState(false);
 
   useEffect(() => {
@@ -41,7 +70,7 @@ export default function Sidebar() {
       const isInput = active?.tagName === "INPUT" || active?.tagName === "TEXTAREA";
 
       if (!isInput && e.code === "BracketLeft") {
-        e.preventDefault(); 
+        e.preventDefault();
         setCollapsed((prev) => !prev);
       }
     };
@@ -54,7 +83,7 @@ export default function Sidebar() {
     <div className="relative">
       <aside
         className={`min-h-screen bg-[#1d2125] flex flex-col py-10 overflow-y-auto transition-all duration-300 ease-in-out
-      ${collapsed ? "w-23 px-4" : "w-[320px] px-8"}`}
+        ${collapsed ? "w-23 px-4" : "w-[320px] px-8"}`}
       >
         <nav className="mb-4">
           {navItems.map((item) => {
@@ -83,51 +112,31 @@ export default function Sidebar() {
 
         <div>
           {!collapsed && (
-            <p className="text-xs text-[#8c9bab] mb-2 px-2 tracking-wide">
-              Рабочие пространства
-            </p>
-          )}
-
-          <button
-            onClick={() => setWorkspaceOpen((prev) => !prev)}
-            className={`w-full flex items-center justify-between px-2 py-2 rounded-md hover:bg-[#a1bdd914] transition-all
-          ${collapsed ? "justify-center px-0" : ""}`}
-          >
-            <div className="flex items-center gap-2">
-              <div className="w-9 h-8 rounded-md bg-[#1db954] flex items-center justify-center text-black font-bold">
-                P
-              </div>
-
-              {!collapsed && (
-                <span className="text-sm text-[#b6c2cf] leading-tight">
-                  Рабочее пространство Cardify
-                </span>
-              )}
-            </div>
-
-            {!collapsed && (
-              <ChevronDown
-                size={16}
-                className={`text-[#8c9bab] transition-transform duration-200 ${workspaceOpen ? "rotate-0" : "-rotate-90"
-                  }`}
-              />
-            )}
-          </button>
-
-          {workspaceOpen && !collapsed && (
-            <div className="mt-2 pl-10 text-sm text-[#b6c2cf] space-y-4">
-              <p className="hover:text-white cursor-pointer transition">Доски</p>
-              <p className="hover:text-white cursor-pointer transition">
-                Участники
+            <div className="flex items-center justify-between">
+              <p className="text-xs text-[#8c9bab] mb-2 px-2 tracking-wide">
+                Рабочие пространства
               </p>
-              <p className="hover:text-white cursor-pointer transition">
-                Настройки
-              </p>
+              <Button
+                size={"icon-lg"}
+                variant={"ghost"}
+                onClick={() => setShowCreateWorksppace(true)}
+                className="rounded-full text-[#8c9bab] hover:bg-[#a1bdd914]"
+              >
+                <Plus />
+              </Button>
             </div>
           )}
+
+          {workspaces.map((ws) => (
+            <WorkspaceSidebar
+              key={ws.id}
+              workspace={ws}
+              collapsed={collapsed}
+            />
+          ))}
         </div>
 
-        <div className="absolute top-24 -right-3 z-60">
+        <div className="absolute top-24 -right-3 z-10">
           <TooltipAction
             tooltip={collapsed ? "Показать панель" : "Скрыть панель"}
             shortcut="["
@@ -148,6 +157,15 @@ export default function Sidebar() {
           </TooltipAction>
         </div>
       </aside>
+
+      <WorkspaceModal
+        title={"Новый рабочего пространство"}
+        open={showCreateWorksppace}
+        onClose={() => setShowCreateWorksppace(false)}
+      >
+        <CreateWorkspaceCard/>
+      </WorkspaceModal>
+
     </div>
   );
 }

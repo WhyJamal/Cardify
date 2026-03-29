@@ -18,6 +18,7 @@ import { Button, DatePicker, AddToCardMenu, LabelsMenu } from "@/shared/componen
 import { TooltipAction } from "@/shared/components/custom-tooltip";
 import { formatCardDate } from "@/shared/utils/date";
 import { useCardClient } from "@/features/card/hooks/use-card-client";
+import { InviteMemberMenu } from "@/features/board/invite-member-menu";
 
 interface Comment {
     id: number;
@@ -51,6 +52,10 @@ export default function CardClient({
         tempDesc,
         setTempDesc,
         handleSaveDesc,
+
+        showInvite,
+        setShowInvite,
+        board,
 
         comment,
         setComment,
@@ -231,9 +236,23 @@ export default function CardClient({
                                     <div className="w-8 h-8 rounded-full bg-[#4bce97] flex items-center justify-center text-[#1d2125] text-xs font-semibold">
                                         SG
                                     </div>
-                                    <button className="w-8 h-8 rounded-full bg-[#2c333a] hover:bg-[#38414a] flex items-center justify-center text-[#9fadbc] hover:text-white transition-colors">
+
+                                    <Button
+                                        ref={addBtnRef}
+                                        onClick={() => setShowInvite(true)}
+                                        className="w-8 h-8 rounded-full bg-[#2c333a] hover:bg-[#38414a] flex items-center justify-center text-[#9fadbc] hover:text-white transition-colors"
+                                    >
                                         <Plus size={14} />
-                                    </button>
+                                    </Button>
+
+                                    {showInvite && (
+                                        <InviteMemberMenu
+                                            triggerRef={addBtnRef}
+                                            boardId={board?.id} 
+                                            onClose={() => setShowInvite(false)}
+                                        />
+                                    )}
+
                                 </div>
                             </div>
 

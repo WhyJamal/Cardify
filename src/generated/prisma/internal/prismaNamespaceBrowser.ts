@@ -52,13 +52,18 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   User: 'User',
+  Workspace: 'Workspace',
+  WorkspaceMember: 'WorkspaceMember',
+  Notification: 'Notification',
   Board: 'Board',
+  BoardMember: 'BoardMember',
   BoardLabel: 'BoardLabel',
   Column: 'Column',
   Card: 'Card',
   CardBoardLabel: 'CardBoardLabel',
   CardLink: 'CardLink',
-  CardTimeline: 'CardTimeline'
+  CardTimeline: 'CardTimeline',
+  CardMember: 'CardMember'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -86,17 +91,70 @@ export const UserScalarFieldEnum = {
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
+export const WorkspaceScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  ownerId: 'ownerId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type WorkspaceScalarFieldEnum = (typeof WorkspaceScalarFieldEnum)[keyof typeof WorkspaceScalarFieldEnum]
+
+
+export const WorkspaceMemberScalarFieldEnum = {
+  id: 'id',
+  workspaceId: 'workspaceId',
+  userId: 'userId',
+  role: 'role',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type WorkspaceMemberScalarFieldEnum = (typeof WorkspaceMemberScalarFieldEnum)[keyof typeof WorkspaceMemberScalarFieldEnum]
+
+
+export const NotificationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  type: 'type',
+  title: 'title',
+  body: 'body',
+  data: 'data',
+  isRead: 'isRead',
+  isDismissed: 'isDismissed',
+  createdAt: 'createdAt'
+} as const
+
+export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
+
+
 export const BoardScalarFieldEnum = {
   id: 'id',
   title: 'title',
   bg: 'bg',
   isPhoto: 'isPhoto',
+  workspaceId: 'workspaceId',
   ownerId: 'ownerId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type BoardScalarFieldEnum = (typeof BoardScalarFieldEnum)[keyof typeof BoardScalarFieldEnum]
+
+
+export const BoardMemberScalarFieldEnum = {
+  id: 'id',
+  boardId: 'boardId',
+  userId: 'userId',
+  role: 'role',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BoardMemberScalarFieldEnum = (typeof BoardMemberScalarFieldEnum)[keyof typeof BoardMemberScalarFieldEnum]
 
 
 export const BoardLabelScalarFieldEnum = {
@@ -182,6 +240,16 @@ export const CardTimelineScalarFieldEnum = {
 } as const
 
 export type CardTimelineScalarFieldEnum = (typeof CardTimelineScalarFieldEnum)[keyof typeof CardTimelineScalarFieldEnum]
+
+
+export const CardMemberScalarFieldEnum = {
+  id: 'id',
+  cardId: 'cardId',
+  userId: 'userId',
+  createdAt: 'createdAt'
+} as const
+
+export type CardMemberScalarFieldEnum = (typeof CardMemberScalarFieldEnum)[keyof typeof CardMemberScalarFieldEnum]
 
 
 export const SortOrder = {

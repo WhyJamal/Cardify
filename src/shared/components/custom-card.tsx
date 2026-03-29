@@ -1,6 +1,6 @@
 "use client";
 
-import { Eye, Paperclip, CheckSquare, AlignLeft, ExternalLink, Pencil, Clock } from "lucide-react";
+import { Eye, Paperclip, CheckSquare, AlignLeft, ExternalLink, Pencil, Clock, Archive } from "lucide-react";
 import { useRef, useEffect, useState } from "react";
 import { useDrag, useDrop, useDragLayer } from "react-dnd";
 import { getEmptyImage } from "react-dnd-html5-backend";
@@ -10,6 +10,7 @@ import { TooltipAction } from "./custom-tooltip";
 import Link from "next/link";
 import { formatDueDate } from "../utils/date";
 import { shadeColor } from "../utils/labels";
+import { Button } from "./ui/button";
 
 interface CardProps {
   card: CardData;
@@ -84,8 +85,8 @@ export function CardContent({ card, onClickCard, showLabelName, onToggleLabel, o
             <div className="relative flex items-start group">
               <div
                 className={`round-sm relative flex items-center ${card.isCompleted
-                    ? "mr-2" 
-                    : "absolute left-0 top-0.5 opacity-0 group-hover:opacity-100 transition-all duration-200"
+                  ? "mr-2"
+                  : "absolute left-0 top-0.5 opacity-0 group-hover:opacity-100 transition-all duration-200"
                   }`}
               >
                 <div className="relative">
@@ -214,12 +215,24 @@ export function CustomCard({ card, columnId, index, onEdit, onClickCard, onDropC
       className={`group relative bg-[#22272b] rounded-lg shadow-sm cursor-grab active:cursor-grabbing hover:bg-[#282e33] transition-colors ${isDragging ? "opacity-40 scale-95" : "opacity-100"
         }`}
     >
-      <button
+      <Button
+        size={"icon-sm"}
+        variant={"ghost"}
         onClick={() => onEdit?.(card.id)}
-        className="absolute top-2 right-2 z-10 opacity-0 group-hover:opacity-100 p-1 rounded bg-[#2c333a] hover:bg-[#3d4954] text-[#9fadbc] transition-all"
+        className="absolute top-2 right-2 z-10 opacity-0 group-hover:opacity-100 rounded bg-[#2c333a] hover:bg-[#3d4954] text-[#9fadbc] transition-all"
       >
         <Pencil size={12} />
-      </button>
+      </Button>
+      {card.isCompleted && (
+        <Button
+          size={"icon-sm"}
+          variant={"ghost"}
+          onClick={() => onEdit?.(card.id)}
+          className="absolute top-2 right-9 z-10 opacity-0 group-hover:opacity-100 p-1 rounded bg-[#2c333a] hover:bg-[#3d4954] text-[#9fadbc] transition-all"
+        >
+          <Archive size={12} />
+        </Button>
+      )}
       <CardContent card={card} onClickCard={onClickCard} showLabelName={showLabelName} onToggleLabel={onToggleLabel} onToggleIsCompleted={onToggleIsCompleted} />
     </div>
   );

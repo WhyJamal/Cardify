@@ -96,7 +96,7 @@ export default function CardClient({
 
     return (
         <div className="fixed inset-0 bg-black/60 grid items-start justify-center z-50 p-4">
-            <div className="bg-[#1d2125] top-10 rounded-2xl w-full max-w-5xl max-h-[90vh] overflow-hidden shadow-2xl relative">
+            <div className="bg-[#1d2125] top-10 rounded-2xl min-w-5xl max-w-5xl max-h-[60vh] overflow-hidden shadow-2xl relative">
                 <div className="flex items-center justify-between px-5 pt-4 pb-2 border-b border-white/10">
                     <div className="flex items-center gap-2 text-[#9fadbc] text-sm">
                         <span className="bg-[#2c333a] rounded px-2 py-0.5 flex items-center gap-1 cursor-pointer hover:bg-[#38414a]">
@@ -336,7 +336,7 @@ export default function CardClient({
                         </div>
                     </div>
 
-                    <div className="w-112.5 shrink-0 border-l border-[#2c333a] px-5 pb-6 pt-2 bg-[#0f1313]">
+                    <div className="w-112.5 shrink-0 border-l border-[#2c333a] px-5 pb-6 pt-2 bg-[#0f1313] max-h-96 overflow-y-scroll">
                         <div className="flex items-center justify-between mb-4">
                             <div className="flex items-center gap-2 text-white text-sm font-medium">
                                 <MessageSquare size={15} className="text-[#9fadbc]" />

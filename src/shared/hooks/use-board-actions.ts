@@ -1,9 +1,11 @@
 import { useRef } from "react";
 import { useBoardView } from "@/app/providers/BoardProvider";
 import { clientFetch } from "@/lib/client-api";
+import { boardApi } from "@/features/board/api/board-api";
+import { Board, User } from "../types";
 
 export function useBoardActions() {
-  const { board, columns, setColumns } = useBoardView();
+  const { board, columns, setColumns, setBoard } = useBoardView();
   const lastColumnReorder = useRef<string>("");
 
   // ─── Cards ───────────────────────────────────────────────
@@ -140,6 +142,42 @@ export function useBoardActions() {
     return true;
   }
 
-  return { dropCard, addCard, dropColumn, addColumn };
+  // ─── Members ─────────────────────────────────────────────
+
+  async function addMember(userId: string, user: User) {
+    if (!board?.id) return;
+    try {
+      await boardApi.addMember(board.id, userId);
+      setBoard((prev: Board | null) => {
+        if (!prev) return prev;
+        const already = prev.members?.some((m) => m.userId === userId);
+        if (already) return prev;
+        return {
+          ...prev,
+          members: [...(prev.members ?? []), { userId, user, status: "ACCEPTED" }],
+        };
+      });
+    } catch (err) {
+      console.error("addMember failed", err);
+    }
+  }
+
+  async function removeMember(userId: string) {
+    if (!board?.id) return;
+    try {
+      await boardApi.removeMember(board.id, userId);
+      setBoard((prev: Board | null) => {
+        if (!prev) return prev;
+        return {
+          ...prev,
+          members: (prev.members ?? []).filter((m) => m.userId !== userId),
+        };
+      });
+    } catch (err) {
+      console.error("removeMember failed", err);
+    }
+  }
+
+  return { dropCard, addCard, dropColumn, addColumn, addMember, removeMember };
 }
 

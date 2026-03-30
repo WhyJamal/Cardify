@@ -114,5 +114,7 @@ export interface Board {
   bg: string;
   isPhoto: boolean;
   workspaceId: string;
+  
   columns: ColumnInt[];
+  members: any[];
 }

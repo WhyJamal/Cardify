@@ -23,17 +23,28 @@ export const cardApi = {
     clientFetch(`/api/cards/${cardId}/timeline`, {
       method: "POST",
       body: JSON.stringify({ text }),
-  }),
+    }),
 
   updateIsCompleted: (cardId: string, isCompleted: boolean) =>
     clientFetch(`/api/cards/${cardId}`, {
       method: "PATCH",
       body: JSON.stringify({ isCompleted }),
-  }),
+    }),
 
   updateTitleCard: (cardId: string, title: string) =>
     clientFetch(`/api/cards/${cardId}`, {
       method: "PATCH",
       body: JSON.stringify({ title }),
-  }),
+    }),
+
+  addMember: (cardId: string, userId: string) =>
+    clientFetch(`/api/cards/${cardId}/members`, {
+      method: "POST",
+      body: JSON.stringify({ userId }),
+    }),
+
+  removeMember: (cardId: string, userId: string) =>
+    clientFetch(`/api/cards/${cardId}/members/${userId}`, {
+      method: "DELETE",
+    }),
 };

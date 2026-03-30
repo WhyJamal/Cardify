@@ -56,7 +56,6 @@ export default function CardClient({
         handleSaveDesc,
 
         showInvite,
-        setShowInvite,
         board,
 
         comment,
@@ -82,6 +81,10 @@ export default function CardClient({
         handleUpdateLabels,
         handleUpdateDueDate,
         handleOpenInvites,
+
+        handleAddMember,
+        handleRemoveMember,
+        handleCloseInvites,
 
         status,
         router,
@@ -249,7 +252,7 @@ export default function CardClient({
                                             </div>
                                         ))}
                                         <Button
-                                            onClick={() => setShowInvite(true)}
+                                            onClick={handleOpenInvites}
                                             className="w-8 h-8 rounded-full bg-[#2c333a] hover:bg-[#38414a] flex items-center justify-center text-[#9fadbc] hover:text-white transition-colors"
                                         >
                                             <Plus size={14} />
@@ -258,8 +261,11 @@ export default function CardClient({
                                         {showInvite && (
                                             <InviteMemberMenu
                                                 triggerRef={addBtnRef}
-                                                boardId={board?.id}
-                                                onClose={() => setShowInvite(false)}
+                                                workspaceId={board?.workspaceId ?? ""}
+                                                currentMembers={card.members ?? []}
+                                                onAdd={handleAddMember}
+                                                onRemove={handleRemoveMember}
+                                                onClose={handleCloseInvites}
                                             />
                                         )}
 

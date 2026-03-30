@@ -116,12 +116,22 @@ export function CardContent({ card, onClickCard, showLabelName, onToggleLabel, o
             </div>
           )}
 
-          {card.dueDate && (
-            <div className="inline-flex items-center gap-1 bg-green-700 px-1 text-black font-medium rounded-sm">
-              <Clock className="w-4 h-4" />
-              <span className="text-sm">{formatDueDate(card.dueDate)}</span>
-            </div>
-          )}
+          <div className="flex w-full justify-between">
+            {card.dueDate && (
+              <div className="inline-flex items-center gap-1 bg-green-700 px-1 text-black font-medium rounded-sm">
+                <Clock className="w-3 h-3" />
+                <span className="text-xs">{formatDueDate(card.dueDate)}</span>
+              </div>
+            )}
+
+            {card.members && card.members.length > 0 && (
+              card.members.map((member) => (
+                <div className="w-6 h-6 rounded-full flex items-center justify-center bg-green-700 text-[10px] font-bold text-white">
+                  {getInitials(member.user.name || "")}
+                </div>
+              ))
+            )}
+          </div>
 
           {card.links && card.links.length > 0 && (
             <div className="flex flex-col gap-1 mb-2">
@@ -149,16 +159,6 @@ export function CardContent({ card, onClickCard, showLabelName, onToggleLabel, o
               </div>
             </div>
           )} */}
-
-          {card.members && card.members.length > 0 && (
-            <div className="flex w-full justify-end">
-              {card.members.map((member) => (
-                <div className="w-6 h-6 rounded-full flex items-center justify-center bg-green-700 text-[10px] font-bold text-white">
-                  {getInitials(member.user.name || "")}
-                </div>
-              ))}
-            </div>
-          )}
 
         </div>
       </Link>

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
-import type { CardData, CardTimeline } from "@/shared/types";
+import type { CardData, CardMember, CardTimeline, User } from "@/shared/types";
 import { cardApi } from "@/features/card/api/card-api";
 import { useCardActions } from "@/shared/hooks/use-card-actions";
 import { useBoardView } from "@/app/providers/BoardProvider";
@@ -12,7 +12,7 @@ import { getDueDateStatus } from "@/shared/utils/date";
 export function useCardClient(initialCard: CardData, cardId: string) {
     const router = useRouter();
     const { changeTitleCard, toggleIsCompleted, updateLabels, handleChangeDueDate } = useCardActions();
-    const { board, columns } = useBoardView();
+    const { board, columns, setColumns } = useBoardView();
 
     const addBtnRef = useRef<HTMLButtonElement>(null);
     const titleInputRef = useRef<HTMLInputElement>(null);
@@ -164,6 +164,48 @@ export function useCardClient(initialCard: CardData, cardId: string) {
         [handleChangeDueDate, card.id]
     );
 
+    const handleAddMember = useCallback(
+        async (userId: string, user: User) => {
+            try {
+                const result = await cardApi.addMember(cardId, userId);
+                const newMember: CardMember = {
+                    id: result.cardMember.id,  
+                    user,
+                };
+                setColumns((prev) =>
+                    prev.map((col) => ({
+                        ...col,
+                        cards: col.cards.map((c) =>
+                            c.id === cardId
+                                ? { ...c, members: [...(c.members ?? []), newMember] }
+                                : c
+                        ),
+                    }))
+                );
+            } catch { }
+        },
+        [cardId, setColumns]
+    );
+
+    const handleRemoveMember = useCallback(
+        async (userId: string) => {
+            try {
+                await cardApi.removeMember(cardId, userId);
+                setColumns((prev) =>
+                    prev.map((col) => ({
+                        ...col,
+                        cards: col.cards.map((c) =>
+                            c.id === cardId
+                                ? { ...c, members: (c.members ?? []).filter((m) => m.user.id !== userId) }
+                                : c
+                        ),
+                    }))
+                );
+            } catch { }
+        },
+        [cardId, setColumns]
+    );
+
     return {
         card,
         setCard,
@@ -183,7 +225,6 @@ export function useCardClient(initialCard: CardData, cardId: string) {
         handleSaveDesc,
 
         showInvite,
-        setShowInvite,
         board,
 
         comment,
@@ -210,6 +251,8 @@ export function useCardClient(initialCard: CardData, cardId: string) {
         handleUpdateLabels,
         handleUpdateDueDate,
         handleOpenInvites,
+        handleAddMember,
+        handleRemoveMember,
 
         status,
         router,

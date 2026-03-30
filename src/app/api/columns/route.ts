@@ -41,6 +41,7 @@ export async function GET(req: NextRequest) {
             include: {
               labels: { include: { boardLabel: true } },
               links: true,
+              members: { include: { user: true }}
             },
           },
         },

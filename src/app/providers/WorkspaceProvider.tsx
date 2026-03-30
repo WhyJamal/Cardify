@@ -34,7 +34,7 @@ export function WorkspaceProvider({
     setLoading(true);
     try {
       const data = await workspaceApi.getWorkspaces();
-      console.dir(data);
+      
       setWorkspaces(Array.isArray(data) ? data : []);
 
       const wsArray = Array.isArray(data) ? data : [];

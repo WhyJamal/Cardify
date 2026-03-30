@@ -55,13 +55,30 @@ export const authOptions: NextAuthOptions = {
           });
         }
       }
-
       return true;
+    },
+
+    async jwt({ token, user, account }) {
+      if (user && account?.provider === "credentials") {
+        token.id = user.id;
+      }
+
+      if (account?.provider === "google" && token.email) {
+        const dbUser = await prisma.user.findUnique({
+          where: { email: token.email },
+          select: { id: true },
+        });
+        if (dbUser) {
+          token.id = dbUser.id;
+        }
+      }
+
+      return token;
     },
 
     async session({ session, token }) {
       if (session.user) {
-        session.user.id = token.sub!;
+        session.user.id = token.id;
       }
       return session;
     },

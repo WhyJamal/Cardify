@@ -11,6 +11,7 @@ import Link from "next/link";
 import { formatDueDate } from "../utils/date";
 import { shadeColor } from "../utils/labels";
 import { Button } from "./ui/button";
+import { getInitials } from "../utils/getInitials";
 
 interface CardProps {
   card: CardData;
@@ -134,7 +135,7 @@ export function CardContent({ card, onClickCard, showLabelName, onToggleLabel, o
             </div>
           )}
 
-          {(card.watching || card.hasDescription || card.checklist || card.attachments || card.assignee) && (
+          {/* {(card.watching || card.hasDescription || card.checklist || card.attachments) && (
             <div className="flex items-center justify-between mt-1">
               <div className="flex items-center gap-2 flex-wrap">
                 {card.watching && <span className="flex items-center gap-1 text-[#9fadbc] text-xs"><Eye size={12} /></span>}
@@ -146,13 +147,19 @@ export function CardContent({ card, onClickCard, showLabelName, onToggleLabel, o
                   </span>
                 )}
               </div>
-              {card.assignee && (
-                <div className="w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold text-white" style={{ backgroundColor: card.assignee.color }}>
-                  {card.assignee.initials}
+            </div>
+          )} */}
+
+          {card.members && card.members.length > 0 && (
+            <div className="flex w-full justify-end">
+              {card.members.map((member) => (
+                <div className="w-6 h-6 rounded-full flex items-center justify-center bg-green-700 text-[10px] font-bold text-white">
+                  {getInitials(member.user.name || "")}
                 </div>
-              )}
+              ))}
             </div>
           )}
+
         </div>
       </Link>
     </>

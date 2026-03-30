@@ -6,9 +6,8 @@ import { useEffect, useState } from "react";
 import { LayoutDashboard, FileText, Home, Plus } from "lucide-react";
 
 import { usePathname } from "next/navigation";
-import { TooltipAction, Button, WorkspaceSidebar } from "./";
+import { TooltipAction, Button, WorkspaceSidebar, Spinner } from "./";
 import { ChevronRight } from "lucide-react";
-import { Workspace } from "../types";
 
 import CreateWorkspaceCard from "@/features/workspace/create-workspace-card";
 import WorkspaceModal from "@/features/workspace/modal/workpace-modal";
@@ -29,7 +28,7 @@ const navItems: NavItem[] = [
 ];
 
 export default function Sidebar() {
-  const { workspaces, refresh } = useWorkspace();
+  const { workspaces, refresh,loading } = useWorkspace();
   const pathname = usePathname();
   const [showCreateWorksppace, setShowCreateWorksppace] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
@@ -111,13 +110,18 @@ export default function Sidebar() {
             </div>
           )}
 
-          {workspaces.map((ws) => (
+          {loading ? (
+            <div className="flex mt-2 w-full justify-center">
+              <Spinner />
+            </div>
+          ) : (
+            workspaces.map((ws) => (
             <WorkspaceSidebar
               key={ws.id}
               workspace={ws}
               collapsed={collapsed}
             />
-          ))}
+          )))}
         </div>
 
         <div className="absolute top-24 -right-3 z-10">

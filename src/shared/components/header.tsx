@@ -188,7 +188,7 @@ export function Header() {
         ) : (
           <Link
             href={'/auth/sign-in'}
-            className="bg-[#0052cc] hover:bg-[#0065ff] text-white px-3 py-1.5 rounded text-sm font-medium flex items-center gap-1 transition-colors"
+            className="bg-blue-500 hover:bg-[#0065ff] text-black px-3 py-1.5 rounded text-sm font-medium flex items-center gap-1 transition-colors"
           >
             Войти
           </Link>

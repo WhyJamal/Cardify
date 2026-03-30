@@ -9,7 +9,7 @@ import { useParams } from "next/navigation";
 import { workspaceApi } from "@/features/workspace/api/workspace-api";
 
 export default function WorkspaceHomePage() {
-  const params = useParams<{ workspaceId: string }>();;
+  const params = useParams<{ workspaceId: string }>();
   const workspaceId = params.workspaceId;
 
   const [workspace, setWorkspace] = useState<Workspace | null>(null);

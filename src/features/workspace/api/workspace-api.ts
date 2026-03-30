@@ -1,4 +1,5 @@
 import { clientFetch } from "@/lib/client-api";
+import { WorkspaceMember } from "@/shared/types";
 
 export const workspaceApi = {
   createWorkspace: (name: string) =>
@@ -15,5 +16,33 @@ export const workspaceApi = {
   getWorkspace: async (workspaceId: string) => {
     const res = await clientFetch(`/api/workspaces/${workspaceId}`);
     return res.workspace;
+  },
+
+  searchUsers: async (params: { q: string; workspaceId?: string }) => {
+    const query = new URLSearchParams();
+    query.set("q", params.q);
+
+    if (params.workspaceId) {
+      query.set("workspaceId", params.workspaceId);
+    }
+
+    const res = await clientFetch(`/api/users/search?${query.toString()}`);
+    return res.users ?? res;
+  },
+
+  addMembersToWorkspace: async (workspaceId: string, userIds: string[]) => {
+    const res = await clientFetch(`/api/workspaces/${workspaceId}/members`, {
+      method: "POST",
+      body: JSON.stringify({ userIds }),
+    });
+
+    return res;
+  },
+
+  getWorkspaceMembers: async (workspaceId: string) => {
+    const res = await clientFetch(`/api/workspaces/${workspaceId}/members`)
+
+    return res;
   }
+
 };

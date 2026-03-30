@@ -17,18 +17,23 @@ export type WorkspaceMemberStatus =
   | "ACCEPTED"
   | "DECLINED";
 
+export interface User {
+  id: string;
+  name: string | null;
+  email: string;
+}
+
 export interface WorkspaceMember {
   id: string;
   workspaceId: string;
   userId: string;
   role: WorkspaceRole;
   status: WorkspaceMemberStatus;
-}
+  lastActive: Date; 
 
-export interface User {
-  id: string;
-  name: string | null;
-  email: string;
+  boards: Board;
+
+  user: User;
 }
 
 export interface BoardLabel {
@@ -80,6 +85,8 @@ export interface CardData {
     done: number;
     total: number;
   };
+
+  coverColor: string;
 
   labels?: CardLabel[];
   boardLabels?: BoardLabel[];

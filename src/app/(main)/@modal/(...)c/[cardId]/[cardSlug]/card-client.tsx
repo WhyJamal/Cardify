@@ -19,6 +19,8 @@ import { TooltipAction } from "@/shared/components/custom-tooltip";
 import { formatCardDate } from "@/shared/utils/date";
 import { useCardClient } from "@/features/card/hooks/use-card-client";
 import { InviteMemberMenu } from "@/features/card/invite-member-menu";
+import { getInitials } from "@/shared/utils/getInitials";
+
 
 interface Comment {
     id: number;
@@ -235,31 +237,35 @@ export default function CardClient({
                             )}
                         </div>
 
+
                         <div className="flex gap-6 mb-6 flex-wrap">
-                            <div>
-                                <p className="text-[#9fadbc] text-xs mb-2">Участники</p>
-                                <div className="flex items-center gap-1">
-                                    <div className="w-8 h-8 rounded-full bg-[#4bce97] flex items-center justify-center text-[#1d2125] text-xs font-semibold">
-                                        SG
+                            {card.members && card.members.length > 0 && (
+                                <div>
+                                    <p className="text-[#9fadbc] text-xs mb-2">Участники</p>
+                                    <div className="flex items-center gap-1">
+                                        {card.members.map((member) => (
+                                            <div className="w-8 h-8 rounded-full bg-[#4bce97] flex items-center justify-center text-[#1d2125] text-xs font-semibold">
+                                                {getInitials(member.user.name || "")}
+                                            </div>
+                                        ))}
+                                        <Button
+                                            onClick={() => setShowInvite(true)}
+                                            className="w-8 h-8 rounded-full bg-[#2c333a] hover:bg-[#38414a] flex items-center justify-center text-[#9fadbc] hover:text-white transition-colors"
+                                        >
+                                            <Plus size={14} />
+                                        </Button>
+
+                                        {showInvite && (
+                                            <InviteMemberMenu
+                                                triggerRef={addBtnRef}
+                                                boardId={board?.id}
+                                                onClose={() => setShowInvite(false)}
+                                            />
+                                        )}
+
                                     </div>
-
-                                    <Button
-                                        onClick={() => setShowInvite(true)}
-                                        className="w-8 h-8 rounded-full bg-[#2c333a] hover:bg-[#38414a] flex items-center justify-center text-[#9fadbc] hover:text-white transition-colors"
-                                    >
-                                        <Plus size={14} />
-                                    </Button>
-
-                                    {showInvite && (
-                                        <InviteMemberMenu
-                                            triggerRef={addBtnRef}
-                                            boardId={board?.id} 
-                                            onClose={() => setShowInvite(false)}
-                                        />
-                                    )}
-
                                 </div>
-                            </div>
+                            )}
 
                             {card.labels && card.labels.length > 0 && (
                                 <div>

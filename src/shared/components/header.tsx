@@ -11,6 +11,7 @@ import { AccountDropdown, CreateMenu, TooltipAction, CardifyLogo, Button, Notifi
 import { CreateBoardPanel } from "@/features/board/create-board-panel";
 import WorkspaceModal from "@/features/workspace/modal/workpace-modal";
 import CreateWorkspaceCard from "@/features/workspace/create-workspace-card";
+import { getInitials } from "../utils/getInitials";
 
 type PanelState = "closed" | "menu" | "createBoard" | "createWorkspace";
 
@@ -23,16 +24,6 @@ export function Header() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const handleCreateBtnClick = () => {
     setPanelState((s) => (s === "closed" ? "menu" : "closed"));
-  };
-
-  const getInitials = (name: string) => {
-    const parts = name.trim().split(" ").filter(Boolean);
-
-    if (parts.length >= 2) {
-      return (parts[0][0] + parts[1][0]).toUpperCase();
-    }
-
-    return parts[0].slice(0, 2).toUpperCase();
   };
 
   const initials = session?.user?.name ? getInitials(session.user.name) : null;

@@ -24,6 +24,11 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ id: 
         },
         links: true,
         comments: true,
+        members: {
+          include: {
+            user: true  
+          }
+        },
         column: {
           include: {
             board: {

@@ -17,9 +17,10 @@ interface AddToCardMenuProps {
     onClose: () => void;
     onOpenDates: () => void;
     onOpenLabels: () => void;
+    onOpenInvites: () => void;
 }
 
-export function AddToCardMenu({ triggerRef, onClose, onOpenDates, onOpenLabels }: AddToCardMenuProps) {
+export function AddToCardMenu({ triggerRef, onClose, onOpenDates, onOpenLabels, onOpenInvites }: AddToCardMenuProps) {
 
     const PANEL_WIDTH = 320;
     const PANEL_HEIGHT = 260;
@@ -70,7 +71,7 @@ export function AddToCardMenu({ triggerRef, onClose, onOpenDates, onOpenLabels }
             icon: <User className="w-5 h-5" />,
             title: 'Участники',
             description: 'Назначайте участников',
-            onClick: () => console.log('Участники clicked'),
+            onClick: onOpenInvites,
         },
     ];
 

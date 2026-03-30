@@ -112,15 +112,15 @@ export default function MembersPage() {
                     {filtered.map((member) => (
                         <div
                             key={member.id}
-                            className="grid grid-cols-[320px_240px_120px_130px_120px] items-center gap-4 px-6 py-4 hover:bg-white/3 transition-colors"
+                            className="grid grid-cols-[320px_240px_120px_130px_120px] items-center gap-4 px-6 py-2 hover:bg-white/3 transition-colors"
                         >
                             <div className="flex items-center gap-4 min-w-0">
-                                <div className="w-10 h-10 rounded-full bg-green-600 flex items-center justify-center font-semibold shrink-0">
+                                <div className="w-8 h-8 rounded-full bg-green-600 flex items-center justify-center font-semibold shrink-0">
                                     {member.name.charAt(0)}
                                 </div>
 
                                 <div className="truncate">
-                                    <p className="font-medium leading-none truncate">
+                                    <p className="font-medium text-md leading-none truncate">
                                         {member.name}
                                     </p>
                                     <p className="text-gray-400 text-sm truncate">

@@ -37,11 +37,11 @@ export default function WorkspaceModal({ children, title, open, onClose }: Props
     if (!open) return null;
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80">
 
             <div
                 ref={ref}
-                className="w-full max-w-xl rounded-xl bg-[#1e1f25] border border-white/10 shadow-2xl p-6 text-white"
+                className="w-full max-w-xl rounded-xl bg-[#1e1f25] shadow-2xl p-6 text-white"
             >
 
                 <div className="flex justify-between mb-5">

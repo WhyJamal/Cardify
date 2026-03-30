@@ -5,17 +5,21 @@ import { useRouter } from "next/navigation";
 import type { CardData, CardTimeline } from "@/shared/types";
 import { cardApi } from "@/features/card/api/card-api";
 import { useCardActions } from "@/shared/hooks/use-card-actions";
-import { useBoardView } from "@/app/providers/BoardProvider"; 
+import { useBoardView } from "@/app/providers/BoardProvider";
 import { useEscapeKey } from "@/shared/hooks/use-escape-key";
 import { getDueDateStatus } from "@/shared/utils/date";
 
 export function useCardClient(initialCard: CardData, cardId: string) {
     const router = useRouter();
     const { changeTitleCard, toggleIsCompleted, updateLabels, handleChangeDueDate } = useCardActions();
-    const { board, columns } = useBoardView(); 
+    const { board, columns } = useBoardView();
 
     const addBtnRef = useRef<HTMLButtonElement>(null);
     const titleInputRef = useRef<HTMLInputElement>(null);
+
+    const addInviteRef = useRef<HTMLButtonElement>(null);
+    const addDateRef = useRef<HTMLDivElement>(null);
+    const addLabelsRef = useRef<HTMLButtonElement>(null);
 
     const [card, setCard] = useState<CardData>(initialCard);
     const [isEditingTitle, setIsEditingTitle] = useState(false);
@@ -24,14 +28,13 @@ export function useCardClient(initialCard: CardData, cardId: string) {
     const [isEditingDesc, setIsEditingDesc] = useState(false);
     const [tempDesc, setTempDesc] = useState(initialCard.description ?? "");
 
-    const [showInvite, setShowInvite] = useState(false);
-
     const [comment, setComment] = useState("");
     const [timeline, setTimeline] = useState<CardTimeline[]>([]);
 
     const [showMenu, setShowMenu] = useState(false);
     const [showDatePicker, setShowDatePicker] = useState(false);
     const [showLabels, setShowLabels] = useState(false);
+    const [showInvite, setShowInvite] = useState(false);
 
     useEscapeKey(() => router.back(), true);
 
@@ -46,8 +49,8 @@ export function useCardClient(initialCard: CardData, cardId: string) {
             const found = col.cards.find((c) => c.id === cardId);
             if (found) {
                 setCard((prev) => ({
-                    ...prev,   
-                    ...found,  
+                    ...prev,
+                    ...found,
                     description: prev?.description ?? found.description,
                 }));
                 return;
@@ -55,7 +58,7 @@ export function useCardClient(initialCard: CardData, cardId: string) {
         }
     }, [columns, cardId]);
 
-    const status = getDueDateStatus(card.dueDate, card.isCompleted);
+    const status = getDueDateStatus(card.dueDate ? card.dueDate : undefined, card.isCompleted);
 
     const handleSaveTitle = useCallback(async () => {
         const title = tempTitle ? tempTitle.trim() : null;
@@ -123,6 +126,11 @@ export function useCardClient(initialCard: CardData, cardId: string) {
         setShowDatePicker(true);
     }, []);
 
+    const handleOpenInvites = useCallback(() => {
+        setShowMenu(false);
+        setShowInvite(true);
+    }, []);
+
     const handleOpenLabels = useCallback(() => {
         setShowLabels(true);
         setShowMenu(false);
@@ -135,6 +143,11 @@ export function useCardClient(initialCard: CardData, cardId: string) {
     const handleCloseLabels = useCallback(() => {
         setShowLabels(false);
     }, []);
+
+    const handleCloseInvites = useCallback(() => {
+        setShowLabels(false);
+    }, []);
+
 
     const handleUpdateLabels = useCallback(
         async (newLabels: CardData["labels"]) => {
@@ -178,6 +191,10 @@ export function useCardClient(initialCard: CardData, cardId: string) {
         handleSendComment,
         timeline,
 
+        addInviteRef,
+        addDateRef,
+        addLabelsRef,
+
         addBtnRef,
         showMenu,
         addMenu,
@@ -187,10 +204,12 @@ export function useCardClient(initialCard: CardData, cardId: string) {
         showLabels,
         handleOpenLabels,
         handleCloseLabels,
+        handleCloseInvites,
 
         handleToggleCompleted,
         handleUpdateLabels,
         handleUpdateDueDate,
+        handleOpenInvites,
 
         status,
         router,

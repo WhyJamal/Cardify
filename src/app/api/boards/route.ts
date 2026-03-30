@@ -52,6 +52,7 @@ export async function POST(req: NextRequest) {
   const title = String(body.title || "").trim();
   const bg = String(body.bg || "");
   const isPhoto = Boolean(body.isPhoto);
+  const workspaceId = String(body.workspaceId || "");
 
   if (!title) {
     return NextResponse.json(
@@ -74,7 +75,8 @@ export async function POST(req: NextRequest) {
       title,
       bg,
       isPhoto,
-      ownerId: dbUser.id,
+      owner: { connect: { id: dbUser.id } },
+      workspace: { connect: { id: workspaceId } },
       labels: {
         create: defaultLabels.map((label, idx) => ({
           color: label.color,

@@ -13,36 +13,14 @@ import { Workspace } from "../types";
 import CreateWorkspaceCard from "@/features/workspace/create-workspace-card";
 import WorkspaceModal from "@/features/workspace/modal/workpace-modal";
 
+import { useWorkspace } from "@/app/providers/WorkspaceProvider";
+
 type NavItem = {
   id: string;
   label: string;
   icon: any;
   url?: string;
 };
-
-export const workspaces: Workspace[] = [
-  {
-    id: "w1",
-    name: "Marketing Team",
-    ownerId: "u1",
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-  },
-  {
-    id: "w2",
-    name: "Development Team",
-    ownerId: "u2",
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-  },
-  {
-    id: "w3",
-    name: "Design Team",
-    ownerId: "u3",
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-  },
-];
 
 const navItems: NavItem[] = [
   { id: "boards", label: "Доски", icon: LayoutDashboard, url: `/u/user/boards` },
@@ -51,9 +29,15 @@ const navItems: NavItem[] = [
 ];
 
 export default function Sidebar() {
+  const { workspaces, refresh } = useWorkspace();
   const pathname = usePathname();
-  const [showCreateWorksppace, setShowCreateWorksppace] = useState(true);
+  const [showCreateWorksppace, setShowCreateWorksppace] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
+
+
+  useEffect(() => {
+    refresh();
+  }, []);
 
   useEffect(() => {
     const saved = localStorage.getItem("sidebar-collapsed");
@@ -163,7 +147,9 @@ export default function Sidebar() {
         open={showCreateWorksppace}
         onClose={() => setShowCreateWorksppace(false)}
       >
-        <CreateWorkspaceCard/>
+        <CreateWorkspaceCard
+          onCreate={() => setShowCreateWorksppace(false)}
+        />
       </WorkspaceModal>
 
     </div>

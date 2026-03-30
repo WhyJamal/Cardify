@@ -18,7 +18,7 @@ import { Button, DatePicker, AddToCardMenu, LabelsMenu } from "@/shared/componen
 import { TooltipAction } from "@/shared/components/custom-tooltip";
 import { formatCardDate } from "@/shared/utils/date";
 import { useCardClient } from "@/features/card/hooks/use-card-client";
-import { InviteMemberMenu } from "@/features/board/invite-member-menu";
+import { InviteMemberMenu } from "@/features/card/invite-member-menu";
 
 interface Comment {
     id: number;
@@ -62,6 +62,10 @@ export default function CardClient({
         handleSendComment,
         timeline,
 
+        addInviteRef,
+        addDateRef,
+        addLabelsRef,
+
         addBtnRef,
         showMenu,
         addMenu,
@@ -75,6 +79,7 @@ export default function CardClient({
         handleToggleCompleted,
         handleUpdateLabels,
         handleUpdateDueDate,
+        handleOpenInvites,
 
         status,
         router,
@@ -205,6 +210,7 @@ export default function CardClient({
                                     onClose={() => addMenu()}
                                     onOpenDates={handleOpenDates}
                                     onOpenLabels={handleOpenLabels}
+                                    onOpenInvites={handleOpenInvites}
                                 />
                             )}
 
@@ -212,7 +218,7 @@ export default function CardClient({
                                 <DatePicker
                                     triggerRef={addBtnRef}
                                     cardId={card.id}
-                                    cardDueDate={card.dueDate}
+                                    cardDueDate={card.dueDate ?? undefined}
                                     onClose={handleCloseDatePicker}
                                     onChange={handleUpdateDueDate}
                                 />
@@ -238,7 +244,6 @@ export default function CardClient({
                                     </div>
 
                                     <Button
-                                        ref={addBtnRef}
                                         onClick={() => setShowInvite(true)}
                                         className="w-8 h-8 rounded-full bg-[#2c333a] hover:bg-[#38414a] flex items-center justify-center text-[#9fadbc] hover:text-white transition-colors"
                                     >

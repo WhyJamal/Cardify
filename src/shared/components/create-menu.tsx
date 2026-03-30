@@ -11,10 +11,11 @@ const PANEL_HEIGHT = 240;
 interface Props {
   triggerRef: RefObject<HTMLElement | null>;
   onCreateBoard: () => void;
+  onCreateWorkspace: () => void;
   onClose: () => void;
 }
 
-export function CreateMenu({ triggerRef, onCreateBoard, onClose }: Props) {
+export function CreateMenu({ triggerRef, onCreateBoard, onCreateWorkspace, onClose }: Props) {
   const panelRef = useRef<HTMLDivElement>(null);
 
   const pos = (() => {
@@ -52,7 +53,10 @@ export function CreateMenu({ triggerRef, onCreateBoard, onClose }: Props) {
         </div>
       </button>
 
-      <button className="w-full flex items-start gap-3 px-4 py-2.5 hover:bg-white/8 transition-colors text-left">
+      <button 
+        onClick={onCreateWorkspace}
+        className="w-full flex items-start gap-3 px-4 py-2.5 hover:bg-white/8 transition-colors text-left"
+      >
         <div className="mt-0.5 w-8 h-6 rounded bg-linear-to-br from-violet-500 to-purple-600 flex items-center justify-center shrink-0">
           <Users size={13} className="text-white" />
         </div>

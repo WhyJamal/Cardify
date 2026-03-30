@@ -9,8 +9,10 @@ import { useEffect, useRef, useState } from "react";
 
 import { AccountDropdown, CreateMenu, TooltipAction, CardifyLogo, Button, NotificationDropdown } from ".";
 import { CreateBoardPanel } from "@/features/board/create-board-panel";
+import WorkspaceModal from "@/features/workspace/modal/workpace-modal";
+import CreateWorkspaceCard from "@/features/workspace/create-workspace-card";
 
-type PanelState = "closed" | "menu" | "createBoard";
+type PanelState = "closed" | "menu" | "createBoard" | "createWorkspace";
 
 export function Header() {
   const { data: session, status } = useSession();
@@ -123,7 +125,7 @@ export function Header() {
           ref={createBtnRef}
           onClick={handleCreateBtnClick}
           className={`flex items-center gap-1 transition-colors ${panelState !== "closed"
-            ? "bg-blue-400 text-white"
+            ? "bg-blue-400"
             : ""}`}
         >
           <Plus size={16} />
@@ -160,6 +162,7 @@ export function Header() {
           <CreateMenu
             triggerRef={createBtnRef}
             onCreateBoard={() => setPanelState("createBoard")}
+            onCreateWorkspace={() => setPanelState("createWorkspace")}
             onClose={() => setPanelState("closed")}
           />
         )}
@@ -201,6 +204,16 @@ export function Header() {
         )
         }
       </div>
+
+      <WorkspaceModal
+        title={"Новый рабочего пространство"}
+        open={panelState === "createWorkspace"}
+        onClose={() => setPanelState("closed")}
+      >
+        <CreateWorkspaceCard
+          onCreate={() => setPanelState("closed")}
+        />
+      </WorkspaceModal>
     </header>
   );
 }

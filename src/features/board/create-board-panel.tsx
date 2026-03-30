@@ -2,11 +2,14 @@
 
 import { useEffect, useRef, useState, RefObject, useLayoutEffect } from "react";
 import { createPortal } from "react-dom";
-import { X, ChevronDown, ShoppingBag } from "lucide-react";
+import { X, ShoppingBag } from "lucide-react";
 import { FloatingBgPanel } from "./floating-bg-panel";
 import { calcSidePosition } from "@/shared/utils/floatingPosition";
 import { useRouter } from "next/navigation";
 import { slugify } from "@/shared/utils/slugify";
+import { clientFetch } from "@/lib/client-api";
+import CustomSelect from "@/shared/components/ui/custom-select";
+import { useWorkspace } from "@/app/providers/WorkspaceProvider";
 
 const PANEL_WIDTH = 370;
 const PANEL_HEIGHT = 590;
@@ -26,6 +29,20 @@ const GRADIENT_COLORS = [
   { id: "g5", style: "linear-gradient(135deg, #e040fb 0%, #7c4dff 100%)" },
 ];
 
+interface BoardForm {
+  title: string;
+  bg: string;
+  isBgPhoto: boolean;
+  workspaceId: string | null;
+}
+
+const INITIAL_FORM: BoardForm = {
+  title: "",
+  bg: PHOTO_THUMBS[1],
+  isBgPhoto: true,
+  workspaceId: null,
+};
+
 interface Props {
   triggerRef: RefObject<HTMLElement | null>;
   onClose: () => void;
@@ -33,19 +50,26 @@ interface Props {
 }
 
 export function CreateBoardPanel({ triggerRef, onClose, onCreated }: Props) {
-  const [title, setTitle] = useState("");
-  const [selectedBg, setSelectedBg] = useState<string>(PHOTO_THUMBS[1]);
-  const [isBgPhoto, setIsBgPhoto] = useState(true);
+  const { workspaces } = useWorkspace();
+  const [form, setForm] = useState<BoardForm>(INITIAL_FORM);
   const [showBgPanel, setShowBgPanel] = useState(false);
   const router = useRouter();
 
   const panelRef = useRef<HTMLDivElement>(null);
   const moreButtonRef = useRef<HTMLDivElement>(null);
 
-  const handleSelectBg = (bg: string, isPhoto: boolean) => {
-    setSelectedBg(bg);
-    setIsBgPhoto(isPhoto);
+  const setField = <K extends keyof BoardForm>(key: K, value: BoardForm[K]) => {
+    setForm((prev) => ({ ...prev, [key]: value }));
   };
+
+  const handleSelectBg = (bg: string, isBgPhoto: boolean) => {
+    setForm((prev) => ({ ...prev, bg, isBgPhoto }));
+  };
+
+  const workspaceOptions = workspaces.map((ws) => ({
+    value: ws.id,
+    label: ws.name,
+  }));
 
   const [pos, setPos] = useState({ left: 0, top: 0, maxHeight: PANEL_HEIGHT });
 
@@ -59,15 +83,8 @@ export function CreateBoardPanel({ triggerRef, onClose, onCreated }: Props) {
       const rect = triggerEl.getBoundingClientRect();
       const fallbackRect = panelRef.current?.getBoundingClientRect();
 
-      const calculated = calcSidePosition(
-        rect,
-        PANEL_WIDTH,
-        PANEL_HEIGHT,
-        { fallbackRect }
-      );
-
-      const viewportHeight = window.innerHeight;
-      const dynamicMaxHeight = viewportHeight - calculated.top - 12;
+      const calculated = calcSidePosition(rect, PANEL_WIDTH, PANEL_HEIGHT, { fallbackRect });
+      const dynamicMaxHeight = window.innerHeight - calculated.top - 12;
 
       setPos({
         ...calculated,
@@ -98,45 +115,31 @@ export function CreateBoardPanel({ triggerRef, onClose, onCreated }: Props) {
 
       const insidePanel = panelRef.current?.contains(target) || floatingBgEl?.contains(target);
       const insideTrigger =
-        triggerRef.current?.contains(target) ||
-        moreButtonRef.current?.contains(target);
+        triggerRef.current?.contains(target) || moreButtonRef.current?.contains(target);
 
-      if (!insidePanel && !insideTrigger) {
-        onClose();
-      }
+      if (!insidePanel && !insideTrigger) onClose();
     };
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
   }, [onClose, triggerRef]);
 
   const handleCreateBoard = async () => {
-    if (!title.trim()) return;
+    if (!form.title.trim()) return;
 
-    const res = await fetch("/api/boards", {
+    const res = await clientFetch("/api/boards", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
       body: JSON.stringify({
-        title,
-        bg: selectedBg,
-        isPhoto: isBgPhoto,
+        title: form.title,
+        bg: form.bg,
+        isPhoto: form.isBgPhoto,
+        workspaceId: form.workspaceId ?? "",
       }),
     });
 
-    const data = await res.json();
-
-    if (!res.ok) {
-      console.error(data.error);
-      return;
-    }
-
-    router.push(`/b/${data.board.id}/${slugify(data.board.title)}`);
-    
-    onCreated(data.board);
-
+    router.push(`/b/${res.board.id}/${slugify(res.board.title)}`);
+    onCreated(res.board);
     onClose();
-    setTitle("");
+    setForm(INITIAL_FORM);
   };
 
   const panel = (
@@ -152,7 +155,10 @@ export function CreateBoardPanel({ triggerRef, onClose, onCreated }: Props) {
       }}
       className="bg-[#2c2c2c] rounded-xl shadow-2xl flex flex-col overflow-hidden"
     >
-      <div ref={moreButtonRef} className="flex items-center justify-between px-5 py-4 border-b border-white/10 shrink-0">
+      <div
+        ref={moreButtonRef}
+        className="flex items-center justify-between px-5 py-4 border-b border-white/10 shrink-0"
+      >
         <span className="text-white text-sm">Создать доску</span>
         <button onClick={onClose} className="text-white/60 hover:text-white transition-colors">
           <X size={16} />
@@ -161,10 +167,10 @@ export function CreateBoardPanel({ triggerRef, onClose, onCreated }: Props) {
 
       <div className="overflow-y-scroll max-h-[600] flex-1">
         <div className="mx-5 mt-4 rounded-lg overflow-hidden h-35 relative">
-          {isBgPhoto ? (
-            <img src={selectedBg} alt="bg" className="w-full h-full object-cover" />
+          {form.isBgPhoto ? (
+            <img src={form.bg} alt="bg" className="w-full h-full object-cover" />
           ) : (
-            <div className="w-full h-full" style={{ background: selectedBg }} />
+            <div className="w-full h-full" style={{ background: form.bg }} />
           )}
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="bg-white/20 backdrop-blur-sm rounded-lg p-3 flex gap-2">
@@ -188,17 +194,18 @@ export function CreateBoardPanel({ triggerRef, onClose, onCreated }: Props) {
               <button
                 key={i}
                 onClick={() => handleSelectBg(url, true)}
-                className={`w-10 h-8 rounded overflow-hidden border-2 transition-all ${selectedBg === url && isBgPhoto ? "border-white" : "border-transparent"
-                  }`}
+                className={`w-10 h-8 rounded overflow-hidden border-2 transition-all ${
+                  form.bg === url && form.isBgPhoto ? "border-white" : "border-transparent"
+                }`}
               >
                 <img src={url} alt="" className="w-full h-full object-cover" />
               </button>
             ))}
-
             <button
               onClick={() => setShowBgPanel((v) => !v)}
-              className={`w-10 h-8 rounded transition-colors flex items-center justify-center text-white/70 text-xs font-bold ${showBgPanel ? "bg-white/20" : "bg-white/10 hover:bg-white/20"
-                }`}
+              className={`w-10 h-8 rounded transition-colors flex items-center justify-center text-white/70 text-xs font-bold ${
+                showBgPanel ? "bg-white/20" : "bg-white/10 hover:bg-white/20"
+              }`}
             >
               •••
             </button>
@@ -208,8 +215,9 @@ export function CreateBoardPanel({ triggerRef, onClose, onCreated }: Props) {
               <button
                 key={g.id}
                 onClick={() => handleSelectBg(g.style, false)}
-                className={`w-10 h-8 rounded border-2 transition-all ${selectedBg === g.style && !isBgPhoto ? "border-white" : "border-transparent"
-                  }`}
+                className={`w-10 h-8 rounded border-2 transition-all ${
+                  form.bg === g.style && !form.isBgPhoto ? "border-white" : "border-transparent"
+                }`}
                 style={{ background: g.style }}
               />
             ))}
@@ -221,26 +229,30 @@ export function CreateBoardPanel({ triggerRef, onClose, onCreated }: Props) {
             Заголовок доски <span className="text-red-400">*</span>
           </label>
           <input
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            name="title"
+            value={form.title}
+            onChange={(e) => setField("title", e.target.value)}
             className="mt-1.5 w-full bg-transparent border-2 border-red-400/70 rounded px-3 py-2 text-white text-sm outline-none focus:border-blue-400 transition-colors"
           />
-          {!title && (
+          {!form.title && (
             <p className="mt-1.5 text-white/80 text-xs">👋 Укажите название доски.</p>
           )}
         </div>
 
         <div className="px-5 mt-4">
-          <span className="text-white/70 text-xs">Видимость</span>
-          <button className="mt-1.5 w-full flex items-center justify-between bg-[#3a3a3a] border border-white/10 rounded px-3 py-2.5 text-white text-sm hover:bg-[#404040] transition-colors">
-            <span>Рабочее пространство</span>
-            <ChevronDown size={14} className="text-white/60" />
-          </button>
+          <CustomSelect
+            label="Рабочее пространство"
+            options={workspaceOptions}
+            value={form.workspaceId}
+            onChange={(val) => setField("workspaceId", val)}
+          />
         </div>
 
         <div className="px-5 mt-4">
           <p className="text-white/60 text-xs leading-5">
-            В рабочее пространство можно добавить еще несколько досок — 3 доски. В бесплатной версии в рабочих пространствах может быть до 10 открытых досок. Чтобы добавить больше, оформите подписку.
+            В рабочее пространство можно добавить еще несколько досок — 3 доски. В бесплатной версии
+            в рабочих пространствах может быть до 10 открытых досок. Чтобы добавить больше, оформите
+            подписку.
           </p>
         </div>
 
@@ -254,7 +266,7 @@ export function CreateBoardPanel({ triggerRef, onClose, onCreated }: Props) {
         <div className="px-5 py-5">
           <button
             onClick={handleCreateBoard}
-            disabled={!title}
+            disabled={!form.title}
             className="w-full bg-blue-600 hover:bg-blue-500 disabled:opacity-40 disabled:cursor-not-allowed rounded-lg py-2.5 text-white text-sm font-medium transition-colors"
           >
             Создать доску
@@ -267,8 +279,8 @@ export function CreateBoardPanel({ triggerRef, onClose, onCreated }: Props) {
         <FloatingBgPanel
           triggerRef={moreButtonRef}
           fallbackRef={panelRef}
-          selectedBg={selectedBg}
-          isBgPhoto={isBgPhoto}
+          selectedBg={form.bg}
+          isBgPhoto={form.isBgPhoto}
           onSelectBg={handleSelectBg}
           onClose={() => setShowBgPanel(false)}
         />

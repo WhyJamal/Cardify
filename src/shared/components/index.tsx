@@ -10,6 +10,16 @@ export {
   CardTitle,
 } from "@/shared/components/ui/card";
 export { Spinner } from "./ui/spinner";
+export {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/shared/components/ui/dialog"
 
 export { BoardCard } from "./board-card";
 export { BottomNav } from "./bottom-nav";

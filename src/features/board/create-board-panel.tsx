@@ -124,7 +124,7 @@ export function CreateBoardPanel({ triggerRef, onClose, onCreated }: Props) {
   }, [onClose, triggerRef]);
 
   const handleCreateBoard = async () => {
-    if (!form.title.trim()) return;
+    if (!form.title.trim() || !form.workspaceId?.trim()) return;
 
     const res = await clientFetch("/api/boards", {
       method: "POST",

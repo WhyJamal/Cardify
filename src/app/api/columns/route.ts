@@ -26,8 +26,9 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "Board ID is required" }, { status: 400 });
   }
 
+  //  where: { id: parseInt(boardId), ownerId: dbUser.id },
   const board = await prisma.board.findFirst({
-    where: { id: parseInt(boardId), ownerId: dbUser.id },
+    where: { id: parseInt(boardId) },
     include: {
       columns: {
         orderBy: {

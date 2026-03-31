@@ -6,6 +6,7 @@ import { createPortal } from "react-dom";
 import { useOutsideClick } from "@/shared/hooks/use-outside-click";
 import { calcBelowPosition } from "@/shared/utils/floatingPosition";
 import Image from "next/image";
+import { Switch } from "./ui/switch";
 
 interface Notification {
   id: string;
@@ -86,18 +87,7 @@ export function NotificationDropdown({
         <div className="flex items-center gap-3">
           <label className="flex items-center gap-2 text-xs text-[#9fadbc] cursor-pointer select-none">
             <span>Только непрочитанные</span>
-            <button
-              onClick={() => setOnlyUnread((v) => !v)}
-              className={`w-9 h-5 rounded-full transition-colors relative ${
-                onlyUnread ? "bg-green-500" : "bg-[#3d4954]"
-              }`}
-            >
-              <span
-                className={`absolute left-0 top-0.5 w-4 h-4 rounded-full bg-white transition-transform ${
-                  onlyUnread ? "translate-x-5" : "translate-x-0.5"
-                }`}
-              />
-            </button>
+            <Switch />
           </label>
         </div>
       </div>
@@ -154,7 +144,6 @@ function NotificationItem({
       }`}
     >
       <div className="flex items-start justify-between gap-2">
-        {/* Board bg preview */}
         {data.boardBg && (
           <div
             className="w-8 h-8 rounded shrink-0 mt-0.5"
@@ -175,7 +164,7 @@ function NotificationItem({
             <p className="text-xs text-[#9fadbc] mt-0.5">{n.body}</p>
           )}
 
-          {isBoardInvite && (
+          {/* {isBoardInvite && (
             <div className="flex gap-2 mt-2">
               <button
                 onClick={() => onRespond(n.id, "accept")}
@@ -191,7 +180,7 @@ function NotificationItem({
                 Отклонить
               </button>
             </div>
-          )}
+          )} */}
         </div>
 
         {/* × dismiss */}

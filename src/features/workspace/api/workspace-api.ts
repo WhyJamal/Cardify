@@ -39,6 +39,14 @@ export const workspaceApi = {
     return res;
   },
 
+  removeMembersFromWorkspace: async (workspaceId: string, userId: string) => {
+    const res = await clientFetch(`/api/workspaces/${workspaceId}/members/${userId}`, {
+      method: "DELETE",
+    });
+
+    return res;
+  },
+
   getWorkspaceMembers: async (workspaceId: string) => {
     const res = await clientFetch(`/api/workspaces/${workspaceId}/members`)
 

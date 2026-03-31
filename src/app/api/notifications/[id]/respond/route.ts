@@ -7,7 +7,7 @@ import { prisma } from "@/lib/prisma";
 
 export async function POST(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{id: string}> }
 ) {
   const session = await getServerSession(authOptions);
 
@@ -30,8 +30,9 @@ export async function POST(
     return NextResponse.json({ error: "Invalid action" }, { status: 400 });
   }
 
+  const { id: notificationId } = await params;
   const notification = await prisma.notification.findFirst({
-    where: { id: params.id, userId: dbUser.id },
+    where: { id: notificationId, userId: dbUser.id },
   });
 
   if (!notification) {
@@ -40,7 +41,7 @@ export async function POST(
 
   if (action === "dismiss") {
     await prisma.notification.update({
-      where: { id: params.id },
+      where: { id: notificationId },
       data: { isDismissed: true, isRead: true },
     });
 
@@ -68,7 +69,7 @@ export async function POST(
       data: { status },
     }),
     prisma.notification.update({
-      where: { id: params.id },
+      where: { id: notificationId },
       data: { isRead: true },
     }),
   ]);

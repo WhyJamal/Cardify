@@ -1,14 +1,24 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { ChevronDown, Search, SquareArrowRightExit, UserPlus, X } from "lucide-react";
-import { Button } from "@/shared/components";
+import { ChevronDown, Search, SquareArrowRightExit, Trash2, UserPlus, X } from "lucide-react";
+import {
+    Button,
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+    DialogClose,
+    DialogFooter
+} from "@/shared/components";
 import InviteWorkspaceCard from "@/features/workspace/invite-workspace-card";
 import WorkspaceModal from "@/features/workspace/modal/workpace-modal";
 import { useParams } from "next/navigation";
 import { useWorkspaceActions } from "@/features/workspace/hooks/use-workspace-actions";
 import { WorkspaceMember } from "@/shared/types";
-import CustomLoading from "@/shared/components/custom-loading";
+import { workspaceApi } from "@/features/workspace/api/workspace-api";
 
 export default function MembersPage() {
     const params = useParams<{ workspaceId: string }>();
@@ -44,6 +54,17 @@ export default function MembersPage() {
     useEffect(() => {
         fetchMembers();
     }, [fetchMembers]);
+
+    const handleRemoveMember = async (userId: string) => {
+        try {
+            await workspaceApi.removeMembersFromWorkspace(workspaceId, userId);
+            setMembers((prev) => prev.filter((m) => m.userId !== userId));
+            setCountMembers((prev) => prev - 1);
+        } catch (error) {
+            console.error("Remove member error:", error);
+        } finally {
+        }
+    };
 
     return (
         <div className="min-h-screen bg-[#1f1f23] text-white p-8">
@@ -157,24 +178,41 @@ export default function MembersPage() {
                                 <div>
                                     <Button
                                         size={"sm"}
-                                        className="bg-[#2a2a2f] py-4 hover:bg-red-500/20 text-xs text-gray-200"
+                                        className="w-full bg-[#2a2a2f] py-4 hover:bg-white/10 text-xs text-gray-200"
                                     >
-                                        Администратор
+                                        {member.role}
                                         <ChevronDown />
                                     </Button>
                                 </div>
 
                                 <div>
-                                    {/* {member.id === 1 ? ( */}
-                                    <Button className="w-full bg-[#2a2a2f] p-4 hover:bg-red-500/20 transition rounded-md text-sm">
-                                        <SquareArrowRightExit />
-                                        Покинуть
-                                    </Button>
-                                    {/* ) : (
-                                    <Button className="w-full bg-[#2a2a2f] hover:bg-red-500/20 transition rounded-md text-sm">
-                                        Удалить
-                                    </Button>
-                                )} */}
+                                    {member.role === "OWNER" ? (
+                                        <ConfirmDialog
+                                            title="Покинуть рабочее пространство?"
+                                            desc="Вы потеряете доступ ко всем доскам и данным этого рабочего пространства. Чтобы вернуться, вам потребуется новое приглашение."
+                                            onConfirm={() => handleRemoveMember(member.user.id)}
+                                        >
+                                            <Button
+                                                className="w-full bg-[#2a2a2f] p-4 hover:bg-white/10 transition rounded-md text-sm"
+                                            >
+                                                <SquareArrowRightExit />
+                                                Покинуть
+                                            </Button>
+                                        </ConfirmDialog>
+                                    ) : (
+                                        <ConfirmDialog
+                                            title="Удалить участника?"
+                                            desc="Пользователь потеряет доступ к этому рабочему пространству и всем связанным доскам. Это действие можно отменить только повторным приглашением."
+                                            onConfirm={() => handleRemoveMember(member.user.id)}
+                                        >
+                                            <Button
+                                                className="w-full bg-[#2a2a2f] p-4 gap-3 hover:bg-white/10 transition rounded-md text-sm"
+                                            >
+                                                <Trash2 />
+                                                Удалить
+                                            </Button>
+                                        </ConfirmDialog>
+                                    )}
                                 </div>
                             </div>
                         ))
@@ -198,5 +236,55 @@ export default function MembersPage() {
             </WorkspaceModal>
 
         </div>
+    );
+}
+
+interface ConfirmDialogProps {
+    children: React.ReactNode;
+    title: string;
+    desc: string;
+    onConfirm: () => void;
+}
+
+function ConfirmDialog({ children, title, desc, onConfirm }: ConfirmDialogProps) {
+    return (
+        <Dialog>
+            <DialogTrigger asChild>
+                {children}
+            </DialogTrigger>
+            <DialogContent
+                showCloseButton={false}
+                className="bg-[#312d2d] border border-white/10 text-white rounded"
+            >
+                <DialogHeader>
+                    <DialogTitle>{title}</DialogTitle>
+                    <DialogDescription>
+                        {desc}
+                    </DialogDescription>
+                </DialogHeader>
+
+                <DialogFooter>
+
+                    <DialogClose asChild>
+                        <Button
+                            variant={"destructive"}
+                            className="rounded"
+                            onClick={onConfirm}
+                        >
+                            Согласен
+                        </Button>
+                    </DialogClose>
+
+                    <DialogClose asChild>
+                        <Button
+                            variant={"ghost"}
+                            className="rounded hover:bg-white/10"
+                        >
+                            Отмена
+                        </Button>
+                    </DialogClose>
+                </DialogFooter>
+            </DialogContent>
+        </Dialog>
     );
 }

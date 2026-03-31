@@ -142,7 +142,7 @@ export function InviteMemberMenu({
               className="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-[#3d4954] transition-colors"
             >
               <button
-                onClick={() => !isLoading && handleToggle(m)}
+                onClick={() => !isLoading && !isAdded && handleToggle(m)}
                 disabled={isLoading}
                 className="flex items-center gap-3 flex-1 min-w-0 text-left disabled:opacity-60"
               >
@@ -156,17 +156,18 @@ export function InviteMemberMenu({
                   <p className="text-xs text-[#9fadbc] truncate">{m.user?.email}</p>
                 </div>
               </button>
-              <button
-                onClick={() => !isLoading && handleToggle(m)}
-                disabled={isLoading}
-                className={`shrink-0 w-5 h-5 flex items-center justify-center rounded transition-colors ${isAdded
+              {!isLoading && (
+                <button
+                  onClick={() => !isLoading && isAdded && handleToggle(m)}
+                  disabled={isLoading || !isAdded}
+                  className={`shrink-0 w-5 h-5 flex items-center justify-center rounded transition-colors ${isAdded
                     ? "text-[#9fadbc] hover:text-red-400"
                     : "text-transparent"
-                  }`}
-              >
-                <X size={13} />
-              </button>
-
+                    }`}
+                >
+                  <X size={13} />
+                </button>
+              )}
               {isLoading && (
                 <Spinner />
               )}

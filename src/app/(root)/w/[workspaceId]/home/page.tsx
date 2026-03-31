@@ -27,7 +27,6 @@ export default function WorkspaceHomePage() {
 
       try {
         const ws = await workspaceApi.getWorkspace(workspaceId);
-        console.dir(ws); 
         setWorkspace(ws);
         setWorkspaceBoards(ws.boards ?? []);
       } catch (err) {

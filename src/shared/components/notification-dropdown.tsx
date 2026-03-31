@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { useOutsideClick } from "@/shared/hooks/use-outside-click";
 import { calcBelowPosition } from "@/shared/utils/floatingPosition";
+import Image from "next/image";
 
 interface Notification {
   id: string;
@@ -107,10 +108,13 @@ export function NotificationDropdown({
             <div className="w-5 h-5 border-2 border-[#9fadbc] border-t-transparent rounded-full animate-spin" />
           </div>
         ) : visible.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-16 gap-3 text-[#9fadbc]">
-            <div className="w-16 h-16 rounded-full bg-[#1d2125] flex items-center justify-center text-2xl">
-              🔔
-            </div>
+          <div className="flex flex-col items-center justify-center py-4 gap-3 text-[#9fadbc]">
+            <Image
+              src={"/images/empty/sleeping-snow-leopard.png"}
+              alt="empty"
+              width={200}
+              height={50}
+            />
             <p className="text-sm">Нет непрочитанных уведомлений</p>
           </div>
         ) : (

@@ -61,16 +61,42 @@ export default function RootPage() {
 
   return (
     <div
-      className="min-h-screen w-full flex items-start justify-center pt-8 px-6"
-      style={{ backgroundColor: "#1d2125" }}
+      className="min-h-screen w-full flex items-start justify-center pt-8 px-6 bg-[#1d2125]"
     >
       <div className="w-full max-w-5xl flex gap-12">
 
-        <div className="flex-1 max-w-xl">
+        <div className="flex-1 max-w-xl max-h-screen overflow-y-auto">
 
           <div className="flex items-center gap-2 mb-4">
             <Clock size={16} className="text-gray-400" />
             <span className="text-gray-300 text-sm">Требуют внимания</span>
+          </div>
+
+
+          <div
+            className="rounded-lg py-5 mb-4 flex flex-col gap-4 bg-[#2c2e33] justify-center items-center text-white/80 font-medium"
+          >
+            <h1 className="text-sm text-center">
+              Когда вы будете добавлены в контрольный список, он появится здесь.
+            </h1>
+
+            <Image
+              src="/images/pet/workspace-snow-leopart.webp"
+              alt="workspace snow leopard"
+              width={420}
+              height={220}
+              className="w-full"
+              priority
+            />
+
+            <h1 className="text-md font-semibold">
+              Будьте в курсе событий
+            </h1>
+
+            <p className="text-xs px-6 text-center text-white/60">
+              Приглашайте людей на форумы и открытки, оставляйте комментарии,
+              указывайте сроки выполнения, и мы покажем здесь наиболее важные действия.
+            </p>
           </div>
 
           {!dismissed && (

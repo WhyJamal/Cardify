@@ -87,25 +87,28 @@ export function NotificationDropdown({
         <div className="flex items-center gap-3">
           <label className="flex items-center gap-2 text-xs text-[#9fadbc] cursor-pointer select-none">
             <span>Только непрочитанные</span>
-            <Switch />
+            <Switch
+              checked={onlyUnread}
+              onCheckedChange={(value) => setOnlyUnread(value)}
+            />
           </label>
         </div>
       </div>
 
-      <div className="overflow-y-auto flex-1 max-h-100">
+      <div className="overflow-y-auto flex-1 max-h-[600]">
         {loading ? (
           <div className="flex items-center justify-center py-16">
             <div className="w-5 h-5 border-2 border-[#9fadbc] border-t-transparent rounded-full animate-spin" />
           </div>
         ) : visible.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-4 gap-3 text-[#9fadbc]">
+          <div className="flex flex-col items-center justify-center py-10 gap-6 text-[#9fadbc]">
             <Image
-              src={"/images/empty/sleeping-snow-leopard.png"}
+              src={"/images/pet/sleeping-snow-leopard.png"}
               alt="empty"
-              width={200}
+              width={130}
               height={50}
             />
-            <p className="text-sm">Нет непрочитанных уведомлений</p>
+            <p className="text-md font-bold">Нет непрочитанных уведомлений</p>
           </div>
         ) : (
           <div className="p-2 space-y-1">
@@ -139,9 +142,8 @@ function NotificationItem({
 
   return (
     <div
-      className={`rounded-lg p-3 transition-colors ${
-        n.isRead ? "bg-transparent" : "bg-[#1d2125]"
-      }`}
+      className={`rounded-lg p-3 transition-colors ${n.isRead ? "bg-transparent" : "bg-[#1d2125]"
+        }`}
     >
       <div className="flex items-start justify-between gap-2">
         {data.boardBg && (
@@ -150,9 +152,9 @@ function NotificationItem({
             style={
               data.boardIsPhoto
                 ? {
-                    backgroundImage: `url(${data.boardBg})`,
-                    backgroundSize: "cover",
-                  }
+                  backgroundImage: `url(${data.boardBg})`,
+                  backgroundSize: "cover",
+                }
                 : { background: data.boardBg }
             }
           />

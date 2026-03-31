@@ -8,6 +8,7 @@ import { useCardActions } from "@/shared/hooks/use-card-actions";
 import { useBoardView } from "@/app/providers/BoardProvider";
 import { useEscapeKey } from "@/shared/hooks/use-escape-key";
 import { getDueDateStatus } from "@/shared/utils/date";
+import { boardApi } from "@/features/board/api/board-api";
 
 export function useCardClient(initialCard: CardData, cardId: string) {
     const router = useRouter();
@@ -17,9 +18,9 @@ export function useCardClient(initialCard: CardData, cardId: string) {
     const addBtnRef = useRef<HTMLButtonElement>(null);
     const titleInputRef = useRef<HTMLInputElement>(null);
 
-    const inviteBtnRef = useRef<HTMLButtonElement>(null);
+    const inviteDivRef = useRef<HTMLDivElement>(null);
     const dateBtnRef = useRef<HTMLDivElement>(null);
-    const labelBtnRef = useRef<HTMLButtonElement>(null);
+    const labelDivRef = useRef<HTMLDivElement>(null);
 
     const [card, setCard] = useState<CardData>(initialCard);
     const [isEditingTitle, setIsEditingTitle] = useState(false);
@@ -145,7 +146,7 @@ export function useCardClient(initialCard: CardData, cardId: string) {
     }, []);
 
     const handleCloseInvites = useCallback(() => {
-        setShowInvite(false); 
+        setShowInvite(false);
     }, []);
 
 
@@ -167,6 +168,8 @@ export function useCardClient(initialCard: CardData, cardId: string) {
     const handleAddMember = useCallback(
         async (userId: string, user: User) => {
             try {
+                await boardApi.addMember(board!.id, userId);
+
                 const result = await cardApi.addMember(cardId, userId);
                 const newMember: CardMember = {
                     id: result.cardMember.id,
@@ -184,7 +187,7 @@ export function useCardClient(initialCard: CardData, cardId: string) {
                 );
             } catch { }
         },
-        [cardId, setColumns]
+        [cardId, setColumns, board]
     );
 
     const handleRemoveMember = useCallback(
@@ -232,9 +235,9 @@ export function useCardClient(initialCard: CardData, cardId: string) {
         handleSendComment,
         timeline,
 
-        inviteBtnRef,
+        inviteDivRef,
         dateBtnRef,
-        labelBtnRef,
+        labelDivRef,
 
         addBtnRef,
         showMenu,

@@ -13,6 +13,7 @@ import { useBoardView } from "@/app/providers/BoardProvider";
 import { Spinner } from "./ui/spinner";
 import { darkenHex, getTopPixelAverageColor, getContrastColor } from "../utils/getColor";
 import { useEffect, useState } from "react";
+import { getInitials } from "../utils/getInitials";
 
 interface BoardSubHeaderProps {
   onAddColumn?: () => void;
@@ -64,6 +65,21 @@ export function SubHeader({ onAddColumn }: BoardSubHeaderProps) {
       </div>
 
       <div className="flex items-center gap-1">
+
+        {board?.members && board.members.length > 0 && (
+          <div className="flex -space-x-2">
+            {board.members.map((member) => (
+              <div
+                key={member.id}
+                className="w-7 h-7 rounded-full bg-green-700 flex justify-center items-center text-xs font-medium border border-green-800"
+              >
+                {getInitials(member.user.name || "")}
+              </div>
+            ))}
+          </div>
+        )}
+
+
         <button className="flex items-center gap-1.5 px-3 py-1.5 rounded text-sm hover:bg-white/10 transition-colors">
           <Star size={14} />
         </button>

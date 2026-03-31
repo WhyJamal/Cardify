@@ -63,9 +63,9 @@ export default function CardClient({
         handleSendComment,
         timeline,
 
-        inviteBtnRef,
+        inviteDivRef,
         dateBtnRef,
-        labelBtnRef,
+        labelDivRef,
 
         addBtnRef,
         showMenu,
@@ -231,7 +231,7 @@ export default function CardClient({
 
                             {showLabels && (
                                 <LabelsMenu
-                                    triggerRef={card.labels && card.labels.length > 0 ? labelBtnRef : addBtnRef}
+                                    triggerRef={card.labels && card.labels.length > 0 ? labelDivRef : addBtnRef}
                                     boardLabels={card.boardLabels ?? []}
                                     selectedLabels={card.labels ?? []}
                                     onChange={handleUpdateLabels}
@@ -240,7 +240,7 @@ export default function CardClient({
                             )}
                             {showInvite && (
                                 <InviteMemberMenu
-                                    triggerRef={card.members && card.members.length > 0 ? inviteBtnRef : addBtnRef}
+                                    triggerRef={card.members && card.members.length > 0 ? inviteDivRef : addBtnRef}
                                     workspaceId={board?.workspaceId ?? ""}
                                     currentMembers={card.members ?? []}
                                     onAdd={handleAddMember}
@@ -255,17 +255,21 @@ export default function CardClient({
                             {card.members && card.members.length > 0 && (
                                 <div>
                                     <p className="text-[#9fadbc] text-xs mb-2">Участники</p>
-                                    <div className="flex items-center gap-1">
-                                        {card.members.map((member) => (
-                                            <div
-                                                key={member.user.id}
-                                                className="w-8 h-8 rounded-full bg-[#4bce97] flex items-center justify-center text-[#1d2125] text-xs font-semibold"
-                                            >
-                                                {getInitials(member.user.name || "")}
-                                            </div>
-                                        ))}
+                                    <div
+                                        ref={inviteDivRef}
+                                        className="flex items-center gap-1"
+                                    >
+                                        <div className="flex -space-x-2">
+                                            {card.members.map((member) => (
+                                                <div
+                                                    key={member.user.id}
+                                                    className="w-8 h-8 rounded-full bg-[#4bce97] flex items-center justify-center text-[#1d2125] text-xs font-semibold border border-green-600"
+                                                >
+                                                    {getInitials(member.user.name || "")}
+                                                </div>
+                                            ))}
+                                        </div>
                                         <Button
-                                            ref={inviteBtnRef}
                                             onClick={handleOpenInvites}
                                             className="w-8 h-8 rounded-full bg-[#2c333a] hover:bg-[#38414a] flex items-center justify-center text-[#9fadbc] hover:text-white transition-colors"
                                         >
@@ -279,6 +283,7 @@ export default function CardClient({
                                 <div>
                                     <p className="text-[#9fadbc] text-xs mb-2">Метки</p>
                                     <div
+                                        ref={labelDivRef}
                                         onClick={handleOpenLabels}
                                         className="flex flex-wrap gap-1 max-h-24 px-1 py-1"
                                     >
@@ -294,7 +299,6 @@ export default function CardClient({
                                             </div>
                                         ))}
                                         <button
-                                            ref={labelBtnRef}
                                             onClick={handleOpenLabels}
                                             className="w-8 h-8 rounded bg-[#2c333a] flex items-center justify-center text-[#9fadbc] hover:text-white hover:bg-[#38414a] shrink-0"
                                         >

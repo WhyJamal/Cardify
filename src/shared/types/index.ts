@@ -108,6 +108,22 @@ export interface ColumnInt {
   cards: CardData[];
 }
 
+export type BoardMemberRole = "OWNER" | "ADMIN" | "MEMBER";
+export type BoardMemberStatus = "PENDING" | "ACCEPTED" | "DECLINED";
+
+export interface BoardMember {
+  id: string;          
+  boardId: number;     
+  userId: string;      
+  role: BoardMemberRole;      
+  status: BoardMemberStatus;  
+
+  user: User;
+
+  createdAt: Date;     
+  updatedAt: Date;     
+}
+
 export interface Board {
   id: number;
   title: string;
@@ -116,5 +132,5 @@ export interface Board {
   workspaceId: string;
   
   columns: ColumnInt[];
-  members: any[];
+  members: BoardMember[];
 }

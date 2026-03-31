@@ -2,12 +2,13 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { getBoardId } from "../route";
 
 /* ------------------ POST ------------------ */
 
 export async function POST(
   req: NextRequest,
-  { params }: { params: { boardId: string } }
+  { params }: { params: Promise<{id: string}> }
 ) {
   const session = await getServerSession(authOptions);
 
@@ -23,12 +24,12 @@ export async function POST(
     return NextResponse.json({ error: "User not found" }, { status: 404 });
   }
 
-  const boardId = parseInt(params.boardId);
+  const boardId = await getBoardId(params);
   const body = await req.json();
-  const email = String(body.email || "").trim().toLowerCase();
+  const userId = String(body.userId ?? "").trim();
 
-  if (!email) {
-    return NextResponse.json({ error: "Email is required" }, { status: 400 });
+  if (!userId) {
+    return NextResponse.json({ error: "userId is required" }, { status: 400 });
   }
 
   const board = await prisma.board.findFirst({
@@ -40,7 +41,7 @@ export async function POST(
   }
 
   const invitee = await prisma.user.findUnique({
-    where: { email },
+    where: { id: userId },
   });
 
   if (!invitee) {
@@ -61,7 +62,7 @@ export async function POST(
   if (existing) {
     return NextResponse.json(
       { error: "User already invited or a member" },
-      { status: 400 }
+      { status: 200 }
     );
   }
 

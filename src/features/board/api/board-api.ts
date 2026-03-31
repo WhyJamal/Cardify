@@ -8,13 +8,13 @@ export const boardApi = {
     }),
 
   addMember: (boardId: number, userId: string) =>
-    clientFetch(`/api/boards/${boardId}/members`, {
+    clientFetch(`/api/boards/${boardId}/invite`, {
       method: "POST",
       body: JSON.stringify({ userId }),
     }),
 
   removeMember: (boardId: number, userId: string) =>
-    clientFetch(`/api/boards/${boardId}/members/${userId}`, {
+    clientFetch(`/api/boards/${boardId}/invite/${userId}`, {
       method: "DELETE",
     }),
 };

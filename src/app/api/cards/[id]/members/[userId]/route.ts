@@ -5,7 +5,7 @@ import { prisma } from "@/lib/prisma";
 
 export async function DELETE(
   _req: NextRequest,
-  { params }: { params: { cardId: string; userId: string } }
+  { params }: { params: Promise<{id: string; userId: string}>}
 ) {
   const session = await getServerSession(authOptions);
   if (!session?.user?.email) {
@@ -19,7 +19,7 @@ export async function DELETE(
     return NextResponse.json({ error: "User not found" }, { status: 404 });
   }
 
-  const { cardId, userId } = params;
+  const { id: cardId, userId } = await params;
 
   const card = await prisma.card.findUnique({
     where: { id: cardId },

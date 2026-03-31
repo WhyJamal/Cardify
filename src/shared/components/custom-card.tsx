@@ -124,13 +124,15 @@ export function CardContent({ card, onClickCard, showLabelName, onToggleLabel, o
               </div>
             )}
 
-            {card.members && card.members.length > 0 && (
-              card.members.map((member) => (
-                <div className="w-6 h-6 rounded-full flex items-center justify-center bg-green-700 text-[10px] font-bold text-white">
-                  {getInitials(member.user.name || "")}
-                </div>
-              ))
-            )}
+            <div className="flex -space-x-1.5">
+              {card.members && card.members.length > 0 && (
+                card.members.map((member) => (
+                  <div className="w-6 h-6 rounded-full flex items-center justify-center bg-green-700 text-[10px] font-bold text-white">
+                    {getInitials(member.user.name || "")}
+                  </div>
+                ))
+              )}
+            </div>
           </div>
 
           {card.links && card.links.length > 0 && (

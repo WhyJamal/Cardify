@@ -10,7 +10,7 @@ function parseBoardId(id: string): number | null {
   return Number.isFinite(boardId) ? boardId : null;
 }
 
-async function getBoardId(
+export async function getBoardId(
   params: Promise<{ id: string }>
 ): Promise<number | null> {
   const { id } = await params;
@@ -20,6 +20,13 @@ async function getBoardId(
 async function getOwnedBoard(boardId: number) {
   return prisma.board.findUnique({
     where: { id: boardId },
+    include: {
+      members: {
+        include: {
+          user: true, 
+        },
+      },
+    }
   });
 }
 

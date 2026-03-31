@@ -54,16 +54,16 @@ export async function POST(
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }
 
-  const targetIsBoardMember =
-    board.ownerId === userId ||
-    board.members.some((m: BoardMember) => m.userId === userId && m.status === "ACCEPTED");
+  // const targetIsBoardMember =
+  //   board.ownerId === userId ||
+  //   board.members.some((m: BoardMember) => m.userId === userId && m.status === "ACCEPTED");
 
-  if (!targetIsBoardMember) {
-    return NextResponse.json(
-      { error: "User is not a board member" },
-      { status: 400 }
-    );
-  }
+  // if (!targetIsBoardMember) {
+  //   return NextResponse.json(
+  //     { error: "User is not a board member" },
+  //     { status: 400 }
+  //   );
+  // }
 
   const existing = await prisma.cardMember.findUnique({
     where: { cardId_userId: { cardId, userId } },

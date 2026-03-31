@@ -17,9 +17,9 @@ export function useCardClient(initialCard: CardData, cardId: string) {
     const addBtnRef = useRef<HTMLButtonElement>(null);
     const titleInputRef = useRef<HTMLInputElement>(null);
 
-    const addInviteRef = useRef<HTMLButtonElement>(null);
-    const addDateRef = useRef<HTMLDivElement>(null);
-    const addLabelsRef = useRef<HTMLButtonElement>(null);
+    const inviteBtnRef = useRef<HTMLButtonElement>(null);
+    const dateBtnRef = useRef<HTMLDivElement>(null);
+    const labelBtnRef = useRef<HTMLButtonElement>(null);
 
     const [card, setCard] = useState<CardData>(initialCard);
     const [isEditingTitle, setIsEditingTitle] = useState(false);
@@ -145,7 +145,7 @@ export function useCardClient(initialCard: CardData, cardId: string) {
     }, []);
 
     const handleCloseInvites = useCallback(() => {
-        setShowLabels(false);
+        setShowInvite(false); 
     }, []);
 
 
@@ -169,7 +169,7 @@ export function useCardClient(initialCard: CardData, cardId: string) {
             try {
                 const result = await cardApi.addMember(cardId, userId);
                 const newMember: CardMember = {
-                    id: result.cardMember.id,  
+                    id: result.cardMember.id,
                     user,
                 };
                 setColumns((prev) =>
@@ -232,9 +232,9 @@ export function useCardClient(initialCard: CardData, cardId: string) {
         handleSendComment,
         timeline,
 
-        addInviteRef,
-        addDateRef,
-        addLabelsRef,
+        inviteBtnRef,
+        dateBtnRef,
+        labelBtnRef,
 
         addBtnRef,
         showMenu,

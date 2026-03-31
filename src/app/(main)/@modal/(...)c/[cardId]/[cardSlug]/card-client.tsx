@@ -63,9 +63,9 @@ export default function CardClient({
         handleSendComment,
         timeline,
 
-        addInviteRef,
-        addDateRef,
-        addLabelsRef,
+        inviteBtnRef,
+        dateBtnRef,
+        labelBtnRef,
 
         addBtnRef,
         showMenu,
@@ -221,7 +221,7 @@ export default function CardClient({
 
                             {showDatePicker && (
                                 <DatePicker
-                                    triggerRef={addBtnRef}
+                                    triggerRef={card.dueDate ? dateBtnRef : addBtnRef}
                                     cardId={card.id}
                                     cardDueDate={card.dueDate ?? undefined}
                                     onClose={handleCloseDatePicker}
@@ -231,11 +231,21 @@ export default function CardClient({
 
                             {showLabels && (
                                 <LabelsMenu
-                                    triggerRef={addBtnRef}
+                                    triggerRef={card.labels && card.labels.length > 0 ? labelBtnRef : addBtnRef}
                                     boardLabels={card.boardLabels ?? []}
                                     selectedLabels={card.labels ?? []}
                                     onChange={handleUpdateLabels}
                                     onClose={handleCloseLabels}
+                                />
+                            )}
+                            {showInvite && (
+                                <InviteMemberMenu
+                                    triggerRef={card.members && card.members.length > 0 ? inviteBtnRef : addBtnRef}
+                                    workspaceId={board?.workspaceId ?? ""}
+                                    currentMembers={card.members ?? []}
+                                    onAdd={handleAddMember}
+                                    onRemove={handleRemoveMember}
+                                    onClose={handleCloseInvites}
                                 />
                             )}
                         </div>
@@ -247,28 +257,20 @@ export default function CardClient({
                                     <p className="text-[#9fadbc] text-xs mb-2">Участники</p>
                                     <div className="flex items-center gap-1">
                                         {card.members.map((member) => (
-                                            <div className="w-8 h-8 rounded-full bg-[#4bce97] flex items-center justify-center text-[#1d2125] text-xs font-semibold">
+                                            <div
+                                                key={member.user.id}
+                                                className="w-8 h-8 rounded-full bg-[#4bce97] flex items-center justify-center text-[#1d2125] text-xs font-semibold"
+                                            >
                                                 {getInitials(member.user.name || "")}
                                             </div>
                                         ))}
                                         <Button
+                                            ref={inviteBtnRef}
                                             onClick={handleOpenInvites}
                                             className="w-8 h-8 rounded-full bg-[#2c333a] hover:bg-[#38414a] flex items-center justify-center text-[#9fadbc] hover:text-white transition-colors"
                                         >
                                             <Plus size={14} />
                                         </Button>
-
-                                        {showInvite && (
-                                            <InviteMemberMenu
-                                                triggerRef={addBtnRef}
-                                                workspaceId={board?.workspaceId ?? ""}
-                                                currentMembers={card.members ?? []}
-                                                onAdd={handleAddMember}
-                                                onRemove={handleRemoveMember}
-                                                onClose={handleCloseInvites}
-                                            />
-                                        )}
-
                                     </div>
                                 </div>
                             )}
@@ -292,6 +294,7 @@ export default function CardClient({
                                             </div>
                                         ))}
                                         <button
+                                            ref={labelBtnRef}
                                             onClick={handleOpenLabels}
                                             className="w-8 h-8 rounded bg-[#2c333a] flex items-center justify-center text-[#9fadbc] hover:text-white hover:bg-[#38414a] shrink-0"
                                         >
@@ -305,6 +308,7 @@ export default function CardClient({
                                 <div>
                                     <p className="text-[#9fadbc] text-xs mb-2">Срок</p>
                                     <div
+                                        ref={dateBtnRef}
                                         onClick={() => handleOpenDates()}
                                         className="flex items-center gap-2"
                                     >

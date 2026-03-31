@@ -12,8 +12,9 @@ import {
 import { useBoardView } from "@/app/providers/BoardProvider";
 import { Spinner } from "./ui/spinner";
 import { darkenHex, getTopPixelAverageColor, getContrastColor } from "../utils/getColor";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getInitials } from "../utils/getInitials";
+import { useBoardActions } from "../hooks/use-board-actions";
 
 interface BoardSubHeaderProps {
   onAddColumn?: () => void;
@@ -22,6 +23,16 @@ interface BoardSubHeaderProps {
 export function SubHeader({ onAddColumn }: BoardSubHeaderProps) {
   const { board } = useBoardView();
   const [textColor, setTextColor] = useState("black");
+  const {
+    handleSaveTitle,
+    handleCancelTitle,
+    tempTitle,
+    isEditingTitle,
+    setTempTitle,
+    setIsEditingTitle
+  } = useBoardActions();
+
+  const titleInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (board?.isPhoto && board.bg) {
@@ -53,11 +64,35 @@ export function SubHeader({ onAddColumn }: BoardSubHeaderProps) {
       <div
         className="flex items-center gap-2"
       >
-        <button className="flex items-center gap-2 px-2 py-1 rounded hover:bg-white/10 transition-colors">
-          <span className="font-semibold text-base">
-            {board ? board.title : <Spinner />}
-          </span>
-        </button>
+        {isEditingTitle ? (
+          <input
+            ref={titleInputRef}
+            type="text"
+            value={tempTitle}
+            onChange={(e) => setTempTitle(e.target.value)}
+            onBlur={handleSaveTitle}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") handleSaveTitle();
+              if (e.key === "Escape") handleCancelTitle();
+            }}
+            className="text-md font-semibold leading-snug shadow-lg border border-black/10 px-2 py-1 rounded outline-none"
+            autoFocus
+          />
+        ) : (
+          <button
+            onClick={() => {
+              setTempTitle(board?.title);
+              setIsEditingTitle(true);
+            }}
+            className="flex items-center gap-2 px-2 py-1 rounded hover:bg-white/10 transition-colors"
+          >
+
+            <span className="font-semibold text-base">
+              {board ? board.title : <Spinner />}
+            </span>
+          </button>
+        )}
+
         <div className="w-px h-5 bg-white/20" />
         <button className="p-1.5 rounded hover:bg-white/10 text-white/80 transition-colors">
           <Activity size={16} />

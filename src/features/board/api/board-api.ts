@@ -17,4 +17,10 @@ export const boardApi = {
     clientFetch(`/api/boards/${boardId}/invite/${userId}`, {
       method: "DELETE",
     }),
+
+  updateTitleBoard: (boardId: number | undefined, title: string) =>
+    clientFetch(`/api/boards/${boardId}`, {
+      method: "PATCH",
+      body: JSON.stringify({ title }),
+    }),
 };

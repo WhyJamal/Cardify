@@ -1,12 +1,15 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useBoardView } from "@/app/providers/BoardProvider";
 import { clientFetch } from "@/lib/client-api";
 import { boardApi } from "@/features/board/api/board-api";
-import { Board, User } from "../types";
+import { Board, BoardMember, User } from "../types";
 
 export function useBoardActions() {
   const { board, columns, setColumns, setBoard } = useBoardView();
   const lastColumnReorder = useRef<string>("");
+
+  const [isEditingTitle, setIsEditingTitle] = useState(false);
+  const [tempTitle, setTempTitle] = useState(board?.title);
 
   // ─── Cards ───────────────────────────────────────────────
 
@@ -154,7 +157,7 @@ export function useBoardActions() {
         if (already) return prev;
         return {
           ...prev,
-          members: [...(prev.members ?? []), { userId, user, status: "ACCEPTED" }],
+          members: [...(prev.members ?? []), { userId, user, status: "ACCEPTED" } as BoardMember],
         };
       });
     } catch (err) {
@@ -178,6 +181,46 @@ export function useBoardActions() {
     }
   }
 
-  return { dropCard, addCard, dropColumn, addColumn, addMember, removeMember };
+  async function handleSaveTitle() {
+    const title = tempTitle ? tempTitle.trim() : null;
+    if (!title) return;
+
+    try {
+      const res = await boardApi.updateTitleBoard(board?.id, title);
+      if (res) {
+        setBoard((prev: Board | null) => {
+          if (!prev) return prev;
+          return {
+            ...prev,
+            title, 
+          };
+        });
+        setIsEditingTitle(false);
+      }
+    } catch (err) {
+      console.error("Change title failed", err);
+    }
+  }
+
+  async function handleCancelTitle() {
+    setTempTitle(board?.title);
+    setIsEditingTitle(false);
+  }
+
+
+  return {
+    dropCard,
+    addCard,
+    dropColumn,
+    addColumn,
+    addMember,
+    removeMember,
+    handleSaveTitle,
+    handleCancelTitle,
+    tempTitle,
+    isEditingTitle,
+    setTempTitle,
+    setIsEditingTitle
+  };
 }
 

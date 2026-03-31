@@ -76,7 +76,7 @@ export function useCardActions() {
             const prevCard = findCard(cardId);
     
             syncCardInState(cardId, {
-                dueDate: dueDate ? new Date(dueDate) : undefined,
+                dueDate: dueDate ? new Date(dueDate).toISOString() : undefined,
             });
 
             try {

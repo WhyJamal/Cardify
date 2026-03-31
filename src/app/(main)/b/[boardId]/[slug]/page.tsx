@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { Plus, X } from "lucide-react";
@@ -16,9 +16,16 @@ export default function BoardPage() {
   useOpenCardFromQuery();
 
   const { board, columns } = useBoardView();
-  const { dropCard, addCard, dropColumn, addColumn } = useBoardActions();
-  const { toggleIsCompleted } = useCardActions();
 
+  const { 
+    dropCard, 
+    addCard, 
+    dropColumn, 
+    addColumn, 
+  } = useBoardActions();
+
+  const { toggleIsCompleted } = useCardActions();
+        
   const [showLabelName, setShowLabelName] = useState(false);
   const [addingColumn, setAddingColumn] = useState(false);
   const [newColumnTitle, setNewColumnTitle] = useState("");

@@ -31,7 +31,9 @@ export type WorkspaceMemberStatus = (typeof WorkspaceMemberStatus)[keyof typeof 
 export const NotificationType = {
   BOARD_INVITE: 'BOARD_INVITE',
   BOARD_INVITE_ACCEPTED: 'BOARD_INVITE_ACCEPTED',
-  BOARD_INVITE_DECLINED: 'BOARD_INVITE_DECLINED'
+  BOARD_INVITE_DECLINED: 'BOARD_INVITE_DECLINED',
+  WORKSPACE_INVITE: 'WORKSPACE_INVITE',
+  CARD_ASSIGNED: 'CARD_ASSIGNED'
 } as const
 
 export type NotificationType = (typeof NotificationType)[keyof typeof NotificationType]

@@ -6,7 +6,7 @@ import { BoardMember } from "@/generated/prisma/client";
 
 export async function POST(
   req: NextRequest,
-  { params }: { params: Promise<{id: string}> }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const session = await getServerSession(authOptions);
   if (!session?.user?.email) {
@@ -76,9 +76,20 @@ export async function POST(
     );
   }
 
-  const cardMember = await prisma.cardMember.create({
-    data: { cardId, userId },
-  });
+  const cardMember = await prisma.$transaction([
+    prisma.cardMember.create({
+      data: { cardId, userId },
+    }),
+    prisma.notification.create({
+      data: {
+        userId,
+        type: "CARD_ASSIGNED", 
+        title: `Вы "${card.title ?? 'Card'}" вы присоединились к карте`,
+        body: `${dbUser.name ?? dbUser.email} добавил(а) вас в карту`,
+        data: JSON.stringify({ cardId, boardId: card.column.boardId }),
+      },
+    }),
+  ]);
 
   return NextResponse.json({ ok: true, cardMember }, { status: 201 });
 }

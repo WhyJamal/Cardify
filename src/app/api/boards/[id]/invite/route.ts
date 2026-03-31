@@ -8,7 +8,7 @@ import { getBoardId } from "../route";
 
 export async function POST(
   req: NextRequest,
-  { params }: { params: Promise<{id: string}> }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const session = await getServerSession(authOptions);
 
@@ -78,8 +78,8 @@ export async function POST(
       data: {
         userId: invitee.id,
         type: "BOARD_INVITE",
-        title: `"${board.title}" boardiga taklif`,
-        body: `${dbUser.name ?? dbUser.email} sizni qo'shmoqchi`,
+        title: `Вы добавлены в доску "${board.title}"`,
+        body: `${dbUser.name ?? dbUser.email} добавил(а) вас в доску`,
         data: JSON.stringify({
           boardId,
           boardTitle: board.title,

@@ -52,7 +52,7 @@ export async function GET(
 
     const isAllowed =
       workspace.ownerId === currentUserId ||
-      workspace.members.some((m: {userId: string}) => m.userId === currentUserId);
+      workspace.members.some((m: { userId: string }) => m.userId === currentUserId);
 
     if (!isAllowed) {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
@@ -81,11 +81,11 @@ export async function POST(
     }
 
     const { id: workspaceId } = await params;
-    
+
     const body: { userIds?: string[] } = await req.json();
 
     const userIds: string[] = Array.isArray(body.userIds)
-      ? [...new Set(body.userIds.filter(Boolean))] 
+      ? [...new Set(body.userIds.filter(Boolean))]
       : [];
 
     if (!userIds.length) {
@@ -111,14 +111,14 @@ export async function POST(
 
     const isAllowed =
       workspace.ownerId === currentUserId ||
-      workspace.members.some((m: {userId: string}) => m.userId === currentUserId);
+      workspace.members.some((m: { userId: string }) => m.userId === currentUserId);
 
     if (!isAllowed) {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 
     const existingMemberIds = new Set<string>(
-      workspace.members.map((m: {userId: string}) => m.userId)
+      workspace.members.map((m: { userId: string }) => m.userId)
     );
 
     const newUserIds: string[] = userIds.filter((id: string) => !existingMemberIds.has(id));
@@ -127,13 +127,25 @@ export async function POST(
       return NextResponse.json({ invited: 0, message: "No new members" });
     }
 
-    await prisma.workspaceMember.createMany({
-      data: newUserIds.map((userId) => ({
-        workspaceId,
-        userId,
-      })),
-      // skipDuplicates: true,
-    });
+    await prisma.$transaction([
+      prisma.workspaceMember.createMany({
+        data: newUserIds.map((userId) => ({
+          workspaceId,
+          userId,
+        })),
+      }),
+      ...newUserIds.map((userId) =>
+        prisma.notification.create({
+          data: {
+            userId,
+            type: "WORKSPACE_INVITE",
+            title: `Вы добавлены в рабочее пространство "${workspace.name}"`,
+            body: `${session.user.name ?? session.user.email} добавил(а) вас в рабочее пространство`,
+            data: JSON.stringify({ workspaceId }),
+          },
+        })
+      ),
+    ]);
 
     return NextResponse.json({
       invited: newUserIds.length,

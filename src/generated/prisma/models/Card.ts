@@ -28,7 +28,6 @@ export type AggregateCard = {
 
 export type CardAvgAggregateOutputType = {
   numberBadge: number | null
-  attachments: number | null
   checklistDone: number | null
   checklistTotal: number | null
   position: number | null
@@ -36,7 +35,6 @@ export type CardAvgAggregateOutputType = {
 
 export type CardSumAggregateOutputType = {
   numberBadge: number | null
-  attachments: number | null
   checklistDone: number | null
   checklistTotal: number | null
   position: number | null
@@ -51,7 +49,6 @@ export type CardMinAggregateOutputType = {
   description: string | null
   hasDescription: boolean | null
   watching: boolean | null
-  attachments: number | null
   checklistDone: number | null
   checklistTotal: number | null
   assigneeInitials: string | null
@@ -61,6 +58,8 @@ export type CardMinAggregateOutputType = {
   updatedAt: Date | null
   dueDate: Date | null
   isCompleted: boolean | null
+  isImage: boolean | null
+  thumbnailUrl: string | null
 }
 
 export type CardMaxAggregateOutputType = {
@@ -72,7 +71,6 @@ export type CardMaxAggregateOutputType = {
   description: string | null
   hasDescription: boolean | null
   watching: boolean | null
-  attachments: number | null
   checklistDone: number | null
   checklistTotal: number | null
   assigneeInitials: string | null
@@ -82,6 +80,8 @@ export type CardMaxAggregateOutputType = {
   updatedAt: Date | null
   dueDate: Date | null
   isCompleted: boolean | null
+  isImage: boolean | null
+  thumbnailUrl: string | null
 }
 
 export type CardCountAggregateOutputType = {
@@ -93,7 +93,6 @@ export type CardCountAggregateOutputType = {
   description: number
   hasDescription: number
   watching: number
-  attachments: number
   checklistDone: number
   checklistTotal: number
   assigneeInitials: number
@@ -103,13 +102,14 @@ export type CardCountAggregateOutputType = {
   updatedAt: number
   dueDate: number
   isCompleted: number
+  isImage: number
+  thumbnailUrl: number
   _all: number
 }
 
 
 export type CardAvgAggregateInputType = {
   numberBadge?: true
-  attachments?: true
   checklistDone?: true
   checklistTotal?: true
   position?: true
@@ -117,7 +117,6 @@ export type CardAvgAggregateInputType = {
 
 export type CardSumAggregateInputType = {
   numberBadge?: true
-  attachments?: true
   checklistDone?: true
   checklistTotal?: true
   position?: true
@@ -132,7 +131,6 @@ export type CardMinAggregateInputType = {
   description?: true
   hasDescription?: true
   watching?: true
-  attachments?: true
   checklistDone?: true
   checklistTotal?: true
   assigneeInitials?: true
@@ -142,6 +140,8 @@ export type CardMinAggregateInputType = {
   updatedAt?: true
   dueDate?: true
   isCompleted?: true
+  isImage?: true
+  thumbnailUrl?: true
 }
 
 export type CardMaxAggregateInputType = {
@@ -153,7 +153,6 @@ export type CardMaxAggregateInputType = {
   description?: true
   hasDescription?: true
   watching?: true
-  attachments?: true
   checklistDone?: true
   checklistTotal?: true
   assigneeInitials?: true
@@ -163,6 +162,8 @@ export type CardMaxAggregateInputType = {
   updatedAt?: true
   dueDate?: true
   isCompleted?: true
+  isImage?: true
+  thumbnailUrl?: true
 }
 
 export type CardCountAggregateInputType = {
@@ -174,7 +175,6 @@ export type CardCountAggregateInputType = {
   description?: true
   hasDescription?: true
   watching?: true
-  attachments?: true
   checklistDone?: true
   checklistTotal?: true
   assigneeInitials?: true
@@ -184,6 +184,8 @@ export type CardCountAggregateInputType = {
   updatedAt?: true
   dueDate?: true
   isCompleted?: true
+  isImage?: true
+  thumbnailUrl?: true
   _all?: true
 }
 
@@ -282,7 +284,6 @@ export type CardGroupByOutputType = {
   description: string | null
   hasDescription: boolean
   watching: boolean
-  attachments: number
   checklistDone: number
   checklistTotal: number
   assigneeInitials: string | null
@@ -292,6 +293,8 @@ export type CardGroupByOutputType = {
   updatedAt: Date
   dueDate: Date | null
   isCompleted: boolean
+  isImage: boolean
+  thumbnailUrl: string | null
   _count: CardCountAggregateOutputType | null
   _avg: CardAvgAggregateOutputType | null
   _sum: CardSumAggregateOutputType | null
@@ -326,7 +329,6 @@ export type CardWhereInput = {
   description?: Prisma.StringNullableFilter<"Card"> | string | null
   hasDescription?: Prisma.BoolFilter<"Card"> | boolean
   watching?: Prisma.BoolFilter<"Card"> | boolean
-  attachments?: Prisma.IntFilter<"Card"> | number
   checklistDone?: Prisma.IntFilter<"Card"> | number
   checklistTotal?: Prisma.IntFilter<"Card"> | number
   assigneeInitials?: Prisma.StringNullableFilter<"Card"> | string | null
@@ -336,11 +338,14 @@ export type CardWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Card"> | Date | string
   dueDate?: Prisma.DateTimeNullableFilter<"Card"> | Date | string | null
   isCompleted?: Prisma.BoolFilter<"Card"> | boolean
+  isImage?: Prisma.BoolFilter<"Card"> | boolean
+  thumbnailUrl?: Prisma.StringNullableFilter<"Card"> | string | null
   column?: Prisma.XOR<Prisma.ColumnScalarRelationFilter, Prisma.ColumnWhereInput>
   labels?: Prisma.CardBoardLabelListRelationFilter
   links?: Prisma.CardLinkListRelationFilter
   comments?: Prisma.CardTimelineListRelationFilter
   members?: Prisma.CardMemberListRelationFilter
+  attachments?: Prisma.CardAttachmentListRelationFilter
 }
 
 export type CardOrderByWithRelationInput = {
@@ -352,7 +357,6 @@ export type CardOrderByWithRelationInput = {
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   hasDescription?: Prisma.SortOrder
   watching?: Prisma.SortOrder
-  attachments?: Prisma.SortOrder
   checklistDone?: Prisma.SortOrder
   checklistTotal?: Prisma.SortOrder
   assigneeInitials?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -362,11 +366,14 @@ export type CardOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   dueDate?: Prisma.SortOrderInput | Prisma.SortOrder
   isCompleted?: Prisma.SortOrder
+  isImage?: Prisma.SortOrder
+  thumbnailUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   column?: Prisma.ColumnOrderByWithRelationInput
   labels?: Prisma.CardBoardLabelOrderByRelationAggregateInput
   links?: Prisma.CardLinkOrderByRelationAggregateInput
   comments?: Prisma.CardTimelineOrderByRelationAggregateInput
   members?: Prisma.CardMemberOrderByRelationAggregateInput
+  attachments?: Prisma.CardAttachmentOrderByRelationAggregateInput
 }
 
 export type CardWhereUniqueInput = Prisma.AtLeast<{
@@ -381,7 +388,6 @@ export type CardWhereUniqueInput = Prisma.AtLeast<{
   description?: Prisma.StringNullableFilter<"Card"> | string | null
   hasDescription?: Prisma.BoolFilter<"Card"> | boolean
   watching?: Prisma.BoolFilter<"Card"> | boolean
-  attachments?: Prisma.IntFilter<"Card"> | number
   checklistDone?: Prisma.IntFilter<"Card"> | number
   checklistTotal?: Prisma.IntFilter<"Card"> | number
   assigneeInitials?: Prisma.StringNullableFilter<"Card"> | string | null
@@ -391,11 +397,14 @@ export type CardWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Card"> | Date | string
   dueDate?: Prisma.DateTimeNullableFilter<"Card"> | Date | string | null
   isCompleted?: Prisma.BoolFilter<"Card"> | boolean
+  isImage?: Prisma.BoolFilter<"Card"> | boolean
+  thumbnailUrl?: Prisma.StringNullableFilter<"Card"> | string | null
   column?: Prisma.XOR<Prisma.ColumnScalarRelationFilter, Prisma.ColumnWhereInput>
   labels?: Prisma.CardBoardLabelListRelationFilter
   links?: Prisma.CardLinkListRelationFilter
   comments?: Prisma.CardTimelineListRelationFilter
   members?: Prisma.CardMemberListRelationFilter
+  attachments?: Prisma.CardAttachmentListRelationFilter
 }, "id">
 
 export type CardOrderByWithAggregationInput = {
@@ -407,7 +416,6 @@ export type CardOrderByWithAggregationInput = {
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   hasDescription?: Prisma.SortOrder
   watching?: Prisma.SortOrder
-  attachments?: Prisma.SortOrder
   checklistDone?: Prisma.SortOrder
   checklistTotal?: Prisma.SortOrder
   assigneeInitials?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -417,6 +425,8 @@ export type CardOrderByWithAggregationInput = {
   updatedAt?: Prisma.SortOrder
   dueDate?: Prisma.SortOrderInput | Prisma.SortOrder
   isCompleted?: Prisma.SortOrder
+  isImage?: Prisma.SortOrder
+  thumbnailUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.CardCountOrderByAggregateInput
   _avg?: Prisma.CardAvgOrderByAggregateInput
   _max?: Prisma.CardMaxOrderByAggregateInput
@@ -436,7 +446,6 @@ export type CardScalarWhereWithAggregatesInput = {
   description?: Prisma.StringNullableWithAggregatesFilter<"Card"> | string | null
   hasDescription?: Prisma.BoolWithAggregatesFilter<"Card"> | boolean
   watching?: Prisma.BoolWithAggregatesFilter<"Card"> | boolean
-  attachments?: Prisma.IntWithAggregatesFilter<"Card"> | number
   checklistDone?: Prisma.IntWithAggregatesFilter<"Card"> | number
   checklistTotal?: Prisma.IntWithAggregatesFilter<"Card"> | number
   assigneeInitials?: Prisma.StringNullableWithAggregatesFilter<"Card"> | string | null
@@ -446,6 +455,8 @@ export type CardScalarWhereWithAggregatesInput = {
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Card"> | Date | string
   dueDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Card"> | Date | string | null
   isCompleted?: Prisma.BoolWithAggregatesFilter<"Card"> | boolean
+  isImage?: Prisma.BoolWithAggregatesFilter<"Card"> | boolean
+  thumbnailUrl?: Prisma.StringNullableWithAggregatesFilter<"Card"> | string | null
 }
 
 export type CardCreateInput = {
@@ -456,7 +467,6 @@ export type CardCreateInput = {
   description?: string | null
   hasDescription?: boolean
   watching?: boolean
-  attachments?: number
   checklistDone?: number
   checklistTotal?: number
   assigneeInitials?: string | null
@@ -466,11 +476,14 @@ export type CardCreateInput = {
   updatedAt?: Date | string
   dueDate?: Date | string | null
   isCompleted?: boolean
+  isImage?: boolean
+  thumbnailUrl?: string | null
   column: Prisma.ColumnCreateNestedOneWithoutCardsInput
   labels?: Prisma.CardBoardLabelCreateNestedManyWithoutCardInput
   links?: Prisma.CardLinkCreateNestedManyWithoutCardInput
   comments?: Prisma.CardTimelineCreateNestedManyWithoutCardInput
   members?: Prisma.CardMemberCreateNestedManyWithoutCardInput
+  attachments?: Prisma.CardAttachmentCreateNestedManyWithoutCardInput
 }
 
 export type CardUncheckedCreateInput = {
@@ -482,7 +495,6 @@ export type CardUncheckedCreateInput = {
   description?: string | null
   hasDescription?: boolean
   watching?: boolean
-  attachments?: number
   checklistDone?: number
   checklistTotal?: number
   assigneeInitials?: string | null
@@ -492,10 +504,13 @@ export type CardUncheckedCreateInput = {
   updatedAt?: Date | string
   dueDate?: Date | string | null
   isCompleted?: boolean
+  isImage?: boolean
+  thumbnailUrl?: string | null
   labels?: Prisma.CardBoardLabelUncheckedCreateNestedManyWithoutCardInput
   links?: Prisma.CardLinkUncheckedCreateNestedManyWithoutCardInput
   comments?: Prisma.CardTimelineUncheckedCreateNestedManyWithoutCardInput
   members?: Prisma.CardMemberUncheckedCreateNestedManyWithoutCardInput
+  attachments?: Prisma.CardAttachmentUncheckedCreateNestedManyWithoutCardInput
 }
 
 export type CardUpdateInput = {
@@ -506,7 +521,6 @@ export type CardUpdateInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   hasDescription?: Prisma.BoolFieldUpdateOperationsInput | boolean
   watching?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  attachments?: Prisma.IntFieldUpdateOperationsInput | number
   checklistDone?: Prisma.IntFieldUpdateOperationsInput | number
   checklistTotal?: Prisma.IntFieldUpdateOperationsInput | number
   assigneeInitials?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -516,11 +530,14 @@ export type CardUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isImage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  thumbnailUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   column?: Prisma.ColumnUpdateOneRequiredWithoutCardsNestedInput
   labels?: Prisma.CardBoardLabelUpdateManyWithoutCardNestedInput
   links?: Prisma.CardLinkUpdateManyWithoutCardNestedInput
   comments?: Prisma.CardTimelineUpdateManyWithoutCardNestedInput
   members?: Prisma.CardMemberUpdateManyWithoutCardNestedInput
+  attachments?: Prisma.CardAttachmentUpdateManyWithoutCardNestedInput
 }
 
 export type CardUncheckedUpdateInput = {
@@ -532,7 +549,6 @@ export type CardUncheckedUpdateInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   hasDescription?: Prisma.BoolFieldUpdateOperationsInput | boolean
   watching?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  attachments?: Prisma.IntFieldUpdateOperationsInput | number
   checklistDone?: Prisma.IntFieldUpdateOperationsInput | number
   checklistTotal?: Prisma.IntFieldUpdateOperationsInput | number
   assigneeInitials?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -542,10 +558,13 @@ export type CardUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isImage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  thumbnailUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   labels?: Prisma.CardBoardLabelUncheckedUpdateManyWithoutCardNestedInput
   links?: Prisma.CardLinkUncheckedUpdateManyWithoutCardNestedInput
   comments?: Prisma.CardTimelineUncheckedUpdateManyWithoutCardNestedInput
   members?: Prisma.CardMemberUncheckedUpdateManyWithoutCardNestedInput
+  attachments?: Prisma.CardAttachmentUncheckedUpdateManyWithoutCardNestedInput
 }
 
 export type CardCreateManyInput = {
@@ -557,7 +576,6 @@ export type CardCreateManyInput = {
   description?: string | null
   hasDescription?: boolean
   watching?: boolean
-  attachments?: number
   checklistDone?: number
   checklistTotal?: number
   assigneeInitials?: string | null
@@ -567,6 +585,8 @@ export type CardCreateManyInput = {
   updatedAt?: Date | string
   dueDate?: Date | string | null
   isCompleted?: boolean
+  isImage?: boolean
+  thumbnailUrl?: string | null
 }
 
 export type CardUpdateManyMutationInput = {
@@ -577,7 +597,6 @@ export type CardUpdateManyMutationInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   hasDescription?: Prisma.BoolFieldUpdateOperationsInput | boolean
   watching?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  attachments?: Prisma.IntFieldUpdateOperationsInput | number
   checklistDone?: Prisma.IntFieldUpdateOperationsInput | number
   checklistTotal?: Prisma.IntFieldUpdateOperationsInput | number
   assigneeInitials?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -587,6 +606,8 @@ export type CardUpdateManyMutationInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isImage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  thumbnailUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type CardUncheckedUpdateManyInput = {
@@ -598,7 +619,6 @@ export type CardUncheckedUpdateManyInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   hasDescription?: Prisma.BoolFieldUpdateOperationsInput | boolean
   watching?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  attachments?: Prisma.IntFieldUpdateOperationsInput | number
   checklistDone?: Prisma.IntFieldUpdateOperationsInput | number
   checklistTotal?: Prisma.IntFieldUpdateOperationsInput | number
   assigneeInitials?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -608,6 +628,8 @@ export type CardUncheckedUpdateManyInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isImage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  thumbnailUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type CardListRelationFilter = {
@@ -629,7 +651,6 @@ export type CardCountOrderByAggregateInput = {
   description?: Prisma.SortOrder
   hasDescription?: Prisma.SortOrder
   watching?: Prisma.SortOrder
-  attachments?: Prisma.SortOrder
   checklistDone?: Prisma.SortOrder
   checklistTotal?: Prisma.SortOrder
   assigneeInitials?: Prisma.SortOrder
@@ -639,11 +660,12 @@ export type CardCountOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   dueDate?: Prisma.SortOrder
   isCompleted?: Prisma.SortOrder
+  isImage?: Prisma.SortOrder
+  thumbnailUrl?: Prisma.SortOrder
 }
 
 export type CardAvgOrderByAggregateInput = {
   numberBadge?: Prisma.SortOrder
-  attachments?: Prisma.SortOrder
   checklistDone?: Prisma.SortOrder
   checklistTotal?: Prisma.SortOrder
   position?: Prisma.SortOrder
@@ -658,7 +680,6 @@ export type CardMaxOrderByAggregateInput = {
   description?: Prisma.SortOrder
   hasDescription?: Prisma.SortOrder
   watching?: Prisma.SortOrder
-  attachments?: Prisma.SortOrder
   checklistDone?: Prisma.SortOrder
   checklistTotal?: Prisma.SortOrder
   assigneeInitials?: Prisma.SortOrder
@@ -668,6 +689,8 @@ export type CardMaxOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   dueDate?: Prisma.SortOrder
   isCompleted?: Prisma.SortOrder
+  isImage?: Prisma.SortOrder
+  thumbnailUrl?: Prisma.SortOrder
 }
 
 export type CardMinOrderByAggregateInput = {
@@ -679,7 +702,6 @@ export type CardMinOrderByAggregateInput = {
   description?: Prisma.SortOrder
   hasDescription?: Prisma.SortOrder
   watching?: Prisma.SortOrder
-  attachments?: Prisma.SortOrder
   checklistDone?: Prisma.SortOrder
   checklistTotal?: Prisma.SortOrder
   assigneeInitials?: Prisma.SortOrder
@@ -689,11 +711,12 @@ export type CardMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   dueDate?: Prisma.SortOrder
   isCompleted?: Prisma.SortOrder
+  isImage?: Prisma.SortOrder
+  thumbnailUrl?: Prisma.SortOrder
 }
 
 export type CardSumOrderByAggregateInput = {
   numberBadge?: Prisma.SortOrder
-  attachments?: Prisma.SortOrder
   checklistDone?: Prisma.SortOrder
   checklistTotal?: Prisma.SortOrder
   position?: Prisma.SortOrder
@@ -814,6 +837,20 @@ export type CardUpdateOneRequiredWithoutMembersNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CardUpdateToOneWithWhereWithoutMembersInput, Prisma.CardUpdateWithoutMembersInput>, Prisma.CardUncheckedUpdateWithoutMembersInput>
 }
 
+export type CardCreateNestedOneWithoutAttachmentsInput = {
+  create?: Prisma.XOR<Prisma.CardCreateWithoutAttachmentsInput, Prisma.CardUncheckedCreateWithoutAttachmentsInput>
+  connectOrCreate?: Prisma.CardCreateOrConnectWithoutAttachmentsInput
+  connect?: Prisma.CardWhereUniqueInput
+}
+
+export type CardUpdateOneRequiredWithoutAttachmentsNestedInput = {
+  create?: Prisma.XOR<Prisma.CardCreateWithoutAttachmentsInput, Prisma.CardUncheckedCreateWithoutAttachmentsInput>
+  connectOrCreate?: Prisma.CardCreateOrConnectWithoutAttachmentsInput
+  upsert?: Prisma.CardUpsertWithoutAttachmentsInput
+  connect?: Prisma.CardWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CardUpdateToOneWithWhereWithoutAttachmentsInput, Prisma.CardUpdateWithoutAttachmentsInput>, Prisma.CardUncheckedUpdateWithoutAttachmentsInput>
+}
+
 export type CardCreateWithoutColumnInput = {
   id?: string
   title?: string | null
@@ -822,7 +859,6 @@ export type CardCreateWithoutColumnInput = {
   description?: string | null
   hasDescription?: boolean
   watching?: boolean
-  attachments?: number
   checklistDone?: number
   checklistTotal?: number
   assigneeInitials?: string | null
@@ -832,10 +868,13 @@ export type CardCreateWithoutColumnInput = {
   updatedAt?: Date | string
   dueDate?: Date | string | null
   isCompleted?: boolean
+  isImage?: boolean
+  thumbnailUrl?: string | null
   labels?: Prisma.CardBoardLabelCreateNestedManyWithoutCardInput
   links?: Prisma.CardLinkCreateNestedManyWithoutCardInput
   comments?: Prisma.CardTimelineCreateNestedManyWithoutCardInput
   members?: Prisma.CardMemberCreateNestedManyWithoutCardInput
+  attachments?: Prisma.CardAttachmentCreateNestedManyWithoutCardInput
 }
 
 export type CardUncheckedCreateWithoutColumnInput = {
@@ -846,7 +885,6 @@ export type CardUncheckedCreateWithoutColumnInput = {
   description?: string | null
   hasDescription?: boolean
   watching?: boolean
-  attachments?: number
   checklistDone?: number
   checklistTotal?: number
   assigneeInitials?: string | null
@@ -856,10 +894,13 @@ export type CardUncheckedCreateWithoutColumnInput = {
   updatedAt?: Date | string
   dueDate?: Date | string | null
   isCompleted?: boolean
+  isImage?: boolean
+  thumbnailUrl?: string | null
   labels?: Prisma.CardBoardLabelUncheckedCreateNestedManyWithoutCardInput
   links?: Prisma.CardLinkUncheckedCreateNestedManyWithoutCardInput
   comments?: Prisma.CardTimelineUncheckedCreateNestedManyWithoutCardInput
   members?: Prisma.CardMemberUncheckedCreateNestedManyWithoutCardInput
+  attachments?: Prisma.CardAttachmentUncheckedCreateNestedManyWithoutCardInput
 }
 
 export type CardCreateOrConnectWithoutColumnInput = {
@@ -899,7 +940,6 @@ export type CardScalarWhereInput = {
   description?: Prisma.StringNullableFilter<"Card"> | string | null
   hasDescription?: Prisma.BoolFilter<"Card"> | boolean
   watching?: Prisma.BoolFilter<"Card"> | boolean
-  attachments?: Prisma.IntFilter<"Card"> | number
   checklistDone?: Prisma.IntFilter<"Card"> | number
   checklistTotal?: Prisma.IntFilter<"Card"> | number
   assigneeInitials?: Prisma.StringNullableFilter<"Card"> | string | null
@@ -909,6 +949,8 @@ export type CardScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Card"> | Date | string
   dueDate?: Prisma.DateTimeNullableFilter<"Card"> | Date | string | null
   isCompleted?: Prisma.BoolFilter<"Card"> | boolean
+  isImage?: Prisma.BoolFilter<"Card"> | boolean
+  thumbnailUrl?: Prisma.StringNullableFilter<"Card"> | string | null
 }
 
 export type CardCreateWithoutLabelsInput = {
@@ -919,7 +961,6 @@ export type CardCreateWithoutLabelsInput = {
   description?: string | null
   hasDescription?: boolean
   watching?: boolean
-  attachments?: number
   checklistDone?: number
   checklistTotal?: number
   assigneeInitials?: string | null
@@ -929,10 +970,13 @@ export type CardCreateWithoutLabelsInput = {
   updatedAt?: Date | string
   dueDate?: Date | string | null
   isCompleted?: boolean
+  isImage?: boolean
+  thumbnailUrl?: string | null
   column: Prisma.ColumnCreateNestedOneWithoutCardsInput
   links?: Prisma.CardLinkCreateNestedManyWithoutCardInput
   comments?: Prisma.CardTimelineCreateNestedManyWithoutCardInput
   members?: Prisma.CardMemberCreateNestedManyWithoutCardInput
+  attachments?: Prisma.CardAttachmentCreateNestedManyWithoutCardInput
 }
 
 export type CardUncheckedCreateWithoutLabelsInput = {
@@ -944,7 +988,6 @@ export type CardUncheckedCreateWithoutLabelsInput = {
   description?: string | null
   hasDescription?: boolean
   watching?: boolean
-  attachments?: number
   checklistDone?: number
   checklistTotal?: number
   assigneeInitials?: string | null
@@ -954,9 +997,12 @@ export type CardUncheckedCreateWithoutLabelsInput = {
   updatedAt?: Date | string
   dueDate?: Date | string | null
   isCompleted?: boolean
+  isImage?: boolean
+  thumbnailUrl?: string | null
   links?: Prisma.CardLinkUncheckedCreateNestedManyWithoutCardInput
   comments?: Prisma.CardTimelineUncheckedCreateNestedManyWithoutCardInput
   members?: Prisma.CardMemberUncheckedCreateNestedManyWithoutCardInput
+  attachments?: Prisma.CardAttachmentUncheckedCreateNestedManyWithoutCardInput
 }
 
 export type CardCreateOrConnectWithoutLabelsInput = {
@@ -983,7 +1029,6 @@ export type CardUpdateWithoutLabelsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   hasDescription?: Prisma.BoolFieldUpdateOperationsInput | boolean
   watching?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  attachments?: Prisma.IntFieldUpdateOperationsInput | number
   checklistDone?: Prisma.IntFieldUpdateOperationsInput | number
   checklistTotal?: Prisma.IntFieldUpdateOperationsInput | number
   assigneeInitials?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -993,10 +1038,13 @@ export type CardUpdateWithoutLabelsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isImage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  thumbnailUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   column?: Prisma.ColumnUpdateOneRequiredWithoutCardsNestedInput
   links?: Prisma.CardLinkUpdateManyWithoutCardNestedInput
   comments?: Prisma.CardTimelineUpdateManyWithoutCardNestedInput
   members?: Prisma.CardMemberUpdateManyWithoutCardNestedInput
+  attachments?: Prisma.CardAttachmentUpdateManyWithoutCardNestedInput
 }
 
 export type CardUncheckedUpdateWithoutLabelsInput = {
@@ -1008,7 +1056,6 @@ export type CardUncheckedUpdateWithoutLabelsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   hasDescription?: Prisma.BoolFieldUpdateOperationsInput | boolean
   watching?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  attachments?: Prisma.IntFieldUpdateOperationsInput | number
   checklistDone?: Prisma.IntFieldUpdateOperationsInput | number
   checklistTotal?: Prisma.IntFieldUpdateOperationsInput | number
   assigneeInitials?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1018,9 +1065,12 @@ export type CardUncheckedUpdateWithoutLabelsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isImage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  thumbnailUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   links?: Prisma.CardLinkUncheckedUpdateManyWithoutCardNestedInput
   comments?: Prisma.CardTimelineUncheckedUpdateManyWithoutCardNestedInput
   members?: Prisma.CardMemberUncheckedUpdateManyWithoutCardNestedInput
+  attachments?: Prisma.CardAttachmentUncheckedUpdateManyWithoutCardNestedInput
 }
 
 export type CardCreateWithoutLinksInput = {
@@ -1031,7 +1081,6 @@ export type CardCreateWithoutLinksInput = {
   description?: string | null
   hasDescription?: boolean
   watching?: boolean
-  attachments?: number
   checklistDone?: number
   checklistTotal?: number
   assigneeInitials?: string | null
@@ -1041,10 +1090,13 @@ export type CardCreateWithoutLinksInput = {
   updatedAt?: Date | string
   dueDate?: Date | string | null
   isCompleted?: boolean
+  isImage?: boolean
+  thumbnailUrl?: string | null
   column: Prisma.ColumnCreateNestedOneWithoutCardsInput
   labels?: Prisma.CardBoardLabelCreateNestedManyWithoutCardInput
   comments?: Prisma.CardTimelineCreateNestedManyWithoutCardInput
   members?: Prisma.CardMemberCreateNestedManyWithoutCardInput
+  attachments?: Prisma.CardAttachmentCreateNestedManyWithoutCardInput
 }
 
 export type CardUncheckedCreateWithoutLinksInput = {
@@ -1056,7 +1108,6 @@ export type CardUncheckedCreateWithoutLinksInput = {
   description?: string | null
   hasDescription?: boolean
   watching?: boolean
-  attachments?: number
   checklistDone?: number
   checklistTotal?: number
   assigneeInitials?: string | null
@@ -1066,9 +1117,12 @@ export type CardUncheckedCreateWithoutLinksInput = {
   updatedAt?: Date | string
   dueDate?: Date | string | null
   isCompleted?: boolean
+  isImage?: boolean
+  thumbnailUrl?: string | null
   labels?: Prisma.CardBoardLabelUncheckedCreateNestedManyWithoutCardInput
   comments?: Prisma.CardTimelineUncheckedCreateNestedManyWithoutCardInput
   members?: Prisma.CardMemberUncheckedCreateNestedManyWithoutCardInput
+  attachments?: Prisma.CardAttachmentUncheckedCreateNestedManyWithoutCardInput
 }
 
 export type CardCreateOrConnectWithoutLinksInput = {
@@ -1095,7 +1149,6 @@ export type CardUpdateWithoutLinksInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   hasDescription?: Prisma.BoolFieldUpdateOperationsInput | boolean
   watching?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  attachments?: Prisma.IntFieldUpdateOperationsInput | number
   checklistDone?: Prisma.IntFieldUpdateOperationsInput | number
   checklistTotal?: Prisma.IntFieldUpdateOperationsInput | number
   assigneeInitials?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1105,10 +1158,13 @@ export type CardUpdateWithoutLinksInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isImage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  thumbnailUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   column?: Prisma.ColumnUpdateOneRequiredWithoutCardsNestedInput
   labels?: Prisma.CardBoardLabelUpdateManyWithoutCardNestedInput
   comments?: Prisma.CardTimelineUpdateManyWithoutCardNestedInput
   members?: Prisma.CardMemberUpdateManyWithoutCardNestedInput
+  attachments?: Prisma.CardAttachmentUpdateManyWithoutCardNestedInput
 }
 
 export type CardUncheckedUpdateWithoutLinksInput = {
@@ -1120,7 +1176,6 @@ export type CardUncheckedUpdateWithoutLinksInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   hasDescription?: Prisma.BoolFieldUpdateOperationsInput | boolean
   watching?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  attachments?: Prisma.IntFieldUpdateOperationsInput | number
   checklistDone?: Prisma.IntFieldUpdateOperationsInput | number
   checklistTotal?: Prisma.IntFieldUpdateOperationsInput | number
   assigneeInitials?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1130,9 +1185,12 @@ export type CardUncheckedUpdateWithoutLinksInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isImage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  thumbnailUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   labels?: Prisma.CardBoardLabelUncheckedUpdateManyWithoutCardNestedInput
   comments?: Prisma.CardTimelineUncheckedUpdateManyWithoutCardNestedInput
   members?: Prisma.CardMemberUncheckedUpdateManyWithoutCardNestedInput
+  attachments?: Prisma.CardAttachmentUncheckedUpdateManyWithoutCardNestedInput
 }
 
 export type CardCreateWithoutCommentsInput = {
@@ -1143,7 +1201,6 @@ export type CardCreateWithoutCommentsInput = {
   description?: string | null
   hasDescription?: boolean
   watching?: boolean
-  attachments?: number
   checklistDone?: number
   checklistTotal?: number
   assigneeInitials?: string | null
@@ -1153,10 +1210,13 @@ export type CardCreateWithoutCommentsInput = {
   updatedAt?: Date | string
   dueDate?: Date | string | null
   isCompleted?: boolean
+  isImage?: boolean
+  thumbnailUrl?: string | null
   column: Prisma.ColumnCreateNestedOneWithoutCardsInput
   labels?: Prisma.CardBoardLabelCreateNestedManyWithoutCardInput
   links?: Prisma.CardLinkCreateNestedManyWithoutCardInput
   members?: Prisma.CardMemberCreateNestedManyWithoutCardInput
+  attachments?: Prisma.CardAttachmentCreateNestedManyWithoutCardInput
 }
 
 export type CardUncheckedCreateWithoutCommentsInput = {
@@ -1168,7 +1228,6 @@ export type CardUncheckedCreateWithoutCommentsInput = {
   description?: string | null
   hasDescription?: boolean
   watching?: boolean
-  attachments?: number
   checklistDone?: number
   checklistTotal?: number
   assigneeInitials?: string | null
@@ -1178,9 +1237,12 @@ export type CardUncheckedCreateWithoutCommentsInput = {
   updatedAt?: Date | string
   dueDate?: Date | string | null
   isCompleted?: boolean
+  isImage?: boolean
+  thumbnailUrl?: string | null
   labels?: Prisma.CardBoardLabelUncheckedCreateNestedManyWithoutCardInput
   links?: Prisma.CardLinkUncheckedCreateNestedManyWithoutCardInput
   members?: Prisma.CardMemberUncheckedCreateNestedManyWithoutCardInput
+  attachments?: Prisma.CardAttachmentUncheckedCreateNestedManyWithoutCardInput
 }
 
 export type CardCreateOrConnectWithoutCommentsInput = {
@@ -1207,7 +1269,6 @@ export type CardUpdateWithoutCommentsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   hasDescription?: Prisma.BoolFieldUpdateOperationsInput | boolean
   watching?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  attachments?: Prisma.IntFieldUpdateOperationsInput | number
   checklistDone?: Prisma.IntFieldUpdateOperationsInput | number
   checklistTotal?: Prisma.IntFieldUpdateOperationsInput | number
   assigneeInitials?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1217,10 +1278,13 @@ export type CardUpdateWithoutCommentsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isImage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  thumbnailUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   column?: Prisma.ColumnUpdateOneRequiredWithoutCardsNestedInput
   labels?: Prisma.CardBoardLabelUpdateManyWithoutCardNestedInput
   links?: Prisma.CardLinkUpdateManyWithoutCardNestedInput
   members?: Prisma.CardMemberUpdateManyWithoutCardNestedInput
+  attachments?: Prisma.CardAttachmentUpdateManyWithoutCardNestedInput
 }
 
 export type CardUncheckedUpdateWithoutCommentsInput = {
@@ -1232,7 +1296,6 @@ export type CardUncheckedUpdateWithoutCommentsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   hasDescription?: Prisma.BoolFieldUpdateOperationsInput | boolean
   watching?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  attachments?: Prisma.IntFieldUpdateOperationsInput | number
   checklistDone?: Prisma.IntFieldUpdateOperationsInput | number
   checklistTotal?: Prisma.IntFieldUpdateOperationsInput | number
   assigneeInitials?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1242,9 +1305,12 @@ export type CardUncheckedUpdateWithoutCommentsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isImage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  thumbnailUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   labels?: Prisma.CardBoardLabelUncheckedUpdateManyWithoutCardNestedInput
   links?: Prisma.CardLinkUncheckedUpdateManyWithoutCardNestedInput
   members?: Prisma.CardMemberUncheckedUpdateManyWithoutCardNestedInput
+  attachments?: Prisma.CardAttachmentUncheckedUpdateManyWithoutCardNestedInput
 }
 
 export type CardCreateWithoutMembersInput = {
@@ -1255,7 +1321,6 @@ export type CardCreateWithoutMembersInput = {
   description?: string | null
   hasDescription?: boolean
   watching?: boolean
-  attachments?: number
   checklistDone?: number
   checklistTotal?: number
   assigneeInitials?: string | null
@@ -1265,10 +1330,13 @@ export type CardCreateWithoutMembersInput = {
   updatedAt?: Date | string
   dueDate?: Date | string | null
   isCompleted?: boolean
+  isImage?: boolean
+  thumbnailUrl?: string | null
   column: Prisma.ColumnCreateNestedOneWithoutCardsInput
   labels?: Prisma.CardBoardLabelCreateNestedManyWithoutCardInput
   links?: Prisma.CardLinkCreateNestedManyWithoutCardInput
   comments?: Prisma.CardTimelineCreateNestedManyWithoutCardInput
+  attachments?: Prisma.CardAttachmentCreateNestedManyWithoutCardInput
 }
 
 export type CardUncheckedCreateWithoutMembersInput = {
@@ -1280,7 +1348,6 @@ export type CardUncheckedCreateWithoutMembersInput = {
   description?: string | null
   hasDescription?: boolean
   watching?: boolean
-  attachments?: number
   checklistDone?: number
   checklistTotal?: number
   assigneeInitials?: string | null
@@ -1290,9 +1357,12 @@ export type CardUncheckedCreateWithoutMembersInput = {
   updatedAt?: Date | string
   dueDate?: Date | string | null
   isCompleted?: boolean
+  isImage?: boolean
+  thumbnailUrl?: string | null
   labels?: Prisma.CardBoardLabelUncheckedCreateNestedManyWithoutCardInput
   links?: Prisma.CardLinkUncheckedCreateNestedManyWithoutCardInput
   comments?: Prisma.CardTimelineUncheckedCreateNestedManyWithoutCardInput
+  attachments?: Prisma.CardAttachmentUncheckedCreateNestedManyWithoutCardInput
 }
 
 export type CardCreateOrConnectWithoutMembersInput = {
@@ -1319,7 +1389,6 @@ export type CardUpdateWithoutMembersInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   hasDescription?: Prisma.BoolFieldUpdateOperationsInput | boolean
   watching?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  attachments?: Prisma.IntFieldUpdateOperationsInput | number
   checklistDone?: Prisma.IntFieldUpdateOperationsInput | number
   checklistTotal?: Prisma.IntFieldUpdateOperationsInput | number
   assigneeInitials?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1329,10 +1398,13 @@ export type CardUpdateWithoutMembersInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isImage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  thumbnailUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   column?: Prisma.ColumnUpdateOneRequiredWithoutCardsNestedInput
   labels?: Prisma.CardBoardLabelUpdateManyWithoutCardNestedInput
   links?: Prisma.CardLinkUpdateManyWithoutCardNestedInput
   comments?: Prisma.CardTimelineUpdateManyWithoutCardNestedInput
+  attachments?: Prisma.CardAttachmentUpdateManyWithoutCardNestedInput
 }
 
 export type CardUncheckedUpdateWithoutMembersInput = {
@@ -1344,7 +1416,6 @@ export type CardUncheckedUpdateWithoutMembersInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   hasDescription?: Prisma.BoolFieldUpdateOperationsInput | boolean
   watching?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  attachments?: Prisma.IntFieldUpdateOperationsInput | number
   checklistDone?: Prisma.IntFieldUpdateOperationsInput | number
   checklistTotal?: Prisma.IntFieldUpdateOperationsInput | number
   assigneeInitials?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1354,9 +1425,132 @@ export type CardUncheckedUpdateWithoutMembersInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isImage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  thumbnailUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   labels?: Prisma.CardBoardLabelUncheckedUpdateManyWithoutCardNestedInput
   links?: Prisma.CardLinkUncheckedUpdateManyWithoutCardNestedInput
   comments?: Prisma.CardTimelineUncheckedUpdateManyWithoutCardNestedInput
+  attachments?: Prisma.CardAttachmentUncheckedUpdateManyWithoutCardNestedInput
+}
+
+export type CardCreateWithoutAttachmentsInput = {
+  id?: string
+  title?: string | null
+  image?: string | null
+  numberBadge?: number | null
+  description?: string | null
+  hasDescription?: boolean
+  watching?: boolean
+  checklistDone?: number
+  checklistTotal?: number
+  assigneeInitials?: string | null
+  assigneeColor?: string | null
+  position?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  dueDate?: Date | string | null
+  isCompleted?: boolean
+  isImage?: boolean
+  thumbnailUrl?: string | null
+  column: Prisma.ColumnCreateNestedOneWithoutCardsInput
+  labels?: Prisma.CardBoardLabelCreateNestedManyWithoutCardInput
+  links?: Prisma.CardLinkCreateNestedManyWithoutCardInput
+  comments?: Prisma.CardTimelineCreateNestedManyWithoutCardInput
+  members?: Prisma.CardMemberCreateNestedManyWithoutCardInput
+}
+
+export type CardUncheckedCreateWithoutAttachmentsInput = {
+  id?: string
+  columnId: string
+  title?: string | null
+  image?: string | null
+  numberBadge?: number | null
+  description?: string | null
+  hasDescription?: boolean
+  watching?: boolean
+  checklistDone?: number
+  checklistTotal?: number
+  assigneeInitials?: string | null
+  assigneeColor?: string | null
+  position?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  dueDate?: Date | string | null
+  isCompleted?: boolean
+  isImage?: boolean
+  thumbnailUrl?: string | null
+  labels?: Prisma.CardBoardLabelUncheckedCreateNestedManyWithoutCardInput
+  links?: Prisma.CardLinkUncheckedCreateNestedManyWithoutCardInput
+  comments?: Prisma.CardTimelineUncheckedCreateNestedManyWithoutCardInput
+  members?: Prisma.CardMemberUncheckedCreateNestedManyWithoutCardInput
+}
+
+export type CardCreateOrConnectWithoutAttachmentsInput = {
+  where: Prisma.CardWhereUniqueInput
+  create: Prisma.XOR<Prisma.CardCreateWithoutAttachmentsInput, Prisma.CardUncheckedCreateWithoutAttachmentsInput>
+}
+
+export type CardUpsertWithoutAttachmentsInput = {
+  update: Prisma.XOR<Prisma.CardUpdateWithoutAttachmentsInput, Prisma.CardUncheckedUpdateWithoutAttachmentsInput>
+  create: Prisma.XOR<Prisma.CardCreateWithoutAttachmentsInput, Prisma.CardUncheckedCreateWithoutAttachmentsInput>
+  where?: Prisma.CardWhereInput
+}
+
+export type CardUpdateToOneWithWhereWithoutAttachmentsInput = {
+  where?: Prisma.CardWhereInput
+  data: Prisma.XOR<Prisma.CardUpdateWithoutAttachmentsInput, Prisma.CardUncheckedUpdateWithoutAttachmentsInput>
+}
+
+export type CardUpdateWithoutAttachmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numberBadge?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasDescription?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  watching?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  checklistDone?: Prisma.IntFieldUpdateOperationsInput | number
+  checklistTotal?: Prisma.IntFieldUpdateOperationsInput | number
+  assigneeInitials?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assigneeColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  position?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isImage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  thumbnailUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  column?: Prisma.ColumnUpdateOneRequiredWithoutCardsNestedInput
+  labels?: Prisma.CardBoardLabelUpdateManyWithoutCardNestedInput
+  links?: Prisma.CardLinkUpdateManyWithoutCardNestedInput
+  comments?: Prisma.CardTimelineUpdateManyWithoutCardNestedInput
+  members?: Prisma.CardMemberUpdateManyWithoutCardNestedInput
+}
+
+export type CardUncheckedUpdateWithoutAttachmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  columnId?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numberBadge?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasDescription?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  watching?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  checklistDone?: Prisma.IntFieldUpdateOperationsInput | number
+  checklistTotal?: Prisma.IntFieldUpdateOperationsInput | number
+  assigneeInitials?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assigneeColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  position?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isImage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  thumbnailUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  labels?: Prisma.CardBoardLabelUncheckedUpdateManyWithoutCardNestedInput
+  links?: Prisma.CardLinkUncheckedUpdateManyWithoutCardNestedInput
+  comments?: Prisma.CardTimelineUncheckedUpdateManyWithoutCardNestedInput
+  members?: Prisma.CardMemberUncheckedUpdateManyWithoutCardNestedInput
 }
 
 export type CardCreateManyColumnInput = {
@@ -1367,7 +1561,6 @@ export type CardCreateManyColumnInput = {
   description?: string | null
   hasDescription?: boolean
   watching?: boolean
-  attachments?: number
   checklistDone?: number
   checklistTotal?: number
   assigneeInitials?: string | null
@@ -1377,6 +1570,8 @@ export type CardCreateManyColumnInput = {
   updatedAt?: Date | string
   dueDate?: Date | string | null
   isCompleted?: boolean
+  isImage?: boolean
+  thumbnailUrl?: string | null
 }
 
 export type CardUpdateWithoutColumnInput = {
@@ -1387,7 +1582,6 @@ export type CardUpdateWithoutColumnInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   hasDescription?: Prisma.BoolFieldUpdateOperationsInput | boolean
   watching?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  attachments?: Prisma.IntFieldUpdateOperationsInput | number
   checklistDone?: Prisma.IntFieldUpdateOperationsInput | number
   checklistTotal?: Prisma.IntFieldUpdateOperationsInput | number
   assigneeInitials?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1397,10 +1591,13 @@ export type CardUpdateWithoutColumnInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isImage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  thumbnailUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   labels?: Prisma.CardBoardLabelUpdateManyWithoutCardNestedInput
   links?: Prisma.CardLinkUpdateManyWithoutCardNestedInput
   comments?: Prisma.CardTimelineUpdateManyWithoutCardNestedInput
   members?: Prisma.CardMemberUpdateManyWithoutCardNestedInput
+  attachments?: Prisma.CardAttachmentUpdateManyWithoutCardNestedInput
 }
 
 export type CardUncheckedUpdateWithoutColumnInput = {
@@ -1411,7 +1608,6 @@ export type CardUncheckedUpdateWithoutColumnInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   hasDescription?: Prisma.BoolFieldUpdateOperationsInput | boolean
   watching?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  attachments?: Prisma.IntFieldUpdateOperationsInput | number
   checklistDone?: Prisma.IntFieldUpdateOperationsInput | number
   checklistTotal?: Prisma.IntFieldUpdateOperationsInput | number
   assigneeInitials?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1421,10 +1617,13 @@ export type CardUncheckedUpdateWithoutColumnInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isImage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  thumbnailUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   labels?: Prisma.CardBoardLabelUncheckedUpdateManyWithoutCardNestedInput
   links?: Prisma.CardLinkUncheckedUpdateManyWithoutCardNestedInput
   comments?: Prisma.CardTimelineUncheckedUpdateManyWithoutCardNestedInput
   members?: Prisma.CardMemberUncheckedUpdateManyWithoutCardNestedInput
+  attachments?: Prisma.CardAttachmentUncheckedUpdateManyWithoutCardNestedInput
 }
 
 export type CardUncheckedUpdateManyWithoutColumnInput = {
@@ -1435,7 +1634,6 @@ export type CardUncheckedUpdateManyWithoutColumnInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   hasDescription?: Prisma.BoolFieldUpdateOperationsInput | boolean
   watching?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  attachments?: Prisma.IntFieldUpdateOperationsInput | number
   checklistDone?: Prisma.IntFieldUpdateOperationsInput | number
   checklistTotal?: Prisma.IntFieldUpdateOperationsInput | number
   assigneeInitials?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1445,6 +1643,8 @@ export type CardUncheckedUpdateManyWithoutColumnInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isImage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  thumbnailUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -1457,6 +1657,7 @@ export type CardCountOutputType = {
   links: number
   comments: number
   members: number
+  attachments: number
 }
 
 export type CardCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1464,6 +1665,7 @@ export type CardCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   links?: boolean | CardCountOutputTypeCountLinksArgs
   comments?: boolean | CardCountOutputTypeCountCommentsArgs
   members?: boolean | CardCountOutputTypeCountMembersArgs
+  attachments?: boolean | CardCountOutputTypeCountAttachmentsArgs
 }
 
 /**
@@ -1504,6 +1706,13 @@ export type CardCountOutputTypeCountMembersArgs<ExtArgs extends runtime.Types.Ex
   where?: Prisma.CardMemberWhereInput
 }
 
+/**
+ * CardCountOutputType without action
+ */
+export type CardCountOutputTypeCountAttachmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CardAttachmentWhereInput
+}
+
 
 export type CardSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1514,7 +1723,6 @@ export type CardSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   description?: boolean
   hasDescription?: boolean
   watching?: boolean
-  attachments?: boolean
   checklistDone?: boolean
   checklistTotal?: boolean
   assigneeInitials?: boolean
@@ -1524,11 +1732,14 @@ export type CardSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   updatedAt?: boolean
   dueDate?: boolean
   isCompleted?: boolean
+  isImage?: boolean
+  thumbnailUrl?: boolean
   column?: boolean | Prisma.ColumnDefaultArgs<ExtArgs>
   labels?: boolean | Prisma.Card$labelsArgs<ExtArgs>
   links?: boolean | Prisma.Card$linksArgs<ExtArgs>
   comments?: boolean | Prisma.Card$commentsArgs<ExtArgs>
   members?: boolean | Prisma.Card$membersArgs<ExtArgs>
+  attachments?: boolean | Prisma.Card$attachmentsArgs<ExtArgs>
   _count?: boolean | Prisma.CardCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["card"]>
 
@@ -1541,7 +1752,6 @@ export type CardSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   description?: boolean
   hasDescription?: boolean
   watching?: boolean
-  attachments?: boolean
   checklistDone?: boolean
   checklistTotal?: boolean
   assigneeInitials?: boolean
@@ -1551,6 +1761,8 @@ export type CardSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   updatedAt?: boolean
   dueDate?: boolean
   isCompleted?: boolean
+  isImage?: boolean
+  thumbnailUrl?: boolean
   column?: boolean | Prisma.ColumnDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["card"]>
 
@@ -1563,7 +1775,6 @@ export type CardSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   description?: boolean
   hasDescription?: boolean
   watching?: boolean
-  attachments?: boolean
   checklistDone?: boolean
   checklistTotal?: boolean
   assigneeInitials?: boolean
@@ -1573,6 +1784,8 @@ export type CardSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   updatedAt?: boolean
   dueDate?: boolean
   isCompleted?: boolean
+  isImage?: boolean
+  thumbnailUrl?: boolean
   column?: boolean | Prisma.ColumnDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["card"]>
 
@@ -1585,7 +1798,6 @@ export type CardSelectScalar = {
   description?: boolean
   hasDescription?: boolean
   watching?: boolean
-  attachments?: boolean
   checklistDone?: boolean
   checklistTotal?: boolean
   assigneeInitials?: boolean
@@ -1595,15 +1807,18 @@ export type CardSelectScalar = {
   updatedAt?: boolean
   dueDate?: boolean
   isCompleted?: boolean
+  isImage?: boolean
+  thumbnailUrl?: boolean
 }
 
-export type CardOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "columnId" | "title" | "image" | "numberBadge" | "description" | "hasDescription" | "watching" | "attachments" | "checklistDone" | "checklistTotal" | "assigneeInitials" | "assigneeColor" | "position" | "createdAt" | "updatedAt" | "dueDate" | "isCompleted", ExtArgs["result"]["card"]>
+export type CardOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "columnId" | "title" | "image" | "numberBadge" | "description" | "hasDescription" | "watching" | "checklistDone" | "checklistTotal" | "assigneeInitials" | "assigneeColor" | "position" | "createdAt" | "updatedAt" | "dueDate" | "isCompleted" | "isImage" | "thumbnailUrl", ExtArgs["result"]["card"]>
 export type CardInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   column?: boolean | Prisma.ColumnDefaultArgs<ExtArgs>
   labels?: boolean | Prisma.Card$labelsArgs<ExtArgs>
   links?: boolean | Prisma.Card$linksArgs<ExtArgs>
   comments?: boolean | Prisma.Card$commentsArgs<ExtArgs>
   members?: boolean | Prisma.Card$membersArgs<ExtArgs>
+  attachments?: boolean | Prisma.Card$attachmentsArgs<ExtArgs>
   _count?: boolean | Prisma.CardCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CardIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1621,6 +1836,7 @@ export type $CardPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     links: Prisma.$CardLinkPayload<ExtArgs>[]
     comments: Prisma.$CardTimelinePayload<ExtArgs>[]
     members: Prisma.$CardMemberPayload<ExtArgs>[]
+    attachments: Prisma.$CardAttachmentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1631,7 +1847,6 @@ export type $CardPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     description: string | null
     hasDescription: boolean
     watching: boolean
-    attachments: number
     checklistDone: number
     checklistTotal: number
     assigneeInitials: string | null
@@ -1641,6 +1856,8 @@ export type $CardPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     updatedAt: Date
     dueDate: Date | null
     isCompleted: boolean
+    isImage: boolean
+    thumbnailUrl: string | null
   }, ExtArgs["result"]["card"]>
   composites: {}
 }
@@ -2040,6 +2257,7 @@ export interface Prisma__CardClient<T, Null = never, ExtArgs extends runtime.Typ
   links<T extends Prisma.Card$linksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Card$linksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CardLinkPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   comments<T extends Prisma.Card$commentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Card$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CardTimelinePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   members<T extends Prisma.Card$membersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Card$membersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CardMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  attachments<T extends Prisma.Card$attachmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Card$attachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CardAttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2077,7 +2295,6 @@ export interface CardFieldRefs {
   readonly description: Prisma.FieldRef<"Card", 'String'>
   readonly hasDescription: Prisma.FieldRef<"Card", 'Boolean'>
   readonly watching: Prisma.FieldRef<"Card", 'Boolean'>
-  readonly attachments: Prisma.FieldRef<"Card", 'Int'>
   readonly checklistDone: Prisma.FieldRef<"Card", 'Int'>
   readonly checklistTotal: Prisma.FieldRef<"Card", 'Int'>
   readonly assigneeInitials: Prisma.FieldRef<"Card", 'String'>
@@ -2087,6 +2304,8 @@ export interface CardFieldRefs {
   readonly updatedAt: Prisma.FieldRef<"Card", 'DateTime'>
   readonly dueDate: Prisma.FieldRef<"Card", 'DateTime'>
   readonly isCompleted: Prisma.FieldRef<"Card", 'Boolean'>
+  readonly isImage: Prisma.FieldRef<"Card", 'Boolean'>
+  readonly thumbnailUrl: Prisma.FieldRef<"Card", 'String'>
 }
     
 
@@ -2579,6 +2798,30 @@ export type Card$membersArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
   take?: number
   skip?: number
   distinct?: Prisma.CardMemberScalarFieldEnum | Prisma.CardMemberScalarFieldEnum[]
+}
+
+/**
+ * Card.attachments
+ */
+export type Card$attachmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CardAttachment
+   */
+  select?: Prisma.CardAttachmentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CardAttachment
+   */
+  omit?: Prisma.CardAttachmentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CardAttachmentInclude<ExtArgs> | null
+  where?: Prisma.CardAttachmentWhereInput
+  orderBy?: Prisma.CardAttachmentOrderByWithRelationInput | Prisma.CardAttachmentOrderByWithRelationInput[]
+  cursor?: Prisma.CardAttachmentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CardAttachmentScalarFieldEnum | Prisma.CardAttachmentScalarFieldEnum[]
 }
 
 /**

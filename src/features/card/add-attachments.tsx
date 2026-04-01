@@ -5,6 +5,8 @@ import { useOutsideClick } from "@/shared/hooks/use-outside-click";
 import { calcSidePosition } from "@/shared/utils/floatingPosition";
 import { createPortal } from "react-dom";
 import { KanbanSquare, X } from "lucide-react";
+import { CardAttachment, CardLink } from "@/shared/types";
+import { cardApi } from "./api/card-api";
 
 interface RecentLink {
     id: string;
@@ -20,11 +22,13 @@ const recentLinks: RecentLink[] = [
 
 interface AddAttachmentsProps {
     triggerRef: React.RefObject<HTMLElement | null>;
+    cardId: string;
     onClose?: () => void;
-    onChange?: () => void;
+    onSuccess?: (attachment: CardAttachment) => void;
+    onSuccessLink?: (link: CardLink) => void;
 }
 
-export default function AddAttachments({ triggerRef, onClose }: AddAttachmentsProps) {
+export default function AddAttachments({ triggerRef, cardId, onClose, onSuccess, onSuccessLink }: AddAttachmentsProps) {
     const [link, setLink] = useState("");
     const [displayText, setDisplayText] = useState("");
     const [linkError, setLinkError] = useState(false);
@@ -47,21 +51,26 @@ export default function AddAttachments({ triggerRef, onClose }: AddAttachmentsPr
 
     useOutsideClick([panelRef, triggerRef], () => onClose?.(), true);
 
-    const handleInsert = () => {
+    const handleInsert = async () => {
         if (!link.trim()) { setLinkError(true); return; }
+        const result = await cardApi.addLink(cardId, link.trim(), displayText.trim() || link.trim());
+        onSuccessLink?.(result);
         onClose?.();
     };
 
-    const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (!file) return;
-
+        const formData = new FormData();
+        formData.append("file", file);
+        const result = await cardApi.uploadAttachment(cardId, formData);
+        onSuccess?.(result);
         onClose?.();
         if (fileRef.current) fileRef.current.value = "";
     };
 
     const handleRecent = (item: RecentLink) => {
-        setLink(`https://trello.com/${item.title}`);
+        setLink(`https://cardify.org/${item.title}`);
         setDisplayText(item.title);
         setLinkError(false);
     };

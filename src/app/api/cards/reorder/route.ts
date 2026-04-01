@@ -31,10 +31,10 @@ export async function PATCH(req: NextRequest) {
     );
   }
 
+  // ownerId: dbUser.id,
   const board = await prisma.board.findFirst({
     where: {
       id: boardId,
-      ownerId: dbUser.id,
     },
   });
 

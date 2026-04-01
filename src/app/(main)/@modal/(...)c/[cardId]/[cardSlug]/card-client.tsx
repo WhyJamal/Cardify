@@ -211,7 +211,7 @@ export default function CardClient({
                                 Добавить
                             </button>
 
-                            <button 
+                            <button
                                 ref={attachBtnRef}
                                 onClick={addAttachments}
                                 className="flex items-center gap-1.5 bg-[#2c333a] hover:bg-[#38414a] text-[#9fadbc] hover:text-white text-sm px-3 py-1.5 rounded transition-colors"
@@ -224,6 +224,7 @@ export default function CardClient({
                                 <AddAttachments
                                     triggerRef={attachBtnRef}
                                     onClose={handleCloseAttach}
+                                    cardId={cardId}
                                 />
                             )}
 
@@ -395,11 +396,15 @@ export default function CardClient({
                                     {card.description || "Описание отсутствует"}
                                 </p>
                             )}
-                            <ListAttachments/>
+                            
+                            {card.attachments && card.attachments.length > 0 && (
+                                <ListAttachments initialCard={initialCard} cardId={cardId} />
+                            )}
+
                         </div>
                     </div>
 
-                    <div 
+                    <div
                         className="scrollbar-thin w-112.5 shrink-0 border-l border-[#2c333a] px-5 pb-6 pt-2 bg-[#0f1313] max-h-96 overflow-y-auto min-h-0"
                     >
                         <div className="flex items-center justify-between mb-4">

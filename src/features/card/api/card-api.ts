@@ -47,4 +47,27 @@ export const cardApi = {
     clientFetch(`/api/cards/${cardId}/members/${userId}`, {
       method: "DELETE",
     }),
+
+  uploadAttachment: (cardId: string, formData: FormData) =>
+    clientFetch(`/api/cards/${cardId}/attachments`, {
+      method: "POST",
+      body: formData,
+    }),
+
+  deleteAttachment: (cardId: string, attachmentId: string) =>
+    clientFetch(`/api/cards/${cardId}/attachments/${attachmentId}`, {
+      method: "DELETE",
+    }),
+
+  addLink: (cardId: string, url: string, text: string) =>
+    clientFetch(`/api/cards/${cardId}/links`, {
+      method: "POST",
+      body: JSON.stringify({ url, text }),
+    }),
+
+  deleteLink: (cardId: string, linkId: string) =>
+    clientFetch(`/api/cards/${cardId}/links/${linkId}`, {
+      method: "DELETE",
+    }),
+
 };

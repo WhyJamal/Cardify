@@ -188,7 +188,7 @@ model Card {
   description      String?
   hasDescription   Boolean   @default(false)
   watching         Boolean   @default(false)
-  attachments      Int       @default(0)
+  // attachments      Int       @default(0)
   checklistDone    Int       @default(0)
   checklistTotal   Int       @default(0)
   assigneeInitials String?
@@ -199,11 +199,15 @@ model Card {
   dueDate          DateTime?
   isCompleted      Boolean   @default(false)
 
-  column   Column           @relation(fields: [columnId], references: [id], onDelete: Cascade)
-  labels   CardBoardLabel[]
-  links    CardLink[]
-  comments CardTimeline[]
-  members  CardMember[]
+  isImage Boolean @default(false)
+  thumbnailUrl String?
+
+  column           Column           @relation(fields: [columnId], references: [id], onDelete: Cascade)
+  labels           CardBoardLabel[]
+  links            CardLink[]
+  comments         CardTimeline[]
+  members          CardMember[]
+  attachments      CardAttachment[]
 
   @@index([columnId, position])
 }
@@ -268,4 +272,19 @@ model CardMember {
   @@unique([cardId, userId])
   @@index([cardId])
   @@index([userId])
+}
+
+model CardAttachment {
+  id         String   @id @default(cuid())
+  cardId     String
+  fileName   String
+  fileUrl    String
+  fileSize   Int?
+  mimeType   String?
+  uploadedBy String?
+  createdAt  DateTime @default(now())
+
+  card Card @relation(fields: [cardId], references: [id], onDelete: Cascade)
+
+  @@index([cardId])
 }

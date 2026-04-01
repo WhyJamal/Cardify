@@ -42,7 +42,8 @@ export async function GET(req: NextRequest) {
             include: {
               labels: { include: { boardLabel: true } },
               links: true,
-              members: { include: { user: true }}
+              members: { include: { user: true }},
+              attachments: true,
             },
           },
         },
@@ -112,10 +113,10 @@ export async function POST(req: NextRequest) {
     );
   }
 
+  // ownerId: dbUser.id,
   const board = await prisma.board.findFirst({
     where: {
-      id: boardId,
-      ownerId: dbUser.id,
+      id: boardId
     },
   });
 

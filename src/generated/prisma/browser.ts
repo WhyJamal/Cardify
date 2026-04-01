@@ -82,3 +82,8 @@ export type CardTimeline = Prisma.CardTimelineModel
  * 
  */
 export type CardMember = Prisma.CardMemberModel
+/**
+ * Model CardAttachment
+ * 
+ */
+export type CardAttachment = Prisma.CardAttachmentModel

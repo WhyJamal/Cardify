@@ -117,17 +117,35 @@ export function CardContent({ card, onClickCard, showLabelName, onToggleLabel, o
           )}
 
           <div className="flex w-full justify-between">
-            {card.dueDate && (
-              <div className="inline-flex items-center gap-1 bg-green-700 px-1 text-black font-medium rounded-sm">
-                <Clock className="w-3 h-3" />
-                <span className="text-xs">{formatDueDate(card.dueDate)}</span>
-              </div>
-            )}
+            <div className="flex gap-2">
+              {card.dueDate && (
+                <div className="inline-flex items-center gap-1 bg-green-700 px-1 text-black font-medium rounded-sm">
+                  <Clock className="w-3 h-3" />
+                  <span className="text-xs">{formatDueDate(card.dueDate)}</span>
+                </div>
+              )}
+
+              {card.description && (
+                <span className="flex items-center gap-1 text-[#9fadbc] text-xs">
+                  <AlignLeft size={12} />
+                </span>
+              )}
+
+              {card.attachments && (
+                <span className="flex items-center gap-1 text-[#9fadbc] text-xs">
+                  <Paperclip size={12} />{(card.attachments?.length ?? 0) + (card.links?.length ?? 0)}
+                </span>
+              )}
+
+            </div>
+
 
             <div className="flex -space-x-1.5">
               {card.members && card.members.length > 0 && (
                 card.members.map((member) => (
-                  <div className="w-6 h-6 rounded-full flex items-center justify-center bg-green-700 text-[10px] font-bold text-white">
+                  <div
+                    key={member.id}
+                    className="w-6 h-6 rounded-full flex items-center justify-center bg-green-700 text-[10px] font-bold text-white">
                     {getInitials(member.user.name || "")}
                   </div>
                 ))
@@ -135,8 +153,8 @@ export function CardContent({ card, onClickCard, showLabelName, onToggleLabel, o
             </div>
           </div>
 
-          {card.links && card.links.length > 0 && (
-            <div className="flex flex-col gap-1 mb-2">
+          {/* {card.links && card.links.length > 0 && (
+            <div className="flex gap-2 mt-2">
               {card.links.map((link, i) => (
                 <div key={i} className="flex items-center gap-1.5 text-[#579dff] text-xs hover:underline cursor-pointer">
                   {link.icon && <span className="w-4 h-4 rounded bg-blue-500/20 flex items-center justify-center text-[8px] text-blue-400">✦</span>}
@@ -145,14 +163,12 @@ export function CardContent({ card, onClickCard, showLabelName, onToggleLabel, o
                 </div>
               ))}
             </div>
-          )}
+          )} */}
 
           {/* {(card.watching || card.hasDescription || card.checklist || card.attachments) && (
             <div className="flex items-center justify-between mt-1">
               <div className="flex items-center gap-2 flex-wrap">
                 {card.watching && <span className="flex items-center gap-1 text-[#9fadbc] text-xs"><Eye size={12} /></span>}
-                {card.hasDescription && <span className="flex items-center gap-1 text-[#9fadbc] text-xs"><AlignLeft size={12} /></span>}
-                {card.attachments && <span className="flex items-center gap-1 text-[#9fadbc] text-xs"><Paperclip size={12} />{card.attachments}</span>}
                 {card.checklist && (
                   <span className={`flex items-center gap-1 text-xs px-1 rounded ${card.checklist.done === card.checklist.total && card.checklist.total > 0 ? "bg-green-700/60 text-green-300" : "text-[#9fadbc]"}`}>
                     <CheckSquare size={12} />{card.checklist.done}/{card.checklist.total}
@@ -221,7 +237,10 @@ export function CustomCard({ card, columnId, index, onEdit, onClickCard, onDropC
   return (
     <div
       ref={ref}
-      className={`group relative bg-[#22272b] rounded-lg shadow-sm cursor-grab active:cursor-grabbing hover:bg-[#282e33] transition-colors ${isDragging ? "opacity-40 scale-95" : "opacity-100"
+      className={`group relative bg-[#22272b] rounded-lg shadow-sm cursor-grab active:cursor-grabbing
+        hover:bg-[#282e33] transition-colors 
+        hover:ring-2 hover:ring-white  
+        ${isDragging ? "opacity-40 scale-95" : "opacity-100"
         }`}
     >
       <Button

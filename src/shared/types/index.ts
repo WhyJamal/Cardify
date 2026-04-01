@@ -48,8 +48,11 @@ export interface CardLabel extends BoardLabel {
 }
 
 export interface CardLink {
+  id: string;
+  url: string;
   icon?: string;
   text: string;
+  createdAt: string;
 }
 
 export interface CardTimeline {
@@ -68,6 +71,17 @@ export interface CardMember {
   user: User;
 }
 
+export interface CardAttachment {
+  id: string;
+  cardId: string;
+  fileName: string;
+  fileUrl: string;
+  fileSize?: number | null;
+  mimeType?: string | null;
+  uploadedBy?: string | null;
+  createdAt: string; 
+}
+
 export interface CardData {
   id: string;
   title?: string;
@@ -79,7 +93,7 @@ export interface CardData {
   hasDescription?: boolean;
   watching?: boolean;
 
-  attachments?: number;
+  // attachments?: number;
 
   checklist?: {
     done: number;
@@ -96,6 +110,7 @@ export interface CardData {
   links?: CardLink[];
   comments?: CardTimeline[];
 
+  attachments: CardAttachment[];
   column: ColumnInt;
 
   dueDate?: string | null;

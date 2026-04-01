@@ -396,7 +396,8 @@ export const ModelName = {
   CardBoardLabel: 'CardBoardLabel',
   CardLink: 'CardLink',
   CardTimeline: 'CardTimeline',
-  CardMember: 'CardMember'
+  CardMember: 'CardMember',
+  CardAttachment: 'CardAttachment'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -412,7 +413,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "workspace" | "workspaceMember" | "notification" | "board" | "boardMember" | "boardLabel" | "column" | "card" | "cardBoardLabel" | "cardLink" | "cardTimeline" | "cardMember"
+    modelProps: "user" | "workspace" | "workspaceMember" | "notification" | "board" | "boardMember" | "boardLabel" | "column" | "card" | "cardBoardLabel" | "cardLink" | "cardTimeline" | "cardMember" | "cardAttachment"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1378,6 +1379,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    CardAttachment: {
+      payload: Prisma.$CardAttachmentPayload<ExtArgs>
+      fields: Prisma.CardAttachmentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CardAttachmentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CardAttachmentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CardAttachmentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CardAttachmentPayload>
+        }
+        findFirst: {
+          args: Prisma.CardAttachmentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CardAttachmentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CardAttachmentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CardAttachmentPayload>
+        }
+        findMany: {
+          args: Prisma.CardAttachmentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CardAttachmentPayload>[]
+        }
+        create: {
+          args: Prisma.CardAttachmentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CardAttachmentPayload>
+        }
+        createMany: {
+          args: Prisma.CardAttachmentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CardAttachmentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CardAttachmentPayload>[]
+        }
+        delete: {
+          args: Prisma.CardAttachmentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CardAttachmentPayload>
+        }
+        update: {
+          args: Prisma.CardAttachmentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CardAttachmentPayload>
+        }
+        deleteMany: {
+          args: Prisma.CardAttachmentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CardAttachmentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CardAttachmentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CardAttachmentPayload>[]
+        }
+        upsert: {
+          args: Prisma.CardAttachmentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CardAttachmentPayload>
+        }
+        aggregate: {
+          args: Prisma.CardAttachmentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCardAttachment>
+        }
+        groupBy: {
+          args: Prisma.CardAttachmentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CardAttachmentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CardAttachmentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CardAttachmentCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1525,7 +1600,6 @@ export const CardScalarFieldEnum = {
   description: 'description',
   hasDescription: 'hasDescription',
   watching: 'watching',
-  attachments: 'attachments',
   checklistDone: 'checklistDone',
   checklistTotal: 'checklistTotal',
   assigneeInitials: 'assigneeInitials',
@@ -1534,7 +1608,9 @@ export const CardScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   dueDate: 'dueDate',
-  isCompleted: 'isCompleted'
+  isCompleted: 'isCompleted',
+  isImage: 'isImage',
+  thumbnailUrl: 'thumbnailUrl'
 } as const
 
 export type CardScalarFieldEnum = (typeof CardScalarFieldEnum)[keyof typeof CardScalarFieldEnum]
@@ -1585,6 +1661,20 @@ export const CardMemberScalarFieldEnum = {
 } as const
 
 export type CardMemberScalarFieldEnum = (typeof CardMemberScalarFieldEnum)[keyof typeof CardMemberScalarFieldEnum]
+
+
+export const CardAttachmentScalarFieldEnum = {
+  id: 'id',
+  cardId: 'cardId',
+  fileName: 'fileName',
+  fileUrl: 'fileUrl',
+  fileSize: 'fileSize',
+  mimeType: 'mimeType',
+  uploadedBy: 'uploadedBy',
+  createdAt: 'createdAt'
+} as const
+
+export type CardAttachmentScalarFieldEnum = (typeof CardAttachmentScalarFieldEnum)[keyof typeof CardAttachmentScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1793,6 +1883,7 @@ export type GlobalOmitConfig = {
   cardLink?: Prisma.CardLinkOmit
   cardTimeline?: Prisma.CardTimelineOmit
   cardMember?: Prisma.CardMemberOmit
+  cardAttachment?: Prisma.CardAttachmentOmit
 }
 
 /* Types for Logging */

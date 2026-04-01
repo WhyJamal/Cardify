@@ -29,12 +29,12 @@ export async function POST(req: NextRequest) {
     );
   }
 
+  // board: {
+  //       ownerId: dbUser.id,
+  //     },
   const column = await prisma.column.findFirst({
     where: {
-      id: columnId,
-      board: {
-        ownerId: dbUser.id,
-      },
+      id: columnId
     },
     include: {
       cards: true,

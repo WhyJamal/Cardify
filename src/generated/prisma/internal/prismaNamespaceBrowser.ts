@@ -63,7 +63,8 @@ export const ModelName = {
   CardBoardLabel: 'CardBoardLabel',
   CardLink: 'CardLink',
   CardTimeline: 'CardTimeline',
-  CardMember: 'CardMember'
+  CardMember: 'CardMember',
+  CardAttachment: 'CardAttachment'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -190,7 +191,6 @@ export const CardScalarFieldEnum = {
   description: 'description',
   hasDescription: 'hasDescription',
   watching: 'watching',
-  attachments: 'attachments',
   checklistDone: 'checklistDone',
   checklistTotal: 'checklistTotal',
   assigneeInitials: 'assigneeInitials',
@@ -199,7 +199,9 @@ export const CardScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   dueDate: 'dueDate',
-  isCompleted: 'isCompleted'
+  isCompleted: 'isCompleted',
+  isImage: 'isImage',
+  thumbnailUrl: 'thumbnailUrl'
 } as const
 
 export type CardScalarFieldEnum = (typeof CardScalarFieldEnum)[keyof typeof CardScalarFieldEnum]
@@ -250,6 +252,20 @@ export const CardMemberScalarFieldEnum = {
 } as const
 
 export type CardMemberScalarFieldEnum = (typeof CardMemberScalarFieldEnum)[keyof typeof CardMemberScalarFieldEnum]
+
+
+export const CardAttachmentScalarFieldEnum = {
+  id: 'id',
+  cardId: 'cardId',
+  fileName: 'fileName',
+  fileUrl: 'fileUrl',
+  fileSize: 'fileSize',
+  mimeType: 'mimeType',
+  uploadedBy: 'uploadedBy',
+  createdAt: 'createdAt'
+} as const
+
+export type CardAttachmentScalarFieldEnum = (typeof CardAttachmentScalarFieldEnum)[keyof typeof CardAttachmentScalarFieldEnum]
 
 
 export const SortOrder = {

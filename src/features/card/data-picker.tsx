@@ -15,6 +15,7 @@ import {
   normalizeDateInput,
 } from "@/shared/utils/date";
 import { useOutsideClick } from "@/shared/hooks/use-outside-click";
+import { Button } from "@/shared/components";
 
 interface DatePickerProps {
   triggerRef: React.RefObject<HTMLElement | null>;
@@ -274,15 +275,16 @@ export function DatePicker({
         </div>
 
         <div className="p-4 border-t border-gray-700 space-y-2">
-          <button
+          <Button
+            variant={'custom'}
             onClick={() => handleDueDate("save")}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white py-1 rounded font-medium transition-colors"
+            className="w-full text-sm"
           >
             Сохранить
-          </button>
+          </Button>
           <button
             onClick={() => handleDueDate("delete")}
-            className="w-full bg-[#2f2e2e] hover:bg-gray-700 text-white py-1 rounded font-medium transition-colors"
+            className="w-full bg-[#2c333a] hover:bg-[#38414a] text-[#9fadbc] hover:text-white border border-gray-800 py-1 rounded text-sm transition-colors"
           >
             Удалить
           </button>

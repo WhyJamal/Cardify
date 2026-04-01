@@ -14,13 +14,8 @@ interface RecentLink {
 }
 
 const recentLinks: RecentLink[] = [
-    { id: "1", title: "ads", workspace: "Моя доска Trello", viewedAt: "17 часов назад" },
-    { id: "2", title: "Моя доска Trello", workspace: "Рабочее простра...", viewedAt: "17 часов назад" },
-    { id: "3", title: "asd", workspace: "Моя доска Trello", viewedAt: "17 часов назад" },
-    { id: "4", title: "sas", workspace: "11", viewedAt: "3 дня назад" },
-    { id: "5", title: "sas", workspace: "11", viewedAt: "3 дня назад" },
-    { id: "6", title: "sas", workspace: "11", viewedAt: "3 дня назад" },
-    { id: "7", title: "sas", workspace: "11", viewedAt: "3 дня назад" },
+    // { id: "1", title: "ads", workspace: "Моя доска Trello", viewedAt: "17 часов назад" },
+    // { id: "2", title: "Моя доска Trello", workspace: "Рабочее простра...", viewedAt: "17 часов назад" },
 ];
 
 interface AddAttachmentsProps {
@@ -155,27 +150,33 @@ export default function AddAttachments({ triggerRef, onClose }: AddAttachmentsPr
                     Недавно просмотренные
                 </p>
                 <div className="mt-1 flex flex-col">
-                    {recentLinks.map((item) => (
-                        <button
-                            key={item.id}
-                            onClick={() => handleRecent(item)}
-                            className="flex items-center gap-3 rounded px-1 py-2 text-left hover:bg-[#38414a]"
-                        >
-                            <span className="shrink-0 text-[#579dff]">
-                                <KanbanSquare />
-                            </span>
-                            <div className="min-w-0">
-                                <p className="text-[14px] font-medium text-[#b6c2cf] truncate">
-                                    {item.title}
-                                </p>
-                                <p className="text-[12px] text-[#8c9bab]">
-                                    {item.workspace}
-                                    <span className="mx-1">·</span>
-                                    {item.viewedAt}
-                                </p>
-                            </div>
-                        </button>
-                    ))}
+                    {recentLinks.length > 0 ? (
+                        recentLinks.map((item) => (
+                            <button
+                                key={item.id}
+                                onClick={() => handleRecent(item)}
+                                className="flex items-center gap-3 rounded px-1 py-2 text-left hover:bg-[#38414a]"
+                            >
+                                <span className="shrink-0 text-[#579dff]">
+                                    <KanbanSquare />
+                                </span>
+                                <div className="min-w-0">
+                                    <p className="text-[14px] font-medium text-[#b6c2cf] truncate">
+                                        {item.title}
+                                    </p>
+                                    <p className="text-[12px] text-[#8c9bab]">
+                                        {item.workspace}
+                                        <span className="mx-1">·</span>
+                                        {item.viewedAt}
+                                    </p>
+                                </div>
+                            </button>
+                        ))
+                    ) : (
+                        <div className="flex w-full justify-center text-xs mt-3 font-light text-white/40">
+                            Пусто
+                        </div>
+                    )}
                 </div>
 
             </div>

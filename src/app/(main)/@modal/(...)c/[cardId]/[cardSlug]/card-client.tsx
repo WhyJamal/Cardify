@@ -20,6 +20,8 @@ import { formatCardDate } from "@/shared/utils/date";
 import { useCardClient } from "@/features/card/hooks/use-card-client";
 import { InviteMemberMenu } from "@/features/card/invite-member-menu";
 import { getInitials } from "@/shared/utils/getInitials";
+import AddAttachments from "@/features/card/add-attachments";
+import ListAttachments from "@/features/card/list-attachments";
 
 
 interface Comment {
@@ -57,6 +59,11 @@ export default function CardClient({
 
         showInvite,
         board,
+
+        attachBtnRef,
+        showAttach,
+        addAttachments,
+        handleCloseAttach,
 
         comment,
         setComment,
@@ -151,8 +158,8 @@ export default function CardClient({
                     </div>
                 </div>
 
-                <div className="flex overflow-y-auto h-full">
-                    <div className="flex-1 px-6 pb-6 pt-2 min-w-0">
+                <div className="flex h-full min-h-0">
+                    <div className="flex-1 min-h-0 max-h-100 px-6 pb-6 pt-2 min-w-0 overflow-y-auto">
                         <div className="flex items-start gap-3 mb-5">
                             <div className="round-sm top-1.5">
                                 <input
@@ -204,10 +211,21 @@ export default function CardClient({
                                 Добавить
                             </button>
 
-                            <button className="flex items-center gap-1.5 bg-[#2c333a] hover:bg-[#38414a] text-[#9fadbc] hover:text-white text-sm px-3 py-1.5 rounded transition-colors">
+                            <button 
+                                ref={attachBtnRef}
+                                onClick={addAttachments}
+                                className="flex items-center gap-1.5 bg-[#2c333a] hover:bg-[#38414a] text-[#9fadbc] hover:text-white text-sm px-3 py-1.5 rounded transition-colors"
+                            >
                                 <Paperclip size={14} />
                                 Вложение
                             </button>
+
+                            {showAttach && (
+                                <AddAttachments
+                                    triggerRef={attachBtnRef}
+                                    onClose={handleCloseAttach}
+                                />
+                            )}
 
                             {showMenu && (
                                 <AddToCardMenu
@@ -377,10 +395,13 @@ export default function CardClient({
                                     {card.description || "Описание отсутствует"}
                                 </p>
                             )}
+                            <ListAttachments/>
                         </div>
                     </div>
 
-                    <div className="w-112.5 shrink-0 border-l border-[#2c333a] px-5 pb-6 pt-2 bg-[#0f1313] max-h-96 overflow-y-scroll">
+                    <div 
+                        className="scrollbar-thin w-112.5 shrink-0 border-l border-[#2c333a] px-5 pb-6 pt-2 bg-[#0f1313] max-h-96 overflow-y-auto min-h-0"
+                    >
                         <div className="flex items-center justify-between mb-4">
                             <div className="flex items-center gap-2 text-white text-sm font-medium">
                                 <MessageSquare size={15} className="text-[#9fadbc]" />

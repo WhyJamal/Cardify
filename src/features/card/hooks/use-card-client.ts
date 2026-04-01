@@ -16,6 +16,7 @@ export function useCardClient(initialCard: CardData, cardId: string) {
     const { board, columns, setColumns } = useBoardView();
 
     const addBtnRef = useRef<HTMLButtonElement>(null);
+    const attachBtnRef = useRef<HTMLButtonElement>(null);
     const titleInputRef = useRef<HTMLInputElement>(null);
 
     const inviteDivRef = useRef<HTMLDivElement>(null);
@@ -36,6 +37,8 @@ export function useCardClient(initialCard: CardData, cardId: string) {
     const [showDatePicker, setShowDatePicker] = useState(false);
     const [showLabels, setShowLabels] = useState(false);
     const [showInvite, setShowInvite] = useState(false);
+   
+    const [showAttach, setShowAttach] = useState(false);
 
     useEscapeKey(() => router.back(), true);
 
@@ -120,6 +123,14 @@ export function useCardClient(initialCard: CardData, cardId: string) {
     const addMenu = useCallback(() => {
         setShowMenu((prev) => !prev);
         setShowDatePicker(false);
+    }, []);
+
+    const addAttachments = useCallback(() => {
+        setShowAttach(true);
+    }, []);
+
+    const handleCloseAttach = useCallback(() => {
+        setShowAttach(false);
     }, []);
 
     const handleOpenDates = useCallback(() => {
@@ -229,6 +240,11 @@ export function useCardClient(initialCard: CardData, cardId: string) {
 
         showInvite,
         board,
+
+        attachBtnRef,
+        showAttach,
+        addAttachments,
+        handleCloseAttach,
 
         comment,
         setComment,

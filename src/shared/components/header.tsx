@@ -21,7 +21,10 @@ export function Header() {
   const [panelState, setPanelState] = useState<PanelState>("closed");
   const [searchVal, setSearchVal] = useState("");
   const createBtnRef = useRef<HTMLButtonElement>(null);
+
+  const accountBtnRef = useRef<HTMLButtonElement>(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+
   const handleCreateBtnClick = () => {
     setPanelState((s) => (s === "closed" ? "menu" : "closed"));
   };
@@ -180,6 +183,7 @@ export function Header() {
                 side="bottom"
               >
                 <button
+                  ref={accountBtnRef}
                   onClick={() => setDropdownOpen((prev) => !prev)}
                   className="w-8 h-8 rounded-full bg-linear-to-br from-[#4bce97] to-[#0052cc] flex items-center justify-center text-white text-xs font-bold ml-1"
                 >
@@ -187,7 +191,11 @@ export function Header() {
                 </button>
               </TooltipAction>
               {dropdownOpen && (
-                <AccountDropdown session={session} onClose={() => setDropdownOpen(false)} />
+                <AccountDropdown 
+                  session={session} 
+                  onClose={() => setDropdownOpen(false)} 
+                  triggerRef={accountBtnRef}
+                />
               )}
             </div>
 

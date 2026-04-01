@@ -2,16 +2,20 @@
 
 import { useRef, useEffect } from "react";
 import { ExternalLink, ChevronRight, Layout } from "lucide-react";
-import { Session } from "next-auth";
 import { signOut } from "next-auth/react";
+
+interface AccountDropdownProps {
+    session: any;
+    onClose: () => void;
+    triggerRef: React.RefObject<HTMLElement | null>;
+}
 
 export function AccountDropdown({
     session,
     onClose,
-}: {
-    session: Session;
-    onClose?: () => void;
-}) {
+    triggerRef
+}: AccountDropdownProps
+) {
     const dropdownRef = useRef<HTMLDivElement>(null);
 
     const getInitials = (name?: string | null) => {
@@ -28,10 +32,15 @@ export function AccountDropdown({
 
     useEffect(() => {
         function handleClickOutside(event: MouseEvent) {
-            if (
-                dropdownRef.current &&
-                !dropdownRef.current.contains(event.target as Node)
-            ) {
+            const target = event.target as Node;
+
+            const clickedInsideDropdown =
+                dropdownRef.current?.contains(target);
+
+            const clickedTrigger =
+                triggerRef?.current?.contains(target);
+
+            if (!clickedInsideDropdown && !clickedTrigger) {
                 onClose?.();
             }
         }
@@ -39,7 +48,7 @@ export function AccountDropdown({
         document.addEventListener("mousedown", handleClickOutside);
         return () =>
             document.removeEventListener("mousedown", handleClickOutside);
-    }, [onClose]);
+    }, [onClose, triggerRef]);
 
     return (
         <div className="relative" ref={dropdownRef}>

@@ -5,7 +5,6 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
 import { calcBelowPosition } from "../../shared/utils/floatingPosition";
-// import { useCardActions } from "@/shared/hooks/use-card-actions";
 import { useOutsideClick } from "@/shared/hooks/use-outside-click";
 import {
   mergeLabelsWithChecked,
@@ -22,17 +21,17 @@ interface LabelsMenuProps {
   selectedLabels: SelectedLabel[];
   onClose: () => void;
   onChange?: (labels: LabelWithChecked[]) => void;
+  onCreate: () => void;
 }
 
 export function LabelsMenu({
   onClose,
   onChange,
+  onCreate,
   triggerRef,
   boardLabels = [],
   selectedLabels = [],
 }: LabelsMenuProps) {
-  // const { updateLabels } = useCardActions();
-
   const [searchQuery, setSearchQuery] = useState("");
   const [labels, setLabels] = useState<LabelWithChecked[]>([]);
 
@@ -69,8 +68,6 @@ export function LabelsMenu({
     const checkedLabels = getCheckedLabels(newLabels);
 
     onChange?.(checkedLabels);
-
-    // await updateLabels(cardId, checkedLabels);
   };
 
   const filteredLabels = labels.filter((label) => {
@@ -87,6 +84,7 @@ export function LabelsMenu({
         left: pos.left,
         top: pos.top,
         width: PANEL_WIDTH,
+        maxHeight: pos.maxHeight,
         zIndex: 99998,
       }}
       className="bg-[#2b3035] rounded-lg shadow-xl w-full max-w-[320px] text-white"
@@ -110,7 +108,7 @@ export function LabelsMenu({
 
       <div className="px-4 pb-4">
         <h3 className="text-xs text-gray-400 mb-3 uppercase">Метки</h3>
-        <div className="space-y-2">
+        <div className="space-y-2 overflow-y-auto max-h-[215]">
           {filteredLabels.map((label) => {
             const isHovered = hoveredLabels[label.id] || false;
 
@@ -124,7 +122,7 @@ export function LabelsMenu({
                 />
                 <div
                   onClick={() => toggleLabel(label.id)}
-                  className="flex-1 rounded px-3 py-2 min-h-9 transition-colors"
+                  className="flex-1 rounded px-3 py-2 min-h-9 transition-colors hover:ring-2 hover:ring-white"
                   onMouseEnter={() =>
                     setHoveredLabels((prev) => ({ ...prev, [label.id]: true }))
                   }
@@ -147,7 +145,10 @@ export function LabelsMenu({
       </div>
 
       <div className="px-4 pb-4">
-        <button className="w-full bg-[#343938] hover:bg-gray-600 text-white py-1 rounded transition-colors">
+        <button
+            onClick={onCreate} 
+            className="w-full bg-[#2c333a] hover:bg-[#38414a] text-[#9fadbc] hover:text-white border border-gray-800 py-1 rounded text-sm transition-colors"        
+        >
           Создать новую метку
         </button>
       </div>

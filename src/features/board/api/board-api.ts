@@ -1,4 +1,5 @@
 import { clientFetch } from "@/lib/client-api";
+import { BoardLabel } from "@/shared/types";
 
 export const boardApi = {
   updateColumnTitle: (columnId: string, title: string) =>
@@ -23,4 +24,13 @@ export const boardApi = {
       method: "PATCH",
       body: JSON.stringify({ title }),
     }),
+
+  createLabel: (boardId: number, formData: BoardLabel) => {
+    if (!formData) return;
+
+    return clientFetch(`/api/boards/${boardId}/label`, {
+      method: "POST",
+      body: JSON.stringify(formData),
+    });
+  },
 };

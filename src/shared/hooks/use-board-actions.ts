@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { useBoardView } from "@/app/providers/BoardProvider";
 import { clientFetch } from "@/lib/client-api";
 import { boardApi } from "@/features/board/api/board-api";
-import { Board, BoardMember, User } from "../types";
+import { Board, BoardLabel, BoardMember, User } from "../types";
 
 export function useBoardActions() {
   const { board, columns, setColumns, setBoard } = useBoardView();
@@ -192,7 +192,7 @@ export function useBoardActions() {
           if (!prev) return prev;
           return {
             ...prev,
-            title, 
+            title,
           };
         });
         setIsEditingTitle(false);
@@ -207,6 +207,16 @@ export function useBoardActions() {
     setIsEditingTitle(false);
   }
 
+  async function handleCreateLabel(formData: BoardLabel) {
+    if (!board?.id) return;
+
+    try {
+      const res = await boardApi.createLabel(board?.id, formData);
+      return res;
+    } catch (err) {
+      console.error("Create label failed", err);
+    }
+  }
 
   return {
     dropCard,
@@ -220,7 +230,8 @@ export function useBoardActions() {
     tempTitle,
     isEditingTitle,
     setTempTitle,
-    setIsEditingTitle
+    setIsEditingTitle,
+    handleCreateLabel
   };
 }
 

@@ -23,17 +23,17 @@ import { InviteMemberMenu } from "@/features/card/invite-member-menu";
 import { getInitials } from "@/shared/utils/getInitials";
 import AddAttachments from "@/features/card/add-attachments";
 import ListAttachments from "@/features/card/list-attachments";
+import { CreateLabelMenu } from "@/features/card/create-label-menu";
 
-
-interface Comment {
-    id: number;
-    author: string;
-    initials: string;
-    text: string;
-    date: string;
-    isActivity?: boolean;
-    activityText?: string;
-}
+// interface Comment {
+//     id: number;
+//     author: string;
+//     initials: string;
+//     text: string;
+//     date: string;
+//     isActivity?: boolean;
+//     activityText?: string;
+// }
 
 export default function CardClient({
     cardId,
@@ -44,6 +44,7 @@ export default function CardClient({
 }) {
     const {
         card,
+        setCard,
         isEditingTitle,
         setIsEditingTitle,
         tempTitle,
@@ -91,6 +92,8 @@ export default function CardClient({
         handleOpenDates,
         handleCloseDatePicker,
         showLabels,
+        showCreateLabel,
+        setShowCreateLabel,
         handleOpenLabels,
         handleCloseLabels,
 
@@ -265,8 +268,36 @@ export default function CardClient({
                                     selectedLabels={card.labels ?? []}
                                     onChange={handleUpdateLabels}
                                     onClose={handleCloseLabels}
+                                    onCreate={() => {
+                                        setShowCreateLabel(true);
+                                        handleCloseLabels();
+                                    }}
                                 />
                             )}
+
+                            {showCreateLabel && (
+                                <CreateLabelMenu
+                                    triggerRef={card.labels && card.labels.length > 0 ? labelDivRef : addBtnRef}
+                                    onChange={(newLabel) => {
+                                        setCard((prev) =>
+                                            prev
+                                                ? {
+                                                    ...prev,
+                                                    boardLabels: prev.boardLabels
+                                                        ? [...prev.boardLabels, newLabel]
+                                                        : [newLabel], 
+                                                }
+                                                : prev
+                                        );
+                                    }}
+                                    onClose={() => setShowCreateLabel(false)}
+                                    onBack={() => {
+                                        setShowCreateLabel(false);
+                                        handleOpenLabels();
+                                    }}
+                                />
+                            )}
+
                             {showInvite && (
                                 <InviteMemberMenu
                                     triggerRef={card.members && card.members.length > 0 ? inviteDivRef : addBtnRef}
@@ -319,7 +350,7 @@ export default function CardClient({
                                         {card.labels.map((label) => (
                                             <div
                                                 key={label.id}
-                                                className="flex px-1 py-1 rounded justify-center items-center shrink-0 min-w-14 min-h-8"
+                                                className="flex px-1 py-1 rounded justify-center items-center shrink-0 min-w-14 min-h-8 border border-gray-700"
                                                 style={{ background: label.color }}
                                             >
                                                 <span className="text-xs font-bold text-white">

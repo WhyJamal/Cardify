@@ -147,5 +147,6 @@ export interface Board {
   workspaceId: string;
   
   columns: ColumnInt[];
+  labels: BoardLabel[];
   members: BoardMember[];
 }

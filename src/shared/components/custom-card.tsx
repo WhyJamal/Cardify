@@ -32,7 +32,7 @@ interface CardProps {
 }
 
 export function CardContent({ card, onClickCard, showLabelName, onToggleLabel, onToggleIsCompleted }: { card: CardData; onClickCard?: (cardId: string) => void, showLabelName: boolean, onToggleLabel: () => void, onToggleIsCompleted: (cardId: string, isComplate: boolean) => void }) {
-  const [hovered, setHovered] = useState(false);
+  const [hovered, setHovered] = useState<string | null>(null);
 
   function handleToggleLabel(e: React.MouseEvent<HTMLSpanElement>) {
     e.preventDefault();
@@ -71,10 +71,10 @@ export function CardContent({ card, onClickCard, showLabelName, onToggleLabel, o
                 <span
                   key={label.id}
                   onClick={handleToggleLabel}
-                  onMouseEnter={() => setHovered(true)}
-                  onMouseLeave={() => setHovered(false)}
-                  className="min-h-2 min-w-8 text-xs px-1.5 py-0.5 text-white rounded-sm hover:scale-105"
-                  style={{ backgroundColor: hovered ? shadeColor(label.color, -20) : label.color }}
+                  onMouseEnter={() => setHovered(label.id)}
+                  onMouseLeave={() => setHovered(null)}
+                  className="min-h-2 min-w-8 text-xs px-1.5 py-0.5 text-white rounded-sm hover:scale-105 border border-gray-700 hover:ring-1"
+                  style={{ backgroundColor: hovered === label.id ? shadeColor(label.color, -20) : label.color }}
                 >
                   {showLabelName ? label.name : null}
                 </span>

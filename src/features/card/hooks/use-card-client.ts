@@ -40,6 +40,7 @@ export function useCardClient(initialCard: CardData, cardId: string) {
     const [showMenu, setShowMenu] = useState(false);
     const [showDatePicker, setShowDatePicker] = useState(false);
     const [showLabels, setShowLabels] = useState(false);
+    const [showCreateLabel, setShowCreateLabel] = useState(false);
     const [showInvite, setShowInvite] = useState(false);
 
     const [showAttach, setShowAttach] = useState(false);
@@ -244,11 +245,7 @@ export function useCardClient(initialCard: CardData, cardId: string) {
         cardId: string,
         commentId: string
     ) => {
-        const updated = await cardApi.changeComment(
-            cardId,
-            commentId,
-            changeComment
-        );
+        await cardApi.changeComment(cardId, commentId, changeComment);
 
         setComments(prev =>
             prev.map(c =>
@@ -313,6 +310,8 @@ export function useCardClient(initialCard: CardData, cardId: string) {
         handleCloseDatePicker,
         showLabels,
         handleOpenLabels,
+        showCreateLabel,
+        setShowCreateLabel,
         handleCloseLabels,
         handleCloseInvites,
 

@@ -124,7 +124,8 @@ export function useCardClient(initialCard: CardData, cardId: string) {
 
         try {
             const created = await cardApi.addTimelineComment(cardId, text);
-            setTimeline((prev) => [...prev, created]);
+            //setTimeline((prev) => [...prev, created]);
+            setComments((prev) => [...prev, created]);
             setComment("");
             setIsAddComment(false);
         } catch (err) {

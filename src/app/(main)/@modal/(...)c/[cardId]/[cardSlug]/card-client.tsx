@@ -433,6 +433,7 @@ export default function CardClient({
                                     <textarea
                                         className="w-full bg-[#22272b] text-[#b6c2cf] text-sm p-3 rounded-lg resize-none outline-none focus:ring-2 focus:ring-blue-500 min-h-20"
                                         value={comment}
+                                        placeholder="Напишите комментарий..."
                                         onChange={(e) => setComment(e.target.value)}
                                         onKeyDown={(e) => {
                                             if (e.key === "Enter" && !e.shiftKey) {
@@ -524,34 +525,36 @@ export default function CardClient({
                                                 )}
 
                                                 {editingCommentId !== c.id && (
-                                                    <div className="flex items-center text-xs text-[#9fadbc]">
-                                                        <Smile size={12} />
-                                                        <Dot />
-                                                        <Button
-                                                            variant={"link"}
-                                                            onClick={() => {
-                                                                setEditingCommentId(c.id);
-                                                                setChangeComment(c.text ?? "");
-                                                            }}
-                                                            className="text-white/80 hover:text-white"
-                                                        >
-                                                            Изменить
-                                                        </Button>
-                                                        <Dot />
-                                                        <Button
-                                                            variant={"link"}
-                                                            onClick={() => handleDeleteComment(cardId, c.id)}
-                                                            className="text-white/80 hover:text-white"
-                                                        >
-                                                            Удалить
-                                                        </Button>
-                                                    </div>
+                                                    <>
+                                                        <div className="flex items-center text-xs text-[#9fadbc]">
+                                                            <Smile size={12} />
+                                                            <Dot />
+                                                            <Button
+                                                                variant={"link"}
+                                                                onClick={() => {
+                                                                    setEditingCommentId(c.id);
+                                                                    setChangeComment(c.text ?? "");
+                                                                }}
+                                                                className="text-white/80 hover:text-white"
+                                                            >
+                                                                Изменить
+                                                            </Button>
+                                                            <Dot />
+                                                            <Button
+                                                                variant={"link"}
+                                                                onClick={() => handleDeleteComment(cardId, c.id)}
+                                                                className="text-white/80 hover:text-white"
+                                                            >
+                                                                Удалить
+                                                            </Button>
+                                                        </div>
+                                                        <p className="text-[#9fadbc] text-xs mt-0.5 underline decoration-dotted cursor-pointer hover:text-white">
+                                                            {new Date(c.createdAt).toLocaleString("ru-RU")}
+                                                        </p>
+                                                    </>
                                                 )}
                                             </>
                                         )}
-                                        <p className="text-[#9fadbc] text-xs mt-0.5 underline decoration-dotted cursor-pointer hover:text-white">
-                                            {new Date(c.createdAt).toLocaleString("ru-RU")}
-                                        </p>
                                     </div>
                                 </div>
                             ))}

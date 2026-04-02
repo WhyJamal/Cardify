@@ -31,7 +31,9 @@ export function useCardClient(initialCard: CardData, cardId: string) {
     const [tempDesc, setTempDesc] = useState(initialCard.description ?? "");
 
     const [isAddComment, setIsAddComment] = useState(false);
+    const [editingCommentId, setEditingCommentId] = useState<string | null>(null);
     const [comment, setComment] = useState("");
+    const [changeComment, setChangeComment] = useState("");
     const [timeline, setTimeline] = useState<CardTimeline[]>([]);
     const [comments, setComments] = useState<CardTimeline[]>([]);
 
@@ -238,6 +240,27 @@ export function useCardClient(initialCard: CardData, cardId: string) {
         setComments(prev => prev.filter(f => f.id !== commentId));
     };
 
+    const handleChangeComment = async (
+        cardId: string,
+        commentId: string
+    ) => {
+        const updated = await cardApi.changeComment(
+            cardId,
+            commentId,
+            changeComment
+        );
+
+        setComments(prev =>
+            prev.map(c =>
+                c.id === commentId
+                    ? { ...c, text: changeComment }
+                    : c
+            )
+        );
+
+        setEditingCommentId(null);
+    };
+
     return {
         card,
         setCard,
@@ -272,6 +295,11 @@ export function useCardClient(initialCard: CardData, cardId: string) {
         timeline,
         comments,
         handleDeleteComment,
+        handleChangeComment,
+        editingCommentId,
+        setEditingCommentId,
+        changeComment,
+        setChangeComment,
 
         inviteDivRef,
         dateBtnRef,

@@ -4,7 +4,7 @@ export const cardApi = {
   getTimeline: (cardId: string) =>
     clientFetch(`/api/cards/${cardId}/timeline`, {
       method: "GET",
-    }),
+    }), 
 
   updateDescription: (cardId: string, description: string) =>
     clientFetch(`/api/cards/${cardId}`, {
@@ -33,6 +33,12 @@ export const cardApi = {
   deleteComment: (cardId: string, commentId: string) =>
     clientFetch(`/api/cards/${cardId}/timeline/${commentId}`, {
       method: "DELETE",
+    }),
+
+  changeComment: (cardId: string, commentId: string, comment: string) =>
+    clientFetch(`/api/cards/${cardId}/timeline/${commentId}`, {
+      method: "PATCH",
+      body: JSON.stringify({ comment }),
     }),
 
   updateIsCompleted: (cardId: string, isCompleted: boolean) =>

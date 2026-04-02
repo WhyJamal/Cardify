@@ -74,6 +74,11 @@ export default function CardClient({
         timeline,
         comments,
         handleDeleteComment,
+        handleChangeComment,
+        editingCommentId,
+        setEditingCommentId,
+        changeComment,
+        setChangeComment,
 
         inviteDivRef,
         dateBtnRef,
@@ -481,27 +486,67 @@ export default function CardClient({
                                                 <p className="text-white text-sm font-medium mb-0.5">
                                                     {c.authorName}
                                                 </p>
-                                                <div className="bg-[#22272b] text-[#b6c2cf] text-sm px-3 py-2 rounded-lg mb-1">
-                                                    {c.text}
-                                                </div>
-                                                <div className="flex items-center text-xs text-[#9fadbc]">
-                                                    <Smile size={12} />
-                                                    <Dot />
-                                                    <Button
-                                                        variant={"link"}
-                                                        className="text-white/80 hover:text-white"
-                                                    >
-                                                        Изменить
-                                                    </Button>
-                                                    <Dot />
-                                                    <Button
-                                                        variant={"link"}
-                                                        onClick={() => handleDeleteComment(cardId, c.id)} 
-                                                        className="text-white/80 hover:text-white"
-                                                    >
-                                                        Удалить
-                                                    </Button>
-                                                </div>
+
+                                                {editingCommentId === c.id ? (
+                                                    <div className="ml-6">
+                                                        <textarea
+                                                            className="w-full bg-[#22272b] text-[#b6c2cf] text-sm p-3 rounded-lg resize-none outline-none focus:ring-2 focus:ring-blue-500 min-h-20"
+                                                            value={changeComment}
+                                                            onChange={(e) => setChangeComment(e.target.value)}
+                                                            onKeyDown={(e) => {
+                                                                if (e.key === "Enter" && !e.shiftKey) {
+                                                                    e.preventDefault();
+                                                                    handleChangeComment(cardId, c.id);
+                                                                }
+                                                            }}
+                                                            autoFocus
+                                                        />
+                                                        <div className="flex gap-2 mt-2">
+                                                            <Button
+                                                                size={"lg"}
+                                                                variant={"custom"}
+                                                                onClick={() => handleChangeComment(cardId, c.id)}
+                                                            >
+                                                                Сохранить
+                                                            </Button>
+                                                            <button
+                                                                onClick={() => setEditingCommentId(null)}
+                                                                className="bg-transparent hover:bg-[#38414a] text-[#9fadbc] hover:text-white text-sm px-3 py-1.5 rounded transition-colors"
+                                                            >
+                                                                Отмена
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                ) : (
+                                                    <div className="bg-[#22272b] text-[#b6c2cf] text-sm px-3 py-2 rounded-lg mb-1">
+                                                        {c.text}
+                                                    </div>
+                                                )}
+
+                                                {editingCommentId !== c.id && (
+                                                    <div className="flex items-center text-xs text-[#9fadbc]">
+                                                        <Smile size={12} />
+                                                        <Dot />
+                                                        <Button
+                                                            variant={"link"}
+                                                            onClick={() => {
+                                                                setEditingCommentId(c.id);
+                                                                setChangeComment(c.text ?? "");
+                                                            }}
+                                                            className="text-white/80 hover:text-white"
+                                                        >
+                                                            Изменить
+                                                        </Button>
+                                                        <Dot />
+                                                        <Button
+                                                            variant={"link"}
+                                                            onClick={() => handleDeleteComment(cardId, c.id)}
+                                                            className="text-white/80 hover:text-white"
+                                                        >
+                                                            Удалить
+                                                        </Button>
+                                                    </div>
+                                                )}
                                             </>
                                         )}
                                         <p className="text-[#9fadbc] text-xs mt-0.5 underline decoration-dotted cursor-pointer hover:text-white">
@@ -561,6 +606,6 @@ export default function CardClient({
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 }

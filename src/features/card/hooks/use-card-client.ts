@@ -233,6 +233,11 @@ export function useCardClient(initialCard: CardData, cardId: string) {
         [cardId, setColumns]
     );
 
+    const handleDeleteComment = async (cardId: string, commentId: string) => {
+        cardApi.deleteComment(cardId, commentId);
+        setComments(prev => prev.filter(f => f.id !== commentId));
+    };
+
     return {
         card,
         setCard,
@@ -266,6 +271,7 @@ export function useCardClient(initialCard: CardData, cardId: string) {
         handleSendComment,
         timeline,
         comments,
+        handleDeleteComment,
 
         inviteDivRef,
         dateBtnRef,

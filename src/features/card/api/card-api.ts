@@ -30,6 +30,11 @@ export const cardApi = {
       body: JSON.stringify({ text }),
     }),
 
+  deleteComment: (cardId: string, commentId: string) =>
+    clientFetch(`/api/cards/${cardId}/timeline/${commentId}`, {
+      method: "DELETE",
+    }),
+
   updateIsCompleted: (cardId: string, isCompleted: boolean) =>
     clientFetch(`/api/cards/${cardId}`, {
       method: "PATCH",

@@ -73,6 +73,7 @@ export default function CardClient({
         handleSendComment,
         timeline,
         comments,
+        handleDeleteComment,
 
         inviteDivRef,
         dateBtnRef,
@@ -486,13 +487,20 @@ export default function CardClient({
                                                 <div className="flex items-center text-xs text-[#9fadbc]">
                                                     <Smile size={12} />
                                                     <Dot />
-                                                    <button className="hover:text-white hover:underline transition-colors">
+                                                    <Button
+                                                        variant={"link"}
+                                                        className="text-white/80 hover:text-white"
+                                                    >
                                                         Изменить
-                                                    </button>
+                                                    </Button>
                                                     <Dot />
-                                                    <button className="hover:text-white hover:underline transition-colors">
+                                                    <Button
+                                                        variant={"link"}
+                                                        onClick={() => handleDeleteComment(cardId, c.id)} 
+                                                        className="text-white/80 hover:text-white"
+                                                    >
                                                         Удалить
-                                                    </button>
+                                                    </Button>
                                                 </div>
                                             </>
                                         )}

@@ -1,64 +1,60 @@
 import { NextRequest, NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
-import { getServerSession } from "next-auth";
+import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/auth";
+import { prisma } from "@/lib/prisma";
+
+function getInitials(name: string) {
+  return name
+    .split(" ")
+    .map((n) => n[0])
+    .join("")
+    .toUpperCase()
+    .slice(0, 2);
+}
 
 /* ------------------ GET ------------------ */
-
 export async function GET(
-  _req: NextRequest,
-  { params }: { params: { cardId: string } }
+  req: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
 ) {
-  const session = await getServerSession(authOptions);
-
-  if (!session?.user?.email) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+  const { id: cardId } = await params;
 
   const items = await prisma.cardTimeline.findMany({
-    where: { cardId: params.cardId },
+    where: { cardId },
     orderBy: { createdAt: "asc" },
   });
 
   return NextResponse.json(items);
 }
 
-/* ------------------ POST ------------------ */
-
+/* ------------------ POST (comment) ------------------ */
 export async function POST(
   req: NextRequest,
-  { params }: { params: { cardId: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const session = await getServerSession(authOptions);
-
-  if (!session?.user?.email) {
+  if (!session?.user?.email)
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
 
+  const dbUser = await prisma.user.findUnique({
+    where: { email: session.user.email },
+  });
+  if (!dbUser)
+    return NextResponse.json({ error: "User not found" }, { status: 404 });
+
+  const { id: cardId } = await params;
   const body = await req.json();
   const text = String(body.text ?? "").trim();
 
-  if (!text) {
-    return NextResponse.json({ error: "Comment is required" }, { status: 400 });
-  }
-
-  const authorName =
-    session.user.name || session.user.email?.split("@")[0] || "Unknown";
-
-  const initials = authorName
-    .split(" ")
-    .filter(Boolean)
-    .map((part) => part[0])
-    .join("")
-    .slice(0, 2)
-    .toUpperCase();
+  if (!text)
+    return NextResponse.json({ error: "text is required" }, { status: 400 });
 
   const item = await prisma.cardTimeline.create({
     data: {
-      cardId: params.cardId,
+      cardId,
       type: "COMMENT",
-      authorName,
-      initials,
+      authorName: dbUser.name || dbUser.email,
+      initials: getInitials(dbUser.name || dbUser.email),
       text,
     },
   });

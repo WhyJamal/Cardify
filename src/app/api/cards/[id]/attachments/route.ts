@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { getInitials } from "@/shared/utils/getInitials";
 
 async function getCardId(params: Promise<{ id: string }>) {
   return (await params).id;
@@ -47,7 +48,7 @@ export async function POST(
       return NextResponse.json({ error: "File is required" }, { status: 400 });
     }
 
-    const uploadedUrl = "http://localhost:3000/" + file.name; 
+    const uploadedUrl = "http://localhost:3000/" + file.name;
 
     const attachment = await prisma.cardAttachment.create({
       data: {
@@ -57,6 +58,16 @@ export async function POST(
         fileSize: file.size,
         mimeType: file.type,
         uploadedBy: dbUser.id,
+      },
+    });
+
+    await prisma.cardTimeline.create({
+      data: {
+        cardId,
+        type: "ACTIVITY",
+        authorName: dbUser.name || dbUser.email,
+        initials: getInitials(dbUser.name || dbUser.email),
+        activityText: `добавил(а) файл: "${file.name}"`,
       },
     });
 

@@ -30,14 +30,16 @@ export function useCardClient(initialCard: CardData, cardId: string) {
     const [isEditingDesc, setIsEditingDesc] = useState(false);
     const [tempDesc, setTempDesc] = useState(initialCard.description ?? "");
 
+    const [isAddComment, setIsAddComment] = useState(false);
     const [comment, setComment] = useState("");
     const [timeline, setTimeline] = useState<CardTimeline[]>([]);
+    const [comments, setComments] = useState<CardTimeline[]>([]);
 
     const [showMenu, setShowMenu] = useState(false);
     const [showDatePicker, setShowDatePicker] = useState(false);
     const [showLabels, setShowLabels] = useState(false);
     const [showInvite, setShowInvite] = useState(false);
-   
+
     const [showAttach, setShowAttach] = useState(false);
 
     useEscapeKey(() => router.back(), true);
@@ -47,6 +49,15 @@ export function useCardClient(initialCard: CardData, cardId: string) {
         setTempTitle(initialCard.title);
         setTempDesc(initialCard.description ?? "");
     }, [initialCard]);
+
+    useEffect(() => {
+        cardApi.getTimeline(cardId)
+            .then((data: CardTimeline[]) => {
+                setTimeline(data.filter((item) => item.type === "ACTIVITY"));
+                setComments(data.filter((item) => item.type === "COMMENT"));
+            })
+            .catch(console.error);
+    }, [cardId]);
 
     useEffect(() => {
         for (const col of columns) {
@@ -115,6 +126,7 @@ export function useCardClient(initialCard: CardData, cardId: string) {
             const created = await cardApi.addTimelineComment(cardId, text);
             setTimeline((prev) => [...prev, created]);
             setComment("");
+            setIsAddComment(false);
         } catch (err) {
             console.error("Ошибка при отправке комментария:", err);
         }
@@ -246,10 +258,13 @@ export function useCardClient(initialCard: CardData, cardId: string) {
         addAttachments,
         handleCloseAttach,
 
+        isAddComment,
+        setIsAddComment,
         comment,
         setComment,
         handleSendComment,
         timeline,
+        comments,
 
         inviteDivRef,
         dateBtnRef,

@@ -11,6 +11,7 @@ import {
     MessageSquare,
     Smile,
     ChevronDown,
+    Dot,
 } from "lucide-react";
 
 import type { CardData } from "@/shared/types";
@@ -65,10 +66,13 @@ export default function CardClient({
         addAttachments,
         handleCloseAttach,
 
+        isAddComment,
+        setIsAddComment,
         comment,
         setComment,
         handleSendComment,
         timeline,
+        comments,
 
         inviteDivRef,
         dateBtnRef,
@@ -97,24 +101,24 @@ export default function CardClient({
         router,
     } = useCardClient(initialCard, cardId);
 
-    const comments: Comment[] = [
-        {
-            id: 1,
-            author: "M. Jamal",
-            initials: "JM",
-            text: "comment 1",
-            date: "16 июн. 2025 г., 14:06",
-        },
-        {
-            id: 2,
-            author: "M. Jamal",
-            initials: "JM",
-            text: "",
-            date: "30 мая 2025 г., 10:09",
-            isActivity: true,
-            activityText: "добавил(а) эту карточку в список 2",
-        },
-    ];
+    // const comments: Comment[] = [
+    //     {
+    //         id: 1,
+    //         author: "M. Jamal",
+    //         initials: "JM",
+    //         text: "comment 1",
+    //         date: "16 июн. 2025 г., 14:06",
+    //     },
+    //     {
+    //         id: 2,
+    //         author: "M. Jamal",
+    //         initials: "JM",
+    //         text: "",
+    //         date: "30 мая 2025 г., 10:09",
+    //         isActivity: true,
+    //         activityText: "добавил(а) эту карточку в список 2",
+    //     },
+    // ];
 
     return (
         <div className="fixed inset-0 bg-black/60 grid items-start justify-center z-50 p-4">
@@ -396,7 +400,7 @@ export default function CardClient({
                                     {card.description || "Описание отсутствует"}
                                 </p>
                             )}
-                            
+
                             {card.attachments && card.attachments.length > 0 && (
                                 <ListAttachments initialCard={initialCard} cardId={cardId} />
                             )}
@@ -418,26 +422,43 @@ export default function CardClient({
                         </div>
 
                         <div className="mb-3">
-                            <input
-                                placeholder="Напишите комментарий..."
-                                value={comment}
-                                onChange={(e) => setComment(e.target.value)}
-                                onKeyDown={(e) => {
-                                    if (e.key === "Enter" && !e.shiftKey) {
-                                        e.preventDefault();
-                                        handleSendComment();
-                                    }
-                                }}
-                                className="w-full bg-[#22272b] text-[#b6c2cf] placeholder-[#596773] text-sm px-3 py-2.5 rounded-lg outline-none focus:ring-2 focus:ring-blue-500"
-                            />
-                            {/* <div className="flex justify-start mt-2">
-                                <Button
-                                    onClick={handleSendComment}
-                                    className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-black text-sm px-3 py-2 rounded-sm transition-colors"
-                                >
-                                    Сохранить
-                                </Button>
-                            </div> */}
+                            {isAddComment ? (
+                                <div className="ml-6">
+                                    <textarea
+                                        className="w-full bg-[#22272b] text-[#b6c2cf] text-sm p-3 rounded-lg resize-none outline-none focus:ring-2 focus:ring-blue-500 min-h-20"
+                                        value={comment}
+                                        onChange={(e) => setComment(e.target.value)}
+                                        onKeyDown={(e) => {
+                                            if (e.key === "Enter" && !e.shiftKey) {
+                                                e.preventDefault();
+                                                handleSendComment();
+                                            }
+                                        }}
+                                        autoFocus
+                                    />
+                                    <div className="flex gap-2 mt-2">
+                                        <Button
+                                            size={"lg"}
+                                            variant={"custom"}
+                                            onClick={handleSendComment}
+                                        >
+                                            Сохранить
+                                        </Button>
+                                        <button
+                                            onClick={() => setIsAddComment(false)}
+                                            className="bg-transparent hover:bg-[#38414a] text-[#9fadbc] hover:text-white text-sm px-3 py-1.5 rounded transition-colors"
+                                        >
+                                            Отмена
+                                        </button>
+                                    </div>
+                                </div>
+                            ) : (
+                                <input
+                                    placeholder="Напишите комментарий..."
+                                    onClick={() => { setIsAddComment(true) }}
+                                    className="w-full bg-[#22272b] text-[#b6c2cf] placeholder-[#596773] text-sm px-3 py-2.5 rounded-lg outline-none focus:ring-2 focus:ring-blue-500"
+                                />
+                            )}
                         </div>
 
                         <div className="space-y-4">
@@ -447,28 +468,28 @@ export default function CardClient({
                                         {c.initials}
                                     </div>
                                     <div className="flex-1 min-w-0">
-                                        {c.isActivity ? (
+                                        {c.type === "ACTIVITY" ? (
                                             <p className="text-[#b6c2cf] text-sm leading-snug">
                                                 <span className="text-white font-medium">
-                                                    {c.author}
+                                                    {c.authorName}
                                                 </span>{" "}
                                                 {c.activityText}
                                             </p>
                                         ) : (
                                             <>
                                                 <p className="text-white text-sm font-medium mb-0.5">
-                                                    {c.author}
+                                                    {c.authorName}
                                                 </p>
                                                 <div className="bg-[#22272b] text-[#b6c2cf] text-sm px-3 py-2 rounded-lg mb-1">
                                                     {c.text}
                                                 </div>
-                                                <div className="flex items-center gap-2 text-xs text-[#9fadbc]">
+                                                <div className="flex items-center text-xs text-[#9fadbc]">
                                                     <Smile size={12} />
-                                                    <span>•</span>
+                                                    <Dot />
                                                     <button className="hover:text-white hover:underline transition-colors">
                                                         Изменить
                                                     </button>
-                                                    <span>•</span>
+                                                    <Dot />
                                                     <button className="hover:text-white hover:underline transition-colors">
                                                         Удалить
                                                     </button>
@@ -476,28 +497,59 @@ export default function CardClient({
                                             </>
                                         )}
                                         <p className="text-[#9fadbc] text-xs mt-0.5 underline decoration-dotted cursor-pointer hover:text-white">
-                                            {c.date}
+                                            {new Date(c.createdAt).toLocaleString("ru-RU")}
                                         </p>
                                     </div>
                                 </div>
                             ))}
                         </div>
 
-                        {timeline.length > 0 && (
-                            <div className="mt-6 border-t border-white/10 pt-4">
-                                <p className="text-[#9fadbc] text-xs mb-3">Timeline</p>
-                                <div className="space-y-3">
-                                    {timeline.map((item: any) => (
-                                        <div
-                                            key={item.id}
-                                            className="text-sm text-[#b6c2cf] bg-[#22272b] rounded-lg px-3 py-2"
-                                        >
-                                            {item.text || item.message || "Событие"}
+
+                        <div className="mt-6 border-t border-white/10 pt-4">
+                            <p className="text-[#9fadbc] text-xs mb-3">Действии</p>
+                            <div className="space-y-3">
+                                <div className="space-y-4">
+                                    {timeline.map((item) => (
+                                        <div key={item.id} className="flex gap-3">
+                                            <div className="w-8 h-8 rounded-full bg-[#4bce97] flex items-center justify-center text-[#1d2125] text-xs font-semibold shrink-0">
+                                                {item.initials ?? "?"}
+                                            </div>
+                                            <div className="flex-1 min-w-0">
+                                                {item.type === "ACTIVITY" ? (
+                                                    <p className="text-[#b6c2cf] text-sm leading-snug">
+                                                        <span className="text-white font-medium">{item.authorName}</span>{" "}
+                                                        {item.activityText}
+                                                    </p>
+                                                ) : (
+                                                    <>
+                                                        <p className="text-white text-sm font-medium mb-0.5">
+                                                            {item.authorName}
+                                                        </p>
+                                                        <div className="bg-[#22272b] text-[#b6c2cf] text-sm px-3 py-2 rounded-lg mb-1">
+                                                            {item.text}
+                                                        </div>
+                                                        <div className="flex items-center gap-2 text-xs text-[#9fadbc]">
+                                                            <Smile size={12} />
+                                                            <span>•</span>
+                                                            <button className="hover:text-white hover:underline transition-colors">
+                                                                Изменить
+                                                            </button>
+                                                            <span>•</span>
+                                                            <button className="hover:text-white hover:underline transition-colors">
+                                                                Удалить
+                                                            </button>
+                                                        </div>
+                                                    </>
+                                                )}
+                                                <p className="text-[#9fadbc] text-xs mt-0.5 underline decoration-dotted cursor-pointer hover:text-white">
+                                                    {new Date(item.createdAt).toLocaleString("ru-RU")}
+                                                </p>
+                                            </div>
                                         </div>
                                     ))}
                                 </div>
                             </div>
-                        )}
+                        </div>
                     </div>
                 </div>
             </div>

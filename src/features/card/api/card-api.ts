@@ -1,6 +1,11 @@
 import { clientFetch } from "@/lib/client-api";
 
 export const cardApi = {
+  getTimeline: (cardId: string) =>
+    clientFetch(`/api/cards/${cardId}/timeline`, {
+      method: "GET",
+    }),
+
   updateDescription: (cardId: string, description: string) =>
     clientFetch(`/api/cards/${cardId}`, {
       method: "PATCH",

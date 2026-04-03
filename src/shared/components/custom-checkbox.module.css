@@ -59,7 +59,7 @@
 
 /* animation trigger */
 .cbxInput:checked + .cbxLabel {
-  animation: splash 0.6s ease forwards;
+  animation: splash 2s ease forwards;
 }
 
 /* check animation */

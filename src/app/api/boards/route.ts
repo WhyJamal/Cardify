@@ -84,6 +84,12 @@ export async function POST(req: NextRequest) {
           position: idx,
         })),
       },
+      members: {    
+      create: {
+        userId: dbUser.id,
+        status: "ACCEPTED", 
+      },
+    },
     },
   });
 

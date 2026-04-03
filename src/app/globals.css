@@ -163,12 +163,12 @@
   scrollbar-color: rgba(255,255,255,0.18) transparent;
 }
 
-/*---------------*//* Checkbox *//*------------------------------*/
+/*---------------*//* Checkbox *//*------------------------------
 .round-sm {
   position: relative;
-}
+}*/
 
-/* circle */
+/* circle 
 .round-sm label {
   background-color: #252020;
   border: 2px solid #9fadbc;
@@ -183,9 +183,9 @@
 
 .round-sm label:hover {
   border-color: #ffffff;
-}
+}*/
 
-/* check icon */
+/* check icon 
 .round-sm label:after {
   content: "";
   position: absolute;
@@ -202,14 +202,14 @@
 
   transform: rotate(-45deg);
   opacity: 0;
-}
+}*/
 
-/* hide real checkbox */
+/* hide real checkbox 
 .round-sm input[type="checkbox"] {
   visibility: hidden;
-}
+}*/
 
-/* checked state */
+/* checked state 
 .round-sm input[type="checkbox"]:checked + label {
   background-color: #66bb6a;
   border-color: #66bb6a;
@@ -217,7 +217,7 @@
 
 .round-sm input[type="checkbox"]:checked + label:after {
   opacity: 1;
-}
+}*/
 
 /* Loading */
 .spinner {

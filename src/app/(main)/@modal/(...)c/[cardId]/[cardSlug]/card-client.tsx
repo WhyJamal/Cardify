@@ -194,21 +194,12 @@ export default function CardClient({
                 <div className="flex h-full min-h-0">
                     <div className="flex-1 min-h-0 max-h-100 px-6 pb-6 pt-2 min-w-0 overflow-y-auto">
                         <div className="flex items-start gap-3 mb-5">
-                            {/* <div className="round-sm top-1.5">
-                                <input
-                                    type="checkbox"
-                                    id={`checkbox-${card.id}`}
-                                    checked={card.isCompleted}
-                                    onChange={(e) => handleToggleCompleted(e.target.checked)}
-                                />
-                                <label
-                                    htmlFor={`checkbox-${card.id}`}
-                                    onClick={(e) => e.stopPropagation()}
-                                />
-                                
-                            </div> */}
-                            <CustomCheckbox/>
-                            
+                            <CustomCheckbox
+                                checked={card.isCompleted}
+                                onChange={(value) => handleToggleCompleted(value)}
+                                className="top-1"
+                            />
+
                             {isEditingTitle ? (
                                 <input
                                     ref={titleInputRef}

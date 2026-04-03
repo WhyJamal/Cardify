@@ -12,6 +12,7 @@ import { formatDueDate } from "../utils/date";
 import { shadeColor } from "../utils/labels";
 import { Button } from "./ui/button";
 import { getInitials } from "../utils/getInitials";
+import CustomCheckbox from "./custom-checkbox";
 
 interface CardProps {
   card: CardData;
@@ -100,32 +101,24 @@ export function CardContent({ card, onClickCard, showLabelName, onToggleLabel, o
           )}
 
           {card.title && (
-            <div className="relative flex items-start group">
-              <div
-                className={`round-sm relative flex items-center ${card.isCompleted
-                  ? "mr-2"
-                  : "absolute left-0 top-0.5 opacity-0 group-hover:opacity-100 transition-all duration-200"
-                  }`}
-              >
-                <div className="relative">
-                  <TooltipAction tooltip="Отметь как выполнение" side="top">
-                    <div className="flex items-center">
-                      <input
-                        type="checkbox"
-                        id={`checkbox-${card.id}`}
-                        checked={card.isCompleted}
-                        onChange={(e) => handleToggleIsComplated(card.id, e.target.checked)}
-                        onClick={(e) => e.stopPropagation()}
-                        className="peer cursor-pointer"
-                      />
-                      <label htmlFor={`checkbox-${card.id}`} onClick={(e) => e.stopPropagation()} />
-                    </div>
-                  </TooltipAction>
+            <div className="relative flex items-start group mb-2">
+              <TooltipAction tooltip="Отметь как выполнение" side="top">
+                <div
+                  className={`round-sm relative flex items-center ${card.isCompleted
+                    ? "mr-1"
+                    : "absolute opacity-0 group-hover:opacity-100 transition-all duration-200"
+                    }`}
+                >
+                  <CustomCheckbox
+                    checked={card.isCompleted}
+                    onChange={(value) => handleToggleIsComplated(card.id, value)}
+                    className="top-0.5"
+                  />
                 </div>
-              </div>
+              </TooltipAction>
 
               <p
-                className={`text-sm leading-snug mb-2 pr-5 ${card.isCompleted ? "" : "transition-all duration-200 group-hover:pl-2"
+                className={`absolute text-sm leading-snug ${card.isCompleted ? "left-5" : "left-1 transition-all duration-200 group-hover:pl-4"
                   }`}
                 style={{
                   color:

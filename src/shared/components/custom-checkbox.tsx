@@ -1,11 +1,18 @@
 "use client";
 
-import { useState } from "react";
 import styles from "./custom-checkbox.module.css";
 
-export default function CustomCheckbox() {
-    const [checked, setChecked] = useState(false);
+type Props = {
+    checked: boolean;
+    onChange: (value: boolean, e: React.MouseEvent) => void;
+    className?: string;
+};
 
+export default function CustomCheckbox({
+    checked,
+    onChange,
+    className = "",
+}: Props) {
     return (
         <>
             <svg
@@ -26,23 +33,20 @@ export default function CustomCheckbox() {
                 </defs>
             </svg>
 
-            <div className="relative w-4 h-4 top-1">
+            <div className={`relative w-4 h-4 ${className}`}>
                 <input
                     type="checkbox"
                     checked={checked}
-                    onChange={() => setChecked(!checked)}
-                    className={`${styles.cbxInput} absolute w-4.5 h-4.5 rounded-full z-10`}
+                    onChange={(e) => onChange(e.target.checked, e.nativeEvent as any)}
+                    onMouseDown={(e) => e.stopPropagation()} 
+                    onClick={(e) => e.stopPropagation()}
+                    className={`${styles.cbxInput} absolute w-4 h-4 rounded-full z-10`}
                 />
 
                 <label
-                    className={`${styles.cbxLabel} absolute w-4.5 h-4.5 rounded-full flex items-center justify-center pointer-events-none`}
+                    className={`${styles.cbxLabel} absolute w-4 h-4 rounded-full flex items-center justify-center pointer-events-none`}
                 >
-                    <svg
-                        width="10"
-                        height="9"
-                        viewBox="0 0 16 14"
-                        shapeRendering="geometricPrecision"
-                    >
+                    <svg width="10" height="9" viewBox="0 0 16 14">
                         <path
                             d="M2 8.36364L6.23077 12L13 2"
                             fill="none"
@@ -50,7 +54,6 @@ export default function CustomCheckbox() {
                             strokeWidth="2"
                             strokeLinecap="round"
                             strokeLinejoin="round"
-                            vectorEffect="non-scaling-stroke"
                             strokeDasharray="20"
                             strokeDashoffset="20"
                             style={{ transition: "stroke-dashoffset 0.4s ease" }}

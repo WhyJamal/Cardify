@@ -48,12 +48,13 @@ export async function POST(
     return NextResponse.json({ error: "User not found" }, { status: 404 });
   }
 
-  if (invitee.id === dbUser.id) {
-    return NextResponse.json(
-      { error: "You cannot invite yourself" },
-      { status: 400 }
-    );
-  }
+  // You cannot invite yourself
+  // if (invitee.id === dbUser.id) {
+  //   return NextResponse.json(
+  //     { error: "You cannot invite yourself" },
+  //     { status: 400 }
+  //   );
+  // }
 
   const existing = await prisma.boardMember.findUnique({
     where: { boardId_userId: { boardId, userId: invitee.id } },

@@ -105,7 +105,7 @@ export default function RootPage() {
               style={{ backgroundColor: "#2c2e33" }}
             >
               <Image
-                src="/images/87855c9dd4548ab725ac600d9c082b8681ae99cc.png"
+                src="/images/87855c9dd4548ab725ac600d9c082b8681ae99cc.webp"
                 alt="attention"
                 width={96}
                 height={96}

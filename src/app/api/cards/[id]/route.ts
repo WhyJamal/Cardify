@@ -76,7 +76,7 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
     }
 
     const body = await req.json();
-    const { title, description, position, hasDescription, watching, dueDate, labels, isCompleted, background, isImage, size, textColor } = body;
+    const { title, description, position, hasDescription, watching, isArchive, isChoosen, dueDate, labels, isCompleted, background, isImage, size, textColor } = body;
 
     const labelsProvided = Array.isArray(labels);
 
@@ -87,6 +87,8 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
         ...(description !== undefined && { description }),
         ...(position !== undefined && { position }),
         ...(hasDescription !== undefined && { hasDescription }),
+        ...(isArchive !== undefined && { isArchive }),
+        ...(isChoosen !== undefined && { isChoosen }),
         ...(isCompleted !== undefined && { isCompleted }),
         ...(watching !== undefined && { watching }),
         ...(dueDate !== undefined && { dueDate: dueDate !== null ? new Date(dueDate) : null }),

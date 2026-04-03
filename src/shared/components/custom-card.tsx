@@ -79,7 +79,7 @@ export function CardContent({ card, onClickCard, showLabelName, onToggleLabel, o
               ? card.isImage
                 ? `url(${card.background}) center/cover no-repeat`
                 : card.background ?? undefined
-              : "#000000"
+              : "#22272b"
           }}
         >
           {card.labels && card.labels.length > 0 && (
@@ -131,7 +131,7 @@ export function CardContent({ card, onClickCard, showLabelName, onToggleLabel, o
                   color:
                     card.textColor === "light"
                       ? "#b6c2cf"
-                      : card.textColor || undefined
+                      : card.textColor || "#b6c2cf"
                 }}
               >
                 {card.title}

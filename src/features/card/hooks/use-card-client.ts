@@ -267,13 +267,13 @@ export function useCardClient(initialCard: CardData, cardId: string) {
             const finalTextColor = textColor ?? "light";
             try {
                 await cardApi.updateBackground(card.id, background, isImage, size, finalTextColor);
-                setCard((prev) => prev ? { ...prev, background, isImage, size, textColor } : prev);
+                setCard((prev) => prev ? { ...prev, background, isImage, size, finalTextColor } : prev);
 
                 setColumns((prev) =>
                     prev.map((col) => ({
                         ...col,
                         cards: col.cards.map((c) =>
-                            c.id === cardId ? { ...c, background, isImage, size, textColor } : c
+                            c.id === cardId ? { ...c, background, isImage, size, finalTextColor } : c
                         ),
                     }))
                 );
@@ -287,13 +287,13 @@ export function useCardClient(initialCard: CardData, cardId: string) {
     const handleRemoveBackground = useCallback(async () => {
         try {
             await cardApi.removeBackground(card.id);
-            setCard((prev) => prev ? { ...prev, background: null, isImage: false } : prev);
+            setCard((prev) => prev ? { ...prev, background: null, isImage: false, textColor: "light" } : prev);
 
             setColumns((prev) =>
                 prev.map((col) => ({
                     ...col,
                     cards: col.cards.map((c) =>
-                        c.id === cardId ? { ...c, background: null, isImage: false } : c
+                        c.id === cardId ? { ...c, background: null, isImage: false, textColor: "light" } : c
                     ),
                 }))
             );

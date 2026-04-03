@@ -95,7 +95,7 @@ export const cardApi = {
   removeBackground: (cardId: string) =>
     clientFetch(`/api/cards/${cardId}`, {
       method: "PATCH",
-      body: JSON.stringify({ background: null, isImage: false }),
+      body: JSON.stringify({ background: null, isImage: false, textColor: "light" }),
     }),
 
   uploadCover: (cardId: string, formData: FormData) =>

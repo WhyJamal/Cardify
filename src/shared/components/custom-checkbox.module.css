@@ -1,0 +1,73 @@
+:root {
+  --checkbox-primary: #22c55e;
+}
+
+@keyframes splash {
+  0% {
+    transform: scale(1.1);
+  }
+
+  40% {
+    transform: scale(1);
+    background: var(--checkbox-primary);
+    box-shadow:
+      0 -18px 0 -8px var(--checkbox-primary),
+      16px -8px 0 -8px var(--checkbox-primary),
+      16px 8px 0 -8px var(--checkbox-primary),
+      0 18px 0 -8px var(--checkbox-primary),
+      -16px 8px 0 -8px var(--checkbox-primary),
+      -16px -8px 0 -8px var(--checkbox-primary);
+  }
+
+  100% {
+    background: var(--checkbox-primary);
+    box-shadow:
+      0 -32px 0 -10px transparent,
+      28px -16px 0 -10px transparent,
+      28px 16px 0 -10px transparent,
+      0 32px 0 -10px transparent,
+      -28px 16px 0 -10px transparent,
+      -28px -16px 0 -10px transparent;
+  }
+}
+
+.cbxInput {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  background: transparent;
+  border: 2px solid #bfbfc0;
+  cursor: pointer;
+  margin: 0;
+  border-color: #a0a0a1;
+  transition: border-color 0.2s ease;
+}
+
+.cbxInput:checked {
+  border-color: transparent;
+}
+
+.cbxInput:hover {
+  border-color: #22c55e;
+  /* border-color: #a0a0a1; */
+}
+
+.cbxInput:focus {
+  outline: none;
+}
+
+/* animation trigger */
+.cbxInput:checked + .cbxLabel {
+  animation: splash 0.6s ease forwards;
+}
+
+/* check animation */
+.cbxInput:checked + .cbxLabel svg path {
+  stroke-dashoffset: 0;
+}
+
+.cbxLabel {
+  filter: url(#goo);
+  transform: translate3d(0, 0, 0);
+}

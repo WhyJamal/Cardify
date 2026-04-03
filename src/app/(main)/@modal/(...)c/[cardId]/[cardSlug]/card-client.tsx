@@ -25,6 +25,7 @@ import AddAttachments from "@/features/card/add-attachments";
 import ListAttachments from "@/features/card/list-attachments";
 import { CreateLabelMenu } from "@/features/card/create-label-menu";
 import CoverSettings from "@/features/card/cover-settings";
+import CustomCheckbox from "@/shared/components/custom-checkbox";
 
 export default function CardClient({
     cardId,
@@ -193,7 +194,7 @@ export default function CardClient({
                 <div className="flex h-full min-h-0">
                     <div className="flex-1 min-h-0 max-h-100 px-6 pb-6 pt-2 min-w-0 overflow-y-auto">
                         <div className="flex items-start gap-3 mb-5">
-                            <div className="round-sm top-1.5">
+                            {/* <div className="round-sm top-1.5">
                                 <input
                                     type="checkbox"
                                     id={`checkbox-${card.id}`}
@@ -204,8 +205,10 @@ export default function CardClient({
                                     htmlFor={`checkbox-${card.id}`}
                                     onClick={(e) => e.stopPropagation()}
                                 />
-                            </div>
-
+                                
+                            </div> */}
+                            <CustomCheckbox/>
+                            
                             {isEditingTitle ? (
                                 <input
                                     ref={titleInputRef}

@@ -48,3 +48,6 @@ next-env.d.ts
 
 # editor
 .vscode/
+
+# uploads (user files)
+public/uploads/

@@ -82,6 +82,8 @@ export interface CardAttachment {
   createdAt: string; 
 }
 
+export type SizeOption = "WIDE" | "TALL";
+
 export interface CardData {
   id: string;
   title?: string;
@@ -115,6 +117,10 @@ export interface CardData {
 
   dueDate?: string | null;
   isCompleted: boolean;
+
+  isImage?: boolean;
+  background?: string | null; 
+  size?: SizeOption;
 }
 
 export interface ColumnInt {

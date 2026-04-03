@@ -16,6 +16,7 @@ export function useCardClient(initialCard: CardData, cardId: string) {
     const { board, columns, setColumns } = useBoardView();
 
     const addBtnRef = useRef<HTMLButtonElement>(null);
+    const coverBtnRef = useRef<HTMLButtonElement>(null);
     const attachBtnRef = useRef<HTMLButtonElement>(null);
     const titleInputRef = useRef<HTMLInputElement>(null);
 
@@ -26,6 +27,8 @@ export function useCardClient(initialCard: CardData, cardId: string) {
     const [card, setCard] = useState<CardData>(initialCard);
     const [isEditingTitle, setIsEditingTitle] = useState(false);
     const [tempTitle, setTempTitle] = useState(initialCard.title);
+
+    const [showCover, setShowCover] = useState(false);
 
     const [isEditingDesc, setIsEditingDesc] = useState(false);
     const [tempDesc, setTempDesc] = useState(initialCard.description ?? "");
@@ -258,9 +261,70 @@ export function useCardClient(initialCard: CardData, cardId: string) {
         setEditingCommentId(null);
     };
 
+
+    const handleSetBackground = useCallback(
+        async (background: string, isImage = false, size: "WIDE" | "TALL" = "WIDE") => {
+            try {
+                await cardApi.updateBackground(card.id, background, isImage, size);
+                setCard((prev) => prev ? { ...prev, background, isImage, size } : prev);
+
+                setColumns((prev) =>
+                    prev.map((col) => ({
+                        ...col,
+                        cards: col.cards.map((c) =>
+                            c.id === cardId ? { ...c, background, isImage, size } : c
+                        ),
+                    }))
+                );
+            } catch (err) {
+                console.error("Cover yangilashda xato:", err);
+            }
+        },
+        [card.id, cardId, setColumns]
+    );
+
+    const handleRemoveBackground = useCallback(async () => {
+        try {
+            await cardApi.removeBackground(card.id);
+            setCard((prev) => prev ? { ...prev, background: null, isImage: false } : prev);
+
+            setColumns((prev) =>
+                prev.map((col) => ({
+                    ...col,
+                    cards: col.cards.map((c) =>
+                        c.id === cardId ? { ...c, background: null, isImage: false } : c
+                    ),
+                }))
+            );
+        } catch (err) {
+            console.error("Cover o'chirishda xato:", err);
+        }
+    }, [card.id, cardId, setColumns]);
+
+    const handleUploadCover = useCallback(
+        async (file: File) => {
+            try {
+                const formData = new FormData();
+                formData.append("file", file);
+                const result = await cardApi.uploadCover(card.id, formData);
+                await handleSetBackground(result.url, true);
+            } catch (err) {
+                console.error("Rasm yuklashda xato:", err);
+            }
+        },
+        [card.id, handleSetBackground]
+    );
+
     return {
         card,
         setCard,
+
+        coverBtnRef,
+        showCover,
+        setShowCover,
+        handleSetBackground,
+        handleRemoveBackground,
+        handleUploadCover,
 
         isEditingTitle,
         setIsEditingTitle,

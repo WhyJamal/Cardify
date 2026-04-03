@@ -4,7 +4,7 @@ export const cardApi = {
   getTimeline: (cardId: string) =>
     clientFetch(`/api/cards/${cardId}/timeline`, {
       method: "GET",
-    }), 
+    }),
 
   updateDescription: (cardId: string, description: string) =>
     clientFetch(`/api/cards/${cardId}`, {
@@ -84,6 +84,24 @@ export const cardApi = {
   deleteLink: (cardId: string, linkId: string) =>
     clientFetch(`/api/cards/${cardId}/links/${linkId}`, {
       method: "DELETE",
+    }),
+
+  updateBackground: (cardId: string, background: string, isImage: boolean, size: "WIDE" | "TALL" = "WIDE") =>
+    clientFetch(`/api/cards/${cardId}`, {
+      method: "PATCH",
+      body: JSON.stringify({ background, isImage, size }),
+    }),
+
+  removeBackground: (cardId: string) =>
+    clientFetch(`/api/cards/${cardId}`, {
+      method: "PATCH",
+      body: JSON.stringify({ background: null, isImage: false }),
+    }),
+
+  uploadCover: (cardId: string, formData: FormData) =>
+    clientFetch(`/api/cards/${cardId}/cover`, {
+      method: "POST",
+      body: formData,
     }),
 
 };

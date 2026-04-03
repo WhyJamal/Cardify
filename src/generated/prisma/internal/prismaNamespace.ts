@@ -1610,7 +1610,8 @@ export const CardScalarFieldEnum = {
   dueDate: 'dueDate',
   isCompleted: 'isCompleted',
   isImage: 'isImage',
-  thumbnailUrl: 'thumbnailUrl'
+  background: 'background',
+  size: 'size'
 } as const
 
 export type CardScalarFieldEnum = (typeof CardScalarFieldEnum)[keyof typeof CardScalarFieldEnum]
@@ -1759,6 +1760,13 @@ export type EnumBoardMemberRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$
  * Reference to a field of type 'BoardMemberStatus'
  */
 export type EnumBoardMemberStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BoardMemberStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'SizeOption'
+ */
+export type EnumSizeOptionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SizeOption'>
     
 
 

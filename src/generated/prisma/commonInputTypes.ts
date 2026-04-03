@@ -253,6 +253,13 @@ export type DateTimeNullableFilter<$PrismaModel = never> = {
   not?: Prisma.NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
 }
 
+export type EnumSizeOptionFilter<$PrismaModel = never> = {
+  equals?: $Enums.SizeOption | Prisma.EnumSizeOptionFieldRefInput<$PrismaModel>
+  in?: $Enums.SizeOption[]
+  notIn?: $Enums.SizeOption[]
+  not?: Prisma.NestedEnumSizeOptionFilter<$PrismaModel> | $Enums.SizeOption
+}
+
 export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
   equals?: number | Prisma.IntFieldRefInput<$PrismaModel> | null
   in?: number[] | null
@@ -281,6 +288,16 @@ export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
   _min?: Prisma.NestedDateTimeNullableFilter<$PrismaModel>
   _max?: Prisma.NestedDateTimeNullableFilter<$PrismaModel>
+}
+
+export type EnumSizeOptionWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.SizeOption | Prisma.EnumSizeOptionFieldRefInput<$PrismaModel>
+  in?: $Enums.SizeOption[]
+  notIn?: $Enums.SizeOption[]
+  not?: Prisma.NestedEnumSizeOptionWithAggregatesFilter<$PrismaModel> | $Enums.SizeOption
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumSizeOptionFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumSizeOptionFilter<$PrismaModel>
 }
 
 export type EnumCardTimelineTypeFilter<$PrismaModel = never> = {
@@ -545,6 +562,13 @@ export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
   not?: Prisma.NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
 }
 
+export type NestedEnumSizeOptionFilter<$PrismaModel = never> = {
+  equals?: $Enums.SizeOption | Prisma.EnumSizeOptionFieldRefInput<$PrismaModel>
+  in?: $Enums.SizeOption[]
+  notIn?: $Enums.SizeOption[]
+  not?: Prisma.NestedEnumSizeOptionFilter<$PrismaModel> | $Enums.SizeOption
+}
+
 export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
   equals?: number | Prisma.IntFieldRefInput<$PrismaModel> | null
   in?: number[] | null
@@ -584,6 +608,16 @@ export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
   _min?: Prisma.NestedDateTimeNullableFilter<$PrismaModel>
   _max?: Prisma.NestedDateTimeNullableFilter<$PrismaModel>
+}
+
+export type NestedEnumSizeOptionWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.SizeOption | Prisma.EnumSizeOptionFieldRefInput<$PrismaModel>
+  in?: $Enums.SizeOption[]
+  notIn?: $Enums.SizeOption[]
+  not?: Prisma.NestedEnumSizeOptionWithAggregatesFilter<$PrismaModel> | $Enums.SizeOption
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumSizeOptionFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumSizeOptionFilter<$PrismaModel>
 }
 
 export type NestedEnumCardTimelineTypeFilter<$PrismaModel = never> = {

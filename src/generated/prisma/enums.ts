@@ -57,6 +57,14 @@ export const BoardMemberRole = {
 export type BoardMemberRole = (typeof BoardMemberRole)[keyof typeof BoardMemberRole]
 
 
+export const SizeOption = {
+  WIDE: 'WIDE',
+  TALL: 'TALL'
+} as const
+
+export type SizeOption = (typeof SizeOption)[keyof typeof SizeOption]
+
+
 export const CardTimelineType = {
   COMMENT: 'COMMENT',
   ACTIVITY: 'ACTIVITY'

@@ -24,16 +24,7 @@ import { getInitials } from "@/shared/utils/getInitials";
 import AddAttachments from "@/features/card/add-attachments";
 import ListAttachments from "@/features/card/list-attachments";
 import { CreateLabelMenu } from "@/features/card/create-label-menu";
-
-// interface Comment {
-//     id: number;
-//     author: string;
-//     initials: string;
-//     text: string;
-//     date: string;
-//     isActivity?: boolean;
-//     activityText?: string;
-// }
+import CoverSettings from "@/features/card/cover-settings";
 
 export default function CardClient({
     cardId,
@@ -52,6 +43,13 @@ export default function CardClient({
         titleInputRef,
         handleSaveTitle,
         handleCancelTitle,
+
+        coverBtnRef,
+        showCover,
+        setShowCover,
+        handleSetBackground,
+        handleRemoveBackground,
+        handleUploadCover,
 
         isEditingDesc,
         setIsEditingDesc,
@@ -110,29 +108,23 @@ export default function CardClient({
         router,
     } = useCardClient(initialCard, cardId);
 
-    // const comments: Comment[] = [
-    //     {
-    //         id: 1,
-    //         author: "M. Jamal",
-    //         initials: "JM",
-    //         text: "comment 1",
-    //         date: "16 июн. 2025 г., 14:06",
-    //     },
-    //     {
-    //         id: 2,
-    //         author: "M. Jamal",
-    //         initials: "JM",
-    //         text: "",
-    //         date: "30 мая 2025 г., 10:09",
-    //         isActivity: true,
-    //         activityText: "добавил(а) эту карточку в список 2",
-    //     },
-    // ];
-
     return (
         <div className="fixed inset-0 bg-black/60 grid items-start justify-center z-50 p-4">
             <div className="bg-[#1d2125] top-10 rounded-2xl min-w-5xl max-w-5xl max-h-[60vh] overflow-hidden shadow-2xl relative">
-                <div className="flex items-center justify-between px-5 pt-4 pb-2 border-b border-white/10">
+                <div
+                    className={`flex items-start justify-between px-5 pt-4 pb-2 border-b border-white/10 ${card.background ?
+                        "min-h-30"
+                        : "" 
+
+                    }`}
+                    style={{
+                        background: card
+                            ? card.isImage
+                                ? `url(${card.background}) center/cover no-repeat`
+                                : card.background ?? undefined
+                            : "#000000"
+                    }}
+                >
                     <div className="flex items-center gap-2 text-[#9fadbc] text-sm">
                         <span className="bg-[#2c333a] rounded px-2 py-0.5 flex items-center gap-1 cursor-pointer hover:bg-[#38414a]">
                             {card.column.title} <ChevronDown size={13} />
@@ -141,20 +133,22 @@ export default function CardClient({
 
                     <div className="flex items-center gap-3 text-[#9fadbc]">
                         <Button
+                            ref={coverBtnRef}
                             variant="ghost"
-                            className="hover:text-white hover:bg-[#2c333a] p-1.5 rounded transition-colors"
+                            onClick={() => setShowCover(true)}
+                            className="bg-[#2c333a] hover:text-white hover:bg-[#2c333a] p-1.5 rounded transition-colors"
                         >
                             <Image size={18} />
                         </Button>
                         <Button
                             variant="ghost"
-                            className="hover:text-white hover:bg-[#2c333a] p-1.5 rounded transition-colors"
+                            className="bg-[#2c333a] hover:text-white hover:bg-[#2c333a] p-1.5 rounded transition-colors"
                         >
                             <Eye size={18} />
                         </Button>
                         <Button
                             variant="ghost"
-                            className="hover:text-white hover:bg-[#2c333a] p-1.5 rounded transition-colors"
+                            className="bg-[#2c333a] hover:text-white hover:bg-[#2c333a] p-1.5 rounded transition-colors"
                         >
                             <MoreHorizontal size={18} />
                         </Button>
@@ -163,13 +157,25 @@ export default function CardClient({
                             <Button
                                 variant="ghost"
                                 onClick={() => router.back()}
-                                className="hover:text-white hover:bg-[#2c333a] p-1.5 rounded transition-colors"
+                                className="bg-[#2c333a] hover:text-white hover:bg-[#2c333a] p-1.5 rounded transition-colors"
                             >
                                 <X size={18} />
                             </Button>
                         </TooltipAction>
                     </div>
                 </div>
+
+                {showCover && (
+                    <CoverSettings
+                        triggerRef={coverBtnRef}
+                        onClose={() => setShowCover(false)}
+                        currentBackground={card.background}
+                        onSetBackground={handleSetBackground}
+                        onRemoveBackground={handleRemoveBackground}
+                        onUploadCover={handleUploadCover}
+                        card={card}
+                    />
+                )}
 
                 <div className="flex h-full min-h-0">
                     <div className="flex-1 min-h-0 max-h-100 px-6 pb-6 pt-2 min-w-0 overflow-y-auto">
@@ -285,7 +291,7 @@ export default function CardClient({
                                                     ...prev,
                                                     boardLabels: prev.boardLabels
                                                         ? [...prev.boardLabels, newLabel]
-                                                        : [newLabel], 
+                                                        : [newLabel],
                                                 }
                                                 : prev
                                         );

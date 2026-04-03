@@ -48,8 +48,16 @@ export function CardContent({ card, onClickCard, showLabelName, onToggleLabel, o
 
   return (
     <>
-      {card.coverColor && (
-        <div className="h-8 rounded-t-lg w-full" style={{ backgroundColor: card.coverColor }} />
+      {card.background && card.size === "WIDE" && (
+        <div className="h-8 rounded-t-lg w-full" 
+          style={{
+            background: card && card.size === "WIDE"
+              ? card.isImage
+                ? `url(${card.background}) center/cover no-repeat`
+                : card.background ?? undefined
+              : "#000000"
+          }}        
+        />
       )}
 
       {card.image && (
@@ -64,7 +72,16 @@ export function CardContent({ card, onClickCard, showLabelName, onToggleLabel, o
       )}
 
       <Link href={`/c/${card.id}/${card.title}`}>
-        <div className="p-2 pb-2">
+        <div
+          className="p-2 pb-2 rounded-md"
+          style={{
+            background: card && card.size === "TALL"
+              ? card.isImage
+                ? `url(${card.background}) center/cover no-repeat`
+                : card.background ?? undefined
+              : "#000000"
+          }}
+        >
           {card.labels && card.labels.length > 0 && (
             <div className="flex flex-wrap gap-1 mb-2">
               {card.labels.map((label) => (

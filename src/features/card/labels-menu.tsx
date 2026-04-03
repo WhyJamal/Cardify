@@ -14,6 +14,7 @@ import {
   type LabelWithChecked,
   shadeColor,
 } from "@/shared/utils/labels";
+import { Button } from "@/shared/components";
 
 interface LabelsMenuProps {
   triggerRef: React.RefObject<HTMLElement | null>;
@@ -145,12 +146,13 @@ export function LabelsMenu({
       </div>
 
       <div className="px-4 pb-4">
-        <button
+        <Button
+            variant={"custom"}
             onClick={onCreate} 
-            className="w-full bg-[#2c333a] hover:bg-[#38414a] text-[#9fadbc] hover:text-white border border-gray-800 py-1 rounded text-sm transition-colors"        
+            className="w-full"        
         >
           Создать новую метку
-        </button>
+        </Button>
       </div>
     </div>,
     document.body

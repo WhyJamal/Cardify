@@ -13,25 +13,25 @@ model User {
   email    String  @unique
   password String
 
-  ownedWorkspaces      Workspace[] @relation("WorkspaceOwner")
+  ownedWorkspaces      Workspace[]       @relation("WorkspaceOwner")
   workspaceMemberships WorkspaceMember[]
-  boards        Board[]
-  notifications Notification[]
-  boardMembers  BoardMember[]
-  cardMemberships CardMember[]
-  
+  boards               Board[]
+  notifications        Notification[]
+  boardMembers         BoardMember[]
+  cardMemberships      CardMember[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
 }
 
 model Workspace {
-  id        String   @id @default(cuid())
-  name      String
-  ownerId   String
+  id      String @id @default(cuid())
+  name    String
+  ownerId String
 
-  owner     User     @relation("WorkspaceOwner", fields: [ownerId], references: [id], onDelete: Cascade)
-  members   WorkspaceMember[]
-  boards    Board[]
+  owner   User              @relation("WorkspaceOwner", fields: [ownerId], references: [id], onDelete: Cascade)
+  members WorkspaceMember[]
+  boards  Board[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -53,17 +53,17 @@ enum WorkspaceMemberStatus {
 }
 
 model WorkspaceMember {
-  id           String              @id @default(cuid())
-  workspaceId  String
-  userId       String
-  role         WorkspaceMemberRole  @default(MEMBER)
-  status       WorkspaceMemberStatus @default(PENDING)
+  id          String                @id @default(cuid())
+  workspaceId String
+  userId      String
+  role        WorkspaceMemberRole   @default(MEMBER)
+  status      WorkspaceMemberStatus @default(PENDING)
 
-  workspace    Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
-  user         User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@unique([workspaceId, userId])
   @@index([workspaceId])
@@ -81,7 +81,7 @@ enum NotificationType {
 
 model Notification {
   id     String           @id @default(cuid())
-  userId String 
+  userId String
   type   NotificationType
   title  String
   body   String?
@@ -89,7 +89,7 @@ model Notification {
   data String?
 
   isRead      Boolean @default(false)
-  isDismissed Boolean @default(false) 
+  isDismissed Boolean @default(false)
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -111,20 +111,20 @@ enum BoardMemberRole {
 }
 
 model Board {
-  id          Int     @id @default(autoincrement())
-  title       String
-  bg          String
-  isPhoto     Boolean @default(true)
+  id      Int     @id @default(autoincrement())
+  title   String
+  bg      String
+  isPhoto Boolean @default(true)
 
   workspaceId String
   workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
 
-  ownerId     String
-  owner       User   @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  ownerId String
+  owner   User   @relation(fields: [ownerId], references: [id], onDelete: Cascade)
 
-  columns     Column[]
-  labels      BoardLabel[]
-  members     BoardMember[]
+  columns Column[]
+  labels  BoardLabel[]
+  members BoardMember[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -179,6 +179,11 @@ model Column {
   @@index([boardId, position])
 }
 
+enum SizeOption {
+  WIDE
+  TALL
+}
+
 model Card {
   id               String    @id @default(cuid())
   columnId         String
@@ -199,15 +204,16 @@ model Card {
   dueDate          DateTime?
   isCompleted      Boolean   @default(false)
 
-  isImage Boolean @default(false)
-  thumbnailUrl String?
+  isImage         Boolean @default(false)
+  background      String?
+  size            SizeOption @default(WIDE)
 
-  column           Column           @relation(fields: [columnId], references: [id], onDelete: Cascade)
-  labels           CardBoardLabel[]
-  links            CardLink[]
-  comments         CardTimeline[]
-  members          CardMember[]
-  attachments      CardAttachment[]
+  column          Column           @relation(fields: [columnId], references: [id], onDelete: Cascade)
+  labels          CardBoardLabel[]
+  links           CardLink[]
+  comments        CardTimeline[]
+  members         CardMember[]
+  attachments     CardAttachment[]
 
   @@index([columnId, position])
 }

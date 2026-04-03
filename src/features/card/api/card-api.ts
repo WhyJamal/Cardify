@@ -86,10 +86,10 @@ export const cardApi = {
       method: "DELETE",
     }),
 
-  updateBackground: (cardId: string, background: string, isImage: boolean, size: "WIDE" | "TALL" = "WIDE") =>
+  updateBackground: (cardId: string, background: string, isImage: boolean, size: "WIDE" | "TALL" = "WIDE", textColor: string) =>
     clientFetch(`/api/cards/${cardId}`, {
       method: "PATCH",
-      body: JSON.stringify({ background, isImage, size }),
+      body: JSON.stringify({ background, isImage, size, textColor }),
     }),
 
   removeBackground: (cardId: string) =>
@@ -103,5 +103,4 @@ export const cardApi = {
       method: "POST",
       body: formData,
     }),
-
 };

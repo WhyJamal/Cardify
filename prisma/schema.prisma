@@ -207,7 +207,8 @@ model Card {
   isImage         Boolean @default(false)
   background      String?
   size            SizeOption @default(WIDE)
-
+  textColor       String?
+  
   column          Column           @relation(fields: [columnId], references: [id], onDelete: Cascade)
   labels          CardBoardLabel[]
   links           CardLink[]

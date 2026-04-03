@@ -4,6 +4,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { writeFile, mkdir } from "fs/promises";
 import path from "path";
+import { getInitials } from "@/shared/utils/getInitials";
 
 export async function POST(
     req: NextRequest,
@@ -13,6 +14,10 @@ export async function POST(
 
     const session = await getServerSession(authOptions);
     if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
+    const dbUser = session.user?.email
+        ? await prisma.user.findUnique({ where: { email: session.user.email } })
+        : null;
 
     const formData = await req.formData();
     const file = formData.get("file") as File;
@@ -35,5 +40,26 @@ export async function POST(
         data: { background: url, isImage: true },
     });
 
-    return NextResponse.json({ url });
+    const attachment = await prisma.cardAttachment.create({
+        data: {
+            cardId: id,
+            fileName: file.name,
+            fileUrl: url,
+            fileSize: file.size,
+            mimeType: file.type,
+            uploadedBy: dbUser?.id,
+        },
+    });
+
+    await prisma.cardTimeline.create({
+        data: {
+            cardId: id,
+            type: "ACTIVITY",
+            authorName: dbUser?.name || dbUser?.email || "Unknown",
+            initials: getInitials(dbUser?.name || dbUser?.email || ""),
+            activityText: `обложку обновил(а): "${file.name}"`,
+        },
+    });
+
+    return NextResponse.json({ url, attachment });
 }

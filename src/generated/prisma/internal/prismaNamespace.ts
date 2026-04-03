@@ -1611,7 +1611,8 @@ export const CardScalarFieldEnum = {
   isCompleted: 'isCompleted',
   isImage: 'isImage',
   background: 'background',
-  size: 'size'
+  size: 'size',
+  textColor: 'textColor'
 } as const
 
 export type CardScalarFieldEnum = (typeof CardScalarFieldEnum)[keyof typeof CardScalarFieldEnum]

@@ -121,6 +121,7 @@ export interface CardData {
   isImage?: boolean;
   background?: string | null; 
   size?: SizeOption;
+  textColor?: string | null;
 }
 
 export interface ColumnInt {

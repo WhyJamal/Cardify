@@ -112,11 +112,11 @@ export default function CardClient({
         <div className="fixed inset-0 bg-black/60 grid items-start justify-center z-50 p-4">
             <div className="bg-[#1d2125] top-10 rounded-2xl min-w-5xl max-w-5xl max-h-[60vh] overflow-hidden shadow-2xl relative">
                 <div
-                    className={`flex items-start justify-between px-5 pt-4 pb-2 border-b border-white/10 ${card.background ?
+                    className={`flex flex-col items-start justify-between px-5 pt-4 pb-2 border-b border-white/10 group ${card.background ?
                         "min-h-30"
-                        : "" 
+                        : ""
 
-                    }`}
+                        }`}
                     style={{
                         background: card
                             ? card.isImage
@@ -125,44 +125,57 @@ export default function CardClient({
                             : "#000000"
                     }}
                 >
-                    <div className="flex items-center gap-2 text-[#9fadbc] text-sm">
-                        <span className="bg-[#2c333a] rounded px-2 py-0.5 flex items-center gap-1 cursor-pointer hover:bg-[#38414a]">
-                            {card.column.title} <ChevronDown size={13} />
-                        </span>
-                    </div>
+                    <div className="flex justify-between w-full">
+                        <div className="flex items-center gap-2 text-[#9fadbc] text-sm">
+                            <span className="bg-[#2c333a] rounded px-2 py-0.5 flex items-center gap-1 cursor-pointer hover:bg-[#38414a]">
+                                {card.column.title} <ChevronDown size={13} />
+                            </span>
+                        </div>
 
-                    <div className="flex items-center gap-3 text-[#9fadbc]">
-                        <Button
-                            ref={coverBtnRef}
-                            variant="ghost"
-                            onClick={() => setShowCover(true)}
-                            className="bg-[#2c333a] hover:text-white hover:bg-[#2c333a] p-1.5 rounded transition-colors"
-                        >
-                            <Image size={18} />
-                        </Button>
-                        <Button
-                            variant="ghost"
-                            className="bg-[#2c333a] hover:text-white hover:bg-[#2c333a] p-1.5 rounded transition-colors"
-                        >
-                            <Eye size={18} />
-                        </Button>
-                        <Button
-                            variant="ghost"
-                            className="bg-[#2c333a] hover:text-white hover:bg-[#2c333a] p-1.5 rounded transition-colors"
-                        >
-                            <MoreHorizontal size={18} />
-                        </Button>
-
-                        <TooltipAction tooltip="Закрыть" shortcut="Esc" side="bottom">
+                        <div className="flex items-center gap-3 text-[#9fadbc]">
                             <Button
+                                ref={coverBtnRef}
                                 variant="ghost"
-                                onClick={() => router.back()}
+                                onClick={() => setShowCover(true)}
                                 className="bg-[#2c333a] hover:text-white hover:bg-[#2c333a] p-1.5 rounded transition-colors"
                             >
-                                <X size={18} />
+                                <Image size={18} />
                             </Button>
-                        </TooltipAction>
+                            <Button
+                                variant="ghost"
+                                className="bg-[#2c333a] hover:text-white hover:bg-[#2c333a] p-1.5 rounded transition-colors"
+                            >
+                                <Eye size={18} />
+                            </Button>
+                            <Button
+                                variant="ghost"
+                                className="bg-[#2c333a] hover:text-white hover:bg-[#2c333a] p-1.5 rounded transition-colors"
+                            >
+                                <MoreHorizontal size={18} />
+                            </Button>
+
+                            <TooltipAction tooltip="Закрыть" shortcut="Esc" side="bottom">
+                                <Button
+                                    variant="ghost"
+                                    onClick={() => router.back()}
+                                    className="bg-[#2c333a] hover:text-white hover:bg-[#2c333a] p-1.5 rounded transition-colors"
+                                >
+                                    <X size={18} />
+                                </Button>
+                            </TooltipAction>
+                        </div>
                     </div>
+                    {card.background && (
+                        <div className="flex w-full justify-end opacity-0 group-hover:opacity-100">
+                            <Button
+                                variant={"ghost"}
+                                onClick={handleRemoveBackground}
+                                className="bg-[#2c333a] text-white/80 hover:text-white hover:bg-[#2c333a] p-1.5 rounded transition-colors"
+                            >
+                                Удалить обложку
+                            </Button>
+                        </div>
+                    )}
                 </div>
 
                 {showCover && (

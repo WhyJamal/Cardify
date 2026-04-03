@@ -49,14 +49,14 @@ export function CardContent({ card, onClickCard, showLabelName, onToggleLabel, o
   return (
     <>
       {card.background && card.size === "WIDE" && (
-        <div className="h-8 rounded-t-lg w-full" 
+        <div className="h-8 rounded-t-lg w-full"
           style={{
             background: card && card.size === "WIDE"
               ? card.isImage
                 ? `url(${card.background}) center/cover no-repeat`
                 : card.background ?? undefined
               : "#000000"
-          }}        
+          }}
         />
       )}
 
@@ -125,8 +125,14 @@ export function CardContent({ card, onClickCard, showLabelName, onToggleLabel, o
               </div>
 
               <p
-                className={`text-[#b6c2cf] text-sm leading-snug mb-2 pr-5 ${card.isCompleted ? "" : "transition-all duration-200 group-hover:pl-2"
+                className={`text-sm leading-snug mb-2 pr-5 ${card.isCompleted ? "" : "transition-all duration-200 group-hover:pl-2"
                   }`}
+                style={{
+                  color:
+                    card.textColor === "light"
+                      ? "#b6c2cf"
+                      : card.textColor || undefined
+                }}
               >
                 {card.title}
               </p>
@@ -254,7 +260,7 @@ export function CustomCard({ card, columnId, index, onEdit, onClickCard, onDropC
   return (
     <div
       ref={ref}
-      className={`group relative bg-[#22272b] rounded-lg shadow-sm cursor-grab active:cursor-grabbing
+      className={`group relative bg-[#22272b] rounded-lg shadow-sm cursor-grab active:cursor-grabbing 
         hover:bg-[#282e33] transition-colors 
         hover:ring-2 hover:ring-white  
         ${isDragging ? "opacity-40 scale-95" : "opacity-100"

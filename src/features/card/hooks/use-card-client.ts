@@ -263,21 +263,22 @@ export function useCardClient(initialCard: CardData, cardId: string) {
 
 
     const handleSetBackground = useCallback(
-        async (background: string, isImage = false, size: "WIDE" | "TALL" = "WIDE") => {
+        async (background: string, isImage = false, size: "WIDE" | "TALL" = "WIDE", textColor?: string) => {
+            const finalTextColor = textColor ?? "light";
             try {
-                await cardApi.updateBackground(card.id, background, isImage, size);
-                setCard((prev) => prev ? { ...prev, background, isImage, size } : prev);
+                await cardApi.updateBackground(card.id, background, isImage, size, finalTextColor);
+                setCard((prev) => prev ? { ...prev, background, isImage, size, textColor } : prev);
 
                 setColumns((prev) =>
                     prev.map((col) => ({
                         ...col,
                         cards: col.cards.map((c) =>
-                            c.id === cardId ? { ...c, background, isImage, size } : c
+                            c.id === cardId ? { ...c, background, isImage, size, textColor } : c
                         ),
                     }))
                 );
             } catch (err) {
-                console.error("Cover yangilashda xato:", err);
+                console.error("Ошибка обновления обложки:", err);
             }
         },
         [card.id, cardId, setColumns]
@@ -297,7 +298,7 @@ export function useCardClient(initialCard: CardData, cardId: string) {
                 }))
             );
         } catch (err) {
-            console.error("Cover o'chirishda xato:", err);
+            console.error("Ошибка удаления обложки:", err);
         }
     }, [card.id, cardId, setColumns]);
 
@@ -307,9 +308,16 @@ export function useCardClient(initialCard: CardData, cardId: string) {
                 const formData = new FormData();
                 formData.append("file", file);
                 const result = await cardApi.uploadCover(card.id, formData);
-                await handleSetBackground(result.url, true);
+                await handleSetBackground(result.url, true, card.size, card.textColor ?? "light");
+
+                if (result.attachment) {
+                    setCard((prev) => prev
+                        ? { ...prev, attachments: [...(prev.attachments ?? []), result.attachment] }
+                        : prev
+                    );
+                }
             } catch (err) {
-                console.error("Rasm yuklashda xato:", err);
+                console.error("Ошибка загрузки изображения:", err);
             }
         },
         [card.id, handleSetBackground]

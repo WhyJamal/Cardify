@@ -34,7 +34,7 @@ interface CoverSettingsProps {
     triggerRef: React.RefObject<HTMLElement | null>;
     onClose: () => void;
     currentBackground?: string | null;
-    onSetBackground: (background: string, isImage?: boolean, size?: "WIDE" | "TALL") => void;
+    onSetBackground: (background: string, isImage?: boolean, size?: "WIDE" | "TALL", textColor?: string) => void;
     onRemoveBackground: () => void;
     onUploadCover: (file: File) => void;
     card: CardData;
@@ -78,11 +78,11 @@ export default function CoverSettings({
         const found = COLORS.find((c) => c.id === colorId);
         if (!found) return;
         setSelectedColor(colorId);
-        onSetBackground(found.hex, false, selectedSize);
+        onSetBackground(found.hex, false, selectedSize, card.textColor ?? "light");
     };
 
     const handlePhotoClick = (url: string) => {
-        onSetBackground(url, true, selectedSize);
+        onSetBackground(url, true, selectedSize, card.textColor ?? "light");
     };
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -134,7 +134,7 @@ export default function CoverSettings({
                             onClick={() => {
                                 setSelectedSize("WIDE");
                                 if (currentBackground) {
-                                    onSetBackground(currentBackground, card?.isImage ?? false, "WIDE");
+                                    onSetBackground(currentBackground, card?.isImage ?? false, "WIDE", "light");
                                 }
                             }}
                             className={`flex-1 h-16 rounded-md flex items-end transition-all border hover:ring-1 ${selectedSize === "WIDE"
@@ -159,7 +159,7 @@ export default function CoverSettings({
                             onClick={() => {
                                 setSelectedSize("TALL");
                                 if (currentBackground) {
-                                    onSetBackground(currentBackground, card?.isImage ?? false, "TALL");
+                                    onSetBackground(currentBackground, card?.isImage ?? false, "TALL", card.textColor ?? "light");
                                 }
                             }}
                             className={`flex-1 h-16 rounded-md flex justify-start items-end transition-all border p-1 hover:ring-2 ${selectedSize === "TALL"
@@ -182,6 +182,41 @@ export default function CoverSettings({
                 >
                     Удалить обложку
                 </Button>
+
+                {((card.isImage || card.background?.startsWith("/uploads"))) && card.size === "TALL" && (
+                    <div>
+                        <p className="text-white/40 text-xs uppercase tracking-widest mb-2 font-medium">
+                            Цвет текста
+                        </p>
+                        <div className="flex gap-2">
+
+                            <button
+                                onClick={() => onSetBackground(card.background ?? "#000000", card?.isImage ?? false, card.size, "light")}
+                                className={`flex-1 h-9 rounded-md border flex items-center justify-start gap-2 text-md font-medium transition-all px-2 overflow-hidden relative
+                                    ${(card.textColor ?? "light") === "light"
+                                        ? "border-white ring-1 ring-white"
+                                        : "border-white/10 hover:border-white/30 hover:text-white/80"
+                                    }`}
+                                style={{ background: `url(${card.background}) center/cover no-repeat` }}
+                            >
+                                <div className="absolute inset-0 bg-black/40" />
+                                <span className="relative z-10 text-white">{card.title}</span>
+                            </button>
+
+                            <button
+                                onClick={() => onSetBackground(card.background ?? "#000000", card?.isImage ?? false, card.size, "dark")}
+                                className={`flex-1 h-9 rounded-md border flex items-center justify-start text-black gap-2 text-md font-medium transition-all px-2
+                                    ${card.textColor === "dark"
+                                        ? "border-white ring-1 ring-white"
+                                        : "border-white/10 hover:border-white/30"
+                                    }`}
+                                style={{ background: `url(${card.background}) center/cover no-repeat` }}
+                            >
+                                {card.title}
+                            </button>
+                        </div>
+                    </div>
+                )}
 
                 <div>
                     <p className="text-white/40 text-xs uppercase tracking-widest mb-2 font-medium">
@@ -224,6 +259,36 @@ export default function CoverSettings({
                     <p className="text-white/40 text-xs uppercase tracking-widest mb-2 font-medium">
                         Вложения
                     </p>
+
+                    {card.attachments?.filter(a => a.mimeType?.startsWith("image/")).length > 0 && (
+                        <div className="grid grid-cols-3 gap-1.5 mb-2">
+                            {card.attachments
+                                .filter(a => a.mimeType?.startsWith("image/"))
+                                .map((attachment) => (
+                                    <button
+                                        key={attachment.id}
+                                        onClick={() => onSetBackground(attachment.fileUrl, true, selectedSize, card.textColor ?? "light")}
+                                        className="relative h-16 rounded-md overflow-hidden hover:ring-2 hover:ring-white/50 transition-all group"
+                                        title={attachment.fileName}
+                                    >
+                                        <img
+                                            src={attachment.fileUrl}
+                                            alt={attachment.fileName}
+                                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                        />
+                                        {card.background === attachment.fileUrl && (
+                                            <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                                                <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                                                </svg>
+                                            </div>
+                                        )}
+                                    </button>
+                                ))
+                            }
+                        </div>
+                    )}
+
                     <input
                         ref={fileInputRef}
                         type="file"

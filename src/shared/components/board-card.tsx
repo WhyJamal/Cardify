@@ -2,6 +2,8 @@ import Link from "next/link";
 import { Card, CardHeader } from "@/shared/components/ui/card";
 import { slugify } from "@/shared/utils/slugify";
 import { Board } from "../types";
+import ToggleChoosen from "./toggle-choosen";
+import { useBoardActions } from "../hooks/use-board-actions";
 
 interface BoardCardProps {
     board: Board;
@@ -9,18 +11,25 @@ interface BoardCardProps {
 }
 
 export function BoardCard({ board, onClick }: BoardCardProps) {
+    const { handleToggleIsChoosen } = useBoardActions();
+
     return (
         <div onClick={onClick}>
             <Link key={board.id} href={`/b/${board.id}/${slugify(board.title)}`}>
                 <Card
-                    className="py-0 rounded-sm overflow-hidden cursor-pointer bg-[#1d2125] shadow-md hover:shadow-lg transition-all duration-200 groupborder-0"
+                    className="py-0 rounded-sm overflow-hidden cursor-pointer bg-[#1d2125] shadow-md hover:shadow-lg transition-all duration-200 groupborder-0 group"
                 >
                     <CardHeader
-                        className="h-16.25 w-full group-hover:brightness-110 transition-all duration-200"
+                        className="h-16.25 w-full group-hover:brightness-110 transition-all duration-200 justify-end"
                         style={{
                             background: board.isPhoto ? `url(${board.bg}) center/cover no-repeat` : board.bg,
                         }}
                     >
+                        <ToggleChoosen 
+                            boardId={board.id}
+                            onToggle={handleToggleIsChoosen}
+                            initialPressed={board.isChoosen}
+                        />
                     </CardHeader>
 
                     <div className="px-2">
@@ -28,6 +37,7 @@ export function BoardCard({ board, onClick }: BoardCardProps) {
                             {board.title}
                         </p>
                     </div>
+                    
                 </Card>
             </Link>
         </div>

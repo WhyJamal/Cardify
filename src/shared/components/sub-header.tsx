@@ -15,6 +15,7 @@ import { darkenHex, getTopPixelAverageColor, getContrastColor } from "../utils/g
 import { useEffect, useRef, useState } from "react";
 import { getInitials } from "../utils/getInitials";
 import { useBoardActions } from "../hooks/use-board-actions";
+import { AvatarGroupCount } from "./avatar-group-count";
 
 interface BoardSubHeaderProps {
   onAddColumn?: () => void;
@@ -114,6 +115,7 @@ export function SubHeader({ onAddColumn }: BoardSubHeaderProps) {
           </div>
         )}
 
+        {/* <AvatarGroupCount members={board?.members || []}/> */}
 
         <button className="flex items-center gap-1.5 px-3 py-1.5 rounded text-sm hover:bg-white/10 transition-colors">
           <Star size={14} />

@@ -1,3 +1,5 @@
+"use client";
+
 import { useRef, useState } from "react";
 import { useBoardView } from "@/app/providers/BoardProvider";
 import { clientFetch } from "@/lib/client-api";
@@ -218,6 +220,24 @@ export function useBoardActions() {
     }
   }
 
+  async function handleToggleIsChoosen(boardId: number, isChoosen: boolean) {
+    if (!boardId) return;
+
+    try {
+      const res = await boardApi.updateIsChoosen(boardId, isChoosen);
+      setBoard((prev: Board | null) => {
+          if (!prev) return prev;
+          return {
+            ...prev,
+            isChoosen,
+          };
+        });
+      return res;
+    } catch (err) {
+      console.error("Create label failed", err);
+    }
+  }
+
   return {
     dropCard,
     addCard,
@@ -231,7 +251,8 @@ export function useBoardActions() {
     isEditingTitle,
     setTempTitle,
     setIsEditingTitle,
-    handleCreateLabel
+    handleCreateLabel,
+    handleToggleIsChoosen
   };
 }
 

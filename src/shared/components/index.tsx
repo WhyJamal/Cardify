@@ -20,6 +20,7 @@ export {
   DialogTitle,
   DialogTrigger,
 } from "@/shared/components/ui/dialog"
+import { AvatarGroupCount } from "./avatar-group-count";
 
 export { BoardCard } from "./board-card";
 export { BottomNav } from "./bottom-nav";

@@ -1545,6 +1545,7 @@ export const BoardScalarFieldEnum = {
   title: 'title',
   bg: 'bg',
   isPhoto: 'isPhoto',
+  isChoosen: 'isChoosen',
   workspaceId: 'workspaceId',
   ownerId: 'ownerId',
   createdAt: 'createdAt',
@@ -1612,7 +1613,8 @@ export const CardScalarFieldEnum = {
   isImage: 'isImage',
   background: 'background',
   size: 'size',
-  textColor: 'textColor'
+  textColor: 'textColor',
+  isArchive: 'isArchive'
 } as const
 
 export type CardScalarFieldEnum = (typeof CardScalarFieldEnum)[keyof typeof CardScalarFieldEnum]

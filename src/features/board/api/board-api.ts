@@ -33,4 +33,12 @@ export const boardApi = {
       body: JSON.stringify(formData),
     });
   },
+
+  updateIsChoosen: (boardId: number, isChoosen: boolean) => {
+    return clientFetch(`/api/boards/${boardId}`,{
+      method: "PATCH",
+      body: JSON.stringify({isChoosen}),
+    })
+  },
+
 };

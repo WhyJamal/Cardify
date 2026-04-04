@@ -94,6 +94,7 @@ export async function PATCH(
     title?: string;
     bg?: string;
     isPhoto?: boolean;
+    isChoosen?: boolean;
   } = {};
 
   if (body.title !== undefined)
@@ -104,6 +105,9 @@ export async function PATCH(
 
   if (body.isPhoto !== undefined)
     data.isPhoto = Boolean(body.isPhoto);
+
+  if (body.isChoosen !== undefined)
+    data.isChoosen = Boolean(body.isChoosen);
 
   if (data.title !== undefined && !data.title) {
     return NextResponse.json(

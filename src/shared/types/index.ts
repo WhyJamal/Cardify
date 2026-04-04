@@ -21,6 +21,7 @@ export interface User {
   id: string;
   name: string | null;
   email: string;
+  image?: string;
 }
 
 export interface WorkspaceMember {
@@ -94,8 +95,7 @@ export interface CardData {
 
   hasDescription?: boolean;
   watching?: boolean;
-
-  // attachments?: number;
+  isArchive: boolean;
 
   checklist?: {
     done: number;
@@ -152,6 +152,7 @@ export interface Board {
   bg: string;
   isPhoto: boolean;
   workspaceId: string;
+  isChoosen: boolean;
   
   columns: ColumnInt[];
   labels: BoardLabel[];

@@ -62,6 +62,7 @@ export type CardMinAggregateOutputType = {
   background: string | null
   size: $Enums.SizeOption | null
   textColor: string | null
+  isArchive: boolean | null
 }
 
 export type CardMaxAggregateOutputType = {
@@ -86,6 +87,7 @@ export type CardMaxAggregateOutputType = {
   background: string | null
   size: $Enums.SizeOption | null
   textColor: string | null
+  isArchive: boolean | null
 }
 
 export type CardCountAggregateOutputType = {
@@ -110,6 +112,7 @@ export type CardCountAggregateOutputType = {
   background: number
   size: number
   textColor: number
+  isArchive: number
   _all: number
 }
 
@@ -150,6 +153,7 @@ export type CardMinAggregateInputType = {
   background?: true
   size?: true
   textColor?: true
+  isArchive?: true
 }
 
 export type CardMaxAggregateInputType = {
@@ -174,6 +178,7 @@ export type CardMaxAggregateInputType = {
   background?: true
   size?: true
   textColor?: true
+  isArchive?: true
 }
 
 export type CardCountAggregateInputType = {
@@ -198,6 +203,7 @@ export type CardCountAggregateInputType = {
   background?: true
   size?: true
   textColor?: true
+  isArchive?: true
   _all?: true
 }
 
@@ -309,6 +315,7 @@ export type CardGroupByOutputType = {
   background: string | null
   size: $Enums.SizeOption
   textColor: string | null
+  isArchive: boolean
   _count: CardCountAggregateOutputType | null
   _avg: CardAvgAggregateOutputType | null
   _sum: CardSumAggregateOutputType | null
@@ -356,6 +363,7 @@ export type CardWhereInput = {
   background?: Prisma.StringNullableFilter<"Card"> | string | null
   size?: Prisma.EnumSizeOptionFilter<"Card"> | $Enums.SizeOption
   textColor?: Prisma.StringNullableFilter<"Card"> | string | null
+  isArchive?: Prisma.BoolFilter<"Card"> | boolean
   column?: Prisma.XOR<Prisma.ColumnScalarRelationFilter, Prisma.ColumnWhereInput>
   labels?: Prisma.CardBoardLabelListRelationFilter
   links?: Prisma.CardLinkListRelationFilter
@@ -386,6 +394,7 @@ export type CardOrderByWithRelationInput = {
   background?: Prisma.SortOrderInput | Prisma.SortOrder
   size?: Prisma.SortOrder
   textColor?: Prisma.SortOrderInput | Prisma.SortOrder
+  isArchive?: Prisma.SortOrder
   column?: Prisma.ColumnOrderByWithRelationInput
   labels?: Prisma.CardBoardLabelOrderByRelationAggregateInput
   links?: Prisma.CardLinkOrderByRelationAggregateInput
@@ -419,6 +428,7 @@ export type CardWhereUniqueInput = Prisma.AtLeast<{
   background?: Prisma.StringNullableFilter<"Card"> | string | null
   size?: Prisma.EnumSizeOptionFilter<"Card"> | $Enums.SizeOption
   textColor?: Prisma.StringNullableFilter<"Card"> | string | null
+  isArchive?: Prisma.BoolFilter<"Card"> | boolean
   column?: Prisma.XOR<Prisma.ColumnScalarRelationFilter, Prisma.ColumnWhereInput>
   labels?: Prisma.CardBoardLabelListRelationFilter
   links?: Prisma.CardLinkListRelationFilter
@@ -449,6 +459,7 @@ export type CardOrderByWithAggregationInput = {
   background?: Prisma.SortOrderInput | Prisma.SortOrder
   size?: Prisma.SortOrder
   textColor?: Prisma.SortOrderInput | Prisma.SortOrder
+  isArchive?: Prisma.SortOrder
   _count?: Prisma.CardCountOrderByAggregateInput
   _avg?: Prisma.CardAvgOrderByAggregateInput
   _max?: Prisma.CardMaxOrderByAggregateInput
@@ -481,6 +492,7 @@ export type CardScalarWhereWithAggregatesInput = {
   background?: Prisma.StringNullableWithAggregatesFilter<"Card"> | string | null
   size?: Prisma.EnumSizeOptionWithAggregatesFilter<"Card"> | $Enums.SizeOption
   textColor?: Prisma.StringNullableWithAggregatesFilter<"Card"> | string | null
+  isArchive?: Prisma.BoolWithAggregatesFilter<"Card"> | boolean
 }
 
 export type CardCreateInput = {
@@ -504,6 +516,7 @@ export type CardCreateInput = {
   background?: string | null
   size?: $Enums.SizeOption
   textColor?: string | null
+  isArchive?: boolean
   column: Prisma.ColumnCreateNestedOneWithoutCardsInput
   labels?: Prisma.CardBoardLabelCreateNestedManyWithoutCardInput
   links?: Prisma.CardLinkCreateNestedManyWithoutCardInput
@@ -534,6 +547,7 @@ export type CardUncheckedCreateInput = {
   background?: string | null
   size?: $Enums.SizeOption
   textColor?: string | null
+  isArchive?: boolean
   labels?: Prisma.CardBoardLabelUncheckedCreateNestedManyWithoutCardInput
   links?: Prisma.CardLinkUncheckedCreateNestedManyWithoutCardInput
   comments?: Prisma.CardTimelineUncheckedCreateNestedManyWithoutCardInput
@@ -562,6 +576,7 @@ export type CardUpdateInput = {
   background?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   size?: Prisma.EnumSizeOptionFieldUpdateOperationsInput | $Enums.SizeOption
   textColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   column?: Prisma.ColumnUpdateOneRequiredWithoutCardsNestedInput
   labels?: Prisma.CardBoardLabelUpdateManyWithoutCardNestedInput
   links?: Prisma.CardLinkUpdateManyWithoutCardNestedInput
@@ -592,6 +607,7 @@ export type CardUncheckedUpdateInput = {
   background?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   size?: Prisma.EnumSizeOptionFieldUpdateOperationsInput | $Enums.SizeOption
   textColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   labels?: Prisma.CardBoardLabelUncheckedUpdateManyWithoutCardNestedInput
   links?: Prisma.CardLinkUncheckedUpdateManyWithoutCardNestedInput
   comments?: Prisma.CardTimelineUncheckedUpdateManyWithoutCardNestedInput
@@ -621,6 +637,7 @@ export type CardCreateManyInput = {
   background?: string | null
   size?: $Enums.SizeOption
   textColor?: string | null
+  isArchive?: boolean
 }
 
 export type CardUpdateManyMutationInput = {
@@ -644,6 +661,7 @@ export type CardUpdateManyMutationInput = {
   background?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   size?: Prisma.EnumSizeOptionFieldUpdateOperationsInput | $Enums.SizeOption
   textColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchive?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type CardUncheckedUpdateManyInput = {
@@ -668,6 +686,7 @@ export type CardUncheckedUpdateManyInput = {
   background?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   size?: Prisma.EnumSizeOptionFieldUpdateOperationsInput | $Enums.SizeOption
   textColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchive?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type CardListRelationFilter = {
@@ -702,6 +721,7 @@ export type CardCountOrderByAggregateInput = {
   background?: Prisma.SortOrder
   size?: Prisma.SortOrder
   textColor?: Prisma.SortOrder
+  isArchive?: Prisma.SortOrder
 }
 
 export type CardAvgOrderByAggregateInput = {
@@ -733,6 +753,7 @@ export type CardMaxOrderByAggregateInput = {
   background?: Prisma.SortOrder
   size?: Prisma.SortOrder
   textColor?: Prisma.SortOrder
+  isArchive?: Prisma.SortOrder
 }
 
 export type CardMinOrderByAggregateInput = {
@@ -757,6 +778,7 @@ export type CardMinOrderByAggregateInput = {
   background?: Prisma.SortOrder
   size?: Prisma.SortOrder
   textColor?: Prisma.SortOrder
+  isArchive?: Prisma.SortOrder
 }
 
 export type CardSumOrderByAggregateInput = {
@@ -920,6 +942,7 @@ export type CardCreateWithoutColumnInput = {
   background?: string | null
   size?: $Enums.SizeOption
   textColor?: string | null
+  isArchive?: boolean
   labels?: Prisma.CardBoardLabelCreateNestedManyWithoutCardInput
   links?: Prisma.CardLinkCreateNestedManyWithoutCardInput
   comments?: Prisma.CardTimelineCreateNestedManyWithoutCardInput
@@ -948,6 +971,7 @@ export type CardUncheckedCreateWithoutColumnInput = {
   background?: string | null
   size?: $Enums.SizeOption
   textColor?: string | null
+  isArchive?: boolean
   labels?: Prisma.CardBoardLabelUncheckedCreateNestedManyWithoutCardInput
   links?: Prisma.CardLinkUncheckedCreateNestedManyWithoutCardInput
   comments?: Prisma.CardTimelineUncheckedCreateNestedManyWithoutCardInput
@@ -1005,6 +1029,7 @@ export type CardScalarWhereInput = {
   background?: Prisma.StringNullableFilter<"Card"> | string | null
   size?: Prisma.EnumSizeOptionFilter<"Card"> | $Enums.SizeOption
   textColor?: Prisma.StringNullableFilter<"Card"> | string | null
+  isArchive?: Prisma.BoolFilter<"Card"> | boolean
 }
 
 export type CardCreateWithoutLabelsInput = {
@@ -1028,6 +1053,7 @@ export type CardCreateWithoutLabelsInput = {
   background?: string | null
   size?: $Enums.SizeOption
   textColor?: string | null
+  isArchive?: boolean
   column: Prisma.ColumnCreateNestedOneWithoutCardsInput
   links?: Prisma.CardLinkCreateNestedManyWithoutCardInput
   comments?: Prisma.CardTimelineCreateNestedManyWithoutCardInput
@@ -1057,6 +1083,7 @@ export type CardUncheckedCreateWithoutLabelsInput = {
   background?: string | null
   size?: $Enums.SizeOption
   textColor?: string | null
+  isArchive?: boolean
   links?: Prisma.CardLinkUncheckedCreateNestedManyWithoutCardInput
   comments?: Prisma.CardTimelineUncheckedCreateNestedManyWithoutCardInput
   members?: Prisma.CardMemberUncheckedCreateNestedManyWithoutCardInput
@@ -1100,6 +1127,7 @@ export type CardUpdateWithoutLabelsInput = {
   background?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   size?: Prisma.EnumSizeOptionFieldUpdateOperationsInput | $Enums.SizeOption
   textColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   column?: Prisma.ColumnUpdateOneRequiredWithoutCardsNestedInput
   links?: Prisma.CardLinkUpdateManyWithoutCardNestedInput
   comments?: Prisma.CardTimelineUpdateManyWithoutCardNestedInput
@@ -1129,6 +1157,7 @@ export type CardUncheckedUpdateWithoutLabelsInput = {
   background?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   size?: Prisma.EnumSizeOptionFieldUpdateOperationsInput | $Enums.SizeOption
   textColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   links?: Prisma.CardLinkUncheckedUpdateManyWithoutCardNestedInput
   comments?: Prisma.CardTimelineUncheckedUpdateManyWithoutCardNestedInput
   members?: Prisma.CardMemberUncheckedUpdateManyWithoutCardNestedInput
@@ -1156,6 +1185,7 @@ export type CardCreateWithoutLinksInput = {
   background?: string | null
   size?: $Enums.SizeOption
   textColor?: string | null
+  isArchive?: boolean
   column: Prisma.ColumnCreateNestedOneWithoutCardsInput
   labels?: Prisma.CardBoardLabelCreateNestedManyWithoutCardInput
   comments?: Prisma.CardTimelineCreateNestedManyWithoutCardInput
@@ -1185,6 +1215,7 @@ export type CardUncheckedCreateWithoutLinksInput = {
   background?: string | null
   size?: $Enums.SizeOption
   textColor?: string | null
+  isArchive?: boolean
   labels?: Prisma.CardBoardLabelUncheckedCreateNestedManyWithoutCardInput
   comments?: Prisma.CardTimelineUncheckedCreateNestedManyWithoutCardInput
   members?: Prisma.CardMemberUncheckedCreateNestedManyWithoutCardInput
@@ -1228,6 +1259,7 @@ export type CardUpdateWithoutLinksInput = {
   background?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   size?: Prisma.EnumSizeOptionFieldUpdateOperationsInput | $Enums.SizeOption
   textColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   column?: Prisma.ColumnUpdateOneRequiredWithoutCardsNestedInput
   labels?: Prisma.CardBoardLabelUpdateManyWithoutCardNestedInput
   comments?: Prisma.CardTimelineUpdateManyWithoutCardNestedInput
@@ -1257,6 +1289,7 @@ export type CardUncheckedUpdateWithoutLinksInput = {
   background?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   size?: Prisma.EnumSizeOptionFieldUpdateOperationsInput | $Enums.SizeOption
   textColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   labels?: Prisma.CardBoardLabelUncheckedUpdateManyWithoutCardNestedInput
   comments?: Prisma.CardTimelineUncheckedUpdateManyWithoutCardNestedInput
   members?: Prisma.CardMemberUncheckedUpdateManyWithoutCardNestedInput
@@ -1284,6 +1317,7 @@ export type CardCreateWithoutCommentsInput = {
   background?: string | null
   size?: $Enums.SizeOption
   textColor?: string | null
+  isArchive?: boolean
   column: Prisma.ColumnCreateNestedOneWithoutCardsInput
   labels?: Prisma.CardBoardLabelCreateNestedManyWithoutCardInput
   links?: Prisma.CardLinkCreateNestedManyWithoutCardInput
@@ -1313,6 +1347,7 @@ export type CardUncheckedCreateWithoutCommentsInput = {
   background?: string | null
   size?: $Enums.SizeOption
   textColor?: string | null
+  isArchive?: boolean
   labels?: Prisma.CardBoardLabelUncheckedCreateNestedManyWithoutCardInput
   links?: Prisma.CardLinkUncheckedCreateNestedManyWithoutCardInput
   members?: Prisma.CardMemberUncheckedCreateNestedManyWithoutCardInput
@@ -1356,6 +1391,7 @@ export type CardUpdateWithoutCommentsInput = {
   background?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   size?: Prisma.EnumSizeOptionFieldUpdateOperationsInput | $Enums.SizeOption
   textColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   column?: Prisma.ColumnUpdateOneRequiredWithoutCardsNestedInput
   labels?: Prisma.CardBoardLabelUpdateManyWithoutCardNestedInput
   links?: Prisma.CardLinkUpdateManyWithoutCardNestedInput
@@ -1385,6 +1421,7 @@ export type CardUncheckedUpdateWithoutCommentsInput = {
   background?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   size?: Prisma.EnumSizeOptionFieldUpdateOperationsInput | $Enums.SizeOption
   textColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   labels?: Prisma.CardBoardLabelUncheckedUpdateManyWithoutCardNestedInput
   links?: Prisma.CardLinkUncheckedUpdateManyWithoutCardNestedInput
   members?: Prisma.CardMemberUncheckedUpdateManyWithoutCardNestedInput
@@ -1412,6 +1449,7 @@ export type CardCreateWithoutMembersInput = {
   background?: string | null
   size?: $Enums.SizeOption
   textColor?: string | null
+  isArchive?: boolean
   column: Prisma.ColumnCreateNestedOneWithoutCardsInput
   labels?: Prisma.CardBoardLabelCreateNestedManyWithoutCardInput
   links?: Prisma.CardLinkCreateNestedManyWithoutCardInput
@@ -1441,6 +1479,7 @@ export type CardUncheckedCreateWithoutMembersInput = {
   background?: string | null
   size?: $Enums.SizeOption
   textColor?: string | null
+  isArchive?: boolean
   labels?: Prisma.CardBoardLabelUncheckedCreateNestedManyWithoutCardInput
   links?: Prisma.CardLinkUncheckedCreateNestedManyWithoutCardInput
   comments?: Prisma.CardTimelineUncheckedCreateNestedManyWithoutCardInput
@@ -1484,6 +1523,7 @@ export type CardUpdateWithoutMembersInput = {
   background?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   size?: Prisma.EnumSizeOptionFieldUpdateOperationsInput | $Enums.SizeOption
   textColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   column?: Prisma.ColumnUpdateOneRequiredWithoutCardsNestedInput
   labels?: Prisma.CardBoardLabelUpdateManyWithoutCardNestedInput
   links?: Prisma.CardLinkUpdateManyWithoutCardNestedInput
@@ -1513,6 +1553,7 @@ export type CardUncheckedUpdateWithoutMembersInput = {
   background?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   size?: Prisma.EnumSizeOptionFieldUpdateOperationsInput | $Enums.SizeOption
   textColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   labels?: Prisma.CardBoardLabelUncheckedUpdateManyWithoutCardNestedInput
   links?: Prisma.CardLinkUncheckedUpdateManyWithoutCardNestedInput
   comments?: Prisma.CardTimelineUncheckedUpdateManyWithoutCardNestedInput
@@ -1540,6 +1581,7 @@ export type CardCreateWithoutAttachmentsInput = {
   background?: string | null
   size?: $Enums.SizeOption
   textColor?: string | null
+  isArchive?: boolean
   column: Prisma.ColumnCreateNestedOneWithoutCardsInput
   labels?: Prisma.CardBoardLabelCreateNestedManyWithoutCardInput
   links?: Prisma.CardLinkCreateNestedManyWithoutCardInput
@@ -1569,6 +1611,7 @@ export type CardUncheckedCreateWithoutAttachmentsInput = {
   background?: string | null
   size?: $Enums.SizeOption
   textColor?: string | null
+  isArchive?: boolean
   labels?: Prisma.CardBoardLabelUncheckedCreateNestedManyWithoutCardInput
   links?: Prisma.CardLinkUncheckedCreateNestedManyWithoutCardInput
   comments?: Prisma.CardTimelineUncheckedCreateNestedManyWithoutCardInput
@@ -1612,6 +1655,7 @@ export type CardUpdateWithoutAttachmentsInput = {
   background?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   size?: Prisma.EnumSizeOptionFieldUpdateOperationsInput | $Enums.SizeOption
   textColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   column?: Prisma.ColumnUpdateOneRequiredWithoutCardsNestedInput
   labels?: Prisma.CardBoardLabelUpdateManyWithoutCardNestedInput
   links?: Prisma.CardLinkUpdateManyWithoutCardNestedInput
@@ -1641,6 +1685,7 @@ export type CardUncheckedUpdateWithoutAttachmentsInput = {
   background?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   size?: Prisma.EnumSizeOptionFieldUpdateOperationsInput | $Enums.SizeOption
   textColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   labels?: Prisma.CardBoardLabelUncheckedUpdateManyWithoutCardNestedInput
   links?: Prisma.CardLinkUncheckedUpdateManyWithoutCardNestedInput
   comments?: Prisma.CardTimelineUncheckedUpdateManyWithoutCardNestedInput
@@ -1668,6 +1713,7 @@ export type CardCreateManyColumnInput = {
   background?: string | null
   size?: $Enums.SizeOption
   textColor?: string | null
+  isArchive?: boolean
 }
 
 export type CardUpdateWithoutColumnInput = {
@@ -1691,6 +1737,7 @@ export type CardUpdateWithoutColumnInput = {
   background?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   size?: Prisma.EnumSizeOptionFieldUpdateOperationsInput | $Enums.SizeOption
   textColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   labels?: Prisma.CardBoardLabelUpdateManyWithoutCardNestedInput
   links?: Prisma.CardLinkUpdateManyWithoutCardNestedInput
   comments?: Prisma.CardTimelineUpdateManyWithoutCardNestedInput
@@ -1719,6 +1766,7 @@ export type CardUncheckedUpdateWithoutColumnInput = {
   background?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   size?: Prisma.EnumSizeOptionFieldUpdateOperationsInput | $Enums.SizeOption
   textColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   labels?: Prisma.CardBoardLabelUncheckedUpdateManyWithoutCardNestedInput
   links?: Prisma.CardLinkUncheckedUpdateManyWithoutCardNestedInput
   comments?: Prisma.CardTimelineUncheckedUpdateManyWithoutCardNestedInput
@@ -1747,6 +1795,7 @@ export type CardUncheckedUpdateManyWithoutColumnInput = {
   background?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   size?: Prisma.EnumSizeOptionFieldUpdateOperationsInput | $Enums.SizeOption
   textColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchive?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 
@@ -1838,6 +1887,7 @@ export type CardSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   background?: boolean
   size?: boolean
   textColor?: boolean
+  isArchive?: boolean
   column?: boolean | Prisma.ColumnDefaultArgs<ExtArgs>
   labels?: boolean | Prisma.Card$labelsArgs<ExtArgs>
   links?: boolean | Prisma.Card$linksArgs<ExtArgs>
@@ -1869,6 +1919,7 @@ export type CardSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   background?: boolean
   size?: boolean
   textColor?: boolean
+  isArchive?: boolean
   column?: boolean | Prisma.ColumnDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["card"]>
 
@@ -1894,6 +1945,7 @@ export type CardSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   background?: boolean
   size?: boolean
   textColor?: boolean
+  isArchive?: boolean
   column?: boolean | Prisma.ColumnDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["card"]>
 
@@ -1919,9 +1971,10 @@ export type CardSelectScalar = {
   background?: boolean
   size?: boolean
   textColor?: boolean
+  isArchive?: boolean
 }
 
-export type CardOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "columnId" | "title" | "image" | "numberBadge" | "description" | "hasDescription" | "watching" | "checklistDone" | "checklistTotal" | "assigneeInitials" | "assigneeColor" | "position" | "createdAt" | "updatedAt" | "dueDate" | "isCompleted" | "isImage" | "background" | "size" | "textColor", ExtArgs["result"]["card"]>
+export type CardOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "columnId" | "title" | "image" | "numberBadge" | "description" | "hasDescription" | "watching" | "checklistDone" | "checklistTotal" | "assigneeInitials" | "assigneeColor" | "position" | "createdAt" | "updatedAt" | "dueDate" | "isCompleted" | "isImage" | "background" | "size" | "textColor" | "isArchive", ExtArgs["result"]["card"]>
 export type CardInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   column?: boolean | Prisma.ColumnDefaultArgs<ExtArgs>
   labels?: boolean | Prisma.Card$labelsArgs<ExtArgs>
@@ -1970,6 +2023,7 @@ export type $CardPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     background: string | null
     size: $Enums.SizeOption
     textColor: string | null
+    isArchive: boolean
   }, ExtArgs["result"]["card"]>
   composites: {}
 }
@@ -2420,6 +2474,7 @@ export interface CardFieldRefs {
   readonly background: Prisma.FieldRef<"Card", 'String'>
   readonly size: Prisma.FieldRef<"Card", 'SizeOption'>
   readonly textColor: Prisma.FieldRef<"Card", 'String'>
+  readonly isArchive: Prisma.FieldRef<"Card", 'Boolean'>
 }
     
 

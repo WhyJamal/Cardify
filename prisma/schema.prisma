@@ -111,23 +111,24 @@ enum BoardMemberRole {
 }
 
 model Board {
-  id      Int     @id @default(autoincrement())
-  title   String
-  bg      String
-  isPhoto Boolean @default(true)
+  id              Int     @id @default(autoincrement())
+  title           String
+  bg              String
+  isPhoto         Boolean @default(true)
+  isChoosen       Boolean           @default(false)
 
-  workspaceId String
-  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  workspaceId     String
+  workspace       Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
 
-  ownerId String
-  owner   User   @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  ownerId         String
+  owner           User   @relation(fields: [ownerId], references: [id], onDelete: Cascade)
 
-  columns Column[]
-  labels  BoardLabel[]
-  members BoardMember[]
+  columns         Column[]
+  labels          BoardLabel[]
+  members         BoardMember[]
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 
   @@index([workspaceId])
   @@index([ownerId])
@@ -209,7 +210,6 @@ model Card {
   textColor       String?
 
   isArchive       Boolean           @default(false)
-  isChoosen       Boolean           @default(false)
   
   column          Column            @relation(fields: [columnId], references: [id], onDelete: Cascade)
   labels          CardBoardLabel[]

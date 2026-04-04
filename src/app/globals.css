@@ -263,3 +263,19 @@
 .animate-loading-bar {
   animation: loading-bar 1.2s linear infinite;
 }
+
+/* animate slidedown */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-down {
+  animation: slideDown 0.2s ease-out forwards;
+}

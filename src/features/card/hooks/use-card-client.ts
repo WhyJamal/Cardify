@@ -50,6 +50,18 @@ export function useCardClient(initialCard: CardData, cardId: string) {
 
     useEscapeKey(() => router.back(), true);
 
+    const titleRef = useRef<HTMLHeadingElement>(null);
+    const [isTitleVisible, setIsTitleVisible] = useState(true);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => setIsTitleVisible(entry.isIntersecting),
+            { threshold: 0 }
+        );
+        if (titleRef.current) observer.observe(titleRef.current);
+        return () => observer.disconnect();
+    }, []);
+
     useEffect(() => {
         setCard(initialCard);
         setTempTitle(initialCard.title);
@@ -326,6 +338,9 @@ export function useCardClient(initialCard: CardData, cardId: string) {
     return {
         card,
         setCard,
+
+        titleRef,
+        isTitleVisible,
 
         coverBtnRef,
         showCover,

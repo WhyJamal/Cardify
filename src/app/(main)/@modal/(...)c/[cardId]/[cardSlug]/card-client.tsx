@@ -45,6 +45,9 @@ export default function CardClient({
         handleSaveTitle,
         handleCancelTitle,
 
+        titleRef,
+        isTitleVisible,
+
         coverBtnRef,
         showCover,
         setShowCover,
@@ -179,21 +182,38 @@ export default function CardClient({
                     )}
                 </div>
 
-                {showCover && (
-                    <CoverSettings
-                        triggerRef={coverBtnRef}
-                        onClose={() => setShowCover(false)}
-                        currentBackground={card.background}
-                        onSetBackground={handleSetBackground}
-                        onRemoveBackground={handleRemoveBackground}
-                        onUploadCover={handleUploadCover}
-                        card={card}
-                    />
-                )}
-
                 <div className="flex h-full min-h-0">
-                    <div className="flex-1 min-h-0 max-h-100 px-6 pb-6 pt-2 min-w-0 overflow-y-auto">
-                        <div className="flex items-start gap-3 mb-5">
+                    <div className="flex-1 min-h-0 max-h-100 px-6 pb-6 min-w-0 overflow-y-auto">
+
+                        {!isTitleVisible && (
+                            <div className="sticky top-0 z-10 bg-[#1d2125] flex items-center gap-3 py-2 mb-2 border-b border-white/10 animate-slide-down">
+                                <CustomCheckbox
+                                    checked={card.isCompleted}
+                                    onChange={(value) => handleToggleCompleted(value)}
+                                />
+                                <span className="text-white text-sm font-semibold truncate flex-1">
+                                    {card.title}
+                                </span>
+                                <button
+                                    ref={addBtnRef}
+                                    onClick={addMenu}
+                                    className="flex items-center gap-1.5 bg-[#2c333a] hover:bg-[#38414a] text-[#9fadbc] hover:text-white text-sm px-3 py-1.5 rounded transition-colors"
+                                >
+                                    <Plus size={14} />
+                                    Добавить
+                                </button>
+                                <button
+                                    ref={attachBtnRef}
+                                    onClick={addAttachments}
+                                    className="flex items-center gap-1.5 bg-[#2c333a] hover:bg-[#38414a] text-[#9fadbc] hover:text-white text-sm px-3 py-1.5 rounded transition-colors"
+                                >
+                                    <Paperclip size={14} />
+                                    Вложение
+                                </button>
+                            </div>
+                        )}
+
+                        <div className="flex items-start gap-3 mb-5 pt-3">
                             <CustomCheckbox
                                 checked={card.isCompleted}
                                 onChange={(value) => handleToggleCompleted(value)}
@@ -216,6 +236,7 @@ export default function CardClient({
                                 />
                             ) : (
                                 <h2
+                                    ref={titleRef}
                                     className="text-white text-xl font-semibold leading-snug cursor-text"
                                     onClick={() => {
                                         setTempTitle(card.title);
@@ -246,81 +267,6 @@ export default function CardClient({
                                 Вложение
                             </button>
 
-                            {showAttach && (
-                                <AddAttachments
-                                    triggerRef={attachBtnRef}
-                                    onClose={handleCloseAttach}
-                                    cardId={cardId}
-                                />
-                            )}
-
-                            {showMenu && (
-                                <AddToCardMenu
-                                    triggerRef={addBtnRef}
-                                    onClose={() => addMenu()}
-                                    onOpenDates={handleOpenDates}
-                                    onOpenLabels={handleOpenLabels}
-                                    onOpenInvites={handleOpenInvites}
-                                />
-                            )}
-
-                            {showDatePicker && (
-                                <DatePicker
-                                    triggerRef={card.dueDate ? dateBtnRef : addBtnRef}
-                                    cardId={card.id}
-                                    cardDueDate={card.dueDate ?? undefined}
-                                    onClose={handleCloseDatePicker}
-                                    onChange={handleUpdateDueDate}
-                                />
-                            )}
-
-                            {showLabels && (
-                                <LabelsMenu
-                                    triggerRef={card.labels && card.labels.length > 0 ? labelDivRef : addBtnRef}
-                                    boardLabels={card.boardLabels ?? []}
-                                    selectedLabels={card.labels ?? []}
-                                    onChange={handleUpdateLabels}
-                                    onClose={handleCloseLabels}
-                                    onCreate={() => {
-                                        setShowCreateLabel(true);
-                                        handleCloseLabels();
-                                    }}
-                                />
-                            )}
-
-                            {showCreateLabel && (
-                                <CreateLabelMenu
-                                    triggerRef={card.labels && card.labels.length > 0 ? labelDivRef : addBtnRef}
-                                    onChange={(newLabel) => {
-                                        setCard((prev) =>
-                                            prev
-                                                ? {
-                                                    ...prev,
-                                                    boardLabels: prev.boardLabels
-                                                        ? [...prev.boardLabels, newLabel]
-                                                        : [newLabel],
-                                                }
-                                                : prev
-                                        );
-                                    }}
-                                    onClose={() => setShowCreateLabel(false)}
-                                    onBack={() => {
-                                        setShowCreateLabel(false);
-                                        handleOpenLabels();
-                                    }}
-                                />
-                            )}
-
-                            {showInvite && (
-                                <InviteMemberMenu
-                                    triggerRef={card.members && card.members.length > 0 ? inviteDivRef : addBtnRef}
-                                    workspaceId={board?.workspaceId ?? ""}
-                                    currentMembers={card.members ?? []}
-                                    onAdd={handleAddMember}
-                                    onRemove={handleRemoveMember}
-                                    onClose={handleCloseInvites}
-                                />
-                            )}
                         </div>
 
 
@@ -653,6 +599,95 @@ export default function CardClient({
                     </div>
                 </div>
             </div>
+
+            {showCover && (
+                <CoverSettings
+                    triggerRef={coverBtnRef}
+                    onClose={() => setShowCover(false)}
+                    currentBackground={card.background}
+                    onSetBackground={handleSetBackground}
+                    onRemoveBackground={handleRemoveBackground}
+                    onUploadCover={handleUploadCover}
+                    card={card}
+                />
+            )}
+
+            {showAttach && (
+                <AddAttachments
+                    triggerRef={attachBtnRef}
+                    onClose={handleCloseAttach}
+                    cardId={cardId}
+                />
+            )}
+
+            {showMenu && (
+                <AddToCardMenu
+                    triggerRef={addBtnRef}
+                    onClose={() => addMenu()}
+                    onOpenDates={handleOpenDates}
+                    onOpenLabels={handleOpenLabels}
+                    onOpenInvites={handleOpenInvites}
+                />
+            )}
+
+            {showDatePicker && (
+                <DatePicker
+                    triggerRef={card.dueDate ? dateBtnRef : addBtnRef}
+                    cardId={card.id}
+                    cardDueDate={card.dueDate ?? undefined}
+                    onClose={handleCloseDatePicker}
+                    onChange={handleUpdateDueDate}
+                />
+            )}
+
+            {showLabels && (
+                <LabelsMenu
+                    triggerRef={card.labels && card.labels.length > 0 ? labelDivRef : addBtnRef}
+                    boardLabels={card.boardLabels ?? []}
+                    selectedLabels={card.labels ?? []}
+                    onChange={handleUpdateLabels}
+                    onClose={handleCloseLabels}
+                    onCreate={() => {
+                        setShowCreateLabel(true);
+                        handleCloseLabels();
+                    }}
+                />
+            )}
+
+            {showCreateLabel && (
+                <CreateLabelMenu
+                    triggerRef={card.labels && card.labels.length > 0 ? labelDivRef : addBtnRef}
+                    onChange={(newLabel) => {
+                        setCard((prev) =>
+                            prev
+                                ? {
+                                    ...prev,
+                                    boardLabels: prev.boardLabels
+                                        ? [...prev.boardLabels, newLabel]
+                                        : [newLabel],
+                                }
+                                : prev
+                        );
+                    }}
+                    onClose={() => setShowCreateLabel(false)}
+                    onBack={() => {
+                        setShowCreateLabel(false);
+                        handleOpenLabels();
+                    }}
+                />
+            )}
+
+            {showInvite && (
+                <InviteMemberMenu
+                    triggerRef={card.members && card.members.length > 0 ? inviteDivRef : addBtnRef}
+                    workspaceId={board?.workspaceId ?? ""}
+                    currentMembers={card.members ?? []}
+                    onAdd={handleAddMember}
+                    onRemove={handleRemoveMember}
+                    onClose={handleCloseInvites}
+                />
+            )}
+
         </div >
     );
 }

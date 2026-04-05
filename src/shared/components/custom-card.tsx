@@ -14,6 +14,8 @@ import { Button } from "./ui/button";
 import { getInitials } from "../utils/getInitials";
 import CustomCheckbox from "./custom-checkbox";
 
+import { CardContextMenu } from "@/features/card/card-context-menu";
+
 interface CardProps {
   card: CardData;
   columnId: string;
@@ -228,6 +230,15 @@ export function CustomCard({
 }: CardProps) {
   const ref = useRef<HTMLDivElement>(null);
 
+  const [cardRect, setCardRect] = useState<DOMRect | null>(null);
+
+  function handlePencilClick(e: React.MouseEvent<HTMLButtonElement>) {
+    e.preventDefault();
+    e.stopPropagation();
+    const rect = ref.current?.getBoundingClientRect();
+    if (rect) setCardRect(rect);
+  }
+
   const [, drag, dragPreview] = useDrag({
     type: "CARD",
     item: { id: card.id, columnId, index },
@@ -287,7 +298,7 @@ export function CustomCard({
       <Button
         size={"icon-sm"}
         variant={"ghost"}
-        onClick={() => onEdit?.(card.id)}
+        onClick={handlePencilClick}
         className="absolute top-2 right-2 z-10 opacity-0 group-hover:opacity-100 rounded bg-[#2c333a] hover:bg-[#3d4954] text-[#9fadbc] transition-all"
       >
         <Pencil size={12} />
@@ -310,6 +321,19 @@ export function CustomCard({
         onToggleLabel={onToggleLabel}
         onToggleIsCompleted={onToggleIsCompleted}
       />
+
+      {cardRect && (
+        <CardContextMenu
+          card={{ id: card.id, title: card.title ?? "" }}
+          cardRect={cardRect}
+          onClose={() => setCardRect(null)}
+          onOpenCard={() => onClickCard?.(card.id)}
+          onArchive={() => onToggleArchive(card.id, true)}
+          onSaveTitle={(newTitle) => {
+            // exp: updateCardTitle(card.id, newTitle)
+          }}
+        />
+      )}
 
     </div>
   );

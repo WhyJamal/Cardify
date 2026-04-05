@@ -22,6 +22,15 @@ export function useCardActions() {
         [setColumns]
     );
 
+    const removeCardFromState = useCallback((cardId: string) => {
+        setColumns(prev =>
+            prev.map(col => ({
+                ...col,
+                cards: col.cards.filter(card => card.id !== cardId),
+            }))
+        );
+    }, [setColumns]);
+
     const findCard = useCallback(
         (cardId: string) => {
             for (const col of board?.columns ?? []) {
@@ -36,7 +45,7 @@ export function useCardActions() {
     const changeTitleCard = useCallback(
         async (cardId: string, title: string) => {
             const prevCard = findCard(cardId);
-            
+
             syncCardInState(cardId, { title });
 
             try {
@@ -71,10 +80,44 @@ export function useCardActions() {
         [findCard, syncCardInState]
     );
 
+    const toggleIsArchive = useCallback(
+        async (cardId: string, isArchive: boolean) => {
+            const prevCard = findCard(cardId);
+
+            if (isArchive) {
+                removeCardFromState(cardId);
+            } else {
+                syncCardInState(cardId, { isArchive: false });
+            }
+
+            try {
+                const result = await cardApi.updateIsArchive(cardId, isArchive);
+                if (!result) throw new Error("Update failed");
+                return true;
+            } catch (err) {
+                console.error(err);
+
+                // rollback
+                if (prevCard && isArchive) {
+                    setColumns(prev =>
+                        prev.map(col =>
+                            col.id === prevCard.column.id
+                                ? { ...col, cards: [...col.cards, prevCard] }
+                                : col
+                        )
+                    );
+                }
+
+                return false;
+            }
+        },
+        [findCard, syncCardInState, removeCardFromState, setColumns]
+    );
+
     const handleChangeDueDate = useCallback(
         async (cardId: string, dueDate: string | null) => {
             const prevCard = findCard(cardId);
-    
+
             syncCardInState(cardId, {
                 dueDate: dueDate ? new Date(dueDate).toISOString() : undefined,
             });
@@ -120,5 +163,5 @@ export function useCardActions() {
         [findCard, syncCardInState]
     );
 
-    return { changeTitleCard, toggleIsCompleted, handleChangeDueDate, updateLabels };
+    return { changeTitleCard, toggleIsCompleted, handleChangeDueDate, updateLabels, toggleIsArchive };
 }

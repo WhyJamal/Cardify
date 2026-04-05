@@ -30,9 +30,23 @@ interface CardProps {
   showLabelName: boolean;
   onToggleLabel: () => void;
   onToggleIsCompleted: (cardId: string, isComplate: boolean) => void;
+  onToggleArchive: (cardId: string, isArchive: boolean) => void;
 }
 
-export function CardContent({ card, onClickCard, showLabelName, onToggleLabel, onToggleIsCompleted }: { card: CardData; onClickCard?: (cardId: string) => void, showLabelName: boolean, onToggleLabel: () => void, onToggleIsCompleted: (cardId: string, isComplate: boolean) => void }) {
+interface CardContentProps {
+  card: CardData;
+  onClickCard?: (cardId: string) => void, showLabelName: boolean,
+  onToggleLabel: () => void,
+  onToggleIsCompleted: (cardId: string, isComplate: boolean) => void
+}
+
+export function CardContent({
+  card,
+  onClickCard,
+  showLabelName,
+  onToggleLabel,
+  onToggleIsCompleted,
+}: CardContentProps) {
   const [hovered, setHovered] = useState<string | null>(null);
 
   function handleToggleLabel(e: React.MouseEvent<HTMLSpanElement>) {
@@ -200,7 +214,18 @@ export function CardContent({ card, onClickCard, showLabelName, onToggleLabel, o
   );
 }
 
-export function CustomCard({ card, columnId, index, onEdit, onClickCard, onDropCard, showLabelName, onToggleLabel, onToggleIsCompleted }: CardProps) {
+export function CustomCard({
+  card,
+  columnId,
+  index,
+  onEdit,
+  onClickCard,
+  onDropCard,
+  showLabelName,
+  onToggleLabel,
+  onToggleIsCompleted,
+  onToggleArchive
+}: CardProps) {
   const ref = useRef<HTMLDivElement>(null);
 
   const [, drag, dragPreview] = useDrag({
@@ -271,13 +296,21 @@ export function CustomCard({ card, columnId, index, onEdit, onClickCard, onDropC
         <Button
           size={"icon-sm"}
           variant={"ghost"}
-          onClick={() => onEdit?.(card.id)}
+          onClick={() => onToggleArchive(card.id, true)}
           className="absolute top-2 right-9 z-10 opacity-0 group-hover:opacity-100 p-1 rounded bg-[#2c333a] hover:bg-[#3d4954] text-[#9fadbc] transition-all"
         >
           <Archive size={12} />
         </Button>
       )}
-      <CardContent card={card} onClickCard={onClickCard} showLabelName={showLabelName} onToggleLabel={onToggleLabel} onToggleIsCompleted={onToggleIsCompleted} />
+
+      <CardContent
+        card={card}
+        onClickCard={onClickCard}
+        showLabelName={showLabelName}
+        onToggleLabel={onToggleLabel}
+        onToggleIsCompleted={onToggleIsCompleted}
+      />
+
     </div>
   );
 }

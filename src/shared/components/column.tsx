@@ -26,6 +26,7 @@ interface ColumnProps {
   showLabelName: boolean;
   onToggleLabel: () => void;
   onToggleIsCompleted: (cardId: string, isComplate: boolean) => void;
+  onToggleArchive: (cardId: string, isArchive: boolean) => void;
 }
 
 export function Column({
@@ -36,6 +37,7 @@ export function Column({
   showLabelName,
   onToggleLabel,
   onToggleIsCompleted,
+  onToggleArchive
 }: ColumnProps) {
   const { setColumns } = useBoardView();
 
@@ -198,6 +200,7 @@ export function Column({
             showLabelName={showLabelName}
             onToggleLabel={onToggleLabel}
             onToggleIsCompleted={onToggleIsCompleted}
+            onToggleArchive={onToggleArchive}
           />
         ))}
 

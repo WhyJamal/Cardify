@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { Plus, X } from "lucide-react";
@@ -24,7 +24,7 @@ export default function BoardPage() {
     addColumn, 
   } = useBoardActions();
 
-  const { toggleIsCompleted } = useCardActions();
+  const { toggleIsCompleted, toggleIsArchive } = useCardActions();
         
   const [showLabelName, setShowLabelName] = useState(false);
   const [addingColumn, setAddingColumn] = useState(false);
@@ -69,6 +69,7 @@ export default function BoardPage() {
                 showLabelName={showLabelName}
                 onToggleLabel={toggleLabel}
                 onToggleIsCompleted={toggleIsCompleted}
+                onToggleArchive={toggleIsArchive}
               />
             ))}
 

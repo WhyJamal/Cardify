@@ -103,4 +103,10 @@ export const cardApi = {
       method: "POST",
       body: formData,
     }),
+
+  updateIsArchive: (cardId: string, isArchive: boolean) =>
+    clientFetch(`/api/cards/${cardId}`, {
+      method: "PATCH",
+      body: JSON.stringify({isArchive}),
+    }),
 };

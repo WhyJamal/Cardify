@@ -36,13 +36,16 @@ export async function GET(req: NextRequest) {
         },
         include: {
           cards: {
+            where: {
+              isArchive: false, 
+            },
             orderBy: {
               position: "asc",
             },
             include: {
               labels: { include: { boardLabel: true } },
               links: true,
-              members: { include: { user: true }},
+              members: { include: { user: true } },
               attachments: true,
             },
           },

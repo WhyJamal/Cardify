@@ -57,13 +57,9 @@ export function CardContextMenu({
     }
 
     function handleAction(action: string) {
-        if (action === "open") onOpenCard1();
+        if (action === "open") onOpenCard();
         if (action === "archive") onArchive();
         onClose();
-    }
-
-    function onOpenCard1() {
-        router.push(`/c/${card.id}/${card.title}`);
     }
 
     const MENU_WIDTH = 192;

@@ -26,6 +26,7 @@ import ListAttachments from "@/features/card/list-attachments";
 import { CreateLabelMenu } from "@/features/card/create-label-menu";
 import CoverSettings from "@/features/card/cover-settings";
 import CustomCheckbox from "@/shared/components/custom-checkbox";
+import MoveCardMenu from "@/features/card/move-card-menu";
 
 export default function CardClient({
     cardId,
@@ -50,10 +51,15 @@ export default function CardClient({
 
         coverBtnRef,
         showCover,
+        moveDivRef,
+        showMoveMenu,
+        setShowMoveMenu,
         setShowCover,
         handleSetBackground,
         handleRemoveBackground,
         handleUploadCover,
+        handleOpenMoveMenu,
+        handleCloseMoveMenu,
 
         isEditingDesc,
         setIsEditingDesc,
@@ -130,7 +136,11 @@ export default function CardClient({
                     }}
                 >
                     <div className="flex justify-between w-full">
-                        <div className="flex items-center gap-2 text-[#9fadbc] text-sm">
+                        <div 
+                            ref={moveDivRef}
+                            onClick={handleOpenMoveMenu}
+                            className="flex items-center gap-2 text-[#9fadbc] text-sm"
+                        >
                             <span className="bg-[#2c333a] rounded px-2 py-0.5 flex items-center gap-1 cursor-pointer hover:bg-[#38414a]">
                                 {card.column.title} <ChevronDown size={13} />
                             </span>
@@ -599,6 +609,13 @@ export default function CardClient({
                     </div>
                 </div>
             </div>
+
+            {showMoveMenu && (
+                <MoveCardMenu
+                    triggerRef={moveDivRef}
+                    onClose={handleCloseMoveMenu}
+                />
+            )}
 
             {showCover && (
                 <CoverSettings

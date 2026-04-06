@@ -15,13 +15,13 @@ import { getInitials } from "../utils/getInitials";
 import CustomCheckbox from "./custom-checkbox";
 
 import { CardContextMenu } from "@/features/card/card-context-menu";
+import { useRouter } from "next/navigation";
 
 interface CardProps {
   card: CardData;
   columnId: string;
   index: number;
   onEdit?: (cardId: string) => void;
-  onClickCard?: (cardId: string) => void;
   onDropCard?: (
     cardId: string,
     fromColumnId: string,
@@ -37,7 +37,8 @@ interface CardProps {
 
 interface CardContentProps {
   card: CardData;
-  onClickCard?: (cardId: string) => void, showLabelName: boolean,
+  onClickCard?: (cardId: string) => void, 
+  showLabelName: boolean,
   onToggleLabel: () => void,
   onToggleIsCompleted: (cardId: string, isComplate: boolean) => void
 }
@@ -221,7 +222,6 @@ export function CustomCard({
   columnId,
   index,
   onEdit,
-  onClickCard,
   onDropCard,
   showLabelName,
   onToggleLabel,
@@ -229,7 +229,7 @@ export function CustomCard({
   onToggleArchive
 }: CardProps) {
   const ref = useRef<HTMLDivElement>(null);
-
+  const router = useRouter();
   const [cardRect, setCardRect] = useState<DOMRect | null>(null);
 
   function handlePencilClick(e: React.MouseEvent<HTMLButtonElement>) {
@@ -286,6 +286,10 @@ export function CustomCard({
     dragPreview(getEmptyImage(), { captureDraggingState: true });
   }, [dragPreview]);
 
+  function onClickCard() {
+        router.push(`/c/${card.id}/${card.title}`);
+    }
+
   return (
     <div
       ref={ref}
@@ -327,7 +331,7 @@ export function CustomCard({
           card={{ id: card.id, title: card.title ?? "" }}
           cardRect={cardRect}
           onClose={() => setCardRect(null)}
-          onOpenCard={() => onClickCard?.(card.id)}
+          onOpenCard={() => onClickCard()}
           onArchive={() => onToggleArchive(card.id, true)}
           onSaveTitle={(newTitle) => {
             // exp: updateCardTitle(card.id, newTitle)

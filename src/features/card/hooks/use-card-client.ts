@@ -28,6 +28,8 @@ export function useCardClient(initialCard: CardData, cardId: string) {
     const [isEditingTitle, setIsEditingTitle] = useState(false);
     const [tempTitle, setTempTitle] = useState(initialCard.title);
 
+    const moveDivRef = useRef<HTMLDivElement>(null);
+    const [showMoveMenu, setShowMoveMenu] = useState(false);
     const [showCover, setShowCover] = useState(false);
 
     const [isEditingDesc, setIsEditingDesc] = useState(false);
@@ -162,6 +164,14 @@ export function useCardClient(initialCard: CardData, cardId: string) {
 
     const handleCloseAttach = useCallback(() => {
         setShowAttach(false);
+    }, []);
+
+    const handleOpenMoveMenu = useCallback(() => {
+        setShowMoveMenu(true);
+    }, []);
+
+    const handleCloseMoveMenu = useCallback(() => {
+        setShowMoveMenu(false);
     }, []);
 
     const handleOpenDates = useCallback(() => {
@@ -343,11 +353,16 @@ export function useCardClient(initialCard: CardData, cardId: string) {
         isTitleVisible,
 
         coverBtnRef,
+        moveDivRef,
+        showMoveMenu,
+        setShowMoveMenu,
         showCover,
         setShowCover,
         handleSetBackground,
         handleRemoveBackground,
         handleUploadCover,
+        handleOpenMoveMenu,
+        handleCloseMoveMenu,
 
         isEditingTitle,
         setIsEditingTitle,

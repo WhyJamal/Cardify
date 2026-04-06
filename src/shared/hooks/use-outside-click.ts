@@ -11,7 +11,10 @@ export function useOutsideClick(
     if (!enabled) return;
 
     const handler = (e: MouseEvent) => {
-      const target = e.target as Node;
+      const target = e.target as HTMLElement;
+
+      if (target.closest("[data-cs-id]")) return;
+
       const clickedInside = refs.some((ref) => ref.current?.contains(target));
 
       if (!clickedInside) onOutside();

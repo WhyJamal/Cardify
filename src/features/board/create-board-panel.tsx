@@ -145,6 +145,7 @@ export function CreateBoardPanel({ triggerRef, onClose, onCreated }: Props) {
   const panel = (
     <div
       ref={panelRef}
+      onMouseDown={(e) => e.stopPropagation()}
       style={{
         position: "fixed",
         left: pos.left,

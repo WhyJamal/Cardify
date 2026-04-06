@@ -35,10 +35,19 @@ export const boardApi = {
   },
 
   updateIsChoosen: (boardId: number, isChoosen: boolean) => {
-    return clientFetch(`/api/boards/${boardId}`,{
+    return clientFetch(`/api/boards/${boardId}`, {
       method: "PATCH",
-      body: JSON.stringify({isChoosen}),
+      body: JSON.stringify({ isChoosen }),
     })
   },
+
+  getBoardsByWorkspace: (workspaceId: string) => {
+    return clientFetch(`/api/workspaces/${workspaceId}/boards`, {
+      method: "GET",
+    });
+  },
+
+  getColumnsByBoard: (boardId: string) =>
+    clientFetch(`/api/boards/${boardId}/columns`, { method: "GET" }),
 
 };

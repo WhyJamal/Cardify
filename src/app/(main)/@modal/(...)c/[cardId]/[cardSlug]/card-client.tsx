@@ -53,7 +53,7 @@ export default function CardClient({
         showCover,
         moveDivRef,
         showMoveMenu,
-        setShowMoveMenu,
+        currentPosition,
         setShowCover,
         handleSetBackground,
         handleRemoveBackground,
@@ -136,7 +136,7 @@ export default function CardClient({
                     }}
                 >
                     <div className="flex justify-between w-full">
-                        <div 
+                        <div
                             ref={moveDivRef}
                             onClick={handleOpenMoveMenu}
                             className="flex items-center gap-2 text-[#9fadbc] text-sm"
@@ -614,6 +614,9 @@ export default function CardClient({
                 <MoveCardMenu
                     triggerRef={moveDivRef}
                     onClose={handleCloseMoveMenu}
+                    cardId={cardId}
+                    currentColumnId={card.column.id}
+                    currentPosition={currentPosition}
                 />
             )}
 

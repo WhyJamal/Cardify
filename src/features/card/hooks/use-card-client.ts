@@ -345,6 +345,9 @@ export function useCardClient(initialCard: CardData, cardId: string) {
         [card.id, handleSetBackground]
     );
 
+    const currentColumn = columns.find((col) => col.cards.some((c) => c.id === cardId));
+    const currentPosition = currentColumn?.cards.findIndex((c) => c.id === cardId) ?? 0;
+
     return {
         card,
         setCard,
@@ -353,6 +356,7 @@ export function useCardClient(initialCard: CardData, cardId: string) {
         isTitleVisible,
 
         coverBtnRef,
+        currentPosition,
         moveDivRef,
         showMoveMenu,
         setShowMoveMenu,

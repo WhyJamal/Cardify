@@ -9,6 +9,7 @@ import { clientFetch } from "@/lib/client-api";
 interface SelectOption {
     value: string;
     label: string;
+    group?: string;
 }
 
 interface ColumnOption extends SelectOption {
@@ -25,10 +26,17 @@ interface BoardWithColumns {
     }[];
 }
 
+interface WorkspaceWithBoards {
+    id: string;
+    name: string;
+    boards: BoardWithColumns[];
+}
+
 export function useMoveCard(cardId: string, currentColumnId: string, currentPosition: number) {
     const { board, columns, setColumns } = useBoardView();
     const { currentWorkspace } = useWorkspace();
 
+    const [allWorkspacesBoards, setAllWorkspacesBoards] = useState<WorkspaceWithBoards[]>([]);
     const [fetchedBoards, setFetchedBoards] = useState<BoardWithColumns[]>([]);
     const [boardOptions, setBoardOptions] = useState<SelectOption[]>([]);
     const [columnOptions, setColumnOptions] = useState<ColumnOption[]>([]);
@@ -42,26 +50,34 @@ export function useMoveCard(cardId: string, currentColumnId: string, currentPosi
     const [moving, setMoving] = useState(false);
 
     const isSameBoard = selectedBoardId === board?.id?.toString();
-    
-    useEffect(() => {
-        if (!currentWorkspace?.id) return;
 
+    const selectedBoardWorkspaceId = allWorkspacesBoards.find((ws) =>
+        ws.boards.some((b) => b.id.toString() === selectedBoardId)
+    )?.id;
+
+    const isSameWorkspace = selectedBoardWorkspaceId === currentWorkspace?.id?.toString();
+
+    useEffect(() => {
         setLoadingBoards(true);
+
         boardApi
-            .getBoardsByWorkspace(currentWorkspace.id)
-            .then((data) => {
-                const boards: BoardWithColumns[] = data.boards ?? data;
-                setFetchedBoards(boards);
+            .getAllBoardsWithWorkspaces()
+            .then((workspaces: WorkspaceWithBoards[]) => {
+                setAllWorkspacesBoards(workspaces);
+                setFetchedBoards(workspaces.flatMap((ws) => ws.boards));
                 setBoardOptions(
-                    boards.map((b) => ({
-                        value: b.id.toString(),
-                        label: b.title,
-                    }))
+                    workspaces.flatMap((ws) =>
+                        ws.boards.map((b) => ({
+                            value: b.id.toString(),
+                            label: b.title,
+                            group: ws.name,
+                        }))
+                    )
                 );
             })
             .catch(console.error)
             .finally(() => setLoadingBoards(false));
-    }, [currentWorkspace]);
+    }, []);
 
     useEffect(() => {
         if (!selectedBoardId) return;
@@ -112,7 +128,7 @@ export function useMoveCard(cardId: string, currentColumnId: string, currentPosi
 
         setMoving(true);
         try {
-            if (isSameBoard) {
+            if (isSameBoard && isSameWorkspace) {
                 let updatedColumns = columns;
                 setColumns((prev) => {
                     const next = prev.map((col) => ({ ...col, cards: [...col.cards] }));
@@ -182,6 +198,7 @@ export function useMoveCard(cardId: string, currentColumnId: string, currentPosi
         currentColumnId,
         currentPosition,
         isSameBoard,
+        isSameWorkspace,
         cardId,
         board?.id,
         columns,

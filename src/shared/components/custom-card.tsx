@@ -164,7 +164,7 @@ export function CardContent({
                 </span>
               )}
 
-              {card.attachments && (
+              {card.attachments && card.attachments.length > 0 && (
                 <span className="flex items-center gap-1 text-[#9fadbc] text-xs">
                   <Paperclip size={12} />{(card.attachments?.length ?? 0) + (card.links?.length ?? 0)}
                 </span>
@@ -328,7 +328,7 @@ export function CustomCard({
 
       {cardRect && (
         <CardContextMenu
-          card={{ id: card.id, title: card.title ?? "" }}
+          card={card}
           cardRect={cardRect}
           onClose={() => setCardRect(null)}
           onOpenCard={() => onClickCard()}

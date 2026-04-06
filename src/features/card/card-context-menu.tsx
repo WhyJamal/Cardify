@@ -8,9 +8,10 @@ import {
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/shared/components";
 import { useRouter } from "next/navigation";
+import { CardData } from "@/shared/types";
 
 interface CardContextMenuProps {
-    card: { id: string; title: string };
+    card: CardData;
     cardRect: DOMRect;
     onClose: () => void;
     onOpenCard: () => void;
@@ -19,16 +20,16 @@ interface CardContextMenuProps {
 }
 
 const MENU_ITEMS = [
-  { icon: ExternalLink, label: "Open card",      action: "open"},
-  { icon: Tag,          label: "Edit labels",    action: "labels"  },
-  { icon: Users,        label: "Change members", action: "members" },
-  { icon: Image,        label: "Change cover",   action: "cover"   },
-  { icon: Clock,        label: "Edit dates",     action: "dates"   },
-  { icon: ArrowRight,   label: "Move",           action: "move"    },
-  { icon: Copy,         label: "Copy card",      action: "copy"    },
-  { icon: Link2,        label: "Copy link",      action: "link"    },
-  { icon: Layers,       label: "Mirror",         action: "mirror"  },
-  { icon: Archive,      label: "Archive",        action: "archive" },
+    { icon: ExternalLink, label: "Open card", action: "open" },
+    { icon: Tag, label: "Edit labels", action: "labels" },
+    { icon: Users, label: "Change members", action: "members" },
+    { icon: Image, label: "Change cover", action: "cover" },
+    { icon: Clock, label: "Edit dates", action: "dates" },
+    { icon: ArrowRight, label: "Move", action: "move" },
+    { icon: Copy, label: "Copy card", action: "copy" },
+    { icon: Link2, label: "Copy link", action: "link" },
+    { icon: Layers, label: "Mirror", action: "mirror" },
+    { icon: Archive, label: "Archive", action: "archive" },
 ];
 
 export function CardContextMenu({
@@ -52,8 +53,8 @@ export function CardContextMenu({
     }, [onClose]);
 
     function handleSave() {
-        if (title.trim()) onSaveTitle(title.trim());
-        onClose();
+        // if (title.trim()) onSaveTitle(title.trim());
+        // onClose();
     }
 
     function handleAction(action: string) {
@@ -89,6 +90,34 @@ export function CardContextMenu({
                     zIndex: 9999,
                 }}
             >
+
+                <div
+                    className="p-2 pb-2 rounded"
+                    style={{
+                        background: card
+                            ? card.isImage
+                                ? `url(${card.background}) center/cover no-repeat`
+                                : card.background ?? undefined
+                            : "#22272b"
+                    }}
+                >
+
+                    {card.labels && card.labels.length > 0 && (
+                        <div className="flex flex-wrap gap-1 mb-2">
+                            {card.labels.map((label) => (
+                                <span
+                                    key={label.id}
+                                    className="min-h-1 min-w-9 text-xs px-1.5 py-0.5 text-white rounded-sm hover:scale-105 border border-gray-700 hover:ring-1"
+                                    style={{ backgroundColor: label.color }}
+                                >
+                                    {label.name ? label.name : null}
+                                </span>
+                            ))}
+                        </div>
+                    )}
+                </div>
+
+
                 <div className="bg-[#22272b] rounded-lg shadow-xl overflow-hidden">
                     <textarea
                         autoFocus

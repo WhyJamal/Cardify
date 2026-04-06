@@ -13,6 +13,7 @@ import CreateWorkspaceCard from "@/features/workspace/create-workspace-card";
 import WorkspaceModal from "@/features/workspace/modal/workpace-modal";
 
 import { useWorkspace } from "@/app/providers/WorkspaceProvider";
+import { WorkspaceModal1 } from "@/features/workspace/workpace-modal";
 
 type NavItem = {
   id: string;
@@ -28,7 +29,7 @@ const navItems: NavItem[] = [
 ];
 
 export default function Sidebar() {
-  const { workspaces, refresh,loading } = useWorkspace();
+  const { workspaces, refresh, loading } = useWorkspace();
   const pathname = usePathname();
   const [showCreateWorksppace, setShowCreateWorksppace] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
@@ -116,12 +117,12 @@ export default function Sidebar() {
             </div>
           ) : (
             workspaces.map((ws) => (
-            <WorkspaceSidebar
-              key={ws.id}
-              workspace={ws}
-              collapsed={collapsed}
-            />
-          )))}
+              <WorkspaceSidebar
+                key={ws.id}
+                workspace={ws}
+                collapsed={collapsed}
+              />
+            )))}
         </div>
 
         <div className="absolute top-24 -right-3 z-10">
@@ -156,6 +157,10 @@ export default function Sidebar() {
         />
       </WorkspaceModal>
 
+      {showCreateWorksppace && (
+        <WorkspaceModal1 onClose={() => setShowCreateWorksppace(false)} />
+      )}
+      
     </div>
   );
 }

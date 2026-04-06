@@ -9,6 +9,7 @@ type SelectOption = {
   label: string;
   subtitle?: string;
   icon?: React.ReactNode;
+  group?: string; // +
 };
 
 interface CustomSelectProps {
@@ -33,6 +34,16 @@ export default function CustomSelect({
   const dropdownId = useRef(`cs-${Math.random().toString(36).slice(2)}`);
 
   const selected = options.find((o) => o.value === value);
+
+  // + group bo'yicha guruhlash
+  const grouped = options.reduce<Record<string, SelectOption[]>>((acc, opt) => {
+    const key = opt.group ?? "";
+    if (!acc[key]) acc[key] = [];
+    acc[key].push(opt);
+    return acc;
+  }, {});
+
+  const hasGroups = options.some((o) => o.group);
 
   const updatePosition = () => {
     if (!buttonRef.current) return;
@@ -62,6 +73,34 @@ export default function CustomSelect({
     setOpen((v) => !v);
   };
 
+  const renderOption = (opt: SelectOption) => (
+    <button
+      key={opt.value}
+      onMouseDown={(e) => {
+        e.preventDefault();
+        onChange?.(opt.value);
+        setOpen(false);
+      }}
+      className={`w-full flex items-center gap-3 px-3 py-2 text-sm text-left transition-colors
+        ${
+          opt.value === value
+            ? "bg-blue-500/20 text-white border-l-2 border-blue-500"
+            : "text-slate-300 hover:bg-white/5 hover:text-white"
+        }`}
+    >
+      {opt.icon && <span className="text-base">{opt.icon}</span>}
+      <div className="flex flex-col flex-1 overflow-hidden">
+        <span className="truncate font-medium">{opt.label}</span>
+        {opt.subtitle && (
+          <span className={`text-xs ${opt.value === value ? "text-blue-400" : "text-slate-500"}`}>
+            {opt.subtitle}
+          </span>
+        )}
+      </div>
+      {opt.value === value && <Check className="w-4 h-4 text-blue-400 shrink-0" />}
+    </button>
+  );
+
   return (
     <div ref={wrapperRef} className="relative w-full">
       {label && (
@@ -84,9 +123,7 @@ export default function CustomSelect({
           </span>
         </div>
         <ChevronDown
-          className={`w-4 h-4 text-slate-400 transition-transform duration-200 ${
-            open ? "rotate-180" : ""
-          }`}
+          className={`w-4 h-4 text-slate-400 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
         />
       </button>
 
@@ -95,41 +132,20 @@ export default function CustomSelect({
           <div
             data-cs-id={dropdownId.current}
             style={dropdownStyle}
-            className="bg-[#3a3a3a] border border-white/10 rounded shadow-2xl py-1 animate-in fade-in slide-in-from-top-2 duration-150"
+            className="bg-[#3a3a3a] border border-white/10 rounded shadow-2xl py-1 animate-in fade-in slide-in-from-top-2 duration-150 max-h-64 overflow-y-auto"
           >
-            {options.map((opt) => (
-              <button
-                key={opt.value}
-                onMouseDown={(e) => {
-                  e.preventDefault();
-                  onChange?.(opt.value);
-                  setOpen(false);
-                }}
-                className={`w-full flex items-center gap-3 px-3 py-2 text-sm text-left transition-colors
-                  ${
-                    opt.value === value
-                      ? "bg-blue-500/20 text-white border-l-2 border-blue-500"
-                      : "text-slate-300 hover:bg-white/5 hover:text-white"
-                  }`}
-              >
-                {opt.icon && <span className="text-base">{opt.icon}</span>}
-                <div className="flex flex-col flex-1 overflow-hidden">
-                  <span className="truncate font-medium">{opt.label}</span>
-                  {opt.subtitle && (
-                    <span
-                      className={`text-xs ${
-                        opt.value === value ? "text-blue-400" : "text-slate-500"
-                      }`}
-                    >
-                      {opt.subtitle}
-                    </span>
-                  )}
-                </div>
-                {opt.value === value && (
-                  <Check className="w-4 h-4 text-blue-400 shrink-0" />
-                )}
-              </button>
-            ))}
+            {hasGroups
+              ? Object.entries(grouped).map(([groupName, opts]) => (
+                  <div key={groupName}>
+                    {groupName && (
+                      <div className="px-3 pt-3 pb-1 text-[10px] font-semibold uppercase tracking-widest text-slate-500 select-none">
+                        {groupName}
+                      </div>
+                    )}
+                    {opts.map(renderOption)}
+                  </div>
+                ))
+              : options.map(renderOption)}
           </div>,
           document.body
         )}

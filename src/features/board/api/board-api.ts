@@ -2,6 +2,11 @@ import { clientFetch } from "@/lib/client-api";
 import { BoardLabel } from "@/shared/types";
 
 export const boardApi = {
+  getAllBoardsWithWorkspaces: async () => {
+    const res = await clientFetch("/api/boards/all");
+    return res.workspaces ?? [];
+  },
+
   updateColumnTitle: (columnId: string, title: string) =>
     clientFetch(`/api/columns/${columnId}`, {
       method: "PATCH",

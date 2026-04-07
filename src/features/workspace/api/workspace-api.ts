@@ -1,5 +1,6 @@
 import { clientFetch } from "@/lib/client-api";
 import { WorkspaceForm } from "../hooks/use-workspace-actions";
+import { serverFetch } from "@/lib/server-api";
 
 export const workspaceApi = {
   createWorkspace: (form: WorkspaceForm) =>

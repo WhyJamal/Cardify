@@ -2,18 +2,9 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { ChevronDown, Search, SquareArrowRightExit, Trash2, UserPlus, X } from "lucide-react";
-import {
-    Button,
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-    DialogClose,
-    DialogFooter
-} from "@/shared/components";
-import InviteWorkspaceCard from "@/features/workspace/invite-workspace-card";
+import { Button } from "@/shared/components";
+import { ConfirmDialog } from "@/shared/components/ui/confirm-diolog";
+import InviteWorkspaceCard from "@/features/workspace/components/invite-workspace-card";
 import WorkspaceModal from "@/features/workspace/modal/workpace-modal";
 import { useParams } from "next/navigation";
 import { useWorkspaceActions } from "@/features/workspace/hooks/use-workspace-actions";
@@ -75,10 +66,6 @@ export default function MembersPage() {
                         Участники с правом управления
                         <span className="ml-2 text-sm text-gray-400">{countMembers}</span>
                     </h1>
-
-                    <button className="p-2 hover:bg-white/10 rounded-lg">
-                        <X size={20} />
-                    </button>
                 </div>
 
                 {/* <div className="bg-[#2a2a2f] rounded-xl p-5 text-sm text-gray-300">
@@ -236,55 +223,5 @@ export default function MembersPage() {
             </WorkspaceModal>
 
         </div>
-    );
-}
-
-interface ConfirmDialogProps {
-    children: React.ReactNode;
-    title: string;
-    desc: string;
-    onConfirm: () => void;
-}
-
-function ConfirmDialog({ children, title, desc, onConfirm }: ConfirmDialogProps) {
-    return (
-        <Dialog>
-            <DialogTrigger asChild>
-                {children}
-            </DialogTrigger>
-            <DialogContent
-                showCloseButton={false}
-                className="bg-[#312d2d] border border-white/10 text-white rounded"
-            >
-                <DialogHeader>
-                    <DialogTitle>{title}</DialogTitle>
-                    <DialogDescription>
-                        {desc}
-                    </DialogDescription>
-                </DialogHeader>
-
-                <DialogFooter>
-
-                    <DialogClose asChild>
-                        <Button
-                            variant={"destructive"}
-                            className="rounded"
-                            onClick={onConfirm}
-                        >
-                            Согласен
-                        </Button>
-                    </DialogClose>
-
-                    <DialogClose asChild>
-                        <Button
-                            variant={"ghost"}
-                            className="rounded hover:bg-white/10"
-                        >
-                            Отмена
-                        </Button>
-                    </DialogClose>
-                </DialogFooter>
-            </DialogContent>
-        </Dialog>
     );
 }

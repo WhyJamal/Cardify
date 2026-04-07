@@ -57,7 +57,7 @@ export default function WorkspaceSidebar({ workspace, collapsed }: WorkspaceSide
                             hasChevron
                         />
                         <SidebarItem
-                            href={`/w/${workspace.id}/settings`}
+                            href={`/w/${workspace.id}/account`}
                             label={!collapsed ? "Настройки" : ""}
                             icon={<Settings size={16} />}
                             hasChevron

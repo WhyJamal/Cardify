@@ -20,7 +20,7 @@ export default function MainLayout({
         <div className="flex h-screen">
           <Sidebar />
 
-          <main className="flex-1">
+          <main className="flex-1 custom-scrollbar">
             {children}
           </main>
         </div>

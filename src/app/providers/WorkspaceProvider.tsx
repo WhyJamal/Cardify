@@ -14,7 +14,11 @@ type WorkspaceContextType = {
   workspaces: Workspace[];
   loading: boolean;
   refresh: () => Promise<void>;
+
   addWorkspace: (ws: Workspace) => void;
+  updateWorkspace: (ws: Workspace) => void;
+  removeWorkspace: (id: string) => void;
+
   currentWorkspace: Workspace | null;
   setCurrentWorkspace: (ws: Workspace | null) => void;
 };
@@ -34,7 +38,7 @@ export function WorkspaceProvider({
     setLoading(true);
     try {
       const data = await workspaceApi.getWorkspaces();
-      
+
       setWorkspaces(Array.isArray(data) ? data : []);
 
       const wsArray = Array.isArray(data) ? data : [];
@@ -53,13 +57,35 @@ export function WorkspaceProvider({
     setCurrentWorkspace(ws);
   };
 
+  const updateWorkspace = (updated: Workspace) => {
+    setWorkspaces(prev =>
+      prev.map(ws => ws.id === updated.id ? updated : ws)
+    );
+
+    setCurrentWorkspace(prev =>
+      prev?.id === updated.id ? updated : prev
+    );
+  };
+
+  const removeWorkspace = (id: string) => {
+    setWorkspaces(prev => prev.filter(ws => ws.id !== id));
+
+    setCurrentWorkspace(prev =>
+      prev?.id === id ? null : prev
+    );
+  };
+
   return (
     <WorkspaceContext.Provider
       value={{
         workspaces,
         loading,
         refresh,
+
         addWorkspace,
+        updateWorkspace,
+        removeWorkspace,
+
         currentWorkspace,
         setCurrentWorkspace,
       }}

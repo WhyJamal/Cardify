@@ -2,8 +2,19 @@ export interface Workspace {
   id: string;
   name: string;
   ownerId: string;
+  description?: string;
+  website?: string;
+  type?: WorkspaceType;
+  shortName?: string; 
+   
   createdAt: string;
   updatedAt: string;
+}
+ 
+export interface WorkspaceType{
+  key: string;
+  label: string;
+  group: string;
 }
 
 export type WorkspaceRole =

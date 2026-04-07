@@ -22,6 +22,8 @@ export {
 } from "@/shared/components/ui/dialog"
 import { AvatarGroupCount } from "./avatar-group-count";
 
+import { ConfirmDialog } from "./ui/confirm-diolog";
+
 export { BoardCard } from "./board-card";
 export { BottomNav } from "./bottom-nav";
 export { CustomCard } from "./custom-card";
@@ -34,6 +36,9 @@ export { default as Sidebar } from "@/shared/components/sidebar"
 export { DatePicker } from "../../features/card/data-picker";
 export { AddToCardMenu } from "../../features/card/add-to-card-menu";
 export { LabelsMenu } from "../../features/card/labels-menu";
+
+export { FormInput } from "./form-input";
+export { FormTextarea } from "./form-textarea";
 
 export { AccountDropdown } from "./account-dropdown";
 export { CreateMenu } from "./create-menu";

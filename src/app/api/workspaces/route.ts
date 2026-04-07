@@ -94,11 +94,22 @@ export async function POST(req: NextRequest) {
     );
   }
 
+  let typeKey: string | null = null;
+  if (type) {
+    const typeExists = await prisma.workspaceType.findUnique({
+      where: { key: type },
+    });
+    if (!typeExists) {
+      return NextResponse.json({ error: "Invalid workspace type" }, { status: 400 });
+    }
+    typeKey = type;
+  }
+
   const workspace = await prisma.workspace.create({
     data: {
       name,
       description,
-      typeKey: type,
+      typeKey,
       ownerId: dbUser.id,
 
       members: {

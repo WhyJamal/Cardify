@@ -78,7 +78,7 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const { name } = await req.json();
+  const { name, description, type } = await req.json();
 
   if (!name?.trim()) {
     return NextResponse.json(
@@ -87,9 +87,18 @@ export async function POST(req: NextRequest) {
     );
   }
 
+  if (description && description.length > 500) {
+    return NextResponse.json(
+      { error: "Description too long" },
+      { status: 400 }
+    );
+  }
+
   const workspace = await prisma.workspace.create({
     data: {
       name,
+      description,
+      typeKey: type,
       ownerId: dbUser.id,
 
       members: {

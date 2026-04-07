@@ -386,6 +386,7 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 export const ModelName = {
   User: 'User',
   Workspace: 'Workspace',
+  WorkspaceType: 'WorkspaceType',
   WorkspaceMember: 'WorkspaceMember',
   Notification: 'Notification',
   Board: 'Board',
@@ -413,7 +414,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "workspace" | "workspaceMember" | "notification" | "board" | "boardMember" | "boardLabel" | "column" | "card" | "cardBoardLabel" | "cardLink" | "cardTimeline" | "cardMember" | "cardAttachment"
+    modelProps: "user" | "workspace" | "workspaceType" | "workspaceMember" | "notification" | "board" | "boardMember" | "boardLabel" | "column" | "card" | "cardBoardLabel" | "cardLink" | "cardTimeline" | "cardMember" | "cardAttachment"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -562,6 +563,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.WorkspaceCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.WorkspaceCountAggregateOutputType> | number
+        }
+      }
+    }
+    WorkspaceType: {
+      payload: Prisma.$WorkspaceTypePayload<ExtArgs>
+      fields: Prisma.WorkspaceTypeFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.WorkspaceTypeFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorkspaceTypePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.WorkspaceTypeFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorkspaceTypePayload>
+        }
+        findFirst: {
+          args: Prisma.WorkspaceTypeFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorkspaceTypePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.WorkspaceTypeFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorkspaceTypePayload>
+        }
+        findMany: {
+          args: Prisma.WorkspaceTypeFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorkspaceTypePayload>[]
+        }
+        create: {
+          args: Prisma.WorkspaceTypeCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorkspaceTypePayload>
+        }
+        createMany: {
+          args: Prisma.WorkspaceTypeCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.WorkspaceTypeCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorkspaceTypePayload>[]
+        }
+        delete: {
+          args: Prisma.WorkspaceTypeDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorkspaceTypePayload>
+        }
+        update: {
+          args: Prisma.WorkspaceTypeUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorkspaceTypePayload>
+        }
+        deleteMany: {
+          args: Prisma.WorkspaceTypeDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.WorkspaceTypeUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.WorkspaceTypeUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorkspaceTypePayload>[]
+        }
+        upsert: {
+          args: Prisma.WorkspaceTypeUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WorkspaceTypePayload>
+        }
+        aggregate: {
+          args: Prisma.WorkspaceTypeAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateWorkspaceType>
+        }
+        groupBy: {
+          args: Prisma.WorkspaceTypeGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.WorkspaceTypeGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.WorkspaceTypeCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.WorkspaceTypeCountAggregateOutputType> | number
         }
       }
     }
@@ -1504,12 +1579,24 @@ export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof User
 export const WorkspaceScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  description: 'description',
+  typeKey: 'typeKey',
   ownerId: 'ownerId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type WorkspaceScalarFieldEnum = (typeof WorkspaceScalarFieldEnum)[keyof typeof WorkspaceScalarFieldEnum]
+
+
+export const WorkspaceTypeScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  label: 'label',
+  group: 'group'
+} as const
+
+export type WorkspaceTypeScalarFieldEnum = (typeof WorkspaceTypeScalarFieldEnum)[keyof typeof WorkspaceTypeScalarFieldEnum]
 
 
 export const WorkspaceMemberScalarFieldEnum = {
@@ -1883,6 +1970,7 @@ export type PrismaClientOptions = ({
 export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
   workspace?: Prisma.WorkspaceOmit
+  workspaceType?: Prisma.WorkspaceTypeOmit
   workspaceMember?: Prisma.WorkspaceMemberOmit
   notification?: Prisma.NotificationOmit
   board?: Prisma.BoardOmit

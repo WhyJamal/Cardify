@@ -1,11 +1,11 @@
 import { clientFetch } from "@/lib/client-api";
-import { WorkspaceMember } from "@/shared/types";
+import { WorkspaceForm } from "../hooks/use-workspace-actions";
 
 export const workspaceApi = {
-  createWorkspace: (name: string) =>
+  createWorkspace: (form: WorkspaceForm) =>
     clientFetch(`/api/workspaces`, {
       method: "POST",
-      body: JSON.stringify({ name }),
+      body: JSON.stringify(form),
     }),
 
   getWorkspaces: async () => {
@@ -16,6 +16,11 @@ export const workspaceApi = {
   getWorkspace: async (workspaceId: string) => {
     const res = await clientFetch(`/api/workspaces/${workspaceId}`);
     return res.workspace;
+  },
+
+  getWorkspaceTypes: async () => {
+    const res = await clientFetch("/api/workspaces/types");
+    return res.types;
   },
 
   searchUsers: async (params: { q: string; workspaceId?: string }) => {

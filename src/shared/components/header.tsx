@@ -9,8 +9,8 @@ import { useEffect, useRef, useState } from "react";
 
 import { AccountDropdown, CreateMenu, TooltipAction, CardifyLogo, Button, NotificationDropdown } from ".";
 import { CreateBoardPanel } from "@/features/board/create-board-panel";
-import WorkspaceModal from "@/features/workspace/modal/workpace-modal";
-import CreateWorkspaceCard from "@/features/workspace/create-workspace-card";
+import { CustomWorkspaceModal } from "@/features/workspace/modal/custom-workpace-modal";
+
 import { getInitials } from "../utils/getInitials";
 
 type PanelState = "closed" | "menu" | "createBoard" | "createWorkspace";
@@ -191,9 +191,9 @@ export function Header() {
                 </button>
               </TooltipAction>
               {dropdownOpen && (
-                <AccountDropdown 
-                  session={session} 
-                  onClose={() => setDropdownOpen(false)} 
+                <AccountDropdown
+                  session={session}
+                  onClose={() => setDropdownOpen(false)}
                   triggerRef={accountBtnRef}
                 />
               )}
@@ -211,15 +211,10 @@ export function Header() {
         }
       </div>
 
-      <WorkspaceModal
-        title={"Новый рабочего пространство"}
-        open={panelState === "createWorkspace"}
-        onClose={() => setPanelState("closed")}
-      >
-        <CreateWorkspaceCard
-          onCreate={() => setPanelState("closed")}
-        />
-      </WorkspaceModal>
+      {panelState === "createWorkspace" && (
+        <CustomWorkspaceModal onClose={() => setPanelState("closed")} />
+      )}
+
     </header>
   );
 }

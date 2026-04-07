@@ -10,6 +10,7 @@
  */
 export type * from './models/User'
 export type * from './models/Workspace'
+export type * from './models/WorkspaceType'
 export type * from './models/WorkspaceMember'
 export type * from './models/Notification'
 export type * from './models/Board'

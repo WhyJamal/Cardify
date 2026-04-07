@@ -52,6 +52,11 @@ export type User = Prisma.UserModel
  */
 export type Workspace = Prisma.WorkspaceModel
 /**
+ * Model WorkspaceType
+ * 
+ */
+export type WorkspaceType = Prisma.WorkspaceTypeModel
+/**
  * Model WorkspaceMember
  * 
  */

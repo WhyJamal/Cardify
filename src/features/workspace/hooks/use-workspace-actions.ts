@@ -4,9 +4,15 @@ import { useState } from "react";
 import { workspaceApi } from "@/features/workspace/api/workspace-api";
 import { Workspace, WorkspaceMember } from "@/shared/types";
 
+export interface WorkspaceForm {
+    name: string;
+    type: string;
+    description?: string;
+}
+
 type WorkspaceActions = {
     listWorkspaces: () => Promise<Workspace[]>;
-    createWorkspace: (name: string) => Promise<Workspace>;
+    createWorkspace: (form: WorkspaceForm) => Promise<Workspace>;
     loadMembers: (workspaceId: string) => Promise<WorkspaceMember[] | undefined>;
     loading: boolean;
 };
@@ -25,10 +31,10 @@ export function useWorkspaceActions(): WorkspaceActions {
         }
     };
 
-    const createWorkspace = async (name: string) => {
+    const createWorkspace = async (form: { name: string; type: string; description?: string }) => {
         setLoading(true);
         try {
-            const ws = await workspaceApi.createWorkspace(name);
+            const ws = await workspaceApi.createWorkspace(form);
             return ws.workspace;
         } finally {
             setLoading(false);

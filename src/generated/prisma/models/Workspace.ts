@@ -27,6 +27,8 @@ export type AggregateWorkspace = {
 export type WorkspaceMinAggregateOutputType = {
   id: string | null
   name: string | null
+  description: string | null
+  typeKey: string | null
   ownerId: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -35,6 +37,8 @@ export type WorkspaceMinAggregateOutputType = {
 export type WorkspaceMaxAggregateOutputType = {
   id: string | null
   name: string | null
+  description: string | null
+  typeKey: string | null
   ownerId: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -43,6 +47,8 @@ export type WorkspaceMaxAggregateOutputType = {
 export type WorkspaceCountAggregateOutputType = {
   id: number
   name: number
+  description: number
+  typeKey: number
   ownerId: number
   createdAt: number
   updatedAt: number
@@ -53,6 +59,8 @@ export type WorkspaceCountAggregateOutputType = {
 export type WorkspaceMinAggregateInputType = {
   id?: true
   name?: true
+  description?: true
+  typeKey?: true
   ownerId?: true
   createdAt?: true
   updatedAt?: true
@@ -61,6 +69,8 @@ export type WorkspaceMinAggregateInputType = {
 export type WorkspaceMaxAggregateInputType = {
   id?: true
   name?: true
+  description?: true
+  typeKey?: true
   ownerId?: true
   createdAt?: true
   updatedAt?: true
@@ -69,6 +79,8 @@ export type WorkspaceMaxAggregateInputType = {
 export type WorkspaceCountAggregateInputType = {
   id?: true
   name?: true
+  description?: true
+  typeKey?: true
   ownerId?: true
   createdAt?: true
   updatedAt?: true
@@ -150,6 +162,8 @@ export type WorkspaceGroupByArgs<ExtArgs extends runtime.Types.Extensions.Intern
 export type WorkspaceGroupByOutputType = {
   id: string
   name: string
+  description: string | null
+  typeKey: string | null
   ownerId: string
   createdAt: Date
   updatedAt: Date
@@ -179,9 +193,12 @@ export type WorkspaceWhereInput = {
   NOT?: Prisma.WorkspaceWhereInput | Prisma.WorkspaceWhereInput[]
   id?: Prisma.StringFilter<"Workspace"> | string
   name?: Prisma.StringFilter<"Workspace"> | string
+  description?: Prisma.StringNullableFilter<"Workspace"> | string | null
+  typeKey?: Prisma.StringNullableFilter<"Workspace"> | string | null
   ownerId?: Prisma.StringFilter<"Workspace"> | string
   createdAt?: Prisma.DateTimeFilter<"Workspace"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Workspace"> | Date | string
+  type?: Prisma.XOR<Prisma.WorkspaceTypeNullableScalarRelationFilter, Prisma.WorkspaceTypeWhereInput> | null
   owner?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   members?: Prisma.WorkspaceMemberListRelationFilter
   boards?: Prisma.BoardListRelationFilter
@@ -190,9 +207,12 @@ export type WorkspaceWhereInput = {
 export type WorkspaceOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  description?: Prisma.SortOrderInput | Prisma.SortOrder
+  typeKey?: Prisma.SortOrderInput | Prisma.SortOrder
   ownerId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  type?: Prisma.WorkspaceTypeOrderByWithRelationInput
   owner?: Prisma.UserOrderByWithRelationInput
   members?: Prisma.WorkspaceMemberOrderByRelationAggregateInput
   boards?: Prisma.BoardOrderByRelationAggregateInput
@@ -204,9 +224,12 @@ export type WorkspaceWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.WorkspaceWhereInput[]
   NOT?: Prisma.WorkspaceWhereInput | Prisma.WorkspaceWhereInput[]
   name?: Prisma.StringFilter<"Workspace"> | string
+  description?: Prisma.StringNullableFilter<"Workspace"> | string | null
+  typeKey?: Prisma.StringNullableFilter<"Workspace"> | string | null
   ownerId?: Prisma.StringFilter<"Workspace"> | string
   createdAt?: Prisma.DateTimeFilter<"Workspace"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Workspace"> | Date | string
+  type?: Prisma.XOR<Prisma.WorkspaceTypeNullableScalarRelationFilter, Prisma.WorkspaceTypeWhereInput> | null
   owner?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   members?: Prisma.WorkspaceMemberListRelationFilter
   boards?: Prisma.BoardListRelationFilter
@@ -215,6 +238,8 @@ export type WorkspaceWhereUniqueInput = Prisma.AtLeast<{
 export type WorkspaceOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  description?: Prisma.SortOrderInput | Prisma.SortOrder
+  typeKey?: Prisma.SortOrderInput | Prisma.SortOrder
   ownerId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -229,6 +254,8 @@ export type WorkspaceScalarWhereWithAggregatesInput = {
   NOT?: Prisma.WorkspaceScalarWhereWithAggregatesInput | Prisma.WorkspaceScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Workspace"> | string
   name?: Prisma.StringWithAggregatesFilter<"Workspace"> | string
+  description?: Prisma.StringNullableWithAggregatesFilter<"Workspace"> | string | null
+  typeKey?: Prisma.StringNullableWithAggregatesFilter<"Workspace"> | string | null
   ownerId?: Prisma.StringWithAggregatesFilter<"Workspace"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Workspace"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Workspace"> | Date | string
@@ -237,8 +264,10 @@ export type WorkspaceScalarWhereWithAggregatesInput = {
 export type WorkspaceCreateInput = {
   id?: string
   name: string
+  description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  type?: Prisma.WorkspaceTypeCreateNestedOneWithoutWorkspacesInput
   owner: Prisma.UserCreateNestedOneWithoutOwnedWorkspacesInput
   members?: Prisma.WorkspaceMemberCreateNestedManyWithoutWorkspaceInput
   boards?: Prisma.BoardCreateNestedManyWithoutWorkspaceInput
@@ -247,6 +276,8 @@ export type WorkspaceCreateInput = {
 export type WorkspaceUncheckedCreateInput = {
   id?: string
   name: string
+  description?: string | null
+  typeKey?: string | null
   ownerId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -257,8 +288,10 @@ export type WorkspaceUncheckedCreateInput = {
 export type WorkspaceUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  type?: Prisma.WorkspaceTypeUpdateOneWithoutWorkspacesNestedInput
   owner?: Prisma.UserUpdateOneRequiredWithoutOwnedWorkspacesNestedInput
   members?: Prisma.WorkspaceMemberUpdateManyWithoutWorkspaceNestedInput
   boards?: Prisma.BoardUpdateManyWithoutWorkspaceNestedInput
@@ -267,6 +300,8 @@ export type WorkspaceUpdateInput = {
 export type WorkspaceUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  typeKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -277,6 +312,8 @@ export type WorkspaceUncheckedUpdateInput = {
 export type WorkspaceCreateManyInput = {
   id?: string
   name: string
+  description?: string | null
+  typeKey?: string | null
   ownerId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -285,6 +322,7 @@ export type WorkspaceCreateManyInput = {
 export type WorkspaceUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -292,6 +330,8 @@ export type WorkspaceUpdateManyMutationInput = {
 export type WorkspaceUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  typeKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -310,6 +350,8 @@ export type WorkspaceOrderByRelationAggregateInput = {
 export type WorkspaceCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  description?: Prisma.SortOrder
+  typeKey?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -318,6 +360,8 @@ export type WorkspaceCountOrderByAggregateInput = {
 export type WorkspaceMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  description?: Prisma.SortOrder
+  typeKey?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -326,6 +370,8 @@ export type WorkspaceMaxOrderByAggregateInput = {
 export type WorkspaceMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  description?: Prisma.SortOrder
+  typeKey?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -378,6 +424,48 @@ export type WorkspaceUncheckedUpdateManyWithoutOwnerNestedInput = {
   deleteMany?: Prisma.WorkspaceScalarWhereInput | Prisma.WorkspaceScalarWhereInput[]
 }
 
+export type WorkspaceCreateNestedManyWithoutTypeInput = {
+  create?: Prisma.XOR<Prisma.WorkspaceCreateWithoutTypeInput, Prisma.WorkspaceUncheckedCreateWithoutTypeInput> | Prisma.WorkspaceCreateWithoutTypeInput[] | Prisma.WorkspaceUncheckedCreateWithoutTypeInput[]
+  connectOrCreate?: Prisma.WorkspaceCreateOrConnectWithoutTypeInput | Prisma.WorkspaceCreateOrConnectWithoutTypeInput[]
+  createMany?: Prisma.WorkspaceCreateManyTypeInputEnvelope
+  connect?: Prisma.WorkspaceWhereUniqueInput | Prisma.WorkspaceWhereUniqueInput[]
+}
+
+export type WorkspaceUncheckedCreateNestedManyWithoutTypeInput = {
+  create?: Prisma.XOR<Prisma.WorkspaceCreateWithoutTypeInput, Prisma.WorkspaceUncheckedCreateWithoutTypeInput> | Prisma.WorkspaceCreateWithoutTypeInput[] | Prisma.WorkspaceUncheckedCreateWithoutTypeInput[]
+  connectOrCreate?: Prisma.WorkspaceCreateOrConnectWithoutTypeInput | Prisma.WorkspaceCreateOrConnectWithoutTypeInput[]
+  createMany?: Prisma.WorkspaceCreateManyTypeInputEnvelope
+  connect?: Prisma.WorkspaceWhereUniqueInput | Prisma.WorkspaceWhereUniqueInput[]
+}
+
+export type WorkspaceUpdateManyWithoutTypeNestedInput = {
+  create?: Prisma.XOR<Prisma.WorkspaceCreateWithoutTypeInput, Prisma.WorkspaceUncheckedCreateWithoutTypeInput> | Prisma.WorkspaceCreateWithoutTypeInput[] | Prisma.WorkspaceUncheckedCreateWithoutTypeInput[]
+  connectOrCreate?: Prisma.WorkspaceCreateOrConnectWithoutTypeInput | Prisma.WorkspaceCreateOrConnectWithoutTypeInput[]
+  upsert?: Prisma.WorkspaceUpsertWithWhereUniqueWithoutTypeInput | Prisma.WorkspaceUpsertWithWhereUniqueWithoutTypeInput[]
+  createMany?: Prisma.WorkspaceCreateManyTypeInputEnvelope
+  set?: Prisma.WorkspaceWhereUniqueInput | Prisma.WorkspaceWhereUniqueInput[]
+  disconnect?: Prisma.WorkspaceWhereUniqueInput | Prisma.WorkspaceWhereUniqueInput[]
+  delete?: Prisma.WorkspaceWhereUniqueInput | Prisma.WorkspaceWhereUniqueInput[]
+  connect?: Prisma.WorkspaceWhereUniqueInput | Prisma.WorkspaceWhereUniqueInput[]
+  update?: Prisma.WorkspaceUpdateWithWhereUniqueWithoutTypeInput | Prisma.WorkspaceUpdateWithWhereUniqueWithoutTypeInput[]
+  updateMany?: Prisma.WorkspaceUpdateManyWithWhereWithoutTypeInput | Prisma.WorkspaceUpdateManyWithWhereWithoutTypeInput[]
+  deleteMany?: Prisma.WorkspaceScalarWhereInput | Prisma.WorkspaceScalarWhereInput[]
+}
+
+export type WorkspaceUncheckedUpdateManyWithoutTypeNestedInput = {
+  create?: Prisma.XOR<Prisma.WorkspaceCreateWithoutTypeInput, Prisma.WorkspaceUncheckedCreateWithoutTypeInput> | Prisma.WorkspaceCreateWithoutTypeInput[] | Prisma.WorkspaceUncheckedCreateWithoutTypeInput[]
+  connectOrCreate?: Prisma.WorkspaceCreateOrConnectWithoutTypeInput | Prisma.WorkspaceCreateOrConnectWithoutTypeInput[]
+  upsert?: Prisma.WorkspaceUpsertWithWhereUniqueWithoutTypeInput | Prisma.WorkspaceUpsertWithWhereUniqueWithoutTypeInput[]
+  createMany?: Prisma.WorkspaceCreateManyTypeInputEnvelope
+  set?: Prisma.WorkspaceWhereUniqueInput | Prisma.WorkspaceWhereUniqueInput[]
+  disconnect?: Prisma.WorkspaceWhereUniqueInput | Prisma.WorkspaceWhereUniqueInput[]
+  delete?: Prisma.WorkspaceWhereUniqueInput | Prisma.WorkspaceWhereUniqueInput[]
+  connect?: Prisma.WorkspaceWhereUniqueInput | Prisma.WorkspaceWhereUniqueInput[]
+  update?: Prisma.WorkspaceUpdateWithWhereUniqueWithoutTypeInput | Prisma.WorkspaceUpdateWithWhereUniqueWithoutTypeInput[]
+  updateMany?: Prisma.WorkspaceUpdateManyWithWhereWithoutTypeInput | Prisma.WorkspaceUpdateManyWithWhereWithoutTypeInput[]
+  deleteMany?: Prisma.WorkspaceScalarWhereInput | Prisma.WorkspaceScalarWhereInput[]
+}
+
 export type WorkspaceCreateNestedOneWithoutMembersInput = {
   create?: Prisma.XOR<Prisma.WorkspaceCreateWithoutMembersInput, Prisma.WorkspaceUncheckedCreateWithoutMembersInput>
   connectOrCreate?: Prisma.WorkspaceCreateOrConnectWithoutMembersInput
@@ -409,8 +497,10 @@ export type WorkspaceUpdateOneRequiredWithoutBoardsNestedInput = {
 export type WorkspaceCreateWithoutOwnerInput = {
   id?: string
   name: string
+  description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  type?: Prisma.WorkspaceTypeCreateNestedOneWithoutWorkspacesInput
   members?: Prisma.WorkspaceMemberCreateNestedManyWithoutWorkspaceInput
   boards?: Prisma.BoardCreateNestedManyWithoutWorkspaceInput
 }
@@ -418,6 +508,8 @@ export type WorkspaceCreateWithoutOwnerInput = {
 export type WorkspaceUncheckedCreateWithoutOwnerInput = {
   id?: string
   name: string
+  description?: string | null
+  typeKey?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   members?: Prisma.WorkspaceMemberUncheckedCreateNestedManyWithoutWorkspaceInput
@@ -455,16 +547,67 @@ export type WorkspaceScalarWhereInput = {
   NOT?: Prisma.WorkspaceScalarWhereInput | Prisma.WorkspaceScalarWhereInput[]
   id?: Prisma.StringFilter<"Workspace"> | string
   name?: Prisma.StringFilter<"Workspace"> | string
+  description?: Prisma.StringNullableFilter<"Workspace"> | string | null
+  typeKey?: Prisma.StringNullableFilter<"Workspace"> | string | null
   ownerId?: Prisma.StringFilter<"Workspace"> | string
   createdAt?: Prisma.DateTimeFilter<"Workspace"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Workspace"> | Date | string
 }
 
+export type WorkspaceCreateWithoutTypeInput = {
+  id?: string
+  name: string
+  description?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  owner: Prisma.UserCreateNestedOneWithoutOwnedWorkspacesInput
+  members?: Prisma.WorkspaceMemberCreateNestedManyWithoutWorkspaceInput
+  boards?: Prisma.BoardCreateNestedManyWithoutWorkspaceInput
+}
+
+export type WorkspaceUncheckedCreateWithoutTypeInput = {
+  id?: string
+  name: string
+  description?: string | null
+  ownerId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  members?: Prisma.WorkspaceMemberUncheckedCreateNestedManyWithoutWorkspaceInput
+  boards?: Prisma.BoardUncheckedCreateNestedManyWithoutWorkspaceInput
+}
+
+export type WorkspaceCreateOrConnectWithoutTypeInput = {
+  where: Prisma.WorkspaceWhereUniqueInput
+  create: Prisma.XOR<Prisma.WorkspaceCreateWithoutTypeInput, Prisma.WorkspaceUncheckedCreateWithoutTypeInput>
+}
+
+export type WorkspaceCreateManyTypeInputEnvelope = {
+  data: Prisma.WorkspaceCreateManyTypeInput | Prisma.WorkspaceCreateManyTypeInput[]
+}
+
+export type WorkspaceUpsertWithWhereUniqueWithoutTypeInput = {
+  where: Prisma.WorkspaceWhereUniqueInput
+  update: Prisma.XOR<Prisma.WorkspaceUpdateWithoutTypeInput, Prisma.WorkspaceUncheckedUpdateWithoutTypeInput>
+  create: Prisma.XOR<Prisma.WorkspaceCreateWithoutTypeInput, Prisma.WorkspaceUncheckedCreateWithoutTypeInput>
+}
+
+export type WorkspaceUpdateWithWhereUniqueWithoutTypeInput = {
+  where: Prisma.WorkspaceWhereUniqueInput
+  data: Prisma.XOR<Prisma.WorkspaceUpdateWithoutTypeInput, Prisma.WorkspaceUncheckedUpdateWithoutTypeInput>
+}
+
+export type WorkspaceUpdateManyWithWhereWithoutTypeInput = {
+  where: Prisma.WorkspaceScalarWhereInput
+  data: Prisma.XOR<Prisma.WorkspaceUpdateManyMutationInput, Prisma.WorkspaceUncheckedUpdateManyWithoutTypeInput>
+}
+
 export type WorkspaceCreateWithoutMembersInput = {
   id?: string
   name: string
+  description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  type?: Prisma.WorkspaceTypeCreateNestedOneWithoutWorkspacesInput
   owner: Prisma.UserCreateNestedOneWithoutOwnedWorkspacesInput
   boards?: Prisma.BoardCreateNestedManyWithoutWorkspaceInput
 }
@@ -472,6 +615,8 @@ export type WorkspaceCreateWithoutMembersInput = {
 export type WorkspaceUncheckedCreateWithoutMembersInput = {
   id?: string
   name: string
+  description?: string | null
+  typeKey?: string | null
   ownerId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -497,8 +642,10 @@ export type WorkspaceUpdateToOneWithWhereWithoutMembersInput = {
 export type WorkspaceUpdateWithoutMembersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  type?: Prisma.WorkspaceTypeUpdateOneWithoutWorkspacesNestedInput
   owner?: Prisma.UserUpdateOneRequiredWithoutOwnedWorkspacesNestedInput
   boards?: Prisma.BoardUpdateManyWithoutWorkspaceNestedInput
 }
@@ -506,6 +653,8 @@ export type WorkspaceUpdateWithoutMembersInput = {
 export type WorkspaceUncheckedUpdateWithoutMembersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  typeKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -515,8 +664,10 @@ export type WorkspaceUncheckedUpdateWithoutMembersInput = {
 export type WorkspaceCreateWithoutBoardsInput = {
   id?: string
   name: string
+  description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  type?: Prisma.WorkspaceTypeCreateNestedOneWithoutWorkspacesInput
   owner: Prisma.UserCreateNestedOneWithoutOwnedWorkspacesInput
   members?: Prisma.WorkspaceMemberCreateNestedManyWithoutWorkspaceInput
 }
@@ -524,6 +675,8 @@ export type WorkspaceCreateWithoutBoardsInput = {
 export type WorkspaceUncheckedCreateWithoutBoardsInput = {
   id?: string
   name: string
+  description?: string | null
+  typeKey?: string | null
   ownerId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -549,8 +702,10 @@ export type WorkspaceUpdateToOneWithWhereWithoutBoardsInput = {
 export type WorkspaceUpdateWithoutBoardsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  type?: Prisma.WorkspaceTypeUpdateOneWithoutWorkspacesNestedInput
   owner?: Prisma.UserUpdateOneRequiredWithoutOwnedWorkspacesNestedInput
   members?: Prisma.WorkspaceMemberUpdateManyWithoutWorkspaceNestedInput
 }
@@ -558,6 +713,8 @@ export type WorkspaceUpdateWithoutBoardsInput = {
 export type WorkspaceUncheckedUpdateWithoutBoardsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  typeKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -567,6 +724,8 @@ export type WorkspaceUncheckedUpdateWithoutBoardsInput = {
 export type WorkspaceCreateManyOwnerInput = {
   id?: string
   name: string
+  description?: string | null
+  typeKey?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -574,8 +733,10 @@ export type WorkspaceCreateManyOwnerInput = {
 export type WorkspaceUpdateWithoutOwnerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  type?: Prisma.WorkspaceTypeUpdateOneWithoutWorkspacesNestedInput
   members?: Prisma.WorkspaceMemberUpdateManyWithoutWorkspaceNestedInput
   boards?: Prisma.BoardUpdateManyWithoutWorkspaceNestedInput
 }
@@ -583,6 +744,8 @@ export type WorkspaceUpdateWithoutOwnerInput = {
 export type WorkspaceUncheckedUpdateWithoutOwnerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  typeKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   members?: Prisma.WorkspaceMemberUncheckedUpdateManyWithoutWorkspaceNestedInput
@@ -592,6 +755,48 @@ export type WorkspaceUncheckedUpdateWithoutOwnerInput = {
 export type WorkspaceUncheckedUpdateManyWithoutOwnerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  typeKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type WorkspaceCreateManyTypeInput = {
+  id?: string
+  name: string
+  description?: string | null
+  ownerId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type WorkspaceUpdateWithoutTypeInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  owner?: Prisma.UserUpdateOneRequiredWithoutOwnedWorkspacesNestedInput
+  members?: Prisma.WorkspaceMemberUpdateManyWithoutWorkspaceNestedInput
+  boards?: Prisma.BoardUpdateManyWithoutWorkspaceNestedInput
+}
+
+export type WorkspaceUncheckedUpdateWithoutTypeInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ownerId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  members?: Prisma.WorkspaceMemberUncheckedUpdateManyWithoutWorkspaceNestedInput
+  boards?: Prisma.BoardUncheckedUpdateManyWithoutWorkspaceNestedInput
+}
+
+export type WorkspaceUncheckedUpdateManyWithoutTypeInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -639,9 +844,12 @@ export type WorkspaceCountOutputTypeCountBoardsArgs<ExtArgs extends runtime.Type
 export type WorkspaceSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  description?: boolean
+  typeKey?: boolean
   ownerId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  type?: boolean | Prisma.Workspace$typeArgs<ExtArgs>
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   members?: boolean | Prisma.Workspace$membersArgs<ExtArgs>
   boards?: boolean | Prisma.Workspace$boardsArgs<ExtArgs>
@@ -651,46 +859,58 @@ export type WorkspaceSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
 export type WorkspaceSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  description?: boolean
+  typeKey?: boolean
   ownerId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  type?: boolean | Prisma.Workspace$typeArgs<ExtArgs>
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["workspace"]>
 
 export type WorkspaceSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  description?: boolean
+  typeKey?: boolean
   ownerId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  type?: boolean | Prisma.Workspace$typeArgs<ExtArgs>
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["workspace"]>
 
 export type WorkspaceSelectScalar = {
   id?: boolean
   name?: boolean
+  description?: boolean
+  typeKey?: boolean
   ownerId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type WorkspaceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "ownerId" | "createdAt" | "updatedAt", ExtArgs["result"]["workspace"]>
+export type WorkspaceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "typeKey" | "ownerId" | "createdAt" | "updatedAt", ExtArgs["result"]["workspace"]>
 export type WorkspaceInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  type?: boolean | Prisma.Workspace$typeArgs<ExtArgs>
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   members?: boolean | Prisma.Workspace$membersArgs<ExtArgs>
   boards?: boolean | Prisma.Workspace$boardsArgs<ExtArgs>
   _count?: boolean | Prisma.WorkspaceCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type WorkspaceIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  type?: boolean | Prisma.Workspace$typeArgs<ExtArgs>
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type WorkspaceIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  type?: boolean | Prisma.Workspace$typeArgs<ExtArgs>
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 
 export type $WorkspacePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Workspace"
   objects: {
+    type: Prisma.$WorkspaceTypePayload<ExtArgs> | null
     owner: Prisma.$UserPayload<ExtArgs>
     members: Prisma.$WorkspaceMemberPayload<ExtArgs>[]
     boards: Prisma.$BoardPayload<ExtArgs>[]
@@ -698,6 +918,8 @@ export type $WorkspacePayload<ExtArgs extends runtime.Types.Extensions.InternalA
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     name: string
+    description: string | null
+    typeKey: string | null
     ownerId: string
     createdAt: Date
     updatedAt: Date
@@ -1095,6 +1317,7 @@ readonly fields: WorkspaceFieldRefs;
  */
 export interface Prisma__WorkspaceClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  type<T extends Prisma.Workspace$typeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Workspace$typeArgs<ExtArgs>>): Prisma.Prisma__WorkspaceTypeClient<runtime.Types.Result.GetResult<Prisma.$WorkspaceTypePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   owner<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   members<T extends Prisma.Workspace$membersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Workspace$membersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WorkspaceMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   boards<T extends Prisma.Workspace$boardsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Workspace$boardsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoardPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -1129,6 +1352,8 @@ export interface Prisma__WorkspaceClient<T, Null = never, ExtArgs extends runtim
 export interface WorkspaceFieldRefs {
   readonly id: Prisma.FieldRef<"Workspace", 'String'>
   readonly name: Prisma.FieldRef<"Workspace", 'String'>
+  readonly description: Prisma.FieldRef<"Workspace", 'String'>
+  readonly typeKey: Prisma.FieldRef<"Workspace", 'String'>
   readonly ownerId: Prisma.FieldRef<"Workspace", 'String'>
   readonly createdAt: Prisma.FieldRef<"Workspace", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Workspace", 'DateTime'>
@@ -1528,6 +1753,25 @@ export type WorkspaceDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Int
    * Limit how many Workspaces to delete.
    */
   limit?: number
+}
+
+/**
+ * Workspace.type
+ */
+export type Workspace$typeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the WorkspaceType
+   */
+  select?: Prisma.WorkspaceTypeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the WorkspaceType
+   */
+  omit?: Prisma.WorkspaceTypeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.WorkspaceTypeInclude<ExtArgs> | null
+  where?: Prisma.WorkspaceTypeWhereInput
 }
 
 /**

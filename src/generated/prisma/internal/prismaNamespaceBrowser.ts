@@ -53,6 +53,7 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   User: 'User',
   Workspace: 'Workspace',
+  WorkspaceType: 'WorkspaceType',
   WorkspaceMember: 'WorkspaceMember',
   Notification: 'Notification',
   Board: 'Board',
@@ -95,12 +96,24 @@ export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof User
 export const WorkspaceScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  description: 'description',
+  typeKey: 'typeKey',
   ownerId: 'ownerId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type WorkspaceScalarFieldEnum = (typeof WorkspaceScalarFieldEnum)[keyof typeof WorkspaceScalarFieldEnum]
+
+
+export const WorkspaceTypeScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  label: 'label',
+  group: 'group'
+} as const
+
+export type WorkspaceTypeScalarFieldEnum = (typeof WorkspaceTypeScalarFieldEnum)[keyof typeof WorkspaceTypeScalarFieldEnum]
 
 
 export const WorkspaceMemberScalarFieldEnum = {

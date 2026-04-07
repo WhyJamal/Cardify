@@ -9,11 +9,8 @@ import { usePathname } from "next/navigation";
 import { TooltipAction, Button, WorkspaceSidebar, Spinner } from "./";
 import { ChevronRight } from "lucide-react";
 
-import CreateWorkspaceCard from "@/features/workspace/create-workspace-card";
-import WorkspaceModal from "@/features/workspace/modal/workpace-modal";
-
 import { useWorkspace } from "@/app/providers/WorkspaceProvider";
-import { WorkspaceModal1 } from "@/features/workspace/workpace-modal";
+import { CustomWorkspaceModal } from "@/features/workspace/modal/custom-workpace-modal";
 
 type NavItem = {
   id: string;
@@ -147,18 +144,8 @@ export default function Sidebar() {
         </div>
       </aside>
 
-      <WorkspaceModal
-        title={"Новый рабочего пространство"}
-        open={showCreateWorksppace}
-        onClose={() => setShowCreateWorksppace(false)}
-      >
-        <CreateWorkspaceCard
-          onCreate={() => setShowCreateWorksppace(false)}
-        />
-      </WorkspaceModal>
-
       {showCreateWorksppace && (
-        <WorkspaceModal1 onClose={() => setShowCreateWorksppace(false)} />
+        <CustomWorkspaceModal onClose={() => setShowCreateWorksppace(false)} />
       )}
       
     </div>

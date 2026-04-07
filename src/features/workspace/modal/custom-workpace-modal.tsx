@@ -1,21 +1,17 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { BoardIllustration } from "./components/workspace-illustration";
-import { Step1 } from "./components/create-workspace-step1";
-import { Step2 } from "./components/invite-workspace-step2";
+import { BoardIllustration } from "../components/workspace-illustration";
+import { Step1 } from "../components/create-workspace-step1";
+import { Step2 } from "../components/invite-workspace-step2";
 
 interface WorkspaceModalProps {
     onClose: () => void;
 }
 
-export function WorkspaceModal1({ onClose }: WorkspaceModalProps) {
+export function CustomWorkspaceModal({ onClose }: WorkspaceModalProps) {
     const [step, setStep] = useState<1 | 2>(1);
-    const [workspaceName, setWorkspaceName] = useState("Taco's Co.");
-    const [workspaceType, setWorkspaceType] = useState("");
-    const [workspaceDesc, setWorkspaceDesc] = useState("");
-    const [members, setMembers] = useState<string[]>(["Sayyodbee Gulomov"]);
-    const [memberInput, setMemberInput] = useState("");
+    const [workspaceId, setWorkspaceId] = useState<string>("");
 
     const leftRef = useRef<HTMLDivElement>(null);
     const [panelH, setPanelH] = useState(500);
@@ -38,16 +34,15 @@ export function WorkspaceModal1({ onClose }: WorkspaceModalProps) {
     const c4y = panelH * 0.80;
     const clipPath = `path('M 0 0 L ${W} 0 C ${W} ${c1y}, ${dip} ${c2y}, ${dip} ${mid} C ${dip} ${c3y}, ${W} ${c4y}, ${W} ${panelH + 50} L 0 ${panelH} Z')`;
 
-    const removeMember = (name: string) => setMembers((p) => p.filter((m) => m !== name));
+    const handleStep1Continue = (id: string) => {
+        setWorkspaceId(id);
+        setStep(2);
+    };
 
-    const handleMemberKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === "Enter" && memberInput.trim()) {
-            setMembers((p) => [...p, memberInput.trim()]);
-            setMemberInput("");
-        }
-        if (e.key === "Backspace" && !memberInput && members.length > 0) {
-            setMembers((p) => p.slice(0, -1));
-        }
+    const handleStep2Success = () => {
+        setWorkspaceId("");
+        setStep(1);
+        onClose();
     };
 
     return (
@@ -61,22 +56,13 @@ export function WorkspaceModal1({ onClose }: WorkspaceModalProps) {
                 >
                     {step === 1 ? (
                         <Step1
-                            workspaceName={workspaceName}
-                            setWorkspaceName={setWorkspaceName}
-                            workspaceType={workspaceType}
-                            setWorkspaceType={setWorkspaceType}
-                            workspaceDesc={workspaceDesc}
-                            setWorkspaceDesc={setWorkspaceDesc}
-                            onContinue={() => setStep(2)}
+                            onContinue={handleStep1Continue}
                         />
                     ) : (
                         <Step2
-                            members={members}
-                            memberInput={memberInput}
-                            setMemberInput={setMemberInput}
-                            onKeyDown={handleMemberKeyDown}
-                            removeMember={removeMember}
+                            workspaceId={workspaceId}
                             onClose={onClose}
+                            onSuccess={handleStep2Success}
                         />
                     )}
                 </div>
@@ -95,8 +81,3 @@ export function WorkspaceModal1({ onClose }: WorkspaceModalProps) {
         </div>
     );
 }
-
-
-
-
-

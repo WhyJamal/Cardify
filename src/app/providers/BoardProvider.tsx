@@ -8,7 +8,7 @@ import {
   Dispatch,
   SetStateAction,
 } from "react";
-import { Board, ColumnInt } from "@/shared/types";
+import { Board, ColumnInt } from "@shared/types";
 
 type BoardViewContextType = {
   board: Board | null;

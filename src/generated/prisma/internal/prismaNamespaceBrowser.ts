@@ -99,6 +99,9 @@ export const WorkspaceScalarFieldEnum = {
   description: 'description',
   typeKey: 'typeKey',
   ownerId: 'ownerId',
+  logo: 'logo',
+  website: 'website',
+  visibility: 'visibility',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -150,6 +153,7 @@ export const BoardScalarFieldEnum = {
   bg: 'bg',
   isPhoto: 'isPhoto',
   isChoosen: 'isChoosen',
+  visibility: 'visibility',
   workspaceId: 'workspaceId',
   ownerId: 'ownerId',
   createdAt: 'createdAt',

@@ -4,8 +4,8 @@ import { useState, useRef, useEffect } from "react";
 import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, X } from "lucide-react";
 import { createPortal } from "react-dom";
 
-import { calcSidePosition } from "@/shared/utils/floatingPosition";
-// import { useCardActions } from "@/shared/hooks/use-card-actions";
+import { calcSidePosition } from "@utils/floatingPosition";
+// import { useCardActions } from "@hooks/use-card-actions";
 import {
   MONTH_NAMES,
   WEEK_DAYS,
@@ -13,9 +13,9 @@ import {
   formatTimeValue,
   buildDueDateISO,
   normalizeDateInput,
-} from "@/shared/utils/date";
-import { useOutsideClick } from "@/shared/hooks/use-outside-click";
-import { Button } from "@/shared/components";
+} from "@utils/date";
+import { useOutsideClick } from "@hooks/use-outside-click";
+import { Button } from "@components";
 
 interface DatePickerProps {
   triggerRef: React.RefObject<HTMLElement | null>;

@@ -1,12 +1,12 @@
 "use client";
 
 import { ReactNode } from "react";
-import { Kbd } from "@/shared/components/ui/kbd";
+import { Kbd } from "@components/ui/kbd";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@/shared/components/ui/tooltip";
+} from "@components/ui/tooltip";
 import { cn } from "@/lib/utils";
 
 type TooltipActionProps = {

@@ -1,5 +1,5 @@
-import { Header } from "@/shared/components";
-import Sidebar from "@/shared/components/sidebar";
+import { Header } from "@components";
+import Sidebar from "@components/sidebar";
 import { BoardProvider } from "@/app/providers/BoardProvider";
 
 export default function MainLayout({

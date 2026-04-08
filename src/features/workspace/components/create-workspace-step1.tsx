@@ -1,9 +1,9 @@
-import { Button } from "@/shared/components";
+import { Button } from "@components";
 import { HelperText, Label } from "./workspace-ui";
 import { useEffect, useState } from "react";
 import { useWorkspace } from "@/app/providers/WorkspaceProvider";
 import { useWorkspaceActions } from "../hooks/use-workspace-actions";
-import CustomSelect from "@/shared/components/ui/custom-select";
+import CustomSelect from "@components/ui/custom-select";
 import { workspaceApi } from "../api/workspace-api";
 
 interface Step1Props {

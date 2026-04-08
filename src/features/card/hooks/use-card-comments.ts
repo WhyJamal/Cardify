@@ -1,8 +1,8 @@
 "use client";
 
 import { useCallback, useState } from "react";
-import { cardApi } from "@/features/card/api/card-api";
-import type { CardTimeline } from "@/shared/types";
+import { cardApi } from "@features/card/api/card-api";
+import type { CardTimeline } from "@shared/types";
 
 export function useCardComments(cardId: string) {
   const [comment, setComment] = useState("");

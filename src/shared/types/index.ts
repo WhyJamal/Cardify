@@ -1,3 +1,9 @@
+export enum Visibility {
+  PRIVATE = "PRIVATE",
+  PUBLIC = "PUBLIC",
+  WORKSPACE = "WORKSPACE",
+}
+
 export interface Workspace {
   id: string;
   name: string;
@@ -5,13 +11,17 @@ export interface Workspace {
   description?: string;
   website?: string;
   type?: WorkspaceType;
-  shortName?: string; 
-   
+  shortName?: string;
+  logo?: string;
+  visibility: Visibility;
+
+  boards: Board[];
+
   createdAt: string;
   updatedAt: string;
 }
- 
-export interface WorkspaceType{
+
+export interface WorkspaceType {
   key: string;
   label: string;
   group: string;
@@ -41,7 +51,7 @@ export interface WorkspaceMember {
   userId: string;
   role: WorkspaceRole;
   status: WorkspaceMemberStatus;
-  lastActive: Date; 
+  lastActive: Date;
 
   boards: Board;
 
@@ -91,7 +101,7 @@ export interface CardAttachment {
   fileSize?: number | null;
   mimeType?: string | null;
   uploadedBy?: string | null;
-  createdAt: string; 
+  createdAt: string;
 }
 
 export type SizeOption = "WIDE" | "TALL";
@@ -118,7 +128,7 @@ export interface CardData {
   labels?: CardLabel[];
   boardLabels?: BoardLabel[];
 
-  members?: CardMember[]; 
+  members?: CardMember[];
 
   links?: CardLink[];
   comments?: CardTimeline[];
@@ -130,7 +140,7 @@ export interface CardData {
   isCompleted: boolean;
 
   isImage?: boolean;
-  background?: string | null; 
+  background?: string | null;
   size?: SizeOption;
   textColor?: string | null;
 }
@@ -145,16 +155,16 @@ export type BoardMemberRole = "OWNER" | "ADMIN" | "MEMBER";
 export type BoardMemberStatus = "PENDING" | "ACCEPTED" | "DECLINED";
 
 export interface BoardMember {
-  id: string;          
-  boardId: number;     
-  userId: string;      
-  role: BoardMemberRole;      
-  status: BoardMemberStatus;  
+  id: string;
+  boardId: number;
+  userId: string;
+  role: BoardMemberRole;
+  status: BoardMemberStatus;
 
   user: User;
 
-  createdAt: Date;     
-  updatedAt: Date;     
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export interface Board {
@@ -164,7 +174,8 @@ export interface Board {
   isPhoto: boolean;
   workspaceId: string;
   isChoosen: boolean;
-  
+  visibility: Visibility;
+
   columns: ColumnInt[];
   labels: BoardLabel[];
   members: BoardMember[];

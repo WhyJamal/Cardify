@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { Card, CardHeader } from "@/shared/components/ui/card";
-import { slugify } from "@/shared/utils/slugify";
+import { Card, CardHeader } from "@components/ui/card";
+import { slugify } from "@utils/slugify";
 import { Board } from "../types";
 import ToggleChoosen from "./toggle-choosen";
 import { useBoardActions } from "../hooks/use-board-actions";

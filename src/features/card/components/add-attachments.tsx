@@ -1,12 +1,12 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { useOutsideClick } from "@/shared/hooks/use-outside-click";
-import { calcSidePosition } from "@/shared/utils/floatingPosition";
+import { useOutsideClick } from "@hooks/use-outside-click";
+import { calcSidePosition } from "@utils/floatingPosition";
 import { createPortal } from "react-dom";
 import { KanbanSquare, X } from "lucide-react";
-import { CardAttachment, CardLink } from "@/shared/types";
-import { cardApi } from "./api/card-api";
+import { CardAttachment, CardLink } from "@shared/types";
+import { cardApi } from "@features/card/api/card-api";
 
 interface RecentLink {
     id: string;
@@ -16,8 +16,8 @@ interface RecentLink {
 }
 
 const recentLinks: RecentLink[] = [
-    // { id: "1", title: "ads", workspace: "Моя доска Trello", viewedAt: "17 часов назад" },
-    // { id: "2", title: "Моя доска Trello", workspace: "Рабочее простра...", viewedAt: "17 часов назад" },
+    // { id: "1", title: "ads", workspace: "", viewedAt: "17 часов назад" },
+    // { id: "2", title: "", workspace: "Рабочее простра...", viewedAt: "17 часов назад" },
 ];
 
 interface AddAttachmentsProps {

@@ -24,6 +24,12 @@ model User {
   updatedAt DateTime @default(now()) @updatedAt
 }
 
+enum Visibility {
+  PRIVATE
+  PUBLIC
+  WORKSPACE
+}
+
 model Workspace {
   id            String @id @default(cuid())
   name          String
@@ -31,6 +37,9 @@ model Workspace {
   typeKey       String?
   type          WorkspaceType? @relation(fields: [typeKey], references: [key])
   ownerId       String
+  logo          String?
+  website       String?
+  visibility    Visibility @default(PUBLIC)
 
   owner         User              @relation("WorkspaceOwner", fields: [ownerId], references: [id], onDelete: Cascade)
   members       WorkspaceMember[]
@@ -128,6 +137,7 @@ model Board {
   bg              String
   isPhoto         Boolean @default(true)
   isChoosen       Boolean           @default(false)
+  visibility      Visibility @default(PUBLIC)
 
   workspaceId     String
   workspace       Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)

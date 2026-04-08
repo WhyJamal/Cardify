@@ -2,7 +2,7 @@
 
 import { X, Tag, Clock, User } from 'lucide-react';
 import { useEffect, useRef } from 'react';
-import { calcBelowPosition } from '@/shared/utils/floatingPosition';
+import { calcBelowPosition } from '@utils/floatingPosition';
 import { createPortal } from "react-dom";
 
 interface MenuItem {

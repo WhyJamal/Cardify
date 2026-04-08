@@ -5,7 +5,7 @@ import { useRef, useEffect, useState } from "react";
 import { useDrag, useDrop, useDragLayer } from "react-dnd";
 import { getEmptyImage } from "react-dnd-html5-backend";
 import Image from "next/image";
-import { CardData } from "@/shared/types";
+import { CardData } from "@shared/types";
 import { TooltipAction } from "./custom-tooltip";
 import Link from "next/link";
 import { formatDueDate } from "../utils/date";
@@ -14,7 +14,7 @@ import { Button } from "./ui/button";
 import { getInitials } from "../utils/getInitials";
 import CustomCheckbox from "./custom-checkbox";
 
-import { CardContextMenu } from "@/features/card/card-context-menu";
+import { CardContextMenu } from "@features/card/components/card-context-menu";
 import { useRouter } from "next/navigation";
 import { PAGES } from "@/config/pages.config";
 import { slugify } from "../utils/slugify";
@@ -179,7 +179,7 @@ export function CardContent({
               {card.members && card.members.length > 0 && (
                 card.members.map((member) => (
                   <div
-                    key={member.id}
+                    key={member.user.id}
                     className="w-6 h-6 rounded-full flex items-center justify-center bg-green-700 text-[10px] font-bold text-white">
                     {getInitials(member.user.name || "")}
                   </div>

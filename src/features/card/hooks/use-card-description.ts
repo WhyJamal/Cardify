@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useState } from "react";
-import { cardApi } from "@/features/card/api/card-api";
+import { cardApi } from "@features/card/api/card-api";
 
 export function useCardDescription(cardId: string, description?: string) {
   const [isEditingDesc, setIsEditingDesc] = useState(false);

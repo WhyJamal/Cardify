@@ -1,6 +1,6 @@
 "use client";
 
-import CardifyLogo from "@/shared/components/logo";
+import CardifyLogo from "@components/logo";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 

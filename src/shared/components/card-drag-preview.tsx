@@ -1,7 +1,7 @@
 "use client";
 
 import { useDragLayer } from "react-dnd";
-import { CardData } from "@/shared/types";
+import { CardData } from "@shared/types";
 import { CardContent } from "./custom-card";
 
 export function CardDragPreview({ columns }: { columns: { id: string; title: string; cards: CardData[] }[] }) {

@@ -3,11 +3,11 @@
 import { useRef } from "react";
 import { X, Loader2 } from "lucide-react";
 import { createPortal } from "react-dom";
-import CustomSelect from "@/shared/components/ui/custom-select";
-import { Button } from "@/shared/components";
-import { calcSidePosition } from "@/shared/utils/floatingPosition";
-import { useOutsideClick } from "@/shared/hooks/use-outside-click";
-import { useMoveCard } from "@/features/card/hooks/use-move-card";
+import CustomSelect from "@components/ui/custom-select";
+import { Button } from "@components";
+import { calcSidePosition } from "@utils/floatingPosition";
+import { useOutsideClick } from "@hooks/use-outside-click";
+import { useMoveCard } from "@features/card/hooks/use-move-card";
 
 interface MoveCardModalProps {
   triggerRef: React.RefObject<HTMLElement | null>;

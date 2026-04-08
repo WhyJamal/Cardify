@@ -3,12 +3,12 @@
 import { X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { useOutsideClick } from "@/shared/hooks/use-outside-click";
-import { calcBelowPosition } from "@/shared/utils/floatingPosition";
-import { workspaceApi } from "@/features/workspace/api/workspace-api";
-import type { CardMember, User, WorkspaceMember } from "@/shared/types";
-import { Spinner } from "@/shared/components";
-import { getInitials } from "@/shared/utils/getInitials";
+import { useOutsideClick } from "@hooks/use-outside-click";
+import { calcBelowPosition } from "@utils/floatingPosition";
+import { workspaceApi } from "@features/workspace/api/workspace-api";
+import type { CardMember, User, WorkspaceMember } from "@shared/types";
+import { Spinner } from "@components";
+import { getInitials } from "@utils/getInitials";
 
 interface InviteMemberMenuProps {
   triggerRef: React.RefObject<HTMLElement | null>;

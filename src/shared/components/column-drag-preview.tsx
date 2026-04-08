@@ -2,7 +2,7 @@
 
 import { useDragLayer } from "react-dnd";
 import { MoreHorizontal } from "lucide-react";
-import { CardData } from "@/shared/types";
+import { CardData } from "@shared/types";
 
 export function ColumnDragPreview({
   columns,

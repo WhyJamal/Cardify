@@ -1,4 +1,4 @@
-import { EmptyMuted } from "@/shared/components/empty-muted";
+import { EmptyMuted } from "@components/empty-muted";
 
 export default function TemplatesPage() {
     return (

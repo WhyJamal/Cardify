@@ -1,13 +1,6 @@
-import { Check, ChevronLeft, X } from "lucide-react";
+import { PHOTOS } from "@data/photos.data";
+import { ChevronLeft, X } from "lucide-react";
 import Image from "next/image";
-
-const PHOTOS = [
-    "/images/board-backgrounds/tropical-beach-samoa.webp",
-    "/images/board-backgrounds/messy-office-desk-still-life.webp",
-    "/images/board-backgrounds/beautiful-shot-himalayas-mountains-clouds.webp",
-    "/images/board-backgrounds/laptop-coffee-cups-notepads-black-background-top-view.webp",
-    "/images/board-backgrounds/nature-landscape-with-black-sand-beach.webp",
-];
 
 export default function PhotosView({
     selectedBg, isBgPhoto, onSelectBg, onBack, onClose,

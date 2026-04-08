@@ -5,12 +5,12 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { Plus, X } from "lucide-react";
 
-import { Column, BottomNav, ColumnDragPreview } from "@/shared/components";
-import { CardDragPreview } from "@/shared/components/card-drag-preview";
+import { Column, BottomNav, ColumnDragPreview } from "@components";
+import { CardDragPreview } from "@components/card-drag-preview";
 import { useBoardView } from "@/app/providers/BoardProvider";
-import { useBoardActions } from "@/shared/hooks/use-board-actions";
-import { useOpenCardFromQuery } from "@/shared/hooks/use-open-card-from-query";
-import { useCardActions } from "@/shared/hooks/use-card-actions";
+import { useBoardActions } from "@hooks/use-board-actions";
+import { useOpenCardFromQuery } from "@hooks/use-open-card-from-query";
+import { useCardActions } from "@hooks/use-card-actions";
 
 export default function BoardPage() {
   useOpenCardFromQuery();

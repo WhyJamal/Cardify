@@ -1,33 +1,14 @@
 import { useEffect, useRef, useState, RefObject, useLayoutEffect } from "react";
 import { createPortal } from "react-dom";
 import { X, Check } from "lucide-react";
-import { calcFloatingSidePosition } from "@/shared/utils/floatingPosition";
+import { calcFloatingSidePosition } from "@utils/floatingPosition";
 import ColorsView from "./colors-view";
 import PhotosView from "./photos-view";
 import Image from "next/image";
+import { GRADIENT_COLORS } from "@data/colors.data";
+import { PHOTOS } from "@data/photos.data";
 
 const PANEL_WIDTH = 320;
-
-const PHOTOS = [
-    "/images/board-backgrounds/tropical-beach-samoa.webp",
-    "/images/board-backgrounds/messy-office-desk-still-life.webp",
-    "/images/board-backgrounds/beautiful-shot-himalayas-mountains-clouds.webp",
-    "/images/board-backgrounds/laptop-coffee-cups-notepads-black-background-top-view.webp",
-    "/images/board-backgrounds/nature-landscape-with-black-sand-beach.webp",
-];
-
-const GRADIENT_COLORS = [
-  { id: "gc1", style: "linear-gradient(135deg, #1a2a4a 0%, #0d1b35 100%)" },
-  { id: "gc2", style: "linear-gradient(135deg, #1e90ff 0%, #00bcd4 100%)" },
-  { id: "gc3", style: "linear-gradient(135deg, #1a237e 0%, #283593 100%)" },
-  { id: "gc4", style: "linear-gradient(135deg, #6a11cb 0%, #b721ff 100%)" },
-  { id: "gc5", style: "linear-gradient(135deg, #c850c0 0%, #8d4fc2 100%)" },
-  { id: "gc6", style: "linear-gradient(135deg, #ff6b35 0%, #f7931e 100%)" },
-  { id: "gc7", style: "linear-gradient(135deg, #e91e8c 0%, #f06292 100%)" },
-  { id: "gc8", style: "linear-gradient(135deg, #00897b 0%, #26a69a 100%)" },
-  { id: "gc9", style: "linear-gradient(135deg, #1c2b4a 0%, #263350 100%)" },
-  { id: "gc10", style: "linear-gradient(135deg, #7b1212 0%, #b71c1c 100%)" },
-];
 
 interface Props {
   triggerRef: RefObject<HTMLElement | null>;

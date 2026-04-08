@@ -4,8 +4,8 @@ import { X, Pencil } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
-import { calcBelowPosition } from "../../shared/utils/floatingPosition";
-import { useOutsideClick } from "@/shared/hooks/use-outside-click";
+import { calcBelowPosition } from "@utils/floatingPosition";
+import { useOutsideClick } from "@hooks/use-outside-click";
 import {
   mergeLabelsWithChecked,
   getCheckedLabels,
@@ -13,8 +13,8 @@ import {
   type SelectedLabel,
   type LabelWithChecked,
   shadeColor,
-} from "@/shared/utils/labels";
-import { Button } from "@/shared/components";
+} from "@utils/labels";
+import { Button } from "@components";
 
 interface LabelsMenuProps {
   triggerRef: React.RefObject<HTMLElement | null>;

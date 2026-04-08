@@ -1582,6 +1582,9 @@ export const WorkspaceScalarFieldEnum = {
   description: 'description',
   typeKey: 'typeKey',
   ownerId: 'ownerId',
+  logo: 'logo',
+  website: 'website',
+  visibility: 'visibility',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -1633,6 +1636,7 @@ export const BoardScalarFieldEnum = {
   bg: 'bg',
   isPhoto: 'isPhoto',
   isChoosen: 'isChoosen',
+  visibility: 'visibility',
   workspaceId: 'workspaceId',
   ownerId: 'ownerId',
   createdAt: 'createdAt',
@@ -1801,6 +1805,13 @@ export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 
  * Reference to a field of type 'DateTime'
  */
 export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+    
+
+
+/**
+ * Reference to a field of type 'Visibility'
+ */
+export type EnumVisibilityFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Visibility'>
     
 
 

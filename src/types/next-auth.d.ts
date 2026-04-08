@@ -1,4 +1,4 @@
-import { WorkspaceMember } from "@/shared/types";
+import { WorkspaceMember } from "@shared/types";
 import NextAuth from "next-auth";
 
 declare module "next-auth" {

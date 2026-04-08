@@ -9,6 +9,15 @@
 * 🟢 You can import this file directly.
 */
 
+export const Visibility = {
+  PRIVATE: 'PRIVATE',
+  PUBLIC: 'PUBLIC',
+  WORKSPACE: 'WORKSPACE'
+} as const
+
+export type Visibility = (typeof Visibility)[keyof typeof Visibility]
+
+
 export const WorkspaceMemberRole = {
   OWNER: 'OWNER',
   ADMIN: 'ADMIN',

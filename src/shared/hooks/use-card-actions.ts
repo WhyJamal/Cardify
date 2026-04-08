@@ -2,8 +2,8 @@
 
 import { useCallback } from "react";
 import { useBoardView } from "@/app/providers/BoardProvider";
-import { cardApi } from "@/features/card/api/card-api";
-import type { CardData, CardLabel } from "@/shared/types";
+import { cardApi } from "@features/card/api/card-api";
+import type { CardData, CardLabel } from "@shared/types";
 
 export function useCardActions() {
     const { board, setColumns } = useBoardView();

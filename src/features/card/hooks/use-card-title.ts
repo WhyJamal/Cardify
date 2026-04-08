@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useRef, useState } from "react";
-import { useCardActions } from "@/shared/hooks/use-card-actions";
+import { useCardActions } from "@hooks/use-card-actions";
 
 export function useCardTitle(cardId: string, title: string) {
   const { changeTitleCard } = useCardActions();

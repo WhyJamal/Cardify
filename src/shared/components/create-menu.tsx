@@ -3,7 +3,7 @@
 import { useEffect, useRef, RefObject } from "react";
 import { createPortal } from "react-dom";
 import { LayoutDashboard, Users, Copy } from "lucide-react";
-import { calcBelowPosition } from "@/shared/utils/floatingPosition";
+import { calcBelowPosition } from "@utils/floatingPosition";
 
 const PANEL_WIDTH = 300;
 const PANEL_HEIGHT = 240;

@@ -8,7 +8,7 @@ import { TooltipAction, Button, WorkspaceSidebar, Spinner } from "./";
 import { ChevronRight } from "lucide-react";
 
 import { useWorkspace } from "@/app/providers/WorkspaceProvider";
-import { CustomWorkspaceModal } from "@/features/workspace/modal/custom-workpace-modal";
+import { CustomWorkspaceModal } from "@features/workspace/modal/custom-workpace-modal";
 import { sidebarItems } from "../config/navigation";
 import { SidebarItem } from "./sidebar-item";
 

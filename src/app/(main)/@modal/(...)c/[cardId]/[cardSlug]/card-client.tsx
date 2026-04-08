@@ -14,19 +14,19 @@ import {
     Dot,
 } from "lucide-react";
 
-import type { CardData } from "@/shared/types";
-import { Button, DatePicker, AddToCardMenu, LabelsMenu } from "@/shared/components";
-import { TooltipAction } from "@/shared/components/custom-tooltip";
-import { formatCardDate } from "@/shared/utils/date";
-import { useCardClient } from "@/features/card/hooks/use-card-client";
-import { InviteMemberMenu } from "@/features/card/invite-member-menu";
-import { getInitials } from "@/shared/utils/getInitials";
-import AddAttachments from "@/features/card/add-attachments";
-import ListAttachments from "@/features/card/list-attachments";
-import { CreateLabelMenu } from "@/features/card/create-label-menu";
-import CoverSettings from "@/features/card/cover-settings";
-import CustomCheckbox from "@/shared/components/custom-checkbox";
-import MoveCardMenu from "@/features/card/move-card-menu";
+import type { CardData } from "@shared/types";
+import { Button, DatePicker, AddToCardMenu, LabelsMenu } from "@components/";
+import { TooltipAction } from "@components/custom-tooltip";
+import { formatCardDate } from "@utils/date";
+import { useCardClient } from "@features/card/hooks/use-card-client";
+import { InviteMemberMenu } from "@features/card/components/invite-member-menu";
+import { getInitials } from "@utils/getInitials";
+import AddAttachments from "@features/card/components/add-attachments";
+import ListAttachments from "@features/card/components/list-attachments";
+import { CreateLabelMenu } from "@features/card/components/create-label-menu";
+import CoverSettings from "@features/card/components/cover-settings";
+import CustomCheckbox from "@components/custom-checkbox";
+import MoveCardMenu from "@features/card/components/move-card-menu";
 
 export default function CardClient({
     cardId,

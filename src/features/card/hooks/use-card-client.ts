@@ -2,13 +2,13 @@
 
 import { useEffect, useRef, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
-import type { CardData, CardMember, CardTimeline, User } from "@/shared/types";
-import { cardApi } from "@/features/card/api/card-api";
-import { useCardActions } from "@/shared/hooks/use-card-actions";
+import type { CardData, CardMember, CardTimeline, User } from "@shared/types";
+import { cardApi } from "@features/card/api/card-api";
+import { useCardActions } from "@hooks/use-card-actions";
 import { useBoardView } from "@/app/providers/BoardProvider";
-import { useEscapeKey } from "@/shared/hooks/use-escape-key";
-import { getDueDateStatus } from "@/shared/utils/date";
-import { boardApi } from "@/features/board/api/board-api";
+import { useEscapeKey } from "@hooks/use-escape-key";
+import { getDueDateStatus } from "@utils/date";
+import { boardApi } from "@features/board/api/board-api";
 
 export function useCardClient(initialCard: CardData, cardId: string) {
     const router = useRouter();

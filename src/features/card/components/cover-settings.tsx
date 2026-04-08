@@ -3,32 +3,14 @@
 import { useState, useRef } from "react";
 import { X } from "lucide-react";
 import { createPortal } from "react-dom";
-import { calcSidePosition } from "@/shared/utils/floatingPosition";
-import { useOutsideClick } from "@/shared/hooks/use-outside-click";
-import { Button } from "@/shared/components";
-import { CardData, SizeOption } from "@/shared/types";
+import { calcSidePosition } from "@utils/floatingPosition";
+import { useOutsideClick } from "@hooks/use-outside-click";
+import { Button } from "@components";
+import { CardData, SizeOption } from "@shared/types";
+import { UNSPLASH_PHOTOS } from "@data/photos.data";
+import { COVER_COLORS } from "@data/colors.data";
 
-const COLORS = [
-    { id: "green", bg: "bg-[#3d7a5e]", hex: "#3d7a5e" },
-    { id: "yellow", bg: "bg-[#b8860b]", hex: "#b8860b" },
-    { id: "orange", bg: "bg-[#d2691e]", hex: "#d2691e" },
-    { id: "red", bg: "bg-[#c0392b]", hex: "#c0392b" },
-    { id: "purple", bg: "bg-[#8e44ad]", hex: "#8e44ad" },
-    { id: "blue", bg: "bg-[#2980b9]", hex: "#2980b9" },
-    { id: "teal", bg: "bg-[#1a7a7a]", hex: "#1a7a7a" },
-    { id: "olive", bg: "bg-[#556b2f]", hex: "#556b2f" },
-    { id: "pink", bg: "bg-[#c2719c]", hex: "#c2719c" },
-    { id: "gray", bg: "bg-[#7f8c8d]", hex: "#7f8c8d" },
-];
 
-const UNSPLASH_PHOTOS = [
-    { id: 1, url: "https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?w=200&q=80", alt: "Abstract" },
-    { id: 2, url: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=200&q=80", alt: "Waves" },
-    { id: 3, url: "https://images.unsplash.com/photo-1476611338391-6f395a0dd82e?w=200&q=80", alt: "Dark" },
-    { id: 4, url: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=200&q=80", alt: "Mountains" },
-    { id: 5, url: "https://images.unsplash.com/photo-1502481851512-e9e2529bfbf9?w=200&q=80", alt: "Sunset" },
-    { id: 6, url: "https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=200&q=80", alt: "Galaxy" },
-];
 
 interface CoverSettingsProps {
     triggerRef: React.RefObject<HTMLElement | null>;
@@ -53,7 +35,7 @@ export default function CoverSettings({
     const panelRef = useRef<HTMLDivElement>(null);
 
     const initialColorId =
-        COLORS.find((c) => c.hex === currentBackground)?.id ?? "green";
+        COVER_COLORS.find((c) => c.hex === currentBackground)?.id ?? "green";
 
     const [selectedColor, setSelectedColor] = useState<string>(initialColorId);
     const [selectedSize, setSelectedSize] = useState<SizeOption>(card.size ?? "WIDE");
@@ -75,7 +57,7 @@ export default function CoverSettings({
     useOutsideClick([panelRef, triggerRef], () => onClose?.());
 
     const handleColorClick = (colorId: string) => {
-        const found = COLORS.find((c) => c.id === colorId);
+        const found = COVER_COLORS.find((c) => c.id === colorId);
         if (!found) return;
         setSelectedColor(colorId);
         onSetBackground(found.hex, false, selectedSize, card.textColor ?? "light");
@@ -99,7 +81,7 @@ export default function CoverSettings({
         setTimeout(() => setIsSearching(false), 1000);
     };
 
-    const currentColorObj = COLORS.find((c) => c.id === selectedColor) ?? COLORS[0];
+    const currentColorObj = COVER_COLORS.find((c) => c.id === selectedColor) ?? COVER_COLORS[0];
 
     return createPortal(
         <div
@@ -118,7 +100,7 @@ export default function CoverSettings({
                 <span className="text-white text-sm font-semibold tracking-wide">Обложка</span>
                 <button
                     onClick={onClose}
-                    className="text-white/40 hover:text-white/80 transition-colors text-lg leading-none"
+                    className="text-white/40 hover:text-white/80 transition-COVER_COLORS text-lg leading-none"
                 >
                     <X className="w-4 h-4" />
                 </button>
@@ -223,7 +205,7 @@ export default function CoverSettings({
                         Цвета
                     </p>
                     <div className="grid grid-cols-5 gap-2">
-                        {COLORS.map((color) => (
+                        {COVER_COLORS.map((color) => (
                             <button
                                 key={color.id}
                                 onClick={() => handleColorClick(color.id)}
@@ -348,11 +330,11 @@ export default function CoverSettings({
 
                     <p className="text-white/25 text-[10px] mt-2 leading-relaxed">
                         Используя изображения Unsplash, вы соглашаетесь с их{" "}
-                        <a href="#" className="underline hover:text-white/50 transition-colors">
+                        <a href="#" className="underline hover:text-white/50 transition-COVER_COLORS">
                             лицензией
                         </a>{" "}
                         и{" "}
-                        <a href="#" className="underline hover:text-white/50 transition-colors">
+                        <a href="#" className="underline hover:text-white/50 transition-COVER_COLORS">
                             Условиями использования
                         </a>
                     </p>

@@ -5,7 +5,7 @@ import { signIn } from "next-auth/react";
 import { FcGoogle } from "react-icons/fc";
 import Link from "next/link";
 import Image from "next/image";
-import { Button, FloatingInput } from "@/shared/components";
+import { Button, FloatingInput } from "@components";
 import { PAGES } from "@/config/pages.config";
 
 export function SignInCard() {

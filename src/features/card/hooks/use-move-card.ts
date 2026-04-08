@@ -3,7 +3,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { useBoardView } from "@/app/providers/BoardProvider";
 import { useWorkspace } from "@/app/providers/WorkspaceProvider";
-import { boardApi } from "@/features/board/api/board-api";
+import { boardApi } from "@features/board/api/board-api";
 import { clientFetch } from "@/lib/client-api";
 
 interface SelectOption {

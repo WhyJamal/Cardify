@@ -4,9 +4,9 @@ import { useState, useTransition } from "react";
 import {
   updateWorkspace as updateWorkspaceAction,
   type UpdateWorkspaceDto
-} from "@/features/workspace/actions";
-import type { Workspace } from "@/shared/types";
-import { FormInput, Button, FormTextarea } from "@/shared/components";
+} from "@features/workspace/actions";
+import type { Workspace } from "@shared/types";
+import { FormInput, Button, FormTextarea } from "@components";
 import { PencilIcon } from "lucide-react";
 import { useWorkspace } from "@/app/providers/WorkspaceProvider";
 

@@ -3,7 +3,7 @@
 import { useRef, useState } from "react";
 import { useBoardView } from "@/app/providers/BoardProvider";
 import { clientFetch } from "@/lib/client-api";
-import { boardApi } from "@/features/board/api/board-api";
+import { boardApi } from "@features/board/api/board-api";
 import { Board, BoardLabel, BoardMember, User } from "../types";
 
 export function useBoardActions() {

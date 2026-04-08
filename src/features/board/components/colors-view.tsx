@@ -1,29 +1,5 @@
+import { GRADIENT_COLORS, SOLID_COLORS } from "@data/colors.data";
 import { Check, ChevronLeft, X } from "lucide-react";
-
-const GRADIENT_COLORS = [
-  { id: "gc1", style: "linear-gradient(135deg, #1a2a4a 0%, #0d1b35 100%)" },
-  { id: "gc2", style: "linear-gradient(135deg, #1e90ff 0%, #00bcd4 100%)" },
-  { id: "gc3", style: "linear-gradient(135deg, #1a237e 0%, #283593 100%)" },
-  { id: "gc4", style: "linear-gradient(135deg, #6a11cb 0%, #b721ff 100%)" },
-  { id: "gc5", style: "linear-gradient(135deg, #c850c0 0%, #8d4fc2 100%)" },
-  { id: "gc6", style: "linear-gradient(135deg, #ff6b35 0%, #f7931e 100%)" },
-  { id: "gc7", style: "linear-gradient(135deg, #e91e8c 0%, #f06292 100%)" },
-  { id: "gc8", style: "linear-gradient(135deg, #00897b 0%, #26a69a 100%)" },
-  { id: "gc9", style: "linear-gradient(135deg, #1c2b4a 0%, #263350 100%)" },
-  { id: "gc10", style: "linear-gradient(135deg, #7b1212 0%, #b71c1c 100%)" },
-];
-
-const SOLID_COLORS = [
-  { id: "sc1", style: "#1565c0" },
-  { id: "sc2", style: "#e65100" },
-  { id: "sc3", style: "#2e7d32" },
-  { id: "sc4", style: "#c62828" },
-  { id: "sc5", style: "#6a1b9a" },
-  { id: "sc6", style: "#ad1457" },
-  { id: "sc7", style: "#00838f" },
-  { id: "sc8", style: "#546e7a" },
-  { id: "sc9", style: "#37474f" },
-];
 
 export default function ColorsView({
   selectedBg, isBgPhoto, onSelectBg, onBack, onClose,

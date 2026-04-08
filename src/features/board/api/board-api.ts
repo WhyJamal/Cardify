@@ -1,5 +1,5 @@
 import { clientFetch } from "@/lib/client-api";
-import { BoardLabel } from "@/shared/types";
+import { BoardLabel } from "@shared/types";
 
 export const boardApi = {
   getAllBoardsWithWorkspaces: async () => {

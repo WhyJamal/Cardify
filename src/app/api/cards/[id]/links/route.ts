@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { getInitials } from "@/shared/utils/getInitials";
+import { getInitials } from "@utils/getInitials";
 
 export async function POST(
   req: NextRequest,

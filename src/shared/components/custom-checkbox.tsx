@@ -1,6 +1,6 @@
 "use client";
 
-import styles from "./custom-checkbox.module.css";
+import styles from "@shared/assets/custom-checkbox.module.css";
 
 type Props = {
     checked: boolean;

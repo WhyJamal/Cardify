@@ -3,8 +3,8 @@
 import { X, Check } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { useOutsideClick } from "@/shared/hooks/use-outside-click";
-import { calcBelowPosition } from "@/shared/utils/floatingPosition";
+import { useOutsideClick } from "@hooks/use-outside-click";
+import { calcBelowPosition } from "@utils/floatingPosition";
 import Image from "next/image";
 import { Switch } from "./ui/switch";
 

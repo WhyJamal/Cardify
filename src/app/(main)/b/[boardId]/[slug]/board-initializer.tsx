@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { useBoardView } from "@/app/providers/BoardProvider";
-import type { Board, ColumnInt } from "@/shared/types";
+import type { Board, ColumnInt } from "@shared/types";
 
 export function BoardInitializer({
     board,

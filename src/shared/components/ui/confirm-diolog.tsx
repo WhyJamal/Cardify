@@ -8,7 +8,7 @@ import {
     DialogTrigger,
     DialogClose,
     DialogFooter
-} from "@/shared/components";
+} from "@components";
 
 interface ConfirmDialogProps {
     children: React.ReactNode;

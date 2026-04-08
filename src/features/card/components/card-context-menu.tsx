@@ -6,9 +6,9 @@ import {
     ArrowRight, Copy, Link2, Layers, Archive
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { Button } from "@/shared/components";
+import { Button } from "@components";
 import { useRouter } from "next/navigation";
-import { CardData } from "@/shared/types";
+import { CardData } from "@shared/types";
 
 interface CardContextMenuProps {
     card: CardData;

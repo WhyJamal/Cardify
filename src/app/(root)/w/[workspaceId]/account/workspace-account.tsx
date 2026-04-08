@@ -1,6 +1,6 @@
-import { WorkspaceDeleteButton } from "@/features/workspace/components/workspace-delete-button";
+import { WorkspaceDeleteButton } from "@features/workspace/components/workspace-delete-button";
 import { WorkspaceEditForm } from "../../../../../features/workspace/components/workspace-edit-form";
-import { Workspace } from "@/shared/types";
+import { Workspace } from "@shared/types";
 
 interface Props {
   workspace: Workspace;

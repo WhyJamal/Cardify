@@ -1,12 +1,12 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
-import { BoardCard, Spinner } from "@/shared/components";
-import { CreateBoardPanel } from "@/features/board/create-board-panel";
+import { BoardCard, Spinner } from "@components";
+import { CreateBoardPanel } from "@/features/board/components/create-board-panel";
 import { useSession } from "next-auth/react";
-import { Board, Workspace } from "@/shared/types";
+import { Board, Workspace } from "@shared/types";
 import { useParams } from "next/navigation";
-import { workspaceApi } from "@/features/workspace/api/workspace-api";
+import { workspaceApi } from "@features/workspace/api/workspace-api";
 
 export default function WorkspaceHomePage() {
   const params = useParams<{ workspaceId: string }>();

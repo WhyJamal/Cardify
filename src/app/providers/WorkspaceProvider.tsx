@@ -7,8 +7,8 @@ import {
   useState,
 } from "react";
 
-import { Workspace } from "@/shared/types";
-import { workspaceApi } from "@/features/workspace/api/workspace-api";
+import { Workspace } from "@shared/types";
+import { workspaceApi } from "@features/workspace/api/workspace-api";
 
 type WorkspaceContextType = {
   workspaces: Workspace[];

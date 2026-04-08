@@ -4,31 +4,19 @@ import { useEffect, useRef, useState, RefObject, useLayoutEffect } from "react";
 import { createPortal } from "react-dom";
 import { X, ShoppingBag } from "lucide-react";
 import { FloatingBgPanel } from "./floating-bg-panel";
-import { calcSidePosition } from "@/shared/utils/floatingPosition";
+import { calcSidePosition } from "@utils/floatingPosition";
 import { useRouter } from "next/navigation";
-import { slugify } from "@/shared/utils/slugify";
+import { slugify } from "@utils/slugify";
 import { clientFetch } from "@/lib/client-api";
-import CustomSelect from "@/shared/components/ui/custom-select";
+import CustomSelect from "@components/ui/custom-select";
 import { useWorkspace } from "@/app/providers/WorkspaceProvider";
 import { PAGES } from "@/config/pages.config";
+import { GRADIENT_COLORS } from "@data/colors.data";
+import { PHOTOS } from "@data/photos.data";
+
 
 const PANEL_WIDTH = 370;
 const PANEL_HEIGHT = 590;
-
-const PHOTO_THUMBS = [
-  "/images/board-backgrounds/tropical-beach-samoa.webp",
-  "/images/board-backgrounds/laptop-coffee-cups-notepads-black-background-top-view.webp",
-  "/images/board-backgrounds/beautiful-shot-himalayas-mountains-clouds.webp",
-  "/images/board-backgrounds/messy-office-desk-still-life.webp",
-];
-
-const GRADIENT_COLORS = [
-  { id: "g1", style: "linear-gradient(135deg, #2c3e50 0%, #1a2533 100%)" },
-  { id: "g2", style: "linear-gradient(135deg, #5a2d82 0%, #7b3fa0 25%, #9b4db5 45%, #c762c8 70%, #d97bb6 100%)" },
-  { id: "g3", style: "linear-gradient(135deg, #2c3e6e 0%, #1a237e 100%)" },
-  { id: "g4", style: "linear-gradient(135deg, #7c4dff 0%, #651fff 100%)" },
-  { id: "g5", style: "linear-gradient(135deg, #e040fb 0%, #7c4dff 100%)" },
-];
 
 interface BoardForm {
   title: string;
@@ -37,21 +25,23 @@ interface BoardForm {
   workspaceId: string | null;
 }
 
-const INITIAL_FORM: BoardForm = {
-  title: "",
-  bg: PHOTO_THUMBS[1],
-  isBgPhoto: true,
-  workspaceId: null,
-};
-
-interface Props {
+interface CreateBoardPanelProps {
   triggerRef: RefObject<HTMLElement | null>;
   onClose: () => void;
   onCreated: (board: any) => void;
+  workspaceId?: string;
 }
 
-export function CreateBoardPanel({ triggerRef, onClose, onCreated }: Props) {
+export function CreateBoardPanel({ triggerRef, onClose, onCreated, workspaceId }: CreateBoardPanelProps) {
   const { workspaces } = useWorkspace();
+
+  const INITIAL_FORM: BoardForm = {
+    title: "",
+    bg: PHOTOS[0],
+    isBgPhoto: true,
+    workspaceId: workspaceId || null,
+  };
+
   const [form, setForm] = useState<BoardForm>(INITIAL_FORM);
   const [showBgPanel, setShowBgPanel] = useState(false);
   const router = useRouter();
@@ -192,34 +182,31 @@ export function CreateBoardPanel({ triggerRef, onClose, onCreated }: Props) {
         <div className="px-5 mt-4">
           <span className="text-white/70 text-xs">Фон</span>
           <div className="mt-2 flex gap-2 items-center">
-            {PHOTO_THUMBS.map((url, i) => (
+            {PHOTOS.slice(0, 4).map((url) => (
               <button
-                key={i}
+                key={url}
                 onClick={() => handleSelectBg(url, true)}
-                className={`w-10 h-8 rounded overflow-hidden border-2 transition-all ${
-                  form.bg === url && form.isBgPhoto ? "border-white" : "border-transparent"
-                }`}
+                className={`w-10 h-8 rounded overflow-hidden border-2 transition-all ${form.bg === url && form.isBgPhoto ? "border-white" : "border-transparent"
+                  }`}
               >
                 <img src={url} alt="" className="w-full h-full object-cover" />
               </button>
             ))}
             <button
               onClick={() => setShowBgPanel((v) => !v)}
-              className={`w-10 h-8 rounded transition-colors flex items-center justify-center text-white/70 text-xs font-bold ${
-                showBgPanel ? "bg-white/20" : "bg-white/10 hover:bg-white/20"
-              }`}
+              className={`w-10 h-8 rounded transition-colors flex items-center justify-center text-white/70 text-xs font-bold ${showBgPanel ? "bg-white/20" : "bg-white/10 hover:bg-white/20"
+                }`}
             >
               •••
             </button>
           </div>
           <div className="mt-2 flex gap-2 items-center">
-            {GRADIENT_COLORS.map((g) => (
+            {GRADIENT_COLORS.slice(0, 5).map((g) => (
               <button
                 key={g.id}
                 onClick={() => handleSelectBg(g.style, false)}
-                className={`w-10 h-8 rounded border-2 transition-all ${
-                  form.bg === g.style && !form.isBgPhoto ? "border-white" : "border-transparent"
-                }`}
+                className={`w-10 h-8 rounded border-2 transition-all ${form.bg === g.style && !form.isBgPhoto ? "border-white" : "border-transparent"
+                  }`}
                 style={{ background: g.style }}
               />
             ))}

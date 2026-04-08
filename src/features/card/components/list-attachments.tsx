@@ -2,11 +2,11 @@
 
 import { useState, useRef, useEffect } from "react";
 import AddAttachments from "./add-attachments";
-import { useCardClient } from "./hooks/use-card-client";
-import { CardAttachment, CardData, CardLink } from "@/shared/types";
+import { useCardClient } from "@features/card/hooks/use-card-client";
+import { CardAttachment, CardData, CardLink } from "@shared/types";
 import { Ellipsis, ExternalLinkIcon, Paperclip, SearchIcon, Trash2 } from "lucide-react";
-import { cardApi } from "./api/card-api";
-import { formatCardDate } from "@/shared/utils/date";
+import { cardApi } from "@features/card/api/card-api";
+import { formatCardDate } from "@utils/date";
 
 interface ListAttachmentsProps {
     initialCard: CardData;

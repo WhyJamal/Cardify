@@ -40,6 +40,7 @@ export type BoardMinAggregateOutputType = {
   bg: string | null
   isPhoto: boolean | null
   isChoosen: boolean | null
+  visibility: $Enums.Visibility | null
   workspaceId: string | null
   ownerId: string | null
   createdAt: Date | null
@@ -52,6 +53,7 @@ export type BoardMaxAggregateOutputType = {
   bg: string | null
   isPhoto: boolean | null
   isChoosen: boolean | null
+  visibility: $Enums.Visibility | null
   workspaceId: string | null
   ownerId: string | null
   createdAt: Date | null
@@ -64,6 +66,7 @@ export type BoardCountAggregateOutputType = {
   bg: number
   isPhoto: number
   isChoosen: number
+  visibility: number
   workspaceId: number
   ownerId: number
   createdAt: number
@@ -86,6 +89,7 @@ export type BoardMinAggregateInputType = {
   bg?: true
   isPhoto?: true
   isChoosen?: true
+  visibility?: true
   workspaceId?: true
   ownerId?: true
   createdAt?: true
@@ -98,6 +102,7 @@ export type BoardMaxAggregateInputType = {
   bg?: true
   isPhoto?: true
   isChoosen?: true
+  visibility?: true
   workspaceId?: true
   ownerId?: true
   createdAt?: true
@@ -110,6 +115,7 @@ export type BoardCountAggregateInputType = {
   bg?: true
   isPhoto?: true
   isChoosen?: true
+  visibility?: true
   workspaceId?: true
   ownerId?: true
   createdAt?: true
@@ -209,6 +215,7 @@ export type BoardGroupByOutputType = {
   bg: string
   isPhoto: boolean
   isChoosen: boolean
+  visibility: $Enums.Visibility
   workspaceId: string
   ownerId: string
   createdAt: Date
@@ -244,6 +251,7 @@ export type BoardWhereInput = {
   bg?: Prisma.StringFilter<"Board"> | string
   isPhoto?: Prisma.BoolFilter<"Board"> | boolean
   isChoosen?: Prisma.BoolFilter<"Board"> | boolean
+  visibility?: Prisma.EnumVisibilityFilter<"Board"> | $Enums.Visibility
   workspaceId?: Prisma.StringFilter<"Board"> | string
   ownerId?: Prisma.StringFilter<"Board"> | string
   createdAt?: Prisma.DateTimeFilter<"Board"> | Date | string
@@ -261,6 +269,7 @@ export type BoardOrderByWithRelationInput = {
   bg?: Prisma.SortOrder
   isPhoto?: Prisma.SortOrder
   isChoosen?: Prisma.SortOrder
+  visibility?: Prisma.SortOrder
   workspaceId?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -281,6 +290,7 @@ export type BoardWhereUniqueInput = Prisma.AtLeast<{
   bg?: Prisma.StringFilter<"Board"> | string
   isPhoto?: Prisma.BoolFilter<"Board"> | boolean
   isChoosen?: Prisma.BoolFilter<"Board"> | boolean
+  visibility?: Prisma.EnumVisibilityFilter<"Board"> | $Enums.Visibility
   workspaceId?: Prisma.StringFilter<"Board"> | string
   ownerId?: Prisma.StringFilter<"Board"> | string
   createdAt?: Prisma.DateTimeFilter<"Board"> | Date | string
@@ -298,6 +308,7 @@ export type BoardOrderByWithAggregationInput = {
   bg?: Prisma.SortOrder
   isPhoto?: Prisma.SortOrder
   isChoosen?: Prisma.SortOrder
+  visibility?: Prisma.SortOrder
   workspaceId?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -318,6 +329,7 @@ export type BoardScalarWhereWithAggregatesInput = {
   bg?: Prisma.StringWithAggregatesFilter<"Board"> | string
   isPhoto?: Prisma.BoolWithAggregatesFilter<"Board"> | boolean
   isChoosen?: Prisma.BoolWithAggregatesFilter<"Board"> | boolean
+  visibility?: Prisma.EnumVisibilityWithAggregatesFilter<"Board"> | $Enums.Visibility
   workspaceId?: Prisma.StringWithAggregatesFilter<"Board"> | string
   ownerId?: Prisma.StringWithAggregatesFilter<"Board"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Board"> | Date | string
@@ -329,6 +341,7 @@ export type BoardCreateInput = {
   bg: string
   isPhoto?: boolean
   isChoosen?: boolean
+  visibility?: $Enums.Visibility
   createdAt?: Date | string
   updatedAt?: Date | string
   workspace: Prisma.WorkspaceCreateNestedOneWithoutBoardsInput
@@ -344,6 +357,7 @@ export type BoardUncheckedCreateInput = {
   bg: string
   isPhoto?: boolean
   isChoosen?: boolean
+  visibility?: $Enums.Visibility
   workspaceId: string
   ownerId: string
   createdAt?: Date | string
@@ -358,6 +372,7 @@ export type BoardUpdateInput = {
   bg?: Prisma.StringFieldUpdateOperationsInput | string
   isPhoto?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isChoosen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   workspace?: Prisma.WorkspaceUpdateOneRequiredWithoutBoardsNestedInput
@@ -373,6 +388,7 @@ export type BoardUncheckedUpdateInput = {
   bg?: Prisma.StringFieldUpdateOperationsInput | string
   isPhoto?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isChoosen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -388,6 +404,7 @@ export type BoardCreateManyInput = {
   bg: string
   isPhoto?: boolean
   isChoosen?: boolean
+  visibility?: $Enums.Visibility
   workspaceId: string
   ownerId: string
   createdAt?: Date | string
@@ -399,6 +416,7 @@ export type BoardUpdateManyMutationInput = {
   bg?: Prisma.StringFieldUpdateOperationsInput | string
   isPhoto?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isChoosen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -409,6 +427,7 @@ export type BoardUncheckedUpdateManyInput = {
   bg?: Prisma.StringFieldUpdateOperationsInput | string
   isPhoto?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isChoosen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -431,6 +450,7 @@ export type BoardCountOrderByAggregateInput = {
   bg?: Prisma.SortOrder
   isPhoto?: Prisma.SortOrder
   isChoosen?: Prisma.SortOrder
+  visibility?: Prisma.SortOrder
   workspaceId?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -447,6 +467,7 @@ export type BoardMaxOrderByAggregateInput = {
   bg?: Prisma.SortOrder
   isPhoto?: Prisma.SortOrder
   isChoosen?: Prisma.SortOrder
+  visibility?: Prisma.SortOrder
   workspaceId?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -459,6 +480,7 @@ export type BoardMinOrderByAggregateInput = {
   bg?: Prisma.SortOrder
   isPhoto?: Prisma.SortOrder
   isChoosen?: Prisma.SortOrder
+  visibility?: Prisma.SortOrder
   workspaceId?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -613,6 +635,7 @@ export type BoardCreateWithoutOwnerInput = {
   bg: string
   isPhoto?: boolean
   isChoosen?: boolean
+  visibility?: $Enums.Visibility
   createdAt?: Date | string
   updatedAt?: Date | string
   workspace: Prisma.WorkspaceCreateNestedOneWithoutBoardsInput
@@ -627,6 +650,7 @@ export type BoardUncheckedCreateWithoutOwnerInput = {
   bg: string
   isPhoto?: boolean
   isChoosen?: boolean
+  visibility?: $Enums.Visibility
   workspaceId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -669,6 +693,7 @@ export type BoardScalarWhereInput = {
   bg?: Prisma.StringFilter<"Board"> | string
   isPhoto?: Prisma.BoolFilter<"Board"> | boolean
   isChoosen?: Prisma.BoolFilter<"Board"> | boolean
+  visibility?: Prisma.EnumVisibilityFilter<"Board"> | $Enums.Visibility
   workspaceId?: Prisma.StringFilter<"Board"> | string
   ownerId?: Prisma.StringFilter<"Board"> | string
   createdAt?: Prisma.DateTimeFilter<"Board"> | Date | string
@@ -680,6 +705,7 @@ export type BoardCreateWithoutWorkspaceInput = {
   bg: string
   isPhoto?: boolean
   isChoosen?: boolean
+  visibility?: $Enums.Visibility
   createdAt?: Date | string
   updatedAt?: Date | string
   owner: Prisma.UserCreateNestedOneWithoutBoardsInput
@@ -694,6 +720,7 @@ export type BoardUncheckedCreateWithoutWorkspaceInput = {
   bg: string
   isPhoto?: boolean
   isChoosen?: boolean
+  visibility?: $Enums.Visibility
   ownerId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -732,6 +759,7 @@ export type BoardCreateWithoutMembersInput = {
   bg: string
   isPhoto?: boolean
   isChoosen?: boolean
+  visibility?: $Enums.Visibility
   createdAt?: Date | string
   updatedAt?: Date | string
   workspace: Prisma.WorkspaceCreateNestedOneWithoutBoardsInput
@@ -746,6 +774,7 @@ export type BoardUncheckedCreateWithoutMembersInput = {
   bg: string
   isPhoto?: boolean
   isChoosen?: boolean
+  visibility?: $Enums.Visibility
   workspaceId: string
   ownerId: string
   createdAt?: Date | string
@@ -775,6 +804,7 @@ export type BoardUpdateWithoutMembersInput = {
   bg?: Prisma.StringFieldUpdateOperationsInput | string
   isPhoto?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isChoosen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   workspace?: Prisma.WorkspaceUpdateOneRequiredWithoutBoardsNestedInput
@@ -789,6 +819,7 @@ export type BoardUncheckedUpdateWithoutMembersInput = {
   bg?: Prisma.StringFieldUpdateOperationsInput | string
   isPhoto?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isChoosen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -802,6 +833,7 @@ export type BoardCreateWithoutLabelsInput = {
   bg: string
   isPhoto?: boolean
   isChoosen?: boolean
+  visibility?: $Enums.Visibility
   createdAt?: Date | string
   updatedAt?: Date | string
   workspace: Prisma.WorkspaceCreateNestedOneWithoutBoardsInput
@@ -816,6 +848,7 @@ export type BoardUncheckedCreateWithoutLabelsInput = {
   bg: string
   isPhoto?: boolean
   isChoosen?: boolean
+  visibility?: $Enums.Visibility
   workspaceId: string
   ownerId: string
   createdAt?: Date | string
@@ -845,6 +878,7 @@ export type BoardUpdateWithoutLabelsInput = {
   bg?: Prisma.StringFieldUpdateOperationsInput | string
   isPhoto?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isChoosen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   workspace?: Prisma.WorkspaceUpdateOneRequiredWithoutBoardsNestedInput
@@ -859,6 +893,7 @@ export type BoardUncheckedUpdateWithoutLabelsInput = {
   bg?: Prisma.StringFieldUpdateOperationsInput | string
   isPhoto?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isChoosen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -872,6 +907,7 @@ export type BoardCreateWithoutColumnsInput = {
   bg: string
   isPhoto?: boolean
   isChoosen?: boolean
+  visibility?: $Enums.Visibility
   createdAt?: Date | string
   updatedAt?: Date | string
   workspace: Prisma.WorkspaceCreateNestedOneWithoutBoardsInput
@@ -886,6 +922,7 @@ export type BoardUncheckedCreateWithoutColumnsInput = {
   bg: string
   isPhoto?: boolean
   isChoosen?: boolean
+  visibility?: $Enums.Visibility
   workspaceId: string
   ownerId: string
   createdAt?: Date | string
@@ -915,6 +952,7 @@ export type BoardUpdateWithoutColumnsInput = {
   bg?: Prisma.StringFieldUpdateOperationsInput | string
   isPhoto?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isChoosen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   workspace?: Prisma.WorkspaceUpdateOneRequiredWithoutBoardsNestedInput
@@ -929,6 +967,7 @@ export type BoardUncheckedUpdateWithoutColumnsInput = {
   bg?: Prisma.StringFieldUpdateOperationsInput | string
   isPhoto?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isChoosen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -943,6 +982,7 @@ export type BoardCreateManyOwnerInput = {
   bg: string
   isPhoto?: boolean
   isChoosen?: boolean
+  visibility?: $Enums.Visibility
   workspaceId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -953,6 +993,7 @@ export type BoardUpdateWithoutOwnerInput = {
   bg?: Prisma.StringFieldUpdateOperationsInput | string
   isPhoto?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isChoosen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   workspace?: Prisma.WorkspaceUpdateOneRequiredWithoutBoardsNestedInput
@@ -967,6 +1008,7 @@ export type BoardUncheckedUpdateWithoutOwnerInput = {
   bg?: Prisma.StringFieldUpdateOperationsInput | string
   isPhoto?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isChoosen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -981,6 +1023,7 @@ export type BoardUncheckedUpdateManyWithoutOwnerInput = {
   bg?: Prisma.StringFieldUpdateOperationsInput | string
   isPhoto?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isChoosen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -992,6 +1035,7 @@ export type BoardCreateManyWorkspaceInput = {
   bg: string
   isPhoto?: boolean
   isChoosen?: boolean
+  visibility?: $Enums.Visibility
   ownerId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1002,6 +1046,7 @@ export type BoardUpdateWithoutWorkspaceInput = {
   bg?: Prisma.StringFieldUpdateOperationsInput | string
   isPhoto?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isChoosen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   owner?: Prisma.UserUpdateOneRequiredWithoutBoardsNestedInput
@@ -1016,6 +1061,7 @@ export type BoardUncheckedUpdateWithoutWorkspaceInput = {
   bg?: Prisma.StringFieldUpdateOperationsInput | string
   isPhoto?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isChoosen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1030,6 +1076,7 @@ export type BoardUncheckedUpdateManyWithoutWorkspaceInput = {
   bg?: Prisma.StringFieldUpdateOperationsInput | string
   isPhoto?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isChoosen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1090,6 +1137,7 @@ export type BoardSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   bg?: boolean
   isPhoto?: boolean
   isChoosen?: boolean
+  visibility?: boolean
   workspaceId?: boolean
   ownerId?: boolean
   createdAt?: boolean
@@ -1108,6 +1156,7 @@ export type BoardSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   bg?: boolean
   isPhoto?: boolean
   isChoosen?: boolean
+  visibility?: boolean
   workspaceId?: boolean
   ownerId?: boolean
   createdAt?: boolean
@@ -1122,6 +1171,7 @@ export type BoardSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   bg?: boolean
   isPhoto?: boolean
   isChoosen?: boolean
+  visibility?: boolean
   workspaceId?: boolean
   ownerId?: boolean
   createdAt?: boolean
@@ -1136,13 +1186,14 @@ export type BoardSelectScalar = {
   bg?: boolean
   isPhoto?: boolean
   isChoosen?: boolean
+  visibility?: boolean
   workspaceId?: boolean
   ownerId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type BoardOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "bg" | "isPhoto" | "isChoosen" | "workspaceId" | "ownerId" | "createdAt" | "updatedAt", ExtArgs["result"]["board"]>
+export type BoardOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "bg" | "isPhoto" | "isChoosen" | "visibility" | "workspaceId" | "ownerId" | "createdAt" | "updatedAt", ExtArgs["result"]["board"]>
 export type BoardInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   workspace?: boolean | Prisma.WorkspaceDefaultArgs<ExtArgs>
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1175,6 +1226,7 @@ export type $BoardPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     bg: string
     isPhoto: boolean
     isChoosen: boolean
+    visibility: $Enums.Visibility
     workspaceId: string
     ownerId: string
     createdAt: Date
@@ -1612,6 +1664,7 @@ export interface BoardFieldRefs {
   readonly bg: Prisma.FieldRef<"Board", 'String'>
   readonly isPhoto: Prisma.FieldRef<"Board", 'Boolean'>
   readonly isChoosen: Prisma.FieldRef<"Board", 'Boolean'>
+  readonly visibility: Prisma.FieldRef<"Board", 'Visibility'>
   readonly workspaceId: Prisma.FieldRef<"Board", 'String'>
   readonly ownerId: Prisma.FieldRef<"Board", 'String'>
   readonly createdAt: Prisma.FieldRef<"Board", 'DateTime'>

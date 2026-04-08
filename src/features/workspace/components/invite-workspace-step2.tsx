@@ -1,11 +1,11 @@
 "use client";
 
-import { Button } from "@/shared/components";
+import { Button } from "@components";
 import { Label } from "./workspace-ui";
 import { Link, X, Loader2 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { workspaceApi } from "@/features/workspace/api/workspace-api";
-import { User } from "@/shared/types";
+import { workspaceApi } from "@features/workspace/api/workspace-api";
+import { User } from "@shared/types";
 
 interface Step2Props {
     workspaceId: string;

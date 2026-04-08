@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { CardData } from "@/shared/types";
+import type { CardData } from "@shared/types";
 
 export function useCardState(initialCard: CardData) {
   const [card, setCard] = useState<CardData>(initialCard);

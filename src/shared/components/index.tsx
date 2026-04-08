@@ -8,7 +8,7 @@ export {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/shared/components/ui/card";
+} from "@components/ui/card";
 export { Spinner } from "./ui/spinner";
 export {
   Dialog,
@@ -19,7 +19,7 @@ export {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/shared/components/ui/dialog"
+} from "@components/ui/dialog"
 import { AvatarGroupCount } from "./avatar-group-count";
 
 import { ConfirmDialog } from "./ui/confirm-diolog";
@@ -31,11 +31,11 @@ export { ColumnDragPreview } from "./column-drag-preview";
 export { Column } from "./column";
 export { Header } from "./header";
 export { SubHeader } from "./sub-header";
-export { default as Sidebar } from "@/shared/components/sidebar"
+export { default as Sidebar } from "@components/sidebar"
 
-export { DatePicker } from "../../features/card/data-picker";
-export { AddToCardMenu } from "../../features/card/add-to-card-menu";
-export { LabelsMenu } from "../../features/card/labels-menu";
+export { DatePicker } from "@features/card/components/data-picker";
+export { AddToCardMenu } from "@features/card/components/add-to-card-menu";
+export { LabelsMenu } from "@features/card/components/labels-menu";
 
 export { FormInput } from "./form-input";
 export { FormTextarea } from "./form-textarea";

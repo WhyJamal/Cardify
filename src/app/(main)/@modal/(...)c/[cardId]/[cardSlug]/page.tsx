@@ -1,5 +1,5 @@
 import CardClient from "./card-client";
-import { CardData } from "@/shared/types";
+import { CardData } from "@shared/types";
 import { serverFetch } from "@/lib/server-api";
 
 export default async function CardMoadal(

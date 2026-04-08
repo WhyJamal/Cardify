@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 
 import { Suspense } from "react";
 import { AppProviders } from "@/app/providers";
-import CustomLoading from "@/shared/components/custom-loading";
+import CustomLoading from "@components/custom-loading";
 
 const inter = Inter({
   subsets: ["latin"],

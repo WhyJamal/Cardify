@@ -1,7 +1,7 @@
 "use client";
 
 import { Star } from "lucide-react";
-import { Toggle } from "@/shared/components/ui/toggle";
+import { Toggle } from "@components/ui/toggle";
 import { useState } from "react";
 
 interface ToggleChoosenProps {

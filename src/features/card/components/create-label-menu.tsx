@@ -1,11 +1,11 @@
-import { Button } from '@/shared/components';
-import { useOutsideClick } from '@/shared/hooks/use-outside-click';
-import { calcBelowPosition } from '@/shared/utils/floatingPosition';
+import { Button } from '@components';
+import { useOutsideClick } from '@hooks/use-outside-click';
+import { calcBelowPosition } from '@utils/floatingPosition';
 import { Check, ChevronLeft, X } from 'lucide-react';
 import { useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { useBoardActions } from '@/shared/hooks/use-board-actions';
-import { BoardLabel } from '@/shared/types';
+import { useBoardActions } from '@hooks/use-board-actions';
+import { BoardLabel } from '@shared/types';
 
 interface CreateLabelMenuProps {
   triggerRef: React.RefObject<HTMLElement | null>;

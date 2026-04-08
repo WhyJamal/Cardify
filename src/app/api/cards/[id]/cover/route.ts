@@ -4,7 +4,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { writeFile, mkdir } from "fs/promises";
 import path from "path";
-import { getInitials } from "@/shared/utils/getInitials";
+import { getInitials } from "@utils/getInitials";
 
 export async function POST(
     req: NextRequest,

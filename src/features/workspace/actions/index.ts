@@ -1,7 +1,7 @@
 "use server";
 
 import { serverFetch } from "@/lib/server-api";
-import { Workspace } from "@/shared/types";
+import { Workspace } from "@shared/types";
 import { revalidatePath } from "next/cache";
 
 export type UpdateWorkspaceDto = {

@@ -4,7 +4,7 @@ import {
     AvatarGroup,
     // AvatarGroupCount,
     AvatarImage,
-} from "@/shared/components/ui/avatar"
+} from "@components/ui/avatar"
 import { BoardMember, CardMember } from "../types"
 import { getInitials } from "../utils/getInitials";
 

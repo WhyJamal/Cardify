@@ -1,4 +1,4 @@
-import { SignUpCard } from "@/features/auth/sign-up-card";
+import { SignUpCard } from "@features/auth/sign-up-card";
 
 export default function Page() {
   return (

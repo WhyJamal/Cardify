@@ -1,6 +1,6 @@
 "use client";
 
-import { TooltipProvider } from "@/shared/components/ui/tooltip";
+import { TooltipProvider } from "@components/ui/tooltip";
 import { AuthProvider } from "@/app/providers/AuthProvider";
 import { WorkspaceProvider } from "./WorkspaceProvider";
 

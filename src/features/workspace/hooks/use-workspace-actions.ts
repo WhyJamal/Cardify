@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { workspaceApi } from "@/features/workspace/api/workspace-api";
-import { Workspace, WorkspaceMember } from "@/shared/types";
+import { workspaceApi } from "@features/workspace/api/workspace-api";
+import { Workspace, WorkspaceMember } from "@shared/types";
 
 export interface WorkspaceForm {
     name: string;

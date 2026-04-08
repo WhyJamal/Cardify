@@ -30,6 +30,9 @@ export type WorkspaceMinAggregateOutputType = {
   description: string | null
   typeKey: string | null
   ownerId: string | null
+  logo: string | null
+  website: string | null
+  visibility: $Enums.Visibility | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -40,6 +43,9 @@ export type WorkspaceMaxAggregateOutputType = {
   description: string | null
   typeKey: string | null
   ownerId: string | null
+  logo: string | null
+  website: string | null
+  visibility: $Enums.Visibility | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -50,6 +56,9 @@ export type WorkspaceCountAggregateOutputType = {
   description: number
   typeKey: number
   ownerId: number
+  logo: number
+  website: number
+  visibility: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -62,6 +71,9 @@ export type WorkspaceMinAggregateInputType = {
   description?: true
   typeKey?: true
   ownerId?: true
+  logo?: true
+  website?: true
+  visibility?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -72,6 +84,9 @@ export type WorkspaceMaxAggregateInputType = {
   description?: true
   typeKey?: true
   ownerId?: true
+  logo?: true
+  website?: true
+  visibility?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -82,6 +97,9 @@ export type WorkspaceCountAggregateInputType = {
   description?: true
   typeKey?: true
   ownerId?: true
+  logo?: true
+  website?: true
+  visibility?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -165,6 +183,9 @@ export type WorkspaceGroupByOutputType = {
   description: string | null
   typeKey: string | null
   ownerId: string
+  logo: string | null
+  website: string | null
+  visibility: $Enums.Visibility
   createdAt: Date
   updatedAt: Date
   _count: WorkspaceCountAggregateOutputType | null
@@ -196,6 +217,9 @@ export type WorkspaceWhereInput = {
   description?: Prisma.StringNullableFilter<"Workspace"> | string | null
   typeKey?: Prisma.StringNullableFilter<"Workspace"> | string | null
   ownerId?: Prisma.StringFilter<"Workspace"> | string
+  logo?: Prisma.StringNullableFilter<"Workspace"> | string | null
+  website?: Prisma.StringNullableFilter<"Workspace"> | string | null
+  visibility?: Prisma.EnumVisibilityFilter<"Workspace"> | $Enums.Visibility
   createdAt?: Prisma.DateTimeFilter<"Workspace"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Workspace"> | Date | string
   type?: Prisma.XOR<Prisma.WorkspaceTypeNullableScalarRelationFilter, Prisma.WorkspaceTypeWhereInput> | null
@@ -210,6 +234,9 @@ export type WorkspaceOrderByWithRelationInput = {
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   typeKey?: Prisma.SortOrderInput | Prisma.SortOrder
   ownerId?: Prisma.SortOrder
+  logo?: Prisma.SortOrderInput | Prisma.SortOrder
+  website?: Prisma.SortOrderInput | Prisma.SortOrder
+  visibility?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   type?: Prisma.WorkspaceTypeOrderByWithRelationInput
@@ -227,6 +254,9 @@ export type WorkspaceWhereUniqueInput = Prisma.AtLeast<{
   description?: Prisma.StringNullableFilter<"Workspace"> | string | null
   typeKey?: Prisma.StringNullableFilter<"Workspace"> | string | null
   ownerId?: Prisma.StringFilter<"Workspace"> | string
+  logo?: Prisma.StringNullableFilter<"Workspace"> | string | null
+  website?: Prisma.StringNullableFilter<"Workspace"> | string | null
+  visibility?: Prisma.EnumVisibilityFilter<"Workspace"> | $Enums.Visibility
   createdAt?: Prisma.DateTimeFilter<"Workspace"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Workspace"> | Date | string
   type?: Prisma.XOR<Prisma.WorkspaceTypeNullableScalarRelationFilter, Prisma.WorkspaceTypeWhereInput> | null
@@ -241,6 +271,9 @@ export type WorkspaceOrderByWithAggregationInput = {
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   typeKey?: Prisma.SortOrderInput | Prisma.SortOrder
   ownerId?: Prisma.SortOrder
+  logo?: Prisma.SortOrderInput | Prisma.SortOrder
+  website?: Prisma.SortOrderInput | Prisma.SortOrder
+  visibility?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.WorkspaceCountOrderByAggregateInput
@@ -257,6 +290,9 @@ export type WorkspaceScalarWhereWithAggregatesInput = {
   description?: Prisma.StringNullableWithAggregatesFilter<"Workspace"> | string | null
   typeKey?: Prisma.StringNullableWithAggregatesFilter<"Workspace"> | string | null
   ownerId?: Prisma.StringWithAggregatesFilter<"Workspace"> | string
+  logo?: Prisma.StringNullableWithAggregatesFilter<"Workspace"> | string | null
+  website?: Prisma.StringNullableWithAggregatesFilter<"Workspace"> | string | null
+  visibility?: Prisma.EnumVisibilityWithAggregatesFilter<"Workspace"> | $Enums.Visibility
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Workspace"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Workspace"> | Date | string
 }
@@ -265,6 +301,9 @@ export type WorkspaceCreateInput = {
   id?: string
   name: string
   description?: string | null
+  logo?: string | null
+  website?: string | null
+  visibility?: $Enums.Visibility
   createdAt?: Date | string
   updatedAt?: Date | string
   type?: Prisma.WorkspaceTypeCreateNestedOneWithoutWorkspacesInput
@@ -279,6 +318,9 @@ export type WorkspaceUncheckedCreateInput = {
   description?: string | null
   typeKey?: string | null
   ownerId: string
+  logo?: string | null
+  website?: string | null
+  visibility?: $Enums.Visibility
   createdAt?: Date | string
   updatedAt?: Date | string
   members?: Prisma.WorkspaceMemberUncheckedCreateNestedManyWithoutWorkspaceInput
@@ -289,6 +331,9 @@ export type WorkspaceUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.WorkspaceTypeUpdateOneWithoutWorkspacesNestedInput
@@ -303,6 +348,9 @@ export type WorkspaceUncheckedUpdateInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   typeKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   members?: Prisma.WorkspaceMemberUncheckedUpdateManyWithoutWorkspaceNestedInput
@@ -315,6 +363,9 @@ export type WorkspaceCreateManyInput = {
   description?: string | null
   typeKey?: string | null
   ownerId: string
+  logo?: string | null
+  website?: string | null
+  visibility?: $Enums.Visibility
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -323,6 +374,9 @@ export type WorkspaceUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -333,6 +387,9 @@ export type WorkspaceUncheckedUpdateManyInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   typeKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -353,6 +410,9 @@ export type WorkspaceCountOrderByAggregateInput = {
   description?: Prisma.SortOrder
   typeKey?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
+  logo?: Prisma.SortOrder
+  website?: Prisma.SortOrder
+  visibility?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -363,6 +423,9 @@ export type WorkspaceMaxOrderByAggregateInput = {
   description?: Prisma.SortOrder
   typeKey?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
+  logo?: Prisma.SortOrder
+  website?: Prisma.SortOrder
+  visibility?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -373,6 +436,9 @@ export type WorkspaceMinOrderByAggregateInput = {
   description?: Prisma.SortOrder
   typeKey?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
+  logo?: Prisma.SortOrder
+  website?: Prisma.SortOrder
+  visibility?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -422,6 +488,10 @@ export type WorkspaceUncheckedUpdateManyWithoutOwnerNestedInput = {
   update?: Prisma.WorkspaceUpdateWithWhereUniqueWithoutOwnerInput | Prisma.WorkspaceUpdateWithWhereUniqueWithoutOwnerInput[]
   updateMany?: Prisma.WorkspaceUpdateManyWithWhereWithoutOwnerInput | Prisma.WorkspaceUpdateManyWithWhereWithoutOwnerInput[]
   deleteMany?: Prisma.WorkspaceScalarWhereInput | Prisma.WorkspaceScalarWhereInput[]
+}
+
+export type EnumVisibilityFieldUpdateOperationsInput = {
+  set?: $Enums.Visibility
 }
 
 export type WorkspaceCreateNestedManyWithoutTypeInput = {
@@ -498,6 +568,9 @@ export type WorkspaceCreateWithoutOwnerInput = {
   id?: string
   name: string
   description?: string | null
+  logo?: string | null
+  website?: string | null
+  visibility?: $Enums.Visibility
   createdAt?: Date | string
   updatedAt?: Date | string
   type?: Prisma.WorkspaceTypeCreateNestedOneWithoutWorkspacesInput
@@ -510,6 +583,9 @@ export type WorkspaceUncheckedCreateWithoutOwnerInput = {
   name: string
   description?: string | null
   typeKey?: string | null
+  logo?: string | null
+  website?: string | null
+  visibility?: $Enums.Visibility
   createdAt?: Date | string
   updatedAt?: Date | string
   members?: Prisma.WorkspaceMemberUncheckedCreateNestedManyWithoutWorkspaceInput
@@ -550,6 +626,9 @@ export type WorkspaceScalarWhereInput = {
   description?: Prisma.StringNullableFilter<"Workspace"> | string | null
   typeKey?: Prisma.StringNullableFilter<"Workspace"> | string | null
   ownerId?: Prisma.StringFilter<"Workspace"> | string
+  logo?: Prisma.StringNullableFilter<"Workspace"> | string | null
+  website?: Prisma.StringNullableFilter<"Workspace"> | string | null
+  visibility?: Prisma.EnumVisibilityFilter<"Workspace"> | $Enums.Visibility
   createdAt?: Prisma.DateTimeFilter<"Workspace"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Workspace"> | Date | string
 }
@@ -558,6 +637,9 @@ export type WorkspaceCreateWithoutTypeInput = {
   id?: string
   name: string
   description?: string | null
+  logo?: string | null
+  website?: string | null
+  visibility?: $Enums.Visibility
   createdAt?: Date | string
   updatedAt?: Date | string
   owner: Prisma.UserCreateNestedOneWithoutOwnedWorkspacesInput
@@ -570,6 +652,9 @@ export type WorkspaceUncheckedCreateWithoutTypeInput = {
   name: string
   description?: string | null
   ownerId: string
+  logo?: string | null
+  website?: string | null
+  visibility?: $Enums.Visibility
   createdAt?: Date | string
   updatedAt?: Date | string
   members?: Prisma.WorkspaceMemberUncheckedCreateNestedManyWithoutWorkspaceInput
@@ -605,6 +690,9 @@ export type WorkspaceCreateWithoutMembersInput = {
   id?: string
   name: string
   description?: string | null
+  logo?: string | null
+  website?: string | null
+  visibility?: $Enums.Visibility
   createdAt?: Date | string
   updatedAt?: Date | string
   type?: Prisma.WorkspaceTypeCreateNestedOneWithoutWorkspacesInput
@@ -618,6 +706,9 @@ export type WorkspaceUncheckedCreateWithoutMembersInput = {
   description?: string | null
   typeKey?: string | null
   ownerId: string
+  logo?: string | null
+  website?: string | null
+  visibility?: $Enums.Visibility
   createdAt?: Date | string
   updatedAt?: Date | string
   boards?: Prisma.BoardUncheckedCreateNestedManyWithoutWorkspaceInput
@@ -643,6 +734,9 @@ export type WorkspaceUpdateWithoutMembersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.WorkspaceTypeUpdateOneWithoutWorkspacesNestedInput
@@ -656,6 +750,9 @@ export type WorkspaceUncheckedUpdateWithoutMembersInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   typeKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   boards?: Prisma.BoardUncheckedUpdateManyWithoutWorkspaceNestedInput
@@ -665,6 +762,9 @@ export type WorkspaceCreateWithoutBoardsInput = {
   id?: string
   name: string
   description?: string | null
+  logo?: string | null
+  website?: string | null
+  visibility?: $Enums.Visibility
   createdAt?: Date | string
   updatedAt?: Date | string
   type?: Prisma.WorkspaceTypeCreateNestedOneWithoutWorkspacesInput
@@ -678,6 +778,9 @@ export type WorkspaceUncheckedCreateWithoutBoardsInput = {
   description?: string | null
   typeKey?: string | null
   ownerId: string
+  logo?: string | null
+  website?: string | null
+  visibility?: $Enums.Visibility
   createdAt?: Date | string
   updatedAt?: Date | string
   members?: Prisma.WorkspaceMemberUncheckedCreateNestedManyWithoutWorkspaceInput
@@ -703,6 +806,9 @@ export type WorkspaceUpdateWithoutBoardsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.WorkspaceTypeUpdateOneWithoutWorkspacesNestedInput
@@ -716,6 +822,9 @@ export type WorkspaceUncheckedUpdateWithoutBoardsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   typeKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   members?: Prisma.WorkspaceMemberUncheckedUpdateManyWithoutWorkspaceNestedInput
@@ -726,6 +835,9 @@ export type WorkspaceCreateManyOwnerInput = {
   name: string
   description?: string | null
   typeKey?: string | null
+  logo?: string | null
+  website?: string | null
+  visibility?: $Enums.Visibility
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -734,6 +846,9 @@ export type WorkspaceUpdateWithoutOwnerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.WorkspaceTypeUpdateOneWithoutWorkspacesNestedInput
@@ -746,6 +861,9 @@ export type WorkspaceUncheckedUpdateWithoutOwnerInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   typeKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   members?: Prisma.WorkspaceMemberUncheckedUpdateManyWithoutWorkspaceNestedInput
@@ -757,6 +875,9 @@ export type WorkspaceUncheckedUpdateManyWithoutOwnerInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   typeKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -766,6 +887,9 @@ export type WorkspaceCreateManyTypeInput = {
   name: string
   description?: string | null
   ownerId: string
+  logo?: string | null
+  website?: string | null
+  visibility?: $Enums.Visibility
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -774,6 +898,9 @@ export type WorkspaceUpdateWithoutTypeInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   owner?: Prisma.UserUpdateOneRequiredWithoutOwnedWorkspacesNestedInput
@@ -786,6 +913,9 @@ export type WorkspaceUncheckedUpdateWithoutTypeInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   members?: Prisma.WorkspaceMemberUncheckedUpdateManyWithoutWorkspaceNestedInput
@@ -797,6 +927,9 @@ export type WorkspaceUncheckedUpdateManyWithoutTypeInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -847,6 +980,9 @@ export type WorkspaceSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   description?: boolean
   typeKey?: boolean
   ownerId?: boolean
+  logo?: boolean
+  website?: boolean
+  visibility?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   type?: boolean | Prisma.Workspace$typeArgs<ExtArgs>
@@ -862,6 +998,9 @@ export type WorkspaceSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   description?: boolean
   typeKey?: boolean
   ownerId?: boolean
+  logo?: boolean
+  website?: boolean
+  visibility?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   type?: boolean | Prisma.Workspace$typeArgs<ExtArgs>
@@ -874,6 +1013,9 @@ export type WorkspaceSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   description?: boolean
   typeKey?: boolean
   ownerId?: boolean
+  logo?: boolean
+  website?: boolean
+  visibility?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   type?: boolean | Prisma.Workspace$typeArgs<ExtArgs>
@@ -886,11 +1028,14 @@ export type WorkspaceSelectScalar = {
   description?: boolean
   typeKey?: boolean
   ownerId?: boolean
+  logo?: boolean
+  website?: boolean
+  visibility?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type WorkspaceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "typeKey" | "ownerId" | "createdAt" | "updatedAt", ExtArgs["result"]["workspace"]>
+export type WorkspaceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "typeKey" | "ownerId" | "logo" | "website" | "visibility" | "createdAt" | "updatedAt", ExtArgs["result"]["workspace"]>
 export type WorkspaceInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   type?: boolean | Prisma.Workspace$typeArgs<ExtArgs>
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -921,6 +1066,9 @@ export type $WorkspacePayload<ExtArgs extends runtime.Types.Extensions.InternalA
     description: string | null
     typeKey: string | null
     ownerId: string
+    logo: string | null
+    website: string | null
+    visibility: $Enums.Visibility
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["workspace"]>
@@ -1355,6 +1503,9 @@ export interface WorkspaceFieldRefs {
   readonly description: Prisma.FieldRef<"Workspace", 'String'>
   readonly typeKey: Prisma.FieldRef<"Workspace", 'String'>
   readonly ownerId: Prisma.FieldRef<"Workspace", 'String'>
+  readonly logo: Prisma.FieldRef<"Workspace", 'String'>
+  readonly website: Prisma.FieldRef<"Workspace", 'String'>
+  readonly visibility: Prisma.FieldRef<"Workspace", 'Visibility'>
   readonly createdAt: Prisma.FieldRef<"Workspace", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Workspace", 'DateTime'>
 }

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { FloatingInput } from "@/shared/components";
+import { FloatingInput } from "@components";
 import { signIn } from "next-auth/react";
 import { PAGES } from "@/config/pages.config";
 

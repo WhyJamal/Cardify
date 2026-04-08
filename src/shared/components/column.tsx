@@ -6,10 +6,10 @@ import { useDrop, useDrag, useDragLayer } from "react-dnd";
 import { getEmptyImage } from "react-dnd-html5-backend";
 
 import { CustomCard } from "./custom-card";
-import { CardData } from "@/shared/types";
-import { CardModal } from "@/features/card/card-modal";
+import { CardData } from "@shared/types";
+
 import { useBoardView } from "@/app/providers/BoardProvider";
-import { useEditableColumnTitle } from "@/features/board/hooks/use-editable-column-title";
+import { useEditableColumnTitle } from "@features/board/hooks/use-editable-column-title";
 import { Button } from "./ui/button";
 
 interface ColumnProps {
@@ -41,7 +41,6 @@ export function Column({
 }: ColumnProps) {
   const { setColumns } = useBoardView();
 
-  const [showCardModal, setshowCardModal] = useState(false);
   const [addingCard, setAddingCard] = useState(false);
   const [newCardTitle, setNewCardTitle] = useState("");
   const headerRef = useRef<HTMLDivElement>(null);
@@ -253,8 +252,6 @@ export function Column({
           </button>
         </div>
       )}
-
-      {showCardModal && <CardModal onClose={() => setshowCardModal(false)} />}
     </div>
   );
 }

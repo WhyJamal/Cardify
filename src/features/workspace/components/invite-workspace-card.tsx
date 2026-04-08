@@ -1,10 +1,10 @@
 "use client";
 
-import { Button } from "@/shared/components";
-import { workspaceApi } from "@/features/workspace/api/workspace-api";
+import { Button } from "@components";
+import { workspaceApi } from "@features/workspace/api/workspace-api";
 import { X, Loader2 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { User } from "@/shared/types"
+import { User } from "@shared/types"
 
 type Props = {
   workspaceId: string;

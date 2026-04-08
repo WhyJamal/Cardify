@@ -40,6 +40,7 @@ export async function GET() {
       ],
     },
     include: {
+      boards: true,
       _count: {
         select: {
           boards: true,

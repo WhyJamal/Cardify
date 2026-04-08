@@ -3,11 +3,11 @@
 import { useEffect, useRef, useState } from "react";
 import { Clock, AlignJustify, MoreHorizontal, Check, X, Plus } from "lucide-react";
 import Image from "next/image";
-import { CreateBoardPanel } from "@/features/board/create-board-panel";
+import { CreateBoardPanel } from "@/features/board/components/create-board-panel";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { slugify } from "@/shared/utils/slugify";
-import { Board } from "@/shared/types";
+import { slugify } from "@utils/slugify";
+import { Board } from "@shared/types";
 import { PAGES } from "@/config/pages.config";
 
 interface RecentBoardsProps {

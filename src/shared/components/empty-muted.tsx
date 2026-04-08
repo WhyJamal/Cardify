@@ -1,4 +1,4 @@
-import { Button } from "@/shared/components/ui/button"
+import { Button } from "@components/ui/button"
 import {
   Empty,
   EmptyContent,
@@ -6,7 +6,7 @@ import {
   EmptyHeader,
   EmptyMedia,
   EmptyTitle,
-} from "@/shared/components/ui/empty"
+} from "@components/ui/empty"
 import { Bell } from "lucide-react"
 import { RefreshCcwIcon } from "lucide-react"
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { ConfirmDialog } from "@/shared/components/ui/confirm-diolog";
+import { ConfirmDialog } from "@components/ui/confirm-diolog";
 import { deleteWorkspace } from "../actions";
 import { useWorkspace } from "@/app/providers/WorkspaceProvider";
 import { useRouter } from "next/navigation";

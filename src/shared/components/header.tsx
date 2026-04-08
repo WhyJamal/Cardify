@@ -8,8 +8,8 @@ import { useSession } from "next-auth/react";
 import { useEffect, useRef, useState } from "react";
 
 import { AccountDropdown, CreateMenu, TooltipAction, CardifyLogo, Button, NotificationDropdown } from ".";
-import { CreateBoardPanel } from "@/features/board/create-board-panel";
-import { CustomWorkspaceModal } from "@/features/workspace/modal/custom-workpace-modal";
+import { CreateBoardPanel } from "@/features/board/components/create-board-panel";
+import { CustomWorkspaceModal } from "@features/workspace/modal/custom-workpace-modal";
 
 import { getInitials } from "../utils/getInitials";
 import { PAGES } from "@/config/pages.config";

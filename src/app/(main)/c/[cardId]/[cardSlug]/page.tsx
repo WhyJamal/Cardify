@@ -1,7 +1,7 @@
 import { redirect, notFound } from "next/navigation";
 import { serverFetch } from "@/lib/server-api";
 import { PAGES } from "@/config/pages.config";
-import { slugify } from "@/shared/utils/slugify";
+import { slugify } from "@utils/slugify";
 
 async function getCardById(cardId: string) {
     const res = await serverFetch(`/api/cards/${cardId}/location`);

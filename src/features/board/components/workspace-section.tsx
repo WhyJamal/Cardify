@@ -5,7 +5,6 @@ import { LayoutDashboard, Users, Settings, Lock } from "lucide-react";
 import { BoardCard } from "@components/";
 import { CreateBoardPanel } from "@features/board/components/create-board-panel";
 import { Board, Workspace } from "@shared/types";
-import { MembersSearchList } from "@features/workspace/components/members-search-list";
 
 type Tab = "boards" | "members" | "settings";
 

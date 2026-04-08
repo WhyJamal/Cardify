@@ -10,6 +10,7 @@ import { slugify } from "@/shared/utils/slugify";
 import { clientFetch } from "@/lib/client-api";
 import CustomSelect from "@/shared/components/ui/custom-select";
 import { useWorkspace } from "@/app/providers/WorkspaceProvider";
+import { PAGES } from "@/config/pages.config";
 
 const PANEL_WIDTH = 370;
 const PANEL_HEIGHT = 590;
@@ -136,7 +137,7 @@ export function CreateBoardPanel({ triggerRef, onClose, onCreated }: Props) {
       }),
     });
 
-    router.push(`/b/${res.board.id}/${slugify(res.board.title)}`);
+    router.push(PAGES.BOARD(res.board.id, slugify(res.board.title)));
     onCreated(res.board);
     onClose();
     setForm(INITIAL_FORM);

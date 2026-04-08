@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { FloatingInput } from "@/shared/components";
 import { signIn } from "next-auth/react";
+import { PAGES } from "@/config/pages.config";
 
 export function SignUpCard() {
   const router = useRouter();
@@ -107,7 +108,7 @@ export function SignUpCard() {
       return;
     }
 
-    router.push("/");
+    router.push(PAGES.HOME);
     router.refresh();
   };
 
@@ -183,7 +184,7 @@ export function SignUpCard() {
 
                 <div className="flex items-center justify-end gap-3 pt-6">
                   <Link
-                    href="/auth/sign-in"
+                    href={PAGES.SIGN_IN}
                     className="text-[#8ab4f8] px-6 py-3 rounded-full hover:bg-white/5 transition-colors"
                   >
                     У меня есть аккаунт

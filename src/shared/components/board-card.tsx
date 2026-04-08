@@ -4,6 +4,7 @@ import { slugify } from "@/shared/utils/slugify";
 import { Board } from "../types";
 import ToggleChoosen from "./toggle-choosen";
 import { useBoardActions } from "../hooks/use-board-actions";
+import { PAGES } from "@/config/pages.config";
 
 interface BoardCardProps {
     board: Board;
@@ -15,7 +16,7 @@ export function BoardCard({ board, onClick }: BoardCardProps) {
 
     return (
         <div onClick={onClick}>
-            <Link key={board.id} href={`/b/${board.id}/${slugify(board.title)}`}>
+            <Link key={board.id} href={PAGES.BOARD(board.id, slugify(board.title))}>
                 <Card
                     className="py-0 rounded-sm overflow-hidden cursor-pointer bg-[#1d2125] shadow-md hover:shadow-lg transition-all duration-200 groupborder-0 group"
                 >

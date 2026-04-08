@@ -1,5 +1,7 @@
 import { redirect, notFound } from "next/navigation";
 import { serverFetch } from "@/lib/server-api";
+import { PAGES } from "@/config/pages.config";
+import { slugify } from "@/shared/utils/slugify";
 
 async function getCardById(cardId: string) {
     const res = await serverFetch(`/api/cards/${cardId}/location`);
@@ -20,6 +22,6 @@ export default async function CardDeepLinkPage({
     }
 
     redirect(
-        `/b/${card.boardId}/${card.boardSlug}?openCardPath=/c/${cardId}/${cardSlug}`
+        `${PAGES.BOARD(card.boardId, slugify(card.boardSlug))}?openCardPath=${PAGES.CARD(cardId, slugify(cardSlug))}`
     );
 }

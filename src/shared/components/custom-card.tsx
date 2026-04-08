@@ -16,6 +16,8 @@ import CustomCheckbox from "./custom-checkbox";
 
 import { CardContextMenu } from "@/features/card/card-context-menu";
 import { useRouter } from "next/navigation";
+import { PAGES } from "@/config/pages.config";
+import { slugify } from "../utils/slugify";
 
 interface CardProps {
   card: CardData;
@@ -89,7 +91,7 @@ export function CardContent({
         </div>
       )}
 
-      <Link href={`/c/${card.id}/${card.title}`}>
+      <Link href={PAGES.CARD(card.id, slugify(card.title))}>
         <div
           className="p-2 pb-2 rounded-md"
           style={{
@@ -287,7 +289,7 @@ export function CustomCard({
   }, [dragPreview]);
 
   function onClickCard() {
-        router.push(`/c/${card.id}/${card.title}`);
+        router.push(PAGES.CARD(card.id, slugify(card.title)));
     }
 
   return (

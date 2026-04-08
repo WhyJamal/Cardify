@@ -1,9 +1,7 @@
 "use client";
 
-import Link from "next/link";
-
 import { useEffect, useState } from "react";
-import { LayoutDashboard, FileText, Home, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
 
 import { usePathname } from "next/navigation";
 import { TooltipAction, Button, WorkspaceSidebar, Spinner } from "./";
@@ -11,19 +9,9 @@ import { ChevronRight } from "lucide-react";
 
 import { useWorkspace } from "@/app/providers/WorkspaceProvider";
 import { CustomWorkspaceModal } from "@/features/workspace/modal/custom-workpace-modal";
+import { sidebarItems } from "../config/navigation";
+import { SidebarItem } from "./sidebar-item";
 
-type NavItem = {
-  id: string;
-  label: string;
-  icon: any;
-  url?: string;
-};
-
-const navItems: NavItem[] = [
-  { id: "boards", label: "Доски", icon: LayoutDashboard, url: `/u/user/boards` },
-  { id: "templates", label: "Шаблоны", icon: FileText, url: "/templates" },
-  { id: "home", label: "Главная страница", icon: Home, url: "/" },
-];
 
 export default function Sidebar() {
   const { workspaces, refresh, loading } = useWorkspace();
@@ -67,26 +55,14 @@ export default function Sidebar() {
         ${collapsed ? "w-23 px-4" : "w-[320px] px-8"}`}
       >
         <nav className="mb-4">
-          {navItems.map((item) => {
-            const Icon = item.icon;
-            const isActive = item.url === pathname;
-
-            return (
-              <Link key={item.id} href={item.url || "/"} className="block">
-                <button
-                  className={`w-full flex items-center gap-3 px-3 py-2 rounded-md mb-1 text-sm transition-all
-                  ${collapsed ? "justify-center px-0" : ""}
-                  ${isActive
-                      ? "bg-[#579dff26] text-[#579dff]"
-                      : "text-[#b6c2cf] hover:bg-[#a1bdd914]"
-                    }`}
-                >
-                  <Icon size={18} />
-                  {!collapsed && <span>{item.label}</span>}
-                </button>
-              </Link>
-            );
-          })}
+          {sidebarItems.map((item) => (
+            <SidebarItem
+              key={item.id}
+              item={item}
+              isActive={item.url === pathname}
+              collapsed={collapsed}
+            />
+          ))}
         </nav>
 
         <div className="border-t border-[#2c333a] mx-2 mb-4" />
@@ -147,7 +123,7 @@ export default function Sidebar() {
       {showCreateWorksppace && (
         <CustomWorkspaceModal onClose={() => setShowCreateWorksppace(false)} />
       )}
-      
+
     </div>
   );
 }

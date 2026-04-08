@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import SidebarItem from "./sidebar-item";
+import WorkspaceItem from "./workspace-item";
 import { Users, Settings, SquareKanban, ChevronDown } from "lucide-react";
 import { Workspace } from "../types";
+import { PAGES } from "@/config/pages.config";
 
 interface WorkspaceSidebarProps {
     workspace: Workspace;
@@ -45,19 +46,19 @@ export default function WorkspaceSidebar({ workspace, collapsed }: WorkspaceSide
             {workspaceOpen && (
                 <nav className="mt-3 pl-2 text-sm">
                     <ul className="space-y-1">
-                        <SidebarItem
-                            href={`/w/${workspace.id}/home`}
+                        <WorkspaceItem
+                            href={PAGES.WORKSPACE_HOME(workspace.id)}
                             label={!collapsed ? "Доски" : ""}
                             icon={<SquareKanban size={16} />}
                         />
-                        <SidebarItem
-                            href={`/w/${workspace.id}/members`}
+                        <WorkspaceItem
+                            href={PAGES.WORKSPACE_MEMBERS(workspace.id)}
                             label={!collapsed ? "Участники" : ""}
                             icon={<Users size={16} />}
                             hasChevron
                         />
-                        <SidebarItem
-                            href={`/w/${workspace.id}/account`}
+                        <WorkspaceItem
+                            href={PAGES.WORKSPACE_ACCOUNT(workspace.id)}
                             label={!collapsed ? "Настройки" : ""}
                             icon={<Settings size={16} />}
                             hasChevron

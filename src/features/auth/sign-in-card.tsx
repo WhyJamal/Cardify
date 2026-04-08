@@ -6,6 +6,7 @@ import { FcGoogle } from "react-icons/fc";
 import Link from "next/link";
 import Image from "next/image";
 import { Button, FloatingInput } from "@/shared/components";
+import { PAGES } from "@/config/pages.config";
 
 export function SignInCard() {
   const [email, setEmail] = useState("");
@@ -105,7 +106,7 @@ export function SignInCard() {
             )}
 
             <Link
-              href="/auth/sign-up"
+              href={PAGES.SIGN_UP}
               className="inline-block text-[#8ab4f8] text-sm hover:underline"
             >
               Создать аккаунт

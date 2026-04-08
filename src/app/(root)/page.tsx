@@ -8,6 +8,7 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { slugify } from "@/shared/utils/slugify";
 import { Board } from "@/shared/types";
+import { PAGES } from "@/config/pages.config";
 
 interface RecentBoardsProps {
   board: Board;
@@ -224,7 +225,7 @@ export default function RootPage() {
           <div className="space-y-1 mb-6">
             {recentBoards.length ? (
               recentBoards.map((board) => (
-                <Link key={board.id} href={`/b/${board.id}/${slugify(board.title)}`}>
+                <Link key={board.id} href={PAGES.BOARD(board.id, slugify(board.title))}>
                   <div
                     className="flex items-center gap-3 px-2 py-1.5 rounded cursor-pointer transition-colors"
                     style={{ borderRadius: "6px" }}

@@ -4,6 +4,7 @@ import { ConfirmDialog } from "@/shared/components/ui/confirm-diolog";
 import { deleteWorkspace } from "../actions";
 import { useWorkspace } from "@/app/providers/WorkspaceProvider";
 import { useRouter } from "next/navigation";
+import { PAGES } from "@/config/pages.config";
 
 interface Props {
   workspaceId: string;
@@ -17,7 +18,7 @@ export function WorkspaceDeleteButton({ workspaceId }: Props) {
     await deleteWorkspace(workspaceId);
     
     removeWorkspace(workspaceId); 
-    router.push("/");
+    router.push(PAGES.HOME);
   }
 
   return (

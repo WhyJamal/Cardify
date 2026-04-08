@@ -1,38 +1,28 @@
-"use client";
-
 import Link from "next/link";
-import { ReactNode } from "react";
-import { ChevronRight } from "lucide-react";
+import type { NavItem } from "../config/navigation"
 
 interface SidebarItemProps {
-  href: string;
-  label: string;
-  icon: ReactNode;
-  hasChevron?: boolean;
+    item: NavItem;
+    isActive: boolean;
+    collapsed: boolean;
 }
 
-export default function SidebarItem({ href, label, icon, hasChevron = false }: SidebarItemProps) {
-  return (
-    <li>
-      <Link
-        href={href}
-        className="group flex items-center gap-3 px-3 py-2 rounded-lg text-[#b6c2cf]
-                   hover:bg-white/10 hover:text-white justify-between
-                   transition-all duration-200"
-      >
-        <div className="flex gap-2 items-center">
-          {icon}
-          <span className="font-medium">{label}</span>
-        </div>
+export function SidebarItem({ item, isActive, collapsed }: SidebarItemProps) {
+    const Icon = item.icon;
 
-        {hasChevron && (
-          <ChevronRight
-            className="ml-auto opacity-0 translate-x-3 transition-all duration-200 ease-out
-                       group-hover:opacity-100 group-hover:translate-x-0"
-            size={16}
-          />
-        )}
-      </Link>
-    </li>
-  );
+    return (
+        <Link key={item.id} href={item.url || "/"} className="block">
+            <button
+                className={`w-full flex items-center gap-3 px-3 py-2 rounded-md mb-1 text-sm transition-all
+                  ${collapsed ? "justify-center px-0" : ""}
+                  ${isActive
+                        ? "bg-[#579dff26] text-[#579dff]"
+                        : "text-[#b6c2cf] hover:bg-[#a1bdd914]"
+                    }`}
+            >
+                <Icon size={18} />
+                {!collapsed && <span>{item.label}</span>}
+            </button>
+        </Link>
+    )
 }

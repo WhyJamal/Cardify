@@ -12,6 +12,7 @@ import { CreateBoardPanel } from "@/features/board/create-board-panel";
 import { CustomWorkspaceModal } from "@/features/workspace/modal/custom-workpace-modal";
 
 import { getInitials } from "../utils/getInitials";
+import { PAGES } from "@/config/pages.config";
 
 type PanelState = "closed" | "menu" | "createBoard" | "createWorkspace";
 
@@ -63,7 +64,7 @@ export function Header() {
           <LayoutGrid size={18} className="text-[#9fadbc]" />
         </button>
 
-        <Link href={'/'}>
+        <Link href={PAGES.HOME}>
           <button className="flex items-center gap-1 px-1 py-1 rounded hover:bg-white/10 transition-colors">
             <div className="flex items-center gap-1 justify-center">
               <Image
@@ -202,7 +203,7 @@ export function Header() {
           </div>
         ) : (
           <Link
-            href={'/auth/sign-in'}
+            href={PAGES.SIGN_IN}
             className="bg-blue-500 hover:bg-[#0065ff] text-black px-3 py-1.5 rounded text-sm font-medium flex items-center gap-1 transition-colors"
           >
             Войти

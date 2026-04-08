@@ -7,7 +7,7 @@ import { useOutsideClick } from "@hooks/use-outside-click";
 import { calcBelowPosition } from "@utils/floatingPosition";
 import { workspaceApi } from "@features/workspace/api/workspace-api";
 import type { CardMember, User, WorkspaceMember } from "@shared/types";
-import { Spinner } from "@components";
+import { Spinner } from "@components/";
 import { getInitials } from "@utils/getInitials";
 
 interface InviteMemberMenuProps {

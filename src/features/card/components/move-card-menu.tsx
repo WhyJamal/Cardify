@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { X, Loader2 } from "lucide-react";
 import { createPortal } from "react-dom";
 import CustomSelect from "@components/ui/custom-select";
-import { Button } from "@components";
+import { Button } from "@components/";
 import { calcSidePosition } from "@utils/floatingPosition";
 import { useOutsideClick } from "@hooks/use-outside-click";
 import { useMoveCard } from "@features/card/hooks/use-move-card";

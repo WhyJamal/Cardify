@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { Header, SubHeader } from "@components";
+import { Header, SubHeader } from "@components/";
 import { serverFetch } from "@/lib/server-api";
 import { BoardInitializer } from "./board-initializer"; 
 import Loading from "./loading";

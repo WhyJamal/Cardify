@@ -6,7 +6,7 @@ import {
     ArrowRight, Copy, Link2, Layers, Archive
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { Button } from "@components";
+import { Button } from "@components/";
 import { useRouter } from "next/navigation";
 import { CardData } from "@shared/types";
 

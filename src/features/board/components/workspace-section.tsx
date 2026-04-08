@@ -3,8 +3,9 @@
 import { useRef, useState } from "react";
 import { LayoutDashboard, Users, Settings, Lock } from "lucide-react";
 import { BoardCard } from "@components/";
-import { CreateBoardPanel } from "@/features/board/components/create-board-panel";
+import { CreateBoardPanel } from "@features/board/components/create-board-panel";
 import { Board, Workspace } from "@shared/types";
+import { MembersSearchList } from "@features/workspace/components/members-search-list";
 
 type Tab = "boards" | "members" | "settings";
 
@@ -40,11 +41,10 @@ export function WorkspaceSection({ workspace, onBoardOpen, onBoardCreated }: Pro
             <button
               key={key}
               onClick={() => setActiveTab(key)}
-              className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm transition-colors ${
-                activeTab === key
+              className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm transition-colors ${activeTab === key
                   ? "bg-[#a1bdd914] text-[#b6c2cf]"
                   : "hover:bg-[#a1bdd914] text-[#8c9bab]"
-              }`}
+                }`}
             >
               {icon}
               {label}

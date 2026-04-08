@@ -1,4 +1,4 @@
-import { Button } from '@components';
+import { Button } from '@components/';
 import { useOutsideClick } from '@hooks/use-outside-click';
 import { calcBelowPosition } from '@utils/floatingPosition';
 import { Check, ChevronLeft, X } from 'lucide-react';

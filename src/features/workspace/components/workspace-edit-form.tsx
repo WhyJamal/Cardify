@@ -6,7 +6,7 @@ import {
   type UpdateWorkspaceDto
 } from "@features/workspace/actions";
 import type { Workspace } from "@shared/types";
-import { FormInput, Button, FormTextarea } from "@components";
+import { FormInput, Button, FormTextarea } from "@components/";
 import { PencilIcon } from "lucide-react";
 import { useWorkspace } from "@/app/providers/WorkspaceProvider";
 

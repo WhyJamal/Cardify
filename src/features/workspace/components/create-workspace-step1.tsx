@@ -1,4 +1,4 @@
-import { Button } from "@components";
+import { Button } from "@components/";
 import { HelperText, Label } from "./workspace-ui";
 import { useEffect, useState } from "react";
 import { useWorkspace } from "@/app/providers/WorkspaceProvider";

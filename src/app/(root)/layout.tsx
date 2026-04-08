@@ -1,4 +1,4 @@
-import { Header } from "@components";
+import { Header } from "@components/";
 import Sidebar from "@components/sidebar";
 import { BoardProvider } from "@/app/providers/BoardProvider";
 

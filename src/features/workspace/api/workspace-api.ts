@@ -1,6 +1,5 @@
 import { clientFetch } from "@/lib/client-api";
 import { WorkspaceForm } from "../hooks/use-workspace-actions";
-import { serverFetch } from "@/lib/server-api";
 
 export const workspaceApi = {
   createWorkspace: (form: WorkspaceForm) =>
@@ -55,7 +54,6 @@ export const workspaceApi = {
 
   getWorkspaceMembers: async (workspaceId: string) => {
     const res = await clientFetch(`/api/workspaces/${workspaceId}/members`)
-
     return res;
   }
 

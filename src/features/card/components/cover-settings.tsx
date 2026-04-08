@@ -5,7 +5,7 @@ import { X } from "lucide-react";
 import { createPortal } from "react-dom";
 import { calcSidePosition } from "@utils/floatingPosition";
 import { useOutsideClick } from "@hooks/use-outside-click";
-import { Button } from "@components";
+import { Button } from "@components/";
 import { CardData, SizeOption } from "@shared/types";
 import { UNSPLASH_PHOTOS } from "@data/photos.data";
 import { COVER_COLORS } from "@data/colors.data";

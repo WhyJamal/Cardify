@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef } from "react";
 import { X } from "lucide-react";
-import { Button } from "@components";
+import { Button } from "@components/";
 
 interface Props {
     children: React.ReactNode;

@@ -15,7 +15,7 @@ import {
   normalizeDateInput,
 } from "@utils/date";
 import { useOutsideClick } from "@hooks/use-outside-click";
-import { Button } from "@components";
+import { Button } from "@components/";
 
 interface DatePickerProps {
   triggerRef: React.RefObject<HTMLElement | null>;

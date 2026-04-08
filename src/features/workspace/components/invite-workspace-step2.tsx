@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@components";
+import { Button } from "@components/";
 import { Label } from "./workspace-ui";
 import { Link, X, Loader2 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";

@@ -14,7 +14,7 @@ import {
   type LabelWithChecked,
   shadeColor,
 } from "@utils/labels";
-import { Button } from "@components";
+import { Button } from "@components/";
 
 interface LabelsMenuProps {
   triggerRef: React.RefObject<HTMLElement | null>;

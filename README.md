@@ -110,6 +110,44 @@ npx prisma studio
 
 Opens database editor in browser.
 
+### Database Seeding (Initial Data)
+
+Seed scripts add initial data to the database such as default roles, workspace types, or admin users.
+
+---
+
+## Seed File Location
+
+```
+prisma/seed.ts
+```
+
+---
+
+Install required dependencies if not installed:
+
+```bash
+npm install -D ts-node typescript
+```
+
+---
+
+## Run Seed
+
+```bash
+npx prisma db seed
+```
+
+This command will:
+
+* Insert initial data into the database
+* Prepare the project for development
+* Remove the need for manual data setup
+
+---
+
+Database is now ready for development.
+
 ## Running the Project
 
 Start development server:

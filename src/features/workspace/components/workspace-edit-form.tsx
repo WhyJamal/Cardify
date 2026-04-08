@@ -9,6 +9,7 @@ import type { Workspace } from "@shared/types";
 import { FormInput, Button, FormTextarea } from "@components/";
 import { PencilIcon } from "lucide-react";
 import { useWorkspace } from "@/app/providers/WorkspaceProvider";
+import { WorkspaceLogoButton } from "./workspace-logo-button";
 
 interface Props {
   workspace: Workspace;
@@ -127,9 +128,7 @@ export function WorkspaceEditForm({ workspace }: Props) {
 
   return (
     <div className="flex items-center gap-4 mb-8">
-      <div className="w-14 h-14 flex items-center justify-center rounded-lg bg-blue-400 text-xl font-bold text-[#1d2125]">
-        {workspace.name.charAt(0).toUpperCase()}
-      </div>
+      <WorkspaceLogoButton workspace={workspace} />
 
       <div>
         <div className="flex items-center gap-2">

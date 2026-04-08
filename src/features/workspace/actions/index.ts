@@ -32,3 +32,25 @@ export async function deleteWorkspace(workspaceId: string) {
 
   return { success: true };
 }
+
+export async function updateWorkspaceLogo(
+  workspaceId: string,
+  formData: FormData
+): Promise<Workspace> {
+  const res = await serverFetch(`/api/workspaces/${workspaceId}/logo`, {
+    method: "POST",
+    body: formData, 
+  });
+
+  revalidatePath(`/w/${workspaceId}/account`);
+  return res.workspace;
+}
+
+export async function removeWorkspaceLogo(workspaceId: string): Promise<Workspace> {
+  const res = await serverFetch(`/api/workspaces/${workspaceId}/logo`, {
+    method: "DELETE",
+  });
+
+  revalidatePath(`/w/${workspaceId}/account`);
+  return res.workspace;
+}

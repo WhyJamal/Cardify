@@ -5,6 +5,8 @@ import WorkspaceItem from "./workspace-item";
 import { Users, Settings, SquareKanban, ChevronDown } from "lucide-react";
 import { Workspace } from "../types";
 import { PAGES } from "@/config/pages.config";
+import Image from "next/image";
+import { WorkspaceSmallCard } from "./workspace-small-card";
 
 interface WorkspaceSidebarProps {
     workspace: Workspace;
@@ -23,9 +25,11 @@ export default function WorkspaceSidebar({ workspace, collapsed }: WorkspaceSide
             >
 
                 <div className="flex items-center gap-2">
-                    <div className="w-9 h-8 rounded-md bg-[#1db954] flex items-center justify-center text-black font-bold">
-                        {workspace?.name?.[0].toUpperCase() || ""}
-                    </div>
+                    <WorkspaceSmallCard
+                        isLogo={workspace.logo ? true : false}
+                        name={workspace.name}
+                        logo={workspace.logo}
+                    />
 
                     {!collapsed && (
                         <span className="text-sm text-[#b6c2cf] leading-tight">

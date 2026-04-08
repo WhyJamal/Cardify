@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef, useState, useTransition } from "react";
-import Image from "next/image";
 import { updateWorkspaceLogo, removeWorkspaceLogo } from "@features/workspace/actions";
 import { useWorkspace } from "@/app/providers/WorkspaceProvider";
 import type { Workspace } from "@shared/types";
@@ -79,10 +78,7 @@ export function WorkspaceLogoButton({ workspace }: Props) {
                         onClick={() => setShowPanel(false)}
                     />
 
-                    <div
-                        className="absolute left-0 top-18 z-20 rounded shadow-xl overflow-hidden"
-                        style={{ background: "#2B2C2F", minWidth: 300 }}
-                    >
+                    <div className="absolute left-0 top-18 z-20 rounded shadow-xl overflow-hidden min-w-[300] bg-[#2b2c2f]">
                         <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">
                             <span className="text-white text-sm font-medium text-center">Изменить логотип</span>
                             <Button

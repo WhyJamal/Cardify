@@ -60,9 +60,8 @@ export default function MoveCardModal({
       ref={panelRef}
       onMouseDown={(e) => e.stopPropagation()}
       style={{ position: "fixed", left: pos.left, top: pos.top, width: PANEL_WIDTH, zIndex: 99999 }}
-      className="bg-[#2b3035] rounded-lg shadow-xl text-white flex flex-col overflow-hidden"
+      className="bg-[#2b2c2f] rounded-lg shadow-xl text-white flex flex-col overflow-hidden"
     >
-      {/* Header */}
       <div className="flex items-center justify-between px-5 py-4 border-b border-white/10">
         <h2 className="text-sm font-semibold tracking-wide">Переместить карточку</h2>
         <button onClick={onClose} className="text-gray-400 hover:text-white transition-colors">
@@ -70,13 +69,11 @@ export default function MoveCardModal({
         </button>
       </div>
 
-      {/* Body */}
       <div className="px-5 pb-5 pt-4 space-y-4">
         <p className="text-xs text-gray-400 font-medium uppercase tracking-wider">
           Выберите место назначения
         </p>
 
-        {/* Board */}
         {loadingBoards ? (
           <InlineLoader text="Загрузка досок..." />
         ) : (
@@ -89,7 +86,6 @@ export default function MoveCardModal({
           />
         )}
 
-        {/* Column + Position */}
         <div className="flex gap-3">
           <div className="flex-1">
               <CustomSelect

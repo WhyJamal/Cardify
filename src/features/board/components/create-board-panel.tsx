@@ -145,7 +145,7 @@ export function CreateBoardPanel({ triggerRef, onClose, onCreated, workspaceId }
         maxHeight: pos.maxHeight,
         zIndex: 99998,
       }}
-      className="bg-[#2c2c2c] rounded-xl shadow-2xl flex flex-col overflow-hidden"
+      className="bg-[#2b2c2f] rounded-xl shadow-2xl flex flex-col overflow-hidden"
     >
       <div
         ref={moreButtonRef}
@@ -157,7 +157,7 @@ export function CreateBoardPanel({ triggerRef, onClose, onCreated, workspaceId }
         </button>
       </div>
 
-      <div className="overflow-y-scroll max-h-[600] flex-1">
+      <div className="overflow-y-auto max-h-[600] flex-1">
         <div className="mx-5 mt-4 rounded-lg overflow-hidden h-35 relative">
           {form.isBgPhoto ? (
             <img src={form.bg} alt="bg" className="w-full h-full object-cover" />
@@ -237,7 +237,7 @@ export function CreateBoardPanel({ triggerRef, onClose, onCreated, workspaceId }
           />
         </div>
 
-        <div className="px-5 mt-4">
+        {/* <div className="px-5 mt-4">
           <p className="text-white/60 text-xs leading-5">
             В рабочее пространство можно добавить еще несколько досок — 3 доски. В бесплатной версии
             в рабочих пространствах может быть до 10 открытых досок. Чтобы добавить больше, оформите
@@ -250,7 +250,7 @@ export function CreateBoardPanel({ triggerRef, onClose, onCreated, workspaceId }
             <ShoppingBag size={14} className="text-purple-400" />
             Улучшить
           </button>
-        </div>
+        </div> */}
 
         <div className="px-5 py-5">
           <button
@@ -260,7 +260,7 @@ export function CreateBoardPanel({ triggerRef, onClose, onCreated, workspaceId }
           >
             Создать доску
           </button>
-          <p className="text-center text-white/40 text-xs mt-2">Осталось: 10</p>
+          {/* <p className="text-center text-white/40 text-xs mt-2">Осталось: 10</p> */}
         </div>
       </div>
 

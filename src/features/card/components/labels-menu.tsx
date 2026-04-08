@@ -88,7 +88,7 @@ export function LabelsMenu({
         maxHeight: pos.maxHeight,
         zIndex: 99998,
       }}
-      className="bg-[#2b3035] rounded-lg shadow-xl w-full max-w-[320px] text-white"
+      className="bg-[#2b2c2f] rounded-lg shadow-xl w-full max-w-[320px] text-white"
     >
       <div className="flex items-center justify-between p-4 border-b border-gray-700">
         <h2 className="font-medium">Метки</h2>

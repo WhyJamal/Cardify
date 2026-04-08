@@ -204,22 +204,22 @@ export default function CardClient({
                                 <span className="text-white text-sm font-semibold truncate flex-1">
                                     {card.title}
                                 </span>
-                                <button
+                                <Button
+                                    size={"xl"}
                                     ref={addBtnRef}
                                     onClick={addMenu}
-                                    className="flex items-center gap-1.5 bg-[#2c333a] hover:bg-[#38414a] text-[#9fadbc] hover:text-white text-sm px-3 py-1.5 rounded transition-colors"
                                 >
                                     <Plus size={14} />
                                     Добавить
-                                </button>
-                                <button
+                                </Button>
+                                <Button
+                                    size={"xl"}
                                     ref={attachBtnRef}
                                     onClick={addAttachments}
-                                    className="flex items-center gap-1.5 bg-[#2c333a] hover:bg-[#38414a] text-[#9fadbc] hover:text-white text-sm px-3 py-1.5 rounded transition-colors"
                                 >
                                     <Paperclip size={14} />
                                     Вложение
-                                </button>
+                                </Button>
                             </div>
                         )}
 
@@ -259,23 +259,23 @@ export default function CardClient({
                         </div>
 
                         <div className="flex gap-2 mb-6 flex-wrap">
-                            <button
+                            <Button
+                                size={"xl"}
                                 ref={addBtnRef}
                                 onClick={addMenu}
-                                className="flex items-center gap-1.5 bg-[#2c333a] hover:bg-[#38414a] text-[#9fadbc] hover:text-white text-sm px-3 py-1.5 rounded transition-colors"
                             >
                                 <Plus size={14} />
                                 Добавить
-                            </button>
+                            </Button>
 
-                            <button
+                            <Button
+                                size={"xl"}
                                 ref={attachBtnRef}
                                 onClick={addAttachments}
-                                className="flex items-center gap-1.5 bg-[#2c333a] hover:bg-[#38414a] text-[#9fadbc] hover:text-white text-sm px-3 py-1.5 rounded transition-colors"
                             >
                                 <Paperclip size={14} />
                                 Вложение
-                            </button>
+                            </Button>
 
                         </div>
 
@@ -366,15 +366,15 @@ export default function CardClient({
                                     <span className="text-sm font-medium">Описание</span>
                                 </div>
                                 {!isEditingDesc && (
-                                    <button
+                                    <Button
+                                        size={"xl"}
                                         onClick={() => {
                                             setTempDesc(card.description ?? "");
                                             setIsEditingDesc(true);
                                         }}
-                                        className="bg-[#2c333a] hover:bg-[#38414a] text-[#9fadbc] hover:text-white text-sm px-3 py-1.5 rounded transition-colors"
                                     >
                                         Изменить
-                                    </button>
+                                    </Button>
                                 )}
                             </div>
 
@@ -387,18 +387,19 @@ export default function CardClient({
                                         autoFocus
                                     />
                                     <div className="flex gap-2 mt-2">
-                                        <button
+                                        <Button
+                                            size={"xl"}
+                                            variant={"custom"}
                                             onClick={handleSaveDesc}
-                                            className="bg-blue-600 hover:bg-blue-700 text-white text-sm px-3 py-1.5 rounded transition-colors"
                                         >
                                             Сохранить
-                                        </button>
-                                        <button
+                                        </Button>
+                                        <Button
+                                            size={"xl"}
                                             onClick={() => setIsEditingDesc(false)}
-                                            className="bg-transparent hover:bg-[#38414a] text-[#9fadbc] hover:text-white text-sm px-3 py-1.5 rounded transition-colors"
                                         >
                                             Отмена
-                                        </button>
+                                        </Button>
                                     </div>
                                 </div>
                             ) : (
@@ -451,12 +452,12 @@ export default function CardClient({
                                         >
                                             Сохранить
                                         </Button>
-                                        <button
+                                        <Button
+                                            size={"lg"}
                                             onClick={() => setIsAddComment(false)}
-                                            className="bg-transparent hover:bg-[#38414a] text-[#9fadbc] hover:text-white text-sm px-3 py-1.5 rounded transition-colors"
                                         >
                                             Отмена
-                                        </button>
+                                        </Button>
                                     </div>
                                 </div>
                             ) : (

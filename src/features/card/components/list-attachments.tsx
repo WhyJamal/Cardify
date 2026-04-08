@@ -7,6 +7,7 @@ import { CardAttachment, CardData, CardLink } from "@shared/types";
 import { Ellipsis, ExternalLinkIcon, Paperclip, SearchIcon, Trash2 } from "lucide-react";
 import { cardApi } from "@features/card/api/card-api";
 import { formatCardDate } from "@utils/date";
+import { Button } from "@/shared/components";
 
 interface ListAttachmentsProps {
     initialCard: CardData;
@@ -52,13 +53,13 @@ export default function ListAttachments({ initialCard, cardId }: ListAttachments
                         <Paperclip className="w-5 h-5" />
                         <span className="text-[16px] font-semibold text-[#b6c2cf]">Вложения</span>
                     </div>
-                    <button
+                    <Button
+                        size={"xl"}
                         ref={attachBtnRef}
                         onClick={addAttachments}
-                        className="bg-[#2c333a] hover:bg-[#38414a] text-[#9fadbc] hover:text-white text-sm px-3 py-1.5 rounded transition-colors"
                     >
                         Добавить
-                    </button>
+                    </Button>
                 </div>
 
                 {hasLinks && (

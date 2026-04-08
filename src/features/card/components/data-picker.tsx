@@ -211,7 +211,7 @@ export function DatePicker({
         maxHeight: Math.max(240, pos.maxHeight - 80),
         zIndex: 99999,
       }}
-      className="bg-[#2b3035] rounded-lg shadow-xl text-white flex flex-col overflow-hidden"
+      className="bg-[#2b2c2f] rounded-lg shadow-xl text-white flex flex-col overflow-hidden"
     >
       <div className="flex items-center justify-between p-4 border-b border-gray-700 shrink-0">
         <button onClick={onClose} className="hover:bg-gray-700 p-1 rounded">
@@ -282,12 +282,12 @@ export function DatePicker({
           >
             Сохранить
           </Button>
-          <button
+          <Button
             onClick={() => handleDueDate("delete")}
-            className="w-full bg-[#2c333a] hover:bg-[#38414a] text-[#9fadbc] hover:text-white border border-gray-800 py-1 rounded text-sm transition-colors"
+            className="w-full"
           >
             Удалить
-          </button>
+          </Button>
         </div>
       </div>
     </div>,

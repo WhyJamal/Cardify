@@ -102,7 +102,7 @@ export function CreateLabelMenu({ triggerRef, onClose, onBack, onChange }: Creat
         width: PANEL_WIDTH,
         zIndex: 99998,
       }}
-      className="bg-[#2b2b2b] rounded-lg shadow-xl w-full max-w-[320px] text-white"
+      className="bg-[#2b2c2f] rounded-lg shadow-xl w-full max-w-[320px] text-white"
     > {/* 2b3035 */}
       <div className="flex items-center justify-between p-4 border-b border-gray-700">
         <button

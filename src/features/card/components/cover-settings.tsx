@@ -94,7 +94,7 @@ export default function CoverSettings({
                 maxHeight: Math.max(240, pos.maxHeight - 90),
                 zIndex: 99999,
             }}
-            className="bg-[#2b3035] rounded-lg shadow-xl text-white flex flex-col"
+            className="bg-[#2b2c2f] rounded-lg shadow-xl text-white flex flex-col"
         >
             <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">
                 <span className="text-white text-sm font-semibold tracking-wide">Обложка</span>
@@ -158,9 +158,9 @@ export default function CoverSettings({
                 </div>
 
                 <Button
-                    variant="ghost"
+                    variant={"outline"}
                     onClick={() => { onRemoveBackground(); onClose(); }}
-                    className="w-full text-sm rounded text-gray-400 hover:text-white flex items-center justify-center gap-2 hover:bg-[#38414a] border border-[#696b6d]"
+                    className="w-full"
                 >
                     Удалить обложку
                 </Button>
@@ -231,8 +231,8 @@ export default function CoverSettings({
                 </div>
 
                 <Button
-                    variant="ghost"
-                    className="w-full text-sm rounded text-gray-400 hover:text-white flex items-center justify-center gap-2 hover:bg-[#38414a] border border-[#696b6d]"
+                    variant="outline"
+                    className="w-full"
                 >
                     Включить режим для дальтоников
                 </Button>
@@ -279,9 +279,9 @@ export default function CoverSettings({
                         onChange={handleFileChange}
                     />
                     <Button
-                        variant="ghost"
+                       variant="outline"
                         onClick={() => fileInputRef.current?.click()}
-                        className="w-full text-sm rounded text-gray-400 hover:text-white flex items-center justify-center gap-2 hover:bg-[#38414a] border border-[#696b6d]"
+                        className="w-full"
                     >
                         Загрузить изображение обложки
                     </Button>
@@ -317,15 +317,15 @@ export default function CoverSettings({
                             onChange={(e) => setSearchQuery(e.target.value)}
                             onKeyDown={(e) => e.key === "Enter" && handleSearch()}
                             placeholder="Поиск фото..."
-                            className="flex-1 px-3 py-1.5 rounded-md bg-white/5 border border-white/10 text-white text-xs placeholder-white/30 focus:outline-none focus:border-white/30 focus:bg-white/10 transition-all"
+                            className="flex-1 px-3 py-1.5 rounded bg-white/5 border border-white/10 text-white text-xs placeholder-white/30 focus:outline-none focus:border-white/30 focus:bg-white/10 transition-all"
                         />
-                        <button
+                        <Button
+                            variant={"outline"}
                             onClick={handleSearch}
                             disabled={isSearching}
-                            className="px-3 py-1.5 rounded-md bg-white/10 hover:bg-white/20 text-white text-xs transition-all disabled:opacity-50"
                         >
                             {isSearching ? "..." : "Найти"}
-                        </button>
+                        </Button>
                     </div>
 
                     <p className="text-white/25 text-[10px] mt-2 leading-relaxed">

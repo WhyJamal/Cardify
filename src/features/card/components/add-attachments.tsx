@@ -7,6 +7,7 @@ import { createPortal } from "react-dom";
 import { KanbanSquare, X } from "lucide-react";
 import { CardAttachment, CardLink } from "@shared/types";
 import { cardApi } from "@features/card/api/card-api";
+import { Button } from "@/shared/components";
 
 interface RecentLink {
     id: string;
@@ -86,7 +87,7 @@ export default function AddAttachments({ triggerRef, cardId, onClose, onSuccess,
                 maxHeight: Math.max(240, pos.maxHeight - 80),
                 zIndex: 99999,
             }}
-            className="bg-[#2b3035] rounded-lg shadow-xl text-white flex flex-col"
+            className="bg-[#2b2c2f] rounded-lg shadow-xl text-white flex flex-col"
         > {/* 1d2125 */}
 
             <div className="relative flex items-center justify-center border-b border-[#38414a] px-4 py-3">
@@ -191,18 +192,19 @@ export default function AddAttachments({ triggerRef, cardId, onClose, onSuccess,
             </div>
 
             <div className="flex items-center justify-end gap-2 border-t border-[#38414a] px-4 py-3">
-                <button
+                <Button
+                    size={"xl"}
                     onClick={() => onClose?.()}
-                    className="rounded px-4 py-1.75 text-[14px] font-medium text-[#b6c2cf] hover:bg-[#38414a]"
                 >
                     Отмена
-                </button>
-                <button
+                </Button>
+                <Button
+                    size={"xl"}
+                    variant={"custom"}
                     onClick={handleInsert}
-                    className="rounded bg-[#579dff] px-4 py-1.75 text-[14px] font-bold text-[#1d2125] hover:bg-[#85b8ff]"
                 >
                     Вставить
-                </button>
+                </Button>
             </div>
 
         </div>,

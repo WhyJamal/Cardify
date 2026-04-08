@@ -98,7 +98,7 @@ export function InviteMemberMenu({
         width: PANEL_WIDTH,
         zIndex: 99998,
       }}
-      className="bg-[#2b3035] rounded-lg shadow-xl text-white"
+      className="bg-[#2b2c2f] rounded-lg shadow-xl text-white"
     >
       <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">
         <span className="text-sm font-medium">Участники</span>

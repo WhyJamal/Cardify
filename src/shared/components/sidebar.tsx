@@ -51,7 +51,7 @@ export default function Sidebar() {
   return (
     <div className="relative">
       <aside
-        className={`min-h-screen bg-[#1d2125] flex flex-col py-10 overflow-y-auto transition-all duration-300 ease-in-out
+        className={`h-screen bg-[#1d2125] flex flex-col py-10 transition-all duration-300 ease-in-out
         ${collapsed ? "w-23 px-4" : "w-[320px] px-8"}`}
       >
         <nav className="mb-4">
@@ -67,7 +67,7 @@ export default function Sidebar() {
 
         <div className="border-t border-[#2c333a] mx-2 mb-4" />
 
-        <div>
+        <div className="flex flex-col flex-1 overflow-hidden">
           {!collapsed && (
             <div className="flex items-center justify-between">
               <p className="text-xs text-[#8c9bab] mb-2 px-2 tracking-wide">
@@ -89,13 +89,16 @@ export default function Sidebar() {
               <Spinner />
             </div>
           ) : (
-            workspaces.map((ws) => (
-              <WorkspaceSidebar
-                key={ws.id}
-                workspace={ws}
-                collapsed={collapsed}
-              />
-            )))}
+            <div className="flex-1 overflow-y-auto mb-6">
+              {workspaces.map((ws) => (
+                <WorkspaceSidebar
+                  key={ws.id}
+                  workspace={ws}
+                  collapsed={collapsed}
+                />
+              ))}
+            </div>
+          )}
         </div>
 
         <div className="absolute top-24 -right-3 z-10">

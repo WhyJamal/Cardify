@@ -26,7 +26,6 @@ export default function WorkspaceSidebar({ workspace, collapsed }: WorkspaceSide
 
   const [workspaceOpen, setWorkspaceOpen] = useState(isWorkspaceActive);
 
-  // Route o'zgarganda ham ochiq qolsin
   useEffect(() => {
     if (isWorkspaceActive) setWorkspaceOpen(true);
   }, [pathname]);

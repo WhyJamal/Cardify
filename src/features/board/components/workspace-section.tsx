@@ -5,6 +5,8 @@ import { LayoutDashboard, Users, Settings, Lock } from "lucide-react";
 import { BoardCard } from "@components/";
 import { CreateBoardPanel } from "@features/board/components/create-board-panel";
 import { Board, Workspace } from "@shared/types";
+import { PAGES } from "@/config/pages.config";
+import Link from "next/link";
 
 type Tab = "boards" | "members" | "settings";
 
@@ -19,10 +21,10 @@ export function WorkspaceSection({ workspace, onBoardOpen, onBoardCreated }: Pro
   const [showCreateBoard, setShowCreateBoard] = useState(false);
   const triggerRef = useRef<HTMLDivElement | null>(null);
 
-  const tabs: { key: Tab; label: string; icon: React.ReactNode }[] = [
+  const tabs: { key: Tab; label: string; icon: React.ReactNode, link?: string }[] = [
     { key: "boards", label: "Доски", icon: <LayoutDashboard size={15} /> },
-    { key: "members", label: "Участники", icon: <Users size={15} /> },
-    { key: "settings", label: "Настройки", icon: <Settings size={15} /> },
+    { key: "members", label: "Участники", icon: <Users size={15} />, link: PAGES.WORKSPACE_MEMBERS(workspace.id) },
+    { key: "settings", label: "Настройки", icon: <Settings size={15} />, link: PAGES.WORKSPACE_ACCOUNT(workspace.id) },
   ];
 
   return (
@@ -36,19 +38,30 @@ export function WorkspaceSection({ workspace, onBoardOpen, onBoardCreated }: Pro
         </div>
 
         <div className="flex items-center gap-1">
-          {tabs.map(({ key, label, icon }) => (
-            <button
-              key={key}
-              onClick={() => setActiveTab(key)}
-              className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm transition-colors ${activeTab === key
-                  ? "bg-[#a1bdd914] text-[#b6c2cf]"
-                  : "hover:bg-[#a1bdd914] text-[#8c9bab]"
-                }`}
-            >
-              {icon}
-              {label}
-            </button>
-          ))}
+          {tabs.map(({ key, label, icon, link }) =>
+            link ? (
+              <Link
+                key={key}
+                href={link}
+                className="flex items-center gap-2 px-3 py-2 rounded-md text-sm transition-colors hover:bg-[#a1bdd914] text-[#8c9bab]"
+              >
+                {icon}
+                {label}
+              </Link>
+            ) : (
+              <button
+                key={key}
+                onClick={() => setActiveTab(key)}
+                className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm transition-colors ${activeTab === key
+                    ? "bg-[#a1bdd914] text-[#b6c2cf]"
+                    : "hover:bg-[#a1bdd914] text-[#8c9bab]"
+                  }`}
+              >
+                {icon}
+                {label}
+              </button>
+            )
+          )}
           <button className="flex items-center gap-2 px-3 py-2 rounded-md text-sm bg-[#7c3aed1a] text-[#9d6fe8] hover:bg-[#7c3aed30] transition-colors">
             <Lock size={15} />
             Повысить
@@ -72,7 +85,7 @@ export function WorkspaceSection({ workspace, onBoardOpen, onBoardCreated }: Pro
             className="h-25 rounded-lg bg-[#2c333a] hover:bg-[#38414a] transition-colors flex flex-col items-center justify-center gap-1 px-4 py-5 cursor-pointer"
           >
             <span className="text-sm text-[#b6c2cf]">Создать доску</span>
-            <span className="text-xs text-[#8c9bab]">Осталось: 6</span>
+            {/* <span className="text-xs text-[#8c9bab]">Осталось: 6</span> */}
           </div>
 
           {showCreateBoard && (

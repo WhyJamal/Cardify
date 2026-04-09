@@ -44,7 +44,7 @@ export function BoardsList({ initialBoards, workspaceId }: Props) {
                     className="h-25 rounded-lg bg-[#2c333a] hover:bg-[#38414a] transition-colors flex flex-col items-center justify-center gap-1 px-4 py-5 cursor-pointer"
                 >
                     <span className="text-sm text-[#b6c2cf]">Создать доску</span>
-                    <span className="text-xs text-[#8c9bab]">Осталось: 6</span>
+                    {/* <span className="text-xs text-[#8c9bab]">Осталось: 6</span> */}
                 </div>
 
                 {showCreateBoard && (

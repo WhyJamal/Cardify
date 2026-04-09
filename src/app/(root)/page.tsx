@@ -66,13 +66,12 @@ export default function RootPage() {
     >
       <div className="w-full max-w-5xl flex gap-12">
 
-        <div className="flex-1 max-w-xl max-h-screen overflow-y-auto">
+        <div className="flex-1 max-w-2xl max-h-screen overflow-y-auto pb-24 px-2">
 
           <div className="flex items-center gap-2 mb-4">
             <Clock size={16} className="text-gray-400" />
             <span className="text-gray-300 text-sm">Требуют внимания</span>
           </div>
-
 
           <div
             className="rounded-lg py-5 mb-4 flex flex-col gap-4 bg-[#2c2e33] justify-center items-center text-white/80 font-medium"

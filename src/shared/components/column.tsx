@@ -216,7 +216,6 @@ export function Column({
             />
             <div className="flex items-center gap-2 mt-1">
               <Button
-                size={"sm"}
                 variant={"custom"}
                 onClick={handleAddCard}
               >

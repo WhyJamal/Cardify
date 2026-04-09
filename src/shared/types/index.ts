@@ -45,6 +45,8 @@ export interface User {
   image?: string;
 }
 
+export type TaskActionStatus = "COMPLETED" | "DISMISSED" | "PENDING";
+
 export interface WorkspaceMember {
   id: string;
   workspaceId: string;
@@ -149,6 +151,7 @@ export interface ColumnInt {
   id: string;
   title: string;
   cards: CardData[];
+  board: Board;
 }
 
 export type BoardMemberRole = "OWNER" | "ADMIN" | "MEMBER";
@@ -176,6 +179,8 @@ export interface Board {
   isChoosen: boolean;
   visibility: Visibility;
 
+  workspace: Workspace;
+  
   columns: ColumnInt[];
   labels: BoardLabel[];
   members: BoardMember[];

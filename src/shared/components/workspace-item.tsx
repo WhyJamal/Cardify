@@ -5,14 +5,14 @@ import { ReactNode } from "react";
 import { ChevronRight } from "lucide-react";
 import { usePathname } from "next/navigation";
 
-interface SidebarItemProps {
+interface WorkspaceItemProps {
   href: string;
   label: string;
   icon: ReactNode;
   hasChevron?: boolean;
 }
 
-export default function WorkspaceItem({ href, label, icon, hasChevron = false }: SidebarItemProps) {
+export default function WorkspaceItem({ href, label, icon, hasChevron = false }: WorkspaceItemProps) {
   const pathname = usePathname();
   const isActive = pathname === href;
 
@@ -20,7 +20,7 @@ export default function WorkspaceItem({ href, label, icon, hasChevron = false }:
     <li>
       <Link
         href={href}
-        className={`group flex items-center gap-3 px-3 py-2 rounded-lg justify-between
+        className={`group flex items-center gap-3 px-4 py-2 rounded-lg justify-between
                    transition-all duration-200
                    ${isActive
                      ? "bg-[#1d2ee726] text-[#579dff]"

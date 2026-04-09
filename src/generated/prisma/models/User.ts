@@ -196,6 +196,7 @@ export type UserWhereInput = {
   notifications?: Prisma.NotificationListRelationFilter
   boardMembers?: Prisma.BoardMemberListRelationFilter
   cardMemberships?: Prisma.CardMemberListRelationFilter
+  userTaskActions?: Prisma.UserTaskActionListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -211,6 +212,7 @@ export type UserOrderByWithRelationInput = {
   notifications?: Prisma.NotificationOrderByRelationAggregateInput
   boardMembers?: Prisma.BoardMemberOrderByRelationAggregateInput
   cardMemberships?: Prisma.CardMemberOrderByRelationAggregateInput
+  userTaskActions?: Prisma.UserTaskActionOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -229,6 +231,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   notifications?: Prisma.NotificationListRelationFilter
   boardMembers?: Prisma.BoardMemberListRelationFilter
   cardMemberships?: Prisma.CardMemberListRelationFilter
+  userTaskActions?: Prisma.UserTaskActionListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -268,6 +271,7 @@ export type UserCreateInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   boardMembers?: Prisma.BoardMemberCreateNestedManyWithoutUserInput
   cardMemberships?: Prisma.CardMemberCreateNestedManyWithoutUserInput
+  userTaskActions?: Prisma.UserTaskActionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -283,6 +287,7 @@ export type UserUncheckedCreateInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   boardMembers?: Prisma.BoardMemberUncheckedCreateNestedManyWithoutUserInput
   cardMemberships?: Prisma.CardMemberUncheckedCreateNestedManyWithoutUserInput
+  userTaskActions?: Prisma.UserTaskActionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -298,6 +303,7 @@ export type UserUpdateInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   boardMembers?: Prisma.BoardMemberUpdateManyWithoutUserNestedInput
   cardMemberships?: Prisma.CardMemberUpdateManyWithoutUserNestedInput
+  userTaskActions?: Prisma.UserTaskActionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -313,6 +319,7 @@ export type UserUncheckedUpdateInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   boardMembers?: Prisma.BoardMemberUncheckedUpdateManyWithoutUserNestedInput
   cardMemberships?: Prisma.CardMemberUncheckedUpdateManyWithoutUserNestedInput
+  userTaskActions?: Prisma.UserTaskActionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -470,6 +477,20 @@ export type UserUpdateOneRequiredWithoutCardMembershipsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCardMembershipsInput, Prisma.UserUpdateWithoutCardMembershipsInput>, Prisma.UserUncheckedUpdateWithoutCardMembershipsInput>
 }
 
+export type UserCreateNestedOneWithoutUserTaskActionsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUserTaskActionsInput, Prisma.UserUncheckedCreateWithoutUserTaskActionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUserTaskActionsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutUserTaskActionsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUserTaskActionsInput, Prisma.UserUncheckedCreateWithoutUserTaskActionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUserTaskActionsInput
+  upsert?: Prisma.UserUpsertWithoutUserTaskActionsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutUserTaskActionsInput, Prisma.UserUpdateWithoutUserTaskActionsInput>, Prisma.UserUncheckedUpdateWithoutUserTaskActionsInput>
+}
+
 export type UserCreateWithoutOwnedWorkspacesInput = {
   id?: string
   name?: string | null
@@ -482,6 +503,7 @@ export type UserCreateWithoutOwnedWorkspacesInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   boardMembers?: Prisma.BoardMemberCreateNestedManyWithoutUserInput
   cardMemberships?: Prisma.CardMemberCreateNestedManyWithoutUserInput
+  userTaskActions?: Prisma.UserTaskActionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutOwnedWorkspacesInput = {
@@ -496,6 +518,7 @@ export type UserUncheckedCreateWithoutOwnedWorkspacesInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   boardMembers?: Prisma.BoardMemberUncheckedCreateNestedManyWithoutUserInput
   cardMemberships?: Prisma.CardMemberUncheckedCreateNestedManyWithoutUserInput
+  userTaskActions?: Prisma.UserTaskActionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutOwnedWorkspacesInput = {
@@ -526,6 +549,7 @@ export type UserUpdateWithoutOwnedWorkspacesInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   boardMembers?: Prisma.BoardMemberUpdateManyWithoutUserNestedInput
   cardMemberships?: Prisma.CardMemberUpdateManyWithoutUserNestedInput
+  userTaskActions?: Prisma.UserTaskActionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOwnedWorkspacesInput = {
@@ -540,6 +564,7 @@ export type UserUncheckedUpdateWithoutOwnedWorkspacesInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   boardMembers?: Prisma.BoardMemberUncheckedUpdateManyWithoutUserNestedInput
   cardMemberships?: Prisma.CardMemberUncheckedUpdateManyWithoutUserNestedInput
+  userTaskActions?: Prisma.UserTaskActionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutWorkspaceMembershipsInput = {
@@ -554,6 +579,7 @@ export type UserCreateWithoutWorkspaceMembershipsInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   boardMembers?: Prisma.BoardMemberCreateNestedManyWithoutUserInput
   cardMemberships?: Prisma.CardMemberCreateNestedManyWithoutUserInput
+  userTaskActions?: Prisma.UserTaskActionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutWorkspaceMembershipsInput = {
@@ -568,6 +594,7 @@ export type UserUncheckedCreateWithoutWorkspaceMembershipsInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   boardMembers?: Prisma.BoardMemberUncheckedCreateNestedManyWithoutUserInput
   cardMemberships?: Prisma.CardMemberUncheckedCreateNestedManyWithoutUserInput
+  userTaskActions?: Prisma.UserTaskActionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutWorkspaceMembershipsInput = {
@@ -598,6 +625,7 @@ export type UserUpdateWithoutWorkspaceMembershipsInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   boardMembers?: Prisma.BoardMemberUpdateManyWithoutUserNestedInput
   cardMemberships?: Prisma.CardMemberUpdateManyWithoutUserNestedInput
+  userTaskActions?: Prisma.UserTaskActionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutWorkspaceMembershipsInput = {
@@ -612,6 +640,7 @@ export type UserUncheckedUpdateWithoutWorkspaceMembershipsInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   boardMembers?: Prisma.BoardMemberUncheckedUpdateManyWithoutUserNestedInput
   cardMemberships?: Prisma.CardMemberUncheckedUpdateManyWithoutUserNestedInput
+  userTaskActions?: Prisma.UserTaskActionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutNotificationsInput = {
@@ -626,6 +655,7 @@ export type UserCreateWithoutNotificationsInput = {
   boards?: Prisma.BoardCreateNestedManyWithoutOwnerInput
   boardMembers?: Prisma.BoardMemberCreateNestedManyWithoutUserInput
   cardMemberships?: Prisma.CardMemberCreateNestedManyWithoutUserInput
+  userTaskActions?: Prisma.UserTaskActionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutNotificationsInput = {
@@ -640,6 +670,7 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   boards?: Prisma.BoardUncheckedCreateNestedManyWithoutOwnerInput
   boardMembers?: Prisma.BoardMemberUncheckedCreateNestedManyWithoutUserInput
   cardMemberships?: Prisma.CardMemberUncheckedCreateNestedManyWithoutUserInput
+  userTaskActions?: Prisma.UserTaskActionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -670,6 +701,7 @@ export type UserUpdateWithoutNotificationsInput = {
   boards?: Prisma.BoardUpdateManyWithoutOwnerNestedInput
   boardMembers?: Prisma.BoardMemberUpdateManyWithoutUserNestedInput
   cardMemberships?: Prisma.CardMemberUpdateManyWithoutUserNestedInput
+  userTaskActions?: Prisma.UserTaskActionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNotificationsInput = {
@@ -684,6 +716,7 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   boards?: Prisma.BoardUncheckedUpdateManyWithoutOwnerNestedInput
   boardMembers?: Prisma.BoardMemberUncheckedUpdateManyWithoutUserNestedInput
   cardMemberships?: Prisma.CardMemberUncheckedUpdateManyWithoutUserNestedInput
+  userTaskActions?: Prisma.UserTaskActionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutBoardsInput = {
@@ -698,6 +731,7 @@ export type UserCreateWithoutBoardsInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   boardMembers?: Prisma.BoardMemberCreateNestedManyWithoutUserInput
   cardMemberships?: Prisma.CardMemberCreateNestedManyWithoutUserInput
+  userTaskActions?: Prisma.UserTaskActionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutBoardsInput = {
@@ -712,6 +746,7 @@ export type UserUncheckedCreateWithoutBoardsInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   boardMembers?: Prisma.BoardMemberUncheckedCreateNestedManyWithoutUserInput
   cardMemberships?: Prisma.CardMemberUncheckedCreateNestedManyWithoutUserInput
+  userTaskActions?: Prisma.UserTaskActionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutBoardsInput = {
@@ -742,6 +777,7 @@ export type UserUpdateWithoutBoardsInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   boardMembers?: Prisma.BoardMemberUpdateManyWithoutUserNestedInput
   cardMemberships?: Prisma.CardMemberUpdateManyWithoutUserNestedInput
+  userTaskActions?: Prisma.UserTaskActionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBoardsInput = {
@@ -756,6 +792,7 @@ export type UserUncheckedUpdateWithoutBoardsInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   boardMembers?: Prisma.BoardMemberUncheckedUpdateManyWithoutUserNestedInput
   cardMemberships?: Prisma.CardMemberUncheckedUpdateManyWithoutUserNestedInput
+  userTaskActions?: Prisma.UserTaskActionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutBoardMembersInput = {
@@ -770,6 +807,7 @@ export type UserCreateWithoutBoardMembersInput = {
   boards?: Prisma.BoardCreateNestedManyWithoutOwnerInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   cardMemberships?: Prisma.CardMemberCreateNestedManyWithoutUserInput
+  userTaskActions?: Prisma.UserTaskActionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutBoardMembersInput = {
@@ -784,6 +822,7 @@ export type UserUncheckedCreateWithoutBoardMembersInput = {
   boards?: Prisma.BoardUncheckedCreateNestedManyWithoutOwnerInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   cardMemberships?: Prisma.CardMemberUncheckedCreateNestedManyWithoutUserInput
+  userTaskActions?: Prisma.UserTaskActionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutBoardMembersInput = {
@@ -814,6 +853,7 @@ export type UserUpdateWithoutBoardMembersInput = {
   boards?: Prisma.BoardUpdateManyWithoutOwnerNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   cardMemberships?: Prisma.CardMemberUpdateManyWithoutUserNestedInput
+  userTaskActions?: Prisma.UserTaskActionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBoardMembersInput = {
@@ -828,6 +868,7 @@ export type UserUncheckedUpdateWithoutBoardMembersInput = {
   boards?: Prisma.BoardUncheckedUpdateManyWithoutOwnerNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   cardMemberships?: Prisma.CardMemberUncheckedUpdateManyWithoutUserNestedInput
+  userTaskActions?: Prisma.UserTaskActionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCardMembershipsInput = {
@@ -842,6 +883,7 @@ export type UserCreateWithoutCardMembershipsInput = {
   boards?: Prisma.BoardCreateNestedManyWithoutOwnerInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   boardMembers?: Prisma.BoardMemberCreateNestedManyWithoutUserInput
+  userTaskActions?: Prisma.UserTaskActionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCardMembershipsInput = {
@@ -856,6 +898,7 @@ export type UserUncheckedCreateWithoutCardMembershipsInput = {
   boards?: Prisma.BoardUncheckedCreateNestedManyWithoutOwnerInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   boardMembers?: Prisma.BoardMemberUncheckedCreateNestedManyWithoutUserInput
+  userTaskActions?: Prisma.UserTaskActionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCardMembershipsInput = {
@@ -886,6 +929,7 @@ export type UserUpdateWithoutCardMembershipsInput = {
   boards?: Prisma.BoardUpdateManyWithoutOwnerNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   boardMembers?: Prisma.BoardMemberUpdateManyWithoutUserNestedInput
+  userTaskActions?: Prisma.UserTaskActionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCardMembershipsInput = {
@@ -900,6 +944,83 @@ export type UserUncheckedUpdateWithoutCardMembershipsInput = {
   boards?: Prisma.BoardUncheckedUpdateManyWithoutOwnerNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   boardMembers?: Prisma.BoardMemberUncheckedUpdateManyWithoutUserNestedInput
+  userTaskActions?: Prisma.UserTaskActionUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutUserTaskActionsInput = {
+  id?: string
+  name?: string | null
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  ownedWorkspaces?: Prisma.WorkspaceCreateNestedManyWithoutOwnerInput
+  workspaceMemberships?: Prisma.WorkspaceMemberCreateNestedManyWithoutUserInput
+  boards?: Prisma.BoardCreateNestedManyWithoutOwnerInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  boardMembers?: Prisma.BoardMemberCreateNestedManyWithoutUserInput
+  cardMemberships?: Prisma.CardMemberCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutUserTaskActionsInput = {
+  id?: string
+  name?: string | null
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  ownedWorkspaces?: Prisma.WorkspaceUncheckedCreateNestedManyWithoutOwnerInput
+  workspaceMemberships?: Prisma.WorkspaceMemberUncheckedCreateNestedManyWithoutUserInput
+  boards?: Prisma.BoardUncheckedCreateNestedManyWithoutOwnerInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  boardMembers?: Prisma.BoardMemberUncheckedCreateNestedManyWithoutUserInput
+  cardMemberships?: Prisma.CardMemberUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutUserTaskActionsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutUserTaskActionsInput, Prisma.UserUncheckedCreateWithoutUserTaskActionsInput>
+}
+
+export type UserUpsertWithoutUserTaskActionsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutUserTaskActionsInput, Prisma.UserUncheckedUpdateWithoutUserTaskActionsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutUserTaskActionsInput, Prisma.UserUncheckedCreateWithoutUserTaskActionsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutUserTaskActionsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutUserTaskActionsInput, Prisma.UserUncheckedUpdateWithoutUserTaskActionsInput>
+}
+
+export type UserUpdateWithoutUserTaskActionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ownedWorkspaces?: Prisma.WorkspaceUpdateManyWithoutOwnerNestedInput
+  workspaceMemberships?: Prisma.WorkspaceMemberUpdateManyWithoutUserNestedInput
+  boards?: Prisma.BoardUpdateManyWithoutOwnerNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  boardMembers?: Prisma.BoardMemberUpdateManyWithoutUserNestedInput
+  cardMemberships?: Prisma.CardMemberUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutUserTaskActionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ownedWorkspaces?: Prisma.WorkspaceUncheckedUpdateManyWithoutOwnerNestedInput
+  workspaceMemberships?: Prisma.WorkspaceMemberUncheckedUpdateManyWithoutUserNestedInput
+  boards?: Prisma.BoardUncheckedUpdateManyWithoutOwnerNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  boardMembers?: Prisma.BoardMemberUncheckedUpdateManyWithoutUserNestedInput
+  cardMemberships?: Prisma.CardMemberUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -914,6 +1035,7 @@ export type UserCountOutputType = {
   notifications: number
   boardMembers: number
   cardMemberships: number
+  userTaskActions: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -923,6 +1045,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   notifications?: boolean | UserCountOutputTypeCountNotificationsArgs
   boardMembers?: boolean | UserCountOutputTypeCountBoardMembersArgs
   cardMemberships?: boolean | UserCountOutputTypeCountCardMembershipsArgs
+  userTaskActions?: boolean | UserCountOutputTypeCountUserTaskActionsArgs
 }
 
 /**
@@ -977,6 +1100,13 @@ export type UserCountOutputTypeCountCardMembershipsArgs<ExtArgs extends runtime.
   where?: Prisma.CardMemberWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountUserTaskActionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserTaskActionWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -991,6 +1121,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   notifications?: boolean | Prisma.User$notificationsArgs<ExtArgs>
   boardMembers?: boolean | Prisma.User$boardMembersArgs<ExtArgs>
   cardMemberships?: boolean | Prisma.User$cardMembershipsArgs<ExtArgs>
+  userTaskActions?: boolean | Prisma.User$userTaskActionsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1029,6 +1160,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   notifications?: boolean | Prisma.User$notificationsArgs<ExtArgs>
   boardMembers?: boolean | Prisma.User$boardMembersArgs<ExtArgs>
   cardMemberships?: boolean | Prisma.User$cardMembershipsArgs<ExtArgs>
+  userTaskActions?: boolean | Prisma.User$userTaskActionsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1043,6 +1175,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     notifications: Prisma.$NotificationPayload<ExtArgs>[]
     boardMembers: Prisma.$BoardMemberPayload<ExtArgs>[]
     cardMemberships: Prisma.$CardMemberPayload<ExtArgs>[]
+    userTaskActions: Prisma.$UserTaskActionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1451,6 +1584,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   notifications<T extends Prisma.User$notificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   boardMembers<T extends Prisma.User$boardMembersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$boardMembersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoardMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   cardMemberships<T extends Prisma.User$cardMembershipsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$cardMembershipsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CardMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  userTaskActions<T extends Prisma.User$userTaskActionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$userTaskActionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserTaskActionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2018,6 +2152,30 @@ export type User$cardMembershipsArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   distinct?: Prisma.CardMemberScalarFieldEnum | Prisma.CardMemberScalarFieldEnum[]
+}
+
+/**
+ * User.userTaskActions
+ */
+export type User$userTaskActionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserTaskAction
+   */
+  select?: Prisma.UserTaskActionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserTaskAction
+   */
+  omit?: Prisma.UserTaskActionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserTaskActionInclude<ExtArgs> | null
+  where?: Prisma.UserTaskActionWhereInput
+  orderBy?: Prisma.UserTaskActionOrderByWithRelationInput | Prisma.UserTaskActionOrderByWithRelationInput[]
+  cursor?: Prisma.UserTaskActionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserTaskActionScalarFieldEnum | Prisma.UserTaskActionScalarFieldEnum[]
 }
 
 /**

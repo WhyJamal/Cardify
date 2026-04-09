@@ -19,9 +19,32 @@ model User {
   notifications        Notification[]
   boardMembers         BoardMember[]
   cardMemberships      CardMember[]
+  userTaskActions UserTaskAction[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
+}
+
+
+model UserTaskAction {
+  id        String   @id @default(cuid())
+  userId    String
+  cardId    String
+  status    UserTaskStatus @default(PENDING)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  card Card @relation(fields: [cardId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, cardId])
+  @@index([userId, status])
+}
+
+enum UserTaskStatus {
+  PENDING
+  COMPLETED
+  DISMISSED
 }
 
 enum Visibility {
@@ -239,6 +262,8 @@ model Card {
   comments        CardTimeline[]
   members         CardMember[]
   attachments     CardAttachment[]
+
+  userTaskActions UserTaskAction[]
 
   @@index([columnId, position])
 }

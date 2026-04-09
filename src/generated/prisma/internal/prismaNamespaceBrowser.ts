@@ -65,7 +65,8 @@ export const ModelName = {
   CardLink: 'CardLink',
   CardTimeline: 'CardTimeline',
   CardMember: 'CardMember',
-  CardAttachment: 'CardAttachment'
+  CardAttachment: 'CardAttachment',
+  UserTaskAction: 'UserTaskAction'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -287,6 +288,18 @@ export const CardAttachmentScalarFieldEnum = {
 } as const
 
 export type CardAttachmentScalarFieldEnum = (typeof CardAttachmentScalarFieldEnum)[keyof typeof CardAttachmentScalarFieldEnum]
+
+
+export const UserTaskActionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  cardId: 'cardId',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UserTaskActionScalarFieldEnum = (typeof UserTaskActionScalarFieldEnum)[keyof typeof UserTaskActionScalarFieldEnum]
 
 
 export const SortOrder = {

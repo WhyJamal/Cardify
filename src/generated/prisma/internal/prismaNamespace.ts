@@ -398,7 +398,8 @@ export const ModelName = {
   CardLink: 'CardLink',
   CardTimeline: 'CardTimeline',
   CardMember: 'CardMember',
-  CardAttachment: 'CardAttachment'
+  CardAttachment: 'CardAttachment',
+  UserTaskAction: 'UserTaskAction'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -414,7 +415,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "workspace" | "workspaceType" | "workspaceMember" | "notification" | "board" | "boardMember" | "boardLabel" | "column" | "card" | "cardBoardLabel" | "cardLink" | "cardTimeline" | "cardMember" | "cardAttachment"
+    modelProps: "user" | "workspace" | "workspaceType" | "workspaceMember" | "notification" | "board" | "boardMember" | "boardLabel" | "column" | "card" | "cardBoardLabel" | "cardLink" | "cardTimeline" | "cardMember" | "cardAttachment" | "userTaskAction"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1528,6 +1529,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    UserTaskAction: {
+      payload: Prisma.$UserTaskActionPayload<ExtArgs>
+      fields: Prisma.UserTaskActionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.UserTaskActionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserTaskActionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.UserTaskActionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserTaskActionPayload>
+        }
+        findFirst: {
+          args: Prisma.UserTaskActionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserTaskActionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.UserTaskActionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserTaskActionPayload>
+        }
+        findMany: {
+          args: Prisma.UserTaskActionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserTaskActionPayload>[]
+        }
+        create: {
+          args: Prisma.UserTaskActionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserTaskActionPayload>
+        }
+        createMany: {
+          args: Prisma.UserTaskActionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.UserTaskActionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserTaskActionPayload>[]
+        }
+        delete: {
+          args: Prisma.UserTaskActionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserTaskActionPayload>
+        }
+        update: {
+          args: Prisma.UserTaskActionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserTaskActionPayload>
+        }
+        deleteMany: {
+          args: Prisma.UserTaskActionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.UserTaskActionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.UserTaskActionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserTaskActionPayload>[]
+        }
+        upsert: {
+          args: Prisma.UserTaskActionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserTaskActionPayload>
+        }
+        aggregate: {
+          args: Prisma.UserTaskActionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateUserTaskAction>
+        }
+        groupBy: {
+          args: Prisma.UserTaskActionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserTaskActionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.UserTaskActionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserTaskActionCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1772,6 +1847,18 @@ export const CardAttachmentScalarFieldEnum = {
 export type CardAttachmentScalarFieldEnum = (typeof CardAttachmentScalarFieldEnum)[keyof typeof CardAttachmentScalarFieldEnum]
 
 
+export const UserTaskActionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  cardId: 'cardId',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UserTaskActionScalarFieldEnum = (typeof UserTaskActionScalarFieldEnum)[keyof typeof UserTaskActionScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -1875,6 +1962,13 @@ export type EnumSizeOptionFieldRefInput<$PrismaModel> = FieldRefInputType<$Prism
  * Reference to a field of type 'CardTimelineType'
  */
 export type EnumCardTimelineTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CardTimelineType'>
+    
+
+
+/**
+ * Reference to a field of type 'UserTaskStatus'
+ */
+export type EnumUserTaskStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserTaskStatus'>
     
 
 
@@ -1994,6 +2088,7 @@ export type GlobalOmitConfig = {
   cardTimeline?: Prisma.CardTimelineOmit
   cardMember?: Prisma.CardMemberOmit
   cardAttachment?: Prisma.CardAttachmentOmit
+  userTaskAction?: Prisma.UserTaskActionOmit
 }
 
 /* Types for Logging */

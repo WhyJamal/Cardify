@@ -60,8 +60,8 @@ export default function WorkspaceSidebar({ workspace, collapsed }: WorkspaceSide
       </button>
 
       {workspaceOpen && (
-        <nav className="mt-3 pl-2 text-sm">
-          <ul className="space-y-1">
+        <nav className="mt-3 pl-2 text-sm mb-2">
+          <ul className="space-y-1 overflow-x-hidden">
             <WorkspaceItem
               href={PAGES.WORKSPACE_HOME(workspace.id)}
               label={!collapsed ? "Доски" : ""}

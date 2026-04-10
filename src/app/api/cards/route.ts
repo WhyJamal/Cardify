@@ -55,6 +55,7 @@ export async function POST(req: NextRequest) {
       title,
       columnId,
       position,
+      ownerId: dbUser.id,
     },
     include: {
       labels: true,

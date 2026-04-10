@@ -31,7 +31,20 @@ export async function GET(req: NextRequest) {
   if (type === "attention") {
     const cards = await prisma.card.findMany({
       where: {
-        members: { some: { userId: dbUser.id } },
+        OR: [
+          {
+            members: {
+              some: { userId: dbUser.id },
+            },
+          },
+
+          {
+            AND: [
+              { ownerId: dbUser.id }, 
+              { dueDate: { not: null } },
+            ],
+          },
+        ],
         userTaskActions: {
           none: { status: { in: ["COMPLETED", "DISMISSED"] } },
         },
@@ -50,7 +63,7 @@ export async function GET(req: NextRequest) {
           },
         },
         attachments: true,
-        members: true,
+        members: { include: { user: true } },
         comments: true,
       },
       orderBy: { dueDate: "asc" },
@@ -82,7 +95,7 @@ export async function GET(req: NextRequest) {
           },
         },
         attachments: true,
-        members: true,
+        members: { include: { user: true } },
         comments: { include: { user: true } },
       },
       orderBy: { updatedAt: "desc" },

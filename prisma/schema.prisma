@@ -22,6 +22,8 @@ model User {
   userTaskActions      UserTaskAction[]
   cardTimelines        CardTimeline[]
 
+  ownedCards           Card[] @relation("CardOwner")
+
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
 }
@@ -250,21 +252,24 @@ model Card {
   dueDate          DateTime?
   isCompleted      Boolean          @default(false)
 
-  isImage         Boolean           @default(false)
-  background      String?
-  size            SizeOption        @default(WIDE)
-  textColor       String?
+  isImage          Boolean           @default(false)
+  background       String?
+  size             SizeOption        @default(WIDE)
+  textColor        String?
 
-  isArchive       Boolean           @default(false)
+  isArchive        Boolean           @default(false)
   
-  column          Column            @relation(fields: [columnId], references: [id], onDelete: Cascade)
-  labels          CardBoardLabel[]
-  links           CardLink[]
-  comments        CardTimeline[]
-  members         CardMember[]
-  attachments     CardAttachment[]
+  column           Column            @relation(fields: [columnId], references: [id], onDelete: Cascade)
+  labels           CardBoardLabel[]
+  links            CardLink[]
+  comments         CardTimeline[]
+  members          CardMember[]
+  attachments      CardAttachment[]
 
-  userTaskActions UserTaskAction[]
+  ownerId          String?
+  owner            User?    @relation("CardOwner", fields: [ownerId], references: [id])
+
+  userTaskActions  UserTaskAction[]
 
   @@index([columnId, position])
 }

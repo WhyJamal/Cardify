@@ -198,6 +198,7 @@ export type UserWhereInput = {
   cardMemberships?: Prisma.CardMemberListRelationFilter
   userTaskActions?: Prisma.UserTaskActionListRelationFilter
   cardTimelines?: Prisma.CardTimelineListRelationFilter
+  ownedCards?: Prisma.CardListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -215,6 +216,7 @@ export type UserOrderByWithRelationInput = {
   cardMemberships?: Prisma.CardMemberOrderByRelationAggregateInput
   userTaskActions?: Prisma.UserTaskActionOrderByRelationAggregateInput
   cardTimelines?: Prisma.CardTimelineOrderByRelationAggregateInput
+  ownedCards?: Prisma.CardOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -235,6 +237,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   cardMemberships?: Prisma.CardMemberListRelationFilter
   userTaskActions?: Prisma.UserTaskActionListRelationFilter
   cardTimelines?: Prisma.CardTimelineListRelationFilter
+  ownedCards?: Prisma.CardListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -276,6 +279,7 @@ export type UserCreateInput = {
   cardMemberships?: Prisma.CardMemberCreateNestedManyWithoutUserInput
   userTaskActions?: Prisma.UserTaskActionCreateNestedManyWithoutUserInput
   cardTimelines?: Prisma.CardTimelineCreateNestedManyWithoutUserInput
+  ownedCards?: Prisma.CardCreateNestedManyWithoutOwnerInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -293,6 +297,7 @@ export type UserUncheckedCreateInput = {
   cardMemberships?: Prisma.CardMemberUncheckedCreateNestedManyWithoutUserInput
   userTaskActions?: Prisma.UserTaskActionUncheckedCreateNestedManyWithoutUserInput
   cardTimelines?: Prisma.CardTimelineUncheckedCreateNestedManyWithoutUserInput
+  ownedCards?: Prisma.CardUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type UserUpdateInput = {
@@ -310,6 +315,7 @@ export type UserUpdateInput = {
   cardMemberships?: Prisma.CardMemberUpdateManyWithoutUserNestedInput
   userTaskActions?: Prisma.UserTaskActionUpdateManyWithoutUserNestedInput
   cardTimelines?: Prisma.CardTimelineUpdateManyWithoutUserNestedInput
+  ownedCards?: Prisma.CardUpdateManyWithoutOwnerNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -327,6 +333,7 @@ export type UserUncheckedUpdateInput = {
   cardMemberships?: Prisma.CardMemberUncheckedUpdateManyWithoutUserNestedInput
   userTaskActions?: Prisma.UserTaskActionUncheckedUpdateManyWithoutUserNestedInput
   cardTimelines?: Prisma.CardTimelineUncheckedUpdateManyWithoutUserNestedInput
+  ownedCards?: Prisma.CardUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -489,6 +496,22 @@ export type UserUpdateOneRequiredWithoutBoardMembersNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutBoardMembersInput, Prisma.UserUpdateWithoutBoardMembersInput>, Prisma.UserUncheckedUpdateWithoutBoardMembersInput>
 }
 
+export type UserCreateNestedOneWithoutOwnedCardsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutOwnedCardsInput, Prisma.UserUncheckedCreateWithoutOwnedCardsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutOwnedCardsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutOwnedCardsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutOwnedCardsInput, Prisma.UserUncheckedCreateWithoutOwnedCardsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutOwnedCardsInput
+  upsert?: Prisma.UserUpsertWithoutOwnedCardsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutOwnedCardsInput, Prisma.UserUpdateWithoutOwnedCardsInput>, Prisma.UserUncheckedUpdateWithoutOwnedCardsInput>
+}
+
 export type UserCreateNestedOneWithoutCardTimelinesInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutCardTimelinesInput, Prisma.UserUncheckedCreateWithoutCardTimelinesInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutCardTimelinesInput
@@ -533,6 +556,7 @@ export type UserCreateWithoutUserTaskActionsInput = {
   boardMembers?: Prisma.BoardMemberCreateNestedManyWithoutUserInput
   cardMemberships?: Prisma.CardMemberCreateNestedManyWithoutUserInput
   cardTimelines?: Prisma.CardTimelineCreateNestedManyWithoutUserInput
+  ownedCards?: Prisma.CardCreateNestedManyWithoutOwnerInput
 }
 
 export type UserUncheckedCreateWithoutUserTaskActionsInput = {
@@ -549,6 +573,7 @@ export type UserUncheckedCreateWithoutUserTaskActionsInput = {
   boardMembers?: Prisma.BoardMemberUncheckedCreateNestedManyWithoutUserInput
   cardMemberships?: Prisma.CardMemberUncheckedCreateNestedManyWithoutUserInput
   cardTimelines?: Prisma.CardTimelineUncheckedCreateNestedManyWithoutUserInput
+  ownedCards?: Prisma.CardUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type UserCreateOrConnectWithoutUserTaskActionsInput = {
@@ -581,6 +606,7 @@ export type UserUpdateWithoutUserTaskActionsInput = {
   boardMembers?: Prisma.BoardMemberUpdateManyWithoutUserNestedInput
   cardMemberships?: Prisma.CardMemberUpdateManyWithoutUserNestedInput
   cardTimelines?: Prisma.CardTimelineUpdateManyWithoutUserNestedInput
+  ownedCards?: Prisma.CardUpdateManyWithoutOwnerNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUserTaskActionsInput = {
@@ -597,6 +623,7 @@ export type UserUncheckedUpdateWithoutUserTaskActionsInput = {
   boardMembers?: Prisma.BoardMemberUncheckedUpdateManyWithoutUserNestedInput
   cardMemberships?: Prisma.CardMemberUncheckedUpdateManyWithoutUserNestedInput
   cardTimelines?: Prisma.CardTimelineUncheckedUpdateManyWithoutUserNestedInput
+  ownedCards?: Prisma.CardUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type UserCreateWithoutOwnedWorkspacesInput = {
@@ -613,6 +640,7 @@ export type UserCreateWithoutOwnedWorkspacesInput = {
   cardMemberships?: Prisma.CardMemberCreateNestedManyWithoutUserInput
   userTaskActions?: Prisma.UserTaskActionCreateNestedManyWithoutUserInput
   cardTimelines?: Prisma.CardTimelineCreateNestedManyWithoutUserInput
+  ownedCards?: Prisma.CardCreateNestedManyWithoutOwnerInput
 }
 
 export type UserUncheckedCreateWithoutOwnedWorkspacesInput = {
@@ -629,6 +657,7 @@ export type UserUncheckedCreateWithoutOwnedWorkspacesInput = {
   cardMemberships?: Prisma.CardMemberUncheckedCreateNestedManyWithoutUserInput
   userTaskActions?: Prisma.UserTaskActionUncheckedCreateNestedManyWithoutUserInput
   cardTimelines?: Prisma.CardTimelineUncheckedCreateNestedManyWithoutUserInput
+  ownedCards?: Prisma.CardUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type UserCreateOrConnectWithoutOwnedWorkspacesInput = {
@@ -661,6 +690,7 @@ export type UserUpdateWithoutOwnedWorkspacesInput = {
   cardMemberships?: Prisma.CardMemberUpdateManyWithoutUserNestedInput
   userTaskActions?: Prisma.UserTaskActionUpdateManyWithoutUserNestedInput
   cardTimelines?: Prisma.CardTimelineUpdateManyWithoutUserNestedInput
+  ownedCards?: Prisma.CardUpdateManyWithoutOwnerNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOwnedWorkspacesInput = {
@@ -677,6 +707,7 @@ export type UserUncheckedUpdateWithoutOwnedWorkspacesInput = {
   cardMemberships?: Prisma.CardMemberUncheckedUpdateManyWithoutUserNestedInput
   userTaskActions?: Prisma.UserTaskActionUncheckedUpdateManyWithoutUserNestedInput
   cardTimelines?: Prisma.CardTimelineUncheckedUpdateManyWithoutUserNestedInput
+  ownedCards?: Prisma.CardUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type UserCreateWithoutWorkspaceMembershipsInput = {
@@ -693,6 +724,7 @@ export type UserCreateWithoutWorkspaceMembershipsInput = {
   cardMemberships?: Prisma.CardMemberCreateNestedManyWithoutUserInput
   userTaskActions?: Prisma.UserTaskActionCreateNestedManyWithoutUserInput
   cardTimelines?: Prisma.CardTimelineCreateNestedManyWithoutUserInput
+  ownedCards?: Prisma.CardCreateNestedManyWithoutOwnerInput
 }
 
 export type UserUncheckedCreateWithoutWorkspaceMembershipsInput = {
@@ -709,6 +741,7 @@ export type UserUncheckedCreateWithoutWorkspaceMembershipsInput = {
   cardMemberships?: Prisma.CardMemberUncheckedCreateNestedManyWithoutUserInput
   userTaskActions?: Prisma.UserTaskActionUncheckedCreateNestedManyWithoutUserInput
   cardTimelines?: Prisma.CardTimelineUncheckedCreateNestedManyWithoutUserInput
+  ownedCards?: Prisma.CardUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type UserCreateOrConnectWithoutWorkspaceMembershipsInput = {
@@ -741,6 +774,7 @@ export type UserUpdateWithoutWorkspaceMembershipsInput = {
   cardMemberships?: Prisma.CardMemberUpdateManyWithoutUserNestedInput
   userTaskActions?: Prisma.UserTaskActionUpdateManyWithoutUserNestedInput
   cardTimelines?: Prisma.CardTimelineUpdateManyWithoutUserNestedInput
+  ownedCards?: Prisma.CardUpdateManyWithoutOwnerNestedInput
 }
 
 export type UserUncheckedUpdateWithoutWorkspaceMembershipsInput = {
@@ -757,6 +791,7 @@ export type UserUncheckedUpdateWithoutWorkspaceMembershipsInput = {
   cardMemberships?: Prisma.CardMemberUncheckedUpdateManyWithoutUserNestedInput
   userTaskActions?: Prisma.UserTaskActionUncheckedUpdateManyWithoutUserNestedInput
   cardTimelines?: Prisma.CardTimelineUncheckedUpdateManyWithoutUserNestedInput
+  ownedCards?: Prisma.CardUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type UserCreateWithoutNotificationsInput = {
@@ -773,6 +808,7 @@ export type UserCreateWithoutNotificationsInput = {
   cardMemberships?: Prisma.CardMemberCreateNestedManyWithoutUserInput
   userTaskActions?: Prisma.UserTaskActionCreateNestedManyWithoutUserInput
   cardTimelines?: Prisma.CardTimelineCreateNestedManyWithoutUserInput
+  ownedCards?: Prisma.CardCreateNestedManyWithoutOwnerInput
 }
 
 export type UserUncheckedCreateWithoutNotificationsInput = {
@@ -789,6 +825,7 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   cardMemberships?: Prisma.CardMemberUncheckedCreateNestedManyWithoutUserInput
   userTaskActions?: Prisma.UserTaskActionUncheckedCreateNestedManyWithoutUserInput
   cardTimelines?: Prisma.CardTimelineUncheckedCreateNestedManyWithoutUserInput
+  ownedCards?: Prisma.CardUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -821,6 +858,7 @@ export type UserUpdateWithoutNotificationsInput = {
   cardMemberships?: Prisma.CardMemberUpdateManyWithoutUserNestedInput
   userTaskActions?: Prisma.UserTaskActionUpdateManyWithoutUserNestedInput
   cardTimelines?: Prisma.CardTimelineUpdateManyWithoutUserNestedInput
+  ownedCards?: Prisma.CardUpdateManyWithoutOwnerNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNotificationsInput = {
@@ -837,6 +875,7 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   cardMemberships?: Prisma.CardMemberUncheckedUpdateManyWithoutUserNestedInput
   userTaskActions?: Prisma.UserTaskActionUncheckedUpdateManyWithoutUserNestedInput
   cardTimelines?: Prisma.CardTimelineUncheckedUpdateManyWithoutUserNestedInput
+  ownedCards?: Prisma.CardUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type UserCreateWithoutBoardsInput = {
@@ -853,6 +892,7 @@ export type UserCreateWithoutBoardsInput = {
   cardMemberships?: Prisma.CardMemberCreateNestedManyWithoutUserInput
   userTaskActions?: Prisma.UserTaskActionCreateNestedManyWithoutUserInput
   cardTimelines?: Prisma.CardTimelineCreateNestedManyWithoutUserInput
+  ownedCards?: Prisma.CardCreateNestedManyWithoutOwnerInput
 }
 
 export type UserUncheckedCreateWithoutBoardsInput = {
@@ -869,6 +909,7 @@ export type UserUncheckedCreateWithoutBoardsInput = {
   cardMemberships?: Prisma.CardMemberUncheckedCreateNestedManyWithoutUserInput
   userTaskActions?: Prisma.UserTaskActionUncheckedCreateNestedManyWithoutUserInput
   cardTimelines?: Prisma.CardTimelineUncheckedCreateNestedManyWithoutUserInput
+  ownedCards?: Prisma.CardUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type UserCreateOrConnectWithoutBoardsInput = {
@@ -901,6 +942,7 @@ export type UserUpdateWithoutBoardsInput = {
   cardMemberships?: Prisma.CardMemberUpdateManyWithoutUserNestedInput
   userTaskActions?: Prisma.UserTaskActionUpdateManyWithoutUserNestedInput
   cardTimelines?: Prisma.CardTimelineUpdateManyWithoutUserNestedInput
+  ownedCards?: Prisma.CardUpdateManyWithoutOwnerNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBoardsInput = {
@@ -917,6 +959,7 @@ export type UserUncheckedUpdateWithoutBoardsInput = {
   cardMemberships?: Prisma.CardMemberUncheckedUpdateManyWithoutUserNestedInput
   userTaskActions?: Prisma.UserTaskActionUncheckedUpdateManyWithoutUserNestedInput
   cardTimelines?: Prisma.CardTimelineUncheckedUpdateManyWithoutUserNestedInput
+  ownedCards?: Prisma.CardUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type UserCreateWithoutBoardMembersInput = {
@@ -933,6 +976,7 @@ export type UserCreateWithoutBoardMembersInput = {
   cardMemberships?: Prisma.CardMemberCreateNestedManyWithoutUserInput
   userTaskActions?: Prisma.UserTaskActionCreateNestedManyWithoutUserInput
   cardTimelines?: Prisma.CardTimelineCreateNestedManyWithoutUserInput
+  ownedCards?: Prisma.CardCreateNestedManyWithoutOwnerInput
 }
 
 export type UserUncheckedCreateWithoutBoardMembersInput = {
@@ -949,6 +993,7 @@ export type UserUncheckedCreateWithoutBoardMembersInput = {
   cardMemberships?: Prisma.CardMemberUncheckedCreateNestedManyWithoutUserInput
   userTaskActions?: Prisma.UserTaskActionUncheckedCreateNestedManyWithoutUserInput
   cardTimelines?: Prisma.CardTimelineUncheckedCreateNestedManyWithoutUserInput
+  ownedCards?: Prisma.CardUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type UserCreateOrConnectWithoutBoardMembersInput = {
@@ -981,6 +1026,7 @@ export type UserUpdateWithoutBoardMembersInput = {
   cardMemberships?: Prisma.CardMemberUpdateManyWithoutUserNestedInput
   userTaskActions?: Prisma.UserTaskActionUpdateManyWithoutUserNestedInput
   cardTimelines?: Prisma.CardTimelineUpdateManyWithoutUserNestedInput
+  ownedCards?: Prisma.CardUpdateManyWithoutOwnerNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBoardMembersInput = {
@@ -994,6 +1040,91 @@ export type UserUncheckedUpdateWithoutBoardMembersInput = {
   workspaceMemberships?: Prisma.WorkspaceMemberUncheckedUpdateManyWithoutUserNestedInput
   boards?: Prisma.BoardUncheckedUpdateManyWithoutOwnerNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  cardMemberships?: Prisma.CardMemberUncheckedUpdateManyWithoutUserNestedInput
+  userTaskActions?: Prisma.UserTaskActionUncheckedUpdateManyWithoutUserNestedInput
+  cardTimelines?: Prisma.CardTimelineUncheckedUpdateManyWithoutUserNestedInput
+  ownedCards?: Prisma.CardUncheckedUpdateManyWithoutOwnerNestedInput
+}
+
+export type UserCreateWithoutOwnedCardsInput = {
+  id?: string
+  name?: string | null
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  ownedWorkspaces?: Prisma.WorkspaceCreateNestedManyWithoutOwnerInput
+  workspaceMemberships?: Prisma.WorkspaceMemberCreateNestedManyWithoutUserInput
+  boards?: Prisma.BoardCreateNestedManyWithoutOwnerInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  boardMembers?: Prisma.BoardMemberCreateNestedManyWithoutUserInput
+  cardMemberships?: Prisma.CardMemberCreateNestedManyWithoutUserInput
+  userTaskActions?: Prisma.UserTaskActionCreateNestedManyWithoutUserInput
+  cardTimelines?: Prisma.CardTimelineCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutOwnedCardsInput = {
+  id?: string
+  name?: string | null
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  ownedWorkspaces?: Prisma.WorkspaceUncheckedCreateNestedManyWithoutOwnerInput
+  workspaceMemberships?: Prisma.WorkspaceMemberUncheckedCreateNestedManyWithoutUserInput
+  boards?: Prisma.BoardUncheckedCreateNestedManyWithoutOwnerInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  boardMembers?: Prisma.BoardMemberUncheckedCreateNestedManyWithoutUserInput
+  cardMemberships?: Prisma.CardMemberUncheckedCreateNestedManyWithoutUserInput
+  userTaskActions?: Prisma.UserTaskActionUncheckedCreateNestedManyWithoutUserInput
+  cardTimelines?: Prisma.CardTimelineUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutOwnedCardsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutOwnedCardsInput, Prisma.UserUncheckedCreateWithoutOwnedCardsInput>
+}
+
+export type UserUpsertWithoutOwnedCardsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutOwnedCardsInput, Prisma.UserUncheckedUpdateWithoutOwnedCardsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutOwnedCardsInput, Prisma.UserUncheckedCreateWithoutOwnedCardsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutOwnedCardsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutOwnedCardsInput, Prisma.UserUncheckedUpdateWithoutOwnedCardsInput>
+}
+
+export type UserUpdateWithoutOwnedCardsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ownedWorkspaces?: Prisma.WorkspaceUpdateManyWithoutOwnerNestedInput
+  workspaceMemberships?: Prisma.WorkspaceMemberUpdateManyWithoutUserNestedInput
+  boards?: Prisma.BoardUpdateManyWithoutOwnerNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  boardMembers?: Prisma.BoardMemberUpdateManyWithoutUserNestedInput
+  cardMemberships?: Prisma.CardMemberUpdateManyWithoutUserNestedInput
+  userTaskActions?: Prisma.UserTaskActionUpdateManyWithoutUserNestedInput
+  cardTimelines?: Prisma.CardTimelineUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutOwnedCardsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ownedWorkspaces?: Prisma.WorkspaceUncheckedUpdateManyWithoutOwnerNestedInput
+  workspaceMemberships?: Prisma.WorkspaceMemberUncheckedUpdateManyWithoutUserNestedInput
+  boards?: Prisma.BoardUncheckedUpdateManyWithoutOwnerNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  boardMembers?: Prisma.BoardMemberUncheckedUpdateManyWithoutUserNestedInput
   cardMemberships?: Prisma.CardMemberUncheckedUpdateManyWithoutUserNestedInput
   userTaskActions?: Prisma.UserTaskActionUncheckedUpdateManyWithoutUserNestedInput
   cardTimelines?: Prisma.CardTimelineUncheckedUpdateManyWithoutUserNestedInput
@@ -1013,6 +1144,7 @@ export type UserCreateWithoutCardTimelinesInput = {
   boardMembers?: Prisma.BoardMemberCreateNestedManyWithoutUserInput
   cardMemberships?: Prisma.CardMemberCreateNestedManyWithoutUserInput
   userTaskActions?: Prisma.UserTaskActionCreateNestedManyWithoutUserInput
+  ownedCards?: Prisma.CardCreateNestedManyWithoutOwnerInput
 }
 
 export type UserUncheckedCreateWithoutCardTimelinesInput = {
@@ -1029,6 +1161,7 @@ export type UserUncheckedCreateWithoutCardTimelinesInput = {
   boardMembers?: Prisma.BoardMemberUncheckedCreateNestedManyWithoutUserInput
   cardMemberships?: Prisma.CardMemberUncheckedCreateNestedManyWithoutUserInput
   userTaskActions?: Prisma.UserTaskActionUncheckedCreateNestedManyWithoutUserInput
+  ownedCards?: Prisma.CardUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type UserCreateOrConnectWithoutCardTimelinesInput = {
@@ -1061,6 +1194,7 @@ export type UserUpdateWithoutCardTimelinesInput = {
   boardMembers?: Prisma.BoardMemberUpdateManyWithoutUserNestedInput
   cardMemberships?: Prisma.CardMemberUpdateManyWithoutUserNestedInput
   userTaskActions?: Prisma.UserTaskActionUpdateManyWithoutUserNestedInput
+  ownedCards?: Prisma.CardUpdateManyWithoutOwnerNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCardTimelinesInput = {
@@ -1077,6 +1211,7 @@ export type UserUncheckedUpdateWithoutCardTimelinesInput = {
   boardMembers?: Prisma.BoardMemberUncheckedUpdateManyWithoutUserNestedInput
   cardMemberships?: Prisma.CardMemberUncheckedUpdateManyWithoutUserNestedInput
   userTaskActions?: Prisma.UserTaskActionUncheckedUpdateManyWithoutUserNestedInput
+  ownedCards?: Prisma.CardUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type UserCreateWithoutCardMembershipsInput = {
@@ -1093,6 +1228,7 @@ export type UserCreateWithoutCardMembershipsInput = {
   boardMembers?: Prisma.BoardMemberCreateNestedManyWithoutUserInput
   userTaskActions?: Prisma.UserTaskActionCreateNestedManyWithoutUserInput
   cardTimelines?: Prisma.CardTimelineCreateNestedManyWithoutUserInput
+  ownedCards?: Prisma.CardCreateNestedManyWithoutOwnerInput
 }
 
 export type UserUncheckedCreateWithoutCardMembershipsInput = {
@@ -1109,6 +1245,7 @@ export type UserUncheckedCreateWithoutCardMembershipsInput = {
   boardMembers?: Prisma.BoardMemberUncheckedCreateNestedManyWithoutUserInput
   userTaskActions?: Prisma.UserTaskActionUncheckedCreateNestedManyWithoutUserInput
   cardTimelines?: Prisma.CardTimelineUncheckedCreateNestedManyWithoutUserInput
+  ownedCards?: Prisma.CardUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type UserCreateOrConnectWithoutCardMembershipsInput = {
@@ -1141,6 +1278,7 @@ export type UserUpdateWithoutCardMembershipsInput = {
   boardMembers?: Prisma.BoardMemberUpdateManyWithoutUserNestedInput
   userTaskActions?: Prisma.UserTaskActionUpdateManyWithoutUserNestedInput
   cardTimelines?: Prisma.CardTimelineUpdateManyWithoutUserNestedInput
+  ownedCards?: Prisma.CardUpdateManyWithoutOwnerNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCardMembershipsInput = {
@@ -1157,6 +1295,7 @@ export type UserUncheckedUpdateWithoutCardMembershipsInput = {
   boardMembers?: Prisma.BoardMemberUncheckedUpdateManyWithoutUserNestedInput
   userTaskActions?: Prisma.UserTaskActionUncheckedUpdateManyWithoutUserNestedInput
   cardTimelines?: Prisma.CardTimelineUncheckedUpdateManyWithoutUserNestedInput
+  ownedCards?: Prisma.CardUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 
@@ -1173,6 +1312,7 @@ export type UserCountOutputType = {
   cardMemberships: number
   userTaskActions: number
   cardTimelines: number
+  ownedCards: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1184,6 +1324,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   cardMemberships?: boolean | UserCountOutputTypeCountCardMembershipsArgs
   userTaskActions?: boolean | UserCountOutputTypeCountUserTaskActionsArgs
   cardTimelines?: boolean | UserCountOutputTypeCountCardTimelinesArgs
+  ownedCards?: boolean | UserCountOutputTypeCountOwnedCardsArgs
 }
 
 /**
@@ -1252,6 +1393,13 @@ export type UserCountOutputTypeCountCardTimelinesArgs<ExtArgs extends runtime.Ty
   where?: Prisma.CardTimelineWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountOwnedCardsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CardWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1268,6 +1416,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   cardMemberships?: boolean | Prisma.User$cardMembershipsArgs<ExtArgs>
   userTaskActions?: boolean | Prisma.User$userTaskActionsArgs<ExtArgs>
   cardTimelines?: boolean | Prisma.User$cardTimelinesArgs<ExtArgs>
+  ownedCards?: boolean | Prisma.User$ownedCardsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1308,6 +1457,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   cardMemberships?: boolean | Prisma.User$cardMembershipsArgs<ExtArgs>
   userTaskActions?: boolean | Prisma.User$userTaskActionsArgs<ExtArgs>
   cardTimelines?: boolean | Prisma.User$cardTimelinesArgs<ExtArgs>
+  ownedCards?: boolean | Prisma.User$ownedCardsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1324,6 +1474,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     cardMemberships: Prisma.$CardMemberPayload<ExtArgs>[]
     userTaskActions: Prisma.$UserTaskActionPayload<ExtArgs>[]
     cardTimelines: Prisma.$CardTimelinePayload<ExtArgs>[]
+    ownedCards: Prisma.$CardPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1734,6 +1885,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   cardMemberships<T extends Prisma.User$cardMembershipsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$cardMembershipsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CardMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   userTaskActions<T extends Prisma.User$userTaskActionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$userTaskActionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserTaskActionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   cardTimelines<T extends Prisma.User$cardTimelinesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$cardTimelinesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CardTimelinePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  ownedCards<T extends Prisma.User$ownedCardsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ownedCardsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CardPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2349,6 +2501,30 @@ export type User$cardTimelinesArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.CardTimelineScalarFieldEnum | Prisma.CardTimelineScalarFieldEnum[]
+}
+
+/**
+ * User.ownedCards
+ */
+export type User$ownedCardsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Card
+   */
+  select?: Prisma.CardSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Card
+   */
+  omit?: Prisma.CardOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CardInclude<ExtArgs> | null
+  where?: Prisma.CardWhereInput
+  orderBy?: Prisma.CardOrderByWithRelationInput | Prisma.CardOrderByWithRelationInput[]
+  cursor?: Prisma.CardWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CardScalarFieldEnum | Prisma.CardScalarFieldEnum[]
 }
 
 /**

@@ -89,3 +89,31 @@ export function formatDueDate(date: string | Date): string {
 
   return year === now.getFullYear() ? `${day} ${month}` : `${day} ${month} ${year}г.`;
 }
+
+export function formatTimeAgo(date: string | Date) {
+  const now = new Date();
+  const past = new Date(date);
+
+  const diff = Math.floor((now.getTime() - past.getTime()) / 1000); // seconds
+
+  if (diff < 10) return "только что";
+  if (diff < 60) return `${diff} секунд назад`;
+
+  const minutes = Math.floor(diff / 60);
+  if (minutes < 60) return `${minutes} минут назад`;
+
+  const hours = Math.floor(minutes / 60);
+  if (hours < 24) return `${hours} часов назад`;
+
+  const days = Math.floor(hours / 24);
+  if (days < 7) return `${days} дней назад`;
+
+  const weeks = Math.floor(days / 7);
+  if (weeks < 4) return `${weeks} недель назад`;
+
+  const months = Math.floor(days / 30);
+  if (months < 12) return `${months} месяцев назад`;
+
+  const years = Math.floor(days / 365);
+  return `${years} лет назад`;
+}

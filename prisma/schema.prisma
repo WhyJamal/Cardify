@@ -332,7 +332,8 @@ model CardMember {
   card Card @relation(fields: [cardId], references: [id], onDelete: Cascade)
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  createdAt DateTime @default(now())
+  activityText  String?
+  createdAt     DateTime @default(now())
 
   @@unique([cardId, userId])
   @@index([cardId])

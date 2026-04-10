@@ -39,7 +39,7 @@ function CardBg({ card, board }: { card: CardData; board: CardData["column"]["bo
                 <div className="flex gap-2 text-white text-sm font-medium">
                     {card.isCompleted && (
                         <div className="checkbox-round mt-0.5">
-                            <input type="checkbox" id={`checkbox-${card.id}`} checked={card.isCompleted} className="peer cursor-pointer" />
+                            <input type="checkbox" id={`checkbox-${card.id}`} checked={card.isCompleted} readOnly className="peer cursor-pointer" />
                             <label htmlFor={`checkbox-${card.id}`} />
                         </div>
                     )}

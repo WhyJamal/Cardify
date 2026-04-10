@@ -76,20 +76,33 @@ export async function POST(
     );
   }
 
-  const cardMember = await prisma.$transaction([
-    prisma.cardMember.create({
-      data: { cardId, userId },
-    }),
-    prisma.notification.create({
-      data: {
-        userId,
-        type: "CARD_ASSIGNED", 
-        title: `Вы "${card.title ?? 'Card'}" вы присоединились к карте`,
-        body: `${dbUser.name ?? dbUser.email} добавил(а) вас в карту`,
-        data: JSON.stringify({ cardId, boardId: card.column.boardId }),
-      },
-    }),
-  ]);
+  const isSelf = dbUser.id === userId;
 
-  return NextResponse.json({ ok: true, cardMember }, { status: 201 });
+  const activityText = isSelf
+    ? "Вы добавили себя в эту карту"
+    : `${dbUser.name} добавил(а) вас в карту`;
+
+  const result = await prisma.$transaction(async (tx: typeof prisma) => {
+    const cardMember = await tx.cardMember.create({
+      data: { cardId, userId, activityText },
+    });
+
+    if (!isSelf) {
+      await tx.notification.create({
+        data: {
+          userId,
+          type: "CARD_ASSIGNED",
+          title: `Вы присоединились к карте "${card.title ?? "Card"}"`,
+          body: dbUser.name
+            ? `${dbUser.name} добавил(а) вас в карту`
+            : `Вас добавили в карту`,
+          data: JSON.stringify({ cardId, boardId: card.column.boardId }),
+        },
+      });
+    }
+
+    return cardMember;
+  });
+
+  return NextResponse.json({ ok: true, cardMember: result }, { status: 201 });
 }

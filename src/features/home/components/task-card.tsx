@@ -11,7 +11,8 @@ import { useCommentState } from "../hooks/use-comment-state";
 import { CardBg } from "./card";
 import { CommentList } from "./comment-list";
 import { ReplyEditor } from "./reply-editor";
-import { formatCardDate } from "@utils/date";
+import { formatCardDate, formatTimeAgo } from "@utils/date";
+import { useSession } from "next-auth/react";
 
 function CardFooterBreadcrumb({ board, column }: { board: CardData["column"]["board"]; column: { title: string } }) {
     const workspaceName = board.workspace?.name || "Cardify";
@@ -50,6 +51,7 @@ interface AttentionTaskCardProps {
 }
 
 export function AttentionTaskCard({ card, onComplete, onDismiss, onComment }: AttentionTaskCardProps) {
+    const { data: session } = useSession();
     const members = card.members ?? [];
     const firstMember = members[0]?.user;
     const initials = getInitials(firstMember?.name || "User");
@@ -57,18 +59,32 @@ export function AttentionTaskCard({ card, onComplete, onDismiss, onComment }: At
     const { showReply, setShowReply, comment, setComment, loading, comments, handleSave } =
         useCommentState(card.comments ?? [], card.id, onComment, onComplete);
 
+    const myMember = members.find(
+        (m) => m.user?.email === session?.user?.email
+    );
+
     return (
         <CardWrapper card={card}>
             <div className="px-4 py-3 flex items-center justify-between" style={{ backgroundColor: "#2c2e33", borderTop: "1px solid #3d4148" }}>
                 <div className="flex items-center gap-2 flex-wrap">
-                    {members.length > 0 && (
-                        <div className="w-8 h-8 rounded-full bg-linear-to-br from-[#4bce97] to-[#0052cc] flex items-center justify-center text-xs font-bold text-white">
-                            {initials}
+                    {myMember && !card.dueDate && (
+                        <div className="flex gap-2">
+                            <div className="w-8 h-8 rounded-full bg-linear-to-br from-[#4bce97] to-[#0052cc] flex items-center justify-center text-xs font-bold text-white">
+                                {initials}
+                            </div>
+                            <div className="flex flex-col">
+                                <span className="text-sm text-gray-300">
+                                    {myMember.activityText}
+                                </span>
+                                <span className="text-xs text-gray-600">
+                                    {formatTimeAgo(myMember.createdAt || "")}
+                                </span>
+                            </div>
                         </div>
                     )}
                     {card.dueDate && (
                         <span className="flex items-center gap-1.5 rounded text-sm text-white font-bold">
-                            <Clock size={16}/>
+                            <Clock size={16} />
                             Срок {formatCardDate(card.dueDate)}
                         </span>
                     )}

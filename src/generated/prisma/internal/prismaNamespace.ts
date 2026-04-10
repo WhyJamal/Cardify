@@ -1841,6 +1841,7 @@ export const CardMemberScalarFieldEnum = {
   id: 'id',
   cardId: 'cardId',
   userId: 'userId',
+  activityText: 'activityText',
   createdAt: 'createdAt'
 } as const
 

@@ -40,7 +40,7 @@ export async function GET(req: NextRequest) {
 
           {
             AND: [
-              { ownerId: dbUser.id }, 
+              { ownerId: dbUser.id },
               { dueDate: { not: null } },
             ],
           },

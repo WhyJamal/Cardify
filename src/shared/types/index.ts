@@ -94,6 +94,9 @@ export interface CardTimeline {
 
 export interface CardMember {
   id: string;
+  activityText?: string;
+  createdAt: string;
+  
   user: User;
 }
 

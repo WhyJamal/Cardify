@@ -28,6 +28,7 @@ export type CardMemberMinAggregateOutputType = {
   id: string | null
   cardId: string | null
   userId: string | null
+  activityText: string | null
   createdAt: Date | null
 }
 
@@ -35,6 +36,7 @@ export type CardMemberMaxAggregateOutputType = {
   id: string | null
   cardId: string | null
   userId: string | null
+  activityText: string | null
   createdAt: Date | null
 }
 
@@ -42,6 +44,7 @@ export type CardMemberCountAggregateOutputType = {
   id: number
   cardId: number
   userId: number
+  activityText: number
   createdAt: number
   _all: number
 }
@@ -51,6 +54,7 @@ export type CardMemberMinAggregateInputType = {
   id?: true
   cardId?: true
   userId?: true
+  activityText?: true
   createdAt?: true
 }
 
@@ -58,6 +62,7 @@ export type CardMemberMaxAggregateInputType = {
   id?: true
   cardId?: true
   userId?: true
+  activityText?: true
   createdAt?: true
 }
 
@@ -65,6 +70,7 @@ export type CardMemberCountAggregateInputType = {
   id?: true
   cardId?: true
   userId?: true
+  activityText?: true
   createdAt?: true
   _all?: true
 }
@@ -145,6 +151,7 @@ export type CardMemberGroupByOutputType = {
   id: string
   cardId: string
   userId: string
+  activityText: string | null
   createdAt: Date
   _count: CardMemberCountAggregateOutputType | null
   _min: CardMemberMinAggregateOutputType | null
@@ -173,6 +180,7 @@ export type CardMemberWhereInput = {
   id?: Prisma.StringFilter<"CardMember"> | string
   cardId?: Prisma.StringFilter<"CardMember"> | string
   userId?: Prisma.StringFilter<"CardMember"> | string
+  activityText?: Prisma.StringNullableFilter<"CardMember"> | string | null
   createdAt?: Prisma.DateTimeFilter<"CardMember"> | Date | string
   card?: Prisma.XOR<Prisma.CardScalarRelationFilter, Prisma.CardWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -182,6 +190,7 @@ export type CardMemberOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   cardId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  activityText?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   card?: Prisma.CardOrderByWithRelationInput
   user?: Prisma.UserOrderByWithRelationInput
@@ -195,6 +204,7 @@ export type CardMemberWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.CardMemberWhereInput | Prisma.CardMemberWhereInput[]
   cardId?: Prisma.StringFilter<"CardMember"> | string
   userId?: Prisma.StringFilter<"CardMember"> | string
+  activityText?: Prisma.StringNullableFilter<"CardMember"> | string | null
   createdAt?: Prisma.DateTimeFilter<"CardMember"> | Date | string
   card?: Prisma.XOR<Prisma.CardScalarRelationFilter, Prisma.CardWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -204,6 +214,7 @@ export type CardMemberOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   cardId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  activityText?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.CardMemberCountOrderByAggregateInput
   _max?: Prisma.CardMemberMaxOrderByAggregateInput
@@ -217,11 +228,13 @@ export type CardMemberScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"CardMember"> | string
   cardId?: Prisma.StringWithAggregatesFilter<"CardMember"> | string
   userId?: Prisma.StringWithAggregatesFilter<"CardMember"> | string
+  activityText?: Prisma.StringNullableWithAggregatesFilter<"CardMember"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"CardMember"> | Date | string
 }
 
 export type CardMemberCreateInput = {
   id?: string
+  activityText?: string | null
   createdAt?: Date | string
   card: Prisma.CardCreateNestedOneWithoutMembersInput
   user: Prisma.UserCreateNestedOneWithoutCardMembershipsInput
@@ -231,11 +244,13 @@ export type CardMemberUncheckedCreateInput = {
   id?: string
   cardId: string
   userId: string
+  activityText?: string | null
   createdAt?: Date | string
 }
 
 export type CardMemberUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  activityText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   card?: Prisma.CardUpdateOneRequiredWithoutMembersNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutCardMembershipsNestedInput
@@ -245,6 +260,7 @@ export type CardMemberUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   cardId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  activityText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -252,11 +268,13 @@ export type CardMemberCreateManyInput = {
   id?: string
   cardId: string
   userId: string
+  activityText?: string | null
   createdAt?: Date | string
 }
 
 export type CardMemberUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  activityText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -264,6 +282,7 @@ export type CardMemberUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   cardId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  activityText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -286,6 +305,7 @@ export type CardMemberCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   cardId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  activityText?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -293,6 +313,7 @@ export type CardMemberMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   cardId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  activityText?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -300,6 +321,7 @@ export type CardMemberMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   cardId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  activityText?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -389,6 +411,7 @@ export type CardMemberUncheckedUpdateManyWithoutCardNestedInput = {
 
 export type CardMemberCreateWithoutUserInput = {
   id?: string
+  activityText?: string | null
   createdAt?: Date | string
   card: Prisma.CardCreateNestedOneWithoutMembersInput
 }
@@ -396,6 +419,7 @@ export type CardMemberCreateWithoutUserInput = {
 export type CardMemberUncheckedCreateWithoutUserInput = {
   id?: string
   cardId: string
+  activityText?: string | null
   createdAt?: Date | string
 }
 
@@ -431,11 +455,13 @@ export type CardMemberScalarWhereInput = {
   id?: Prisma.StringFilter<"CardMember"> | string
   cardId?: Prisma.StringFilter<"CardMember"> | string
   userId?: Prisma.StringFilter<"CardMember"> | string
+  activityText?: Prisma.StringNullableFilter<"CardMember"> | string | null
   createdAt?: Prisma.DateTimeFilter<"CardMember"> | Date | string
 }
 
 export type CardMemberCreateWithoutCardInput = {
   id?: string
+  activityText?: string | null
   createdAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutCardMembershipsInput
 }
@@ -443,6 +469,7 @@ export type CardMemberCreateWithoutCardInput = {
 export type CardMemberUncheckedCreateWithoutCardInput = {
   id?: string
   userId: string
+  activityText?: string | null
   createdAt?: Date | string
 }
 
@@ -474,11 +501,13 @@ export type CardMemberUpdateManyWithWhereWithoutCardInput = {
 export type CardMemberCreateManyUserInput = {
   id?: string
   cardId: string
+  activityText?: string | null
   createdAt?: Date | string
 }
 
 export type CardMemberUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  activityText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   card?: Prisma.CardUpdateOneRequiredWithoutMembersNestedInput
 }
@@ -486,23 +515,27 @@ export type CardMemberUpdateWithoutUserInput = {
 export type CardMemberUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   cardId?: Prisma.StringFieldUpdateOperationsInput | string
+  activityText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type CardMemberUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   cardId?: Prisma.StringFieldUpdateOperationsInput | string
+  activityText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type CardMemberCreateManyCardInput = {
   id?: string
   userId: string
+  activityText?: string | null
   createdAt?: Date | string
 }
 
 export type CardMemberUpdateWithoutCardInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  activityText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCardMembershipsNestedInput
 }
@@ -510,12 +543,14 @@ export type CardMemberUpdateWithoutCardInput = {
 export type CardMemberUncheckedUpdateWithoutCardInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  activityText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type CardMemberUncheckedUpdateManyWithoutCardInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  activityText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -525,6 +560,7 @@ export type CardMemberSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   id?: boolean
   cardId?: boolean
   userId?: boolean
+  activityText?: boolean
   createdAt?: boolean
   card?: boolean | Prisma.CardDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -534,6 +570,7 @@ export type CardMemberSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   id?: boolean
   cardId?: boolean
   userId?: boolean
+  activityText?: boolean
   createdAt?: boolean
   card?: boolean | Prisma.CardDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -543,6 +580,7 @@ export type CardMemberSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   id?: boolean
   cardId?: boolean
   userId?: boolean
+  activityText?: boolean
   createdAt?: boolean
   card?: boolean | Prisma.CardDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -552,10 +590,11 @@ export type CardMemberSelectScalar = {
   id?: boolean
   cardId?: boolean
   userId?: boolean
+  activityText?: boolean
   createdAt?: boolean
 }
 
-export type CardMemberOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "cardId" | "userId" | "createdAt", ExtArgs["result"]["cardMember"]>
+export type CardMemberOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "cardId" | "userId" | "activityText" | "createdAt", ExtArgs["result"]["cardMember"]>
 export type CardMemberInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   card?: boolean | Prisma.CardDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -579,6 +618,7 @@ export type $CardMemberPayload<ExtArgs extends runtime.Types.Extensions.Internal
     id: string
     cardId: string
     userId: string
+    activityText: string | null
     createdAt: Date
   }, ExtArgs["result"]["cardMember"]>
   composites: {}
@@ -1008,6 +1048,7 @@ export interface CardMemberFieldRefs {
   readonly id: Prisma.FieldRef<"CardMember", 'String'>
   readonly cardId: Prisma.FieldRef<"CardMember", 'String'>
   readonly userId: Prisma.FieldRef<"CardMember", 'String'>
+  readonly activityText: Prisma.FieldRef<"CardMember", 'String'>
   readonly createdAt: Prisma.FieldRef<"CardMember", 'DateTime'>
 }
     

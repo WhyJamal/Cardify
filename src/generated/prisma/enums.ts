@@ -9,6 +9,15 @@
 * 🟢 You can import this file directly.
 */
 
+export const UserTaskStatus = {
+  PENDING: 'PENDING',
+  COMPLETED: 'COMPLETED',
+  DISMISSED: 'DISMISSED'
+} as const
+
+export type UserTaskStatus = (typeof UserTaskStatus)[keyof typeof UserTaskStatus]
+
+
 export const Visibility = {
   PRIVATE: 'PRIVATE',
   PUBLIC: 'PUBLIC',
@@ -80,12 +89,3 @@ export const CardTimelineType = {
 } as const
 
 export type CardTimelineType = (typeof CardTimelineType)[keyof typeof CardTimelineType]
-
-
-export const UserTaskStatus = {
-  PENDING: 'PENDING',
-  COMPLETED: 'COMPLETED',
-  DISMISSED: 'DISMISSED'
-} as const
-
-export type UserTaskStatus = (typeof UserTaskStatus)[keyof typeof UserTaskStatus]

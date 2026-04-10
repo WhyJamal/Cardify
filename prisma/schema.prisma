@@ -19,7 +19,8 @@ model User {
   notifications        Notification[]
   boardMembers         BoardMember[]
   cardMemberships      CardMember[]
-  userTaskActions UserTaskAction[]
+  userTaskActions      UserTaskAction[]
+  cardTimelines        CardTimeline[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
@@ -302,6 +303,7 @@ enum CardTimelineType {
 model CardTimeline {
   id           String           @id @default(cuid())
   cardId       String
+  userId       String?
   type         CardTimelineType @default(COMMENT)
   authorName   String
   initials     String?
@@ -311,8 +313,10 @@ model CardTimeline {
   updatedAt    DateTime         @updatedAt
 
   card Card @relation(fields: [cardId], references: [id], onDelete: Cascade)
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
 
   @@index([cardId, createdAt])
+  @@index([userId])
 }
 
 model CardMember {

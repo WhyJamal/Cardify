@@ -389,6 +389,10 @@ export type UserTaskActionUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.UserTaskActionScalarWhereInput | Prisma.UserTaskActionScalarWhereInput[]
 }
 
+export type EnumUserTaskStatusFieldUpdateOperationsInput = {
+  set?: $Enums.UserTaskStatus
+}
+
 export type UserTaskActionCreateNestedManyWithoutCardInput = {
   create?: Prisma.XOR<Prisma.UserTaskActionCreateWithoutCardInput, Prisma.UserTaskActionUncheckedCreateWithoutCardInput> | Prisma.UserTaskActionCreateWithoutCardInput[] | Prisma.UserTaskActionUncheckedCreateWithoutCardInput[]
   connectOrCreate?: Prisma.UserTaskActionCreateOrConnectWithoutCardInput | Prisma.UserTaskActionCreateOrConnectWithoutCardInput[]
@@ -429,10 +433,6 @@ export type UserTaskActionUncheckedUpdateManyWithoutCardNestedInput = {
   update?: Prisma.UserTaskActionUpdateWithWhereUniqueWithoutCardInput | Prisma.UserTaskActionUpdateWithWhereUniqueWithoutCardInput[]
   updateMany?: Prisma.UserTaskActionUpdateManyWithWhereWithoutCardInput | Prisma.UserTaskActionUpdateManyWithWhereWithoutCardInput[]
   deleteMany?: Prisma.UserTaskActionScalarWhereInput | Prisma.UserTaskActionScalarWhereInput[]
-}
-
-export type EnumUserTaskStatusFieldUpdateOperationsInput = {
-  set?: $Enums.UserTaskStatus
 }
 
 export type UserTaskActionCreateWithoutUserInput = {

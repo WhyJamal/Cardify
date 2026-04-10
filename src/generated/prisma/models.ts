@@ -9,6 +9,7 @@
  * 🟢 You can import this file directly.
  */
 export type * from './models/User'
+export type * from './models/UserTaskAction'
 export type * from './models/Workspace'
 export type * from './models/WorkspaceType'
 export type * from './models/WorkspaceMember'
@@ -23,5 +24,4 @@ export type * from './models/CardLink'
 export type * from './models/CardTimeline'
 export type * from './models/CardMember'
 export type * from './models/CardAttachment'
-export type * from './models/UserTaskAction'
 export type * from './commonInputTypes'

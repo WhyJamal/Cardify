@@ -25,7 +25,7 @@ function ConfirmDialog({ children, title, desc, onConfirm }: ConfirmDialogProps)
             </DialogTrigger>
             <DialogContent
                 showCloseButton={false}
-                className="bg-[#312d2d] border border-white/10 text-white rounded"
+                className="bg-[#2b2c2f] border border-white/10 text-white rounded"
             >
                 <DialogHeader>
                     <DialogTitle>{title}</DialogTitle>
@@ -38,6 +38,7 @@ function ConfirmDialog({ children, title, desc, onConfirm }: ConfirmDialogProps)
 
                     <DialogClose asChild>
                         <Button
+                            size={"lg"}
                             variant={"destructive"}
                             className="rounded"
                             onClick={onConfirm}
@@ -47,10 +48,7 @@ function ConfirmDialog({ children, title, desc, onConfirm }: ConfirmDialogProps)
                     </DialogClose>
 
                     <DialogClose asChild>
-                        <Button
-                            variant={"ghost"}
-                            className="rounded hover:bg-white/10"
-                        >
+                        <Button size={"lg"}>
                             Отмена
                         </Button>
                     </DialogClose>

@@ -106,6 +106,23 @@ export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedDateTimeFilter<$PrismaModel>
 }
 
+export type EnumUserTaskStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.UserTaskStatus | Prisma.EnumUserTaskStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.UserTaskStatus[]
+  notIn?: $Enums.UserTaskStatus[]
+  not?: Prisma.NestedEnumUserTaskStatusFilter<$PrismaModel> | $Enums.UserTaskStatus
+}
+
+export type EnumUserTaskStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.UserTaskStatus | Prisma.EnumUserTaskStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.UserTaskStatus[]
+  notIn?: $Enums.UserTaskStatus[]
+  not?: Prisma.NestedEnumUserTaskStatusWithAggregatesFilter<$PrismaModel> | $Enums.UserTaskStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumUserTaskStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumUserTaskStatusFilter<$PrismaModel>
+}
+
 export type EnumVisibilityFilter<$PrismaModel = never> = {
   equals?: $Enums.Visibility | Prisma.EnumVisibilityFieldRefInput<$PrismaModel>
   in?: $Enums.Visibility[]
@@ -334,23 +351,6 @@ export type EnumCardTimelineTypeWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumCardTimelineTypeFilter<$PrismaModel>
 }
 
-export type EnumUserTaskStatusFilter<$PrismaModel = never> = {
-  equals?: $Enums.UserTaskStatus | Prisma.EnumUserTaskStatusFieldRefInput<$PrismaModel>
-  in?: $Enums.UserTaskStatus[]
-  notIn?: $Enums.UserTaskStatus[]
-  not?: Prisma.NestedEnumUserTaskStatusFilter<$PrismaModel> | $Enums.UserTaskStatus
-}
-
-export type EnumUserTaskStatusWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.UserTaskStatus | Prisma.EnumUserTaskStatusFieldRefInput<$PrismaModel>
-  in?: $Enums.UserTaskStatus[]
-  notIn?: $Enums.UserTaskStatus[]
-  not?: Prisma.NestedEnumUserTaskStatusWithAggregatesFilter<$PrismaModel> | $Enums.UserTaskStatus
-  _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumUserTaskStatusFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumUserTaskStatusFilter<$PrismaModel>
-}
-
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[]
@@ -458,6 +458,23 @@ export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedDateTimeFilter<$PrismaModel>
   _max?: Prisma.NestedDateTimeFilter<$PrismaModel>
+}
+
+export type NestedEnumUserTaskStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.UserTaskStatus | Prisma.EnumUserTaskStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.UserTaskStatus[]
+  notIn?: $Enums.UserTaskStatus[]
+  not?: Prisma.NestedEnumUserTaskStatusFilter<$PrismaModel> | $Enums.UserTaskStatus
+}
+
+export type NestedEnumUserTaskStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.UserTaskStatus | Prisma.EnumUserTaskStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.UserTaskStatus[]
+  notIn?: $Enums.UserTaskStatus[]
+  not?: Prisma.NestedEnumUserTaskStatusWithAggregatesFilter<$PrismaModel> | $Enums.UserTaskStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumUserTaskStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumUserTaskStatusFilter<$PrismaModel>
 }
 
 export type NestedEnumVisibilityFilter<$PrismaModel = never> = {
@@ -686,23 +703,6 @@ export type NestedEnumCardTimelineTypeWithAggregatesFilter<$PrismaModel = never>
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumCardTimelineTypeFilter<$PrismaModel>
   _max?: Prisma.NestedEnumCardTimelineTypeFilter<$PrismaModel>
-}
-
-export type NestedEnumUserTaskStatusFilter<$PrismaModel = never> = {
-  equals?: $Enums.UserTaskStatus | Prisma.EnumUserTaskStatusFieldRefInput<$PrismaModel>
-  in?: $Enums.UserTaskStatus[]
-  notIn?: $Enums.UserTaskStatus[]
-  not?: Prisma.NestedEnumUserTaskStatusFilter<$PrismaModel> | $Enums.UserTaskStatus
-}
-
-export type NestedEnumUserTaskStatusWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.UserTaskStatus | Prisma.EnumUserTaskStatusFieldRefInput<$PrismaModel>
-  in?: $Enums.UserTaskStatus[]
-  notIn?: $Enums.UserTaskStatus[]
-  not?: Prisma.NestedEnumUserTaskStatusWithAggregatesFilter<$PrismaModel> | $Enums.UserTaskStatus
-  _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumUserTaskStatusFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumUserTaskStatusFilter<$PrismaModel>
 }
 
 

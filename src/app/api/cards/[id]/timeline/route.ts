@@ -52,10 +52,14 @@ export async function POST(
   const item = await prisma.cardTimeline.create({
     data: {
       cardId,
+      userId: dbUser.id,
       type: "COMMENT",
       authorName: dbUser.name || dbUser.email,
       initials: getInitials(dbUser.name || dbUser.email),
       text,
+    },
+    include: {
+      user: true,
     },
   });
 

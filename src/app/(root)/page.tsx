@@ -26,12 +26,12 @@ async function getHomePageData(userId: string): Promise<{
 
 export default async function RootPage() {
   const session = await getServerSession(authOptions);
-  if (!session?.user?.email) redirect("/login");
+  if (!session?.user?.email) redirect("/auth/sign-in");
 
   const dbUser = await prisma.user.findUnique({
     where: { email: session.user.email },
   });
-  if (!dbUser) redirect("/login");
+  if (!dbUser) redirect("/auth/sign-in");
 
   const { attentionCards, highlightCards } = await getHomePageData(dbUser.id);
 

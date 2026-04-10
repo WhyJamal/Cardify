@@ -3,6 +3,15 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
+const formatCard = (card: any) => ({
+  ...card,
+  labels: card.labels.map((l: { boardLabel: { id: string; color: string; name?: string } }) => ({
+    id: l.boardLabel.id,
+    color: l.boardLabel.color,
+    name: l.boardLabel.name,
+  })),
+});
+
 export async function GET(req: NextRequest) {
   const session = await getServerSession(authOptions);
   if (!session?.user?.email) {
@@ -17,13 +26,12 @@ export async function GET(req: NextRequest) {
   }
 
   const searchParams = req.nextUrl.searchParams;
-  const type = searchParams.get("type"); 
+  const type = searchParams.get("type");
 
   if (type === "attention") {
     const cards = await prisma.card.findMany({
       where: {
         members: { some: { userId: dbUser.id } },
-        //dueDate: { not: null },
         userTaskActions: {
           none: { status: { in: ["COMPLETED", "DISMISSED"] } },
         },
@@ -32,19 +40,25 @@ export async function GET(req: NextRequest) {
         column: {
           include: {
             board: {
-              include: {
-                workspace: true,
-              },
+              include: { workspace: true },
             },
           },
         },
-        labels: { include: { boardLabel: true } },
+        labels: {
+          include: {
+            boardLabel: true,
+          },
+        },
+        attachments: true,
         members: true,
         comments: true,
       },
       orderBy: { dueDate: "asc" },
     });
-    return NextResponse.json({ cards });
+
+    const formattedCards = cards.map(formatCard);
+
+    return NextResponse.json({ cards: formattedCards });
   }
 
   if (type === "highlights") {
@@ -58,19 +72,25 @@ export async function GET(req: NextRequest) {
         column: {
           include: {
             board: {
-              include: {
-                workspace: true,
-              },
+              include: { workspace: true },
             },
           },
         },
-        labels: { include: { boardLabel: true } },
+        labels: {
+          include: {
+            boardLabel: true,
+          },
+        },
+        attachments: true,
         members: true,
-        comments: true,
+        comments: { include: { user: true } },
       },
       orderBy: { updatedAt: "desc" },
     });
-    return NextResponse.json({ cards });
+
+    const formattedCards = cards.map(formatCard);
+
+    return NextResponse.json({ cards: formattedCards });
   }
 
   return NextResponse.json({ error: "Invalid type" }, { status: 400 });

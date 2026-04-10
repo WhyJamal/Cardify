@@ -47,6 +47,11 @@ export { Prisma }
  */
 export type User = Prisma.UserModel
 /**
+ * Model UserTaskAction
+ * 
+ */
+export type UserTaskAction = Prisma.UserTaskActionModel
+/**
  * Model Workspace
  * 
  */
@@ -116,8 +121,3 @@ export type CardMember = Prisma.CardMemberModel
  * 
  */
 export type CardAttachment = Prisma.CardAttachmentModel
-/**
- * Model UserTaskAction
- * 
- */
-export type UserTaskAction = Prisma.UserTaskActionModel

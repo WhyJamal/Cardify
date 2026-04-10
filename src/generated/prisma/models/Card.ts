@@ -696,6 +696,11 @@ export type CardUncheckedUpdateManyInput = {
   isArchive?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
+export type CardScalarRelationFilter = {
+  is?: Prisma.CardWhereInput
+  isNot?: Prisma.CardWhereInput
+}
+
 export type CardListRelationFilter = {
   every?: Prisma.CardWhereInput
   some?: Prisma.CardWhereInput
@@ -795,9 +800,18 @@ export type CardSumOrderByAggregateInput = {
   position?: Prisma.SortOrder
 }
 
-export type CardScalarRelationFilter = {
-  is?: Prisma.CardWhereInput
-  isNot?: Prisma.CardWhereInput
+export type CardCreateNestedOneWithoutUserTaskActionsInput = {
+  create?: Prisma.XOR<Prisma.CardCreateWithoutUserTaskActionsInput, Prisma.CardUncheckedCreateWithoutUserTaskActionsInput>
+  connectOrCreate?: Prisma.CardCreateOrConnectWithoutUserTaskActionsInput
+  connect?: Prisma.CardWhereUniqueInput
+}
+
+export type CardUpdateOneRequiredWithoutUserTaskActionsNestedInput = {
+  create?: Prisma.XOR<Prisma.CardCreateWithoutUserTaskActionsInput, Prisma.CardUncheckedCreateWithoutUserTaskActionsInput>
+  connectOrCreate?: Prisma.CardCreateOrConnectWithoutUserTaskActionsInput
+  upsert?: Prisma.CardUpsertWithoutUserTaskActionsInput
+  connect?: Prisma.CardWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CardUpdateToOneWithWhereWithoutUserTaskActionsInput, Prisma.CardUpdateWithoutUserTaskActionsInput>, Prisma.CardUncheckedUpdateWithoutUserTaskActionsInput>
 }
 
 export type CardCreateNestedManyWithoutColumnInput = {
@@ -928,18 +942,140 @@ export type CardUpdateOneRequiredWithoutAttachmentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CardUpdateToOneWithWhereWithoutAttachmentsInput, Prisma.CardUpdateWithoutAttachmentsInput>, Prisma.CardUncheckedUpdateWithoutAttachmentsInput>
 }
 
-export type CardCreateNestedOneWithoutUserTaskActionsInput = {
-  create?: Prisma.XOR<Prisma.CardCreateWithoutUserTaskActionsInput, Prisma.CardUncheckedCreateWithoutUserTaskActionsInput>
-  connectOrCreate?: Prisma.CardCreateOrConnectWithoutUserTaskActionsInput
-  connect?: Prisma.CardWhereUniqueInput
+export type CardCreateWithoutUserTaskActionsInput = {
+  id?: string
+  title?: string | null
+  image?: string | null
+  numberBadge?: number | null
+  description?: string | null
+  hasDescription?: boolean
+  watching?: boolean
+  checklistDone?: number
+  checklistTotal?: number
+  assigneeInitials?: string | null
+  assigneeColor?: string | null
+  position?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  dueDate?: Date | string | null
+  isCompleted?: boolean
+  isImage?: boolean
+  background?: string | null
+  size?: $Enums.SizeOption
+  textColor?: string | null
+  isArchive?: boolean
+  column: Prisma.ColumnCreateNestedOneWithoutCardsInput
+  labels?: Prisma.CardBoardLabelCreateNestedManyWithoutCardInput
+  links?: Prisma.CardLinkCreateNestedManyWithoutCardInput
+  comments?: Prisma.CardTimelineCreateNestedManyWithoutCardInput
+  members?: Prisma.CardMemberCreateNestedManyWithoutCardInput
+  attachments?: Prisma.CardAttachmentCreateNestedManyWithoutCardInput
 }
 
-export type CardUpdateOneRequiredWithoutUserTaskActionsNestedInput = {
-  create?: Prisma.XOR<Prisma.CardCreateWithoutUserTaskActionsInput, Prisma.CardUncheckedCreateWithoutUserTaskActionsInput>
-  connectOrCreate?: Prisma.CardCreateOrConnectWithoutUserTaskActionsInput
-  upsert?: Prisma.CardUpsertWithoutUserTaskActionsInput
-  connect?: Prisma.CardWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.CardUpdateToOneWithWhereWithoutUserTaskActionsInput, Prisma.CardUpdateWithoutUserTaskActionsInput>, Prisma.CardUncheckedUpdateWithoutUserTaskActionsInput>
+export type CardUncheckedCreateWithoutUserTaskActionsInput = {
+  id?: string
+  columnId: string
+  title?: string | null
+  image?: string | null
+  numberBadge?: number | null
+  description?: string | null
+  hasDescription?: boolean
+  watching?: boolean
+  checklistDone?: number
+  checklistTotal?: number
+  assigneeInitials?: string | null
+  assigneeColor?: string | null
+  position?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  dueDate?: Date | string | null
+  isCompleted?: boolean
+  isImage?: boolean
+  background?: string | null
+  size?: $Enums.SizeOption
+  textColor?: string | null
+  isArchive?: boolean
+  labels?: Prisma.CardBoardLabelUncheckedCreateNestedManyWithoutCardInput
+  links?: Prisma.CardLinkUncheckedCreateNestedManyWithoutCardInput
+  comments?: Prisma.CardTimelineUncheckedCreateNestedManyWithoutCardInput
+  members?: Prisma.CardMemberUncheckedCreateNestedManyWithoutCardInput
+  attachments?: Prisma.CardAttachmentUncheckedCreateNestedManyWithoutCardInput
+}
+
+export type CardCreateOrConnectWithoutUserTaskActionsInput = {
+  where: Prisma.CardWhereUniqueInput
+  create: Prisma.XOR<Prisma.CardCreateWithoutUserTaskActionsInput, Prisma.CardUncheckedCreateWithoutUserTaskActionsInput>
+}
+
+export type CardUpsertWithoutUserTaskActionsInput = {
+  update: Prisma.XOR<Prisma.CardUpdateWithoutUserTaskActionsInput, Prisma.CardUncheckedUpdateWithoutUserTaskActionsInput>
+  create: Prisma.XOR<Prisma.CardCreateWithoutUserTaskActionsInput, Prisma.CardUncheckedCreateWithoutUserTaskActionsInput>
+  where?: Prisma.CardWhereInput
+}
+
+export type CardUpdateToOneWithWhereWithoutUserTaskActionsInput = {
+  where?: Prisma.CardWhereInput
+  data: Prisma.XOR<Prisma.CardUpdateWithoutUserTaskActionsInput, Prisma.CardUncheckedUpdateWithoutUserTaskActionsInput>
+}
+
+export type CardUpdateWithoutUserTaskActionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numberBadge?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasDescription?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  watching?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  checklistDone?: Prisma.IntFieldUpdateOperationsInput | number
+  checklistTotal?: Prisma.IntFieldUpdateOperationsInput | number
+  assigneeInitials?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assigneeColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  position?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isImage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  background?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  size?: Prisma.EnumSizeOptionFieldUpdateOperationsInput | $Enums.SizeOption
+  textColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  column?: Prisma.ColumnUpdateOneRequiredWithoutCardsNestedInput
+  labels?: Prisma.CardBoardLabelUpdateManyWithoutCardNestedInput
+  links?: Prisma.CardLinkUpdateManyWithoutCardNestedInput
+  comments?: Prisma.CardTimelineUpdateManyWithoutCardNestedInput
+  members?: Prisma.CardMemberUpdateManyWithoutCardNestedInput
+  attachments?: Prisma.CardAttachmentUpdateManyWithoutCardNestedInput
+}
+
+export type CardUncheckedUpdateWithoutUserTaskActionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  columnId?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numberBadge?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasDescription?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  watching?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  checklistDone?: Prisma.IntFieldUpdateOperationsInput | number
+  checklistTotal?: Prisma.IntFieldUpdateOperationsInput | number
+  assigneeInitials?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assigneeColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  position?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isImage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  background?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  size?: Prisma.EnumSizeOptionFieldUpdateOperationsInput | $Enums.SizeOption
+  textColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isArchive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  labels?: Prisma.CardBoardLabelUncheckedUpdateManyWithoutCardNestedInput
+  links?: Prisma.CardLinkUncheckedUpdateManyWithoutCardNestedInput
+  comments?: Prisma.CardTimelineUncheckedUpdateManyWithoutCardNestedInput
+  members?: Prisma.CardMemberUncheckedUpdateManyWithoutCardNestedInput
+  attachments?: Prisma.CardAttachmentUncheckedUpdateManyWithoutCardNestedInput
 }
 
 export type CardCreateWithoutColumnInput = {
@@ -1733,142 +1869,6 @@ export type CardUncheckedUpdateWithoutAttachmentsInput = {
   comments?: Prisma.CardTimelineUncheckedUpdateManyWithoutCardNestedInput
   members?: Prisma.CardMemberUncheckedUpdateManyWithoutCardNestedInput
   userTaskActions?: Prisma.UserTaskActionUncheckedUpdateManyWithoutCardNestedInput
-}
-
-export type CardCreateWithoutUserTaskActionsInput = {
-  id?: string
-  title?: string | null
-  image?: string | null
-  numberBadge?: number | null
-  description?: string | null
-  hasDescription?: boolean
-  watching?: boolean
-  checklistDone?: number
-  checklistTotal?: number
-  assigneeInitials?: string | null
-  assigneeColor?: string | null
-  position?: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  dueDate?: Date | string | null
-  isCompleted?: boolean
-  isImage?: boolean
-  background?: string | null
-  size?: $Enums.SizeOption
-  textColor?: string | null
-  isArchive?: boolean
-  column: Prisma.ColumnCreateNestedOneWithoutCardsInput
-  labels?: Prisma.CardBoardLabelCreateNestedManyWithoutCardInput
-  links?: Prisma.CardLinkCreateNestedManyWithoutCardInput
-  comments?: Prisma.CardTimelineCreateNestedManyWithoutCardInput
-  members?: Prisma.CardMemberCreateNestedManyWithoutCardInput
-  attachments?: Prisma.CardAttachmentCreateNestedManyWithoutCardInput
-}
-
-export type CardUncheckedCreateWithoutUserTaskActionsInput = {
-  id?: string
-  columnId: string
-  title?: string | null
-  image?: string | null
-  numberBadge?: number | null
-  description?: string | null
-  hasDescription?: boolean
-  watching?: boolean
-  checklistDone?: number
-  checklistTotal?: number
-  assigneeInitials?: string | null
-  assigneeColor?: string | null
-  position?: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  dueDate?: Date | string | null
-  isCompleted?: boolean
-  isImage?: boolean
-  background?: string | null
-  size?: $Enums.SizeOption
-  textColor?: string | null
-  isArchive?: boolean
-  labels?: Prisma.CardBoardLabelUncheckedCreateNestedManyWithoutCardInput
-  links?: Prisma.CardLinkUncheckedCreateNestedManyWithoutCardInput
-  comments?: Prisma.CardTimelineUncheckedCreateNestedManyWithoutCardInput
-  members?: Prisma.CardMemberUncheckedCreateNestedManyWithoutCardInput
-  attachments?: Prisma.CardAttachmentUncheckedCreateNestedManyWithoutCardInput
-}
-
-export type CardCreateOrConnectWithoutUserTaskActionsInput = {
-  where: Prisma.CardWhereUniqueInput
-  create: Prisma.XOR<Prisma.CardCreateWithoutUserTaskActionsInput, Prisma.CardUncheckedCreateWithoutUserTaskActionsInput>
-}
-
-export type CardUpsertWithoutUserTaskActionsInput = {
-  update: Prisma.XOR<Prisma.CardUpdateWithoutUserTaskActionsInput, Prisma.CardUncheckedUpdateWithoutUserTaskActionsInput>
-  create: Prisma.XOR<Prisma.CardCreateWithoutUserTaskActionsInput, Prisma.CardUncheckedCreateWithoutUserTaskActionsInput>
-  where?: Prisma.CardWhereInput
-}
-
-export type CardUpdateToOneWithWhereWithoutUserTaskActionsInput = {
-  where?: Prisma.CardWhereInput
-  data: Prisma.XOR<Prisma.CardUpdateWithoutUserTaskActionsInput, Prisma.CardUncheckedUpdateWithoutUserTaskActionsInput>
-}
-
-export type CardUpdateWithoutUserTaskActionsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  numberBadge?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  hasDescription?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  watching?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  checklistDone?: Prisma.IntFieldUpdateOperationsInput | number
-  checklistTotal?: Prisma.IntFieldUpdateOperationsInput | number
-  assigneeInitials?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  assigneeColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  position?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  isCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isImage?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  background?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  size?: Prisma.EnumSizeOptionFieldUpdateOperationsInput | $Enums.SizeOption
-  textColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isArchive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  column?: Prisma.ColumnUpdateOneRequiredWithoutCardsNestedInput
-  labels?: Prisma.CardBoardLabelUpdateManyWithoutCardNestedInput
-  links?: Prisma.CardLinkUpdateManyWithoutCardNestedInput
-  comments?: Prisma.CardTimelineUpdateManyWithoutCardNestedInput
-  members?: Prisma.CardMemberUpdateManyWithoutCardNestedInput
-  attachments?: Prisma.CardAttachmentUpdateManyWithoutCardNestedInput
-}
-
-export type CardUncheckedUpdateWithoutUserTaskActionsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  columnId?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  numberBadge?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  hasDescription?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  watching?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  checklistDone?: Prisma.IntFieldUpdateOperationsInput | number
-  checklistTotal?: Prisma.IntFieldUpdateOperationsInput | number
-  assigneeInitials?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  assigneeColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  position?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  isCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isImage?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  background?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  size?: Prisma.EnumSizeOptionFieldUpdateOperationsInput | $Enums.SizeOption
-  textColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isArchive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  labels?: Prisma.CardBoardLabelUncheckedUpdateManyWithoutCardNestedInput
-  links?: Prisma.CardLinkUncheckedUpdateManyWithoutCardNestedInput
-  comments?: Prisma.CardTimelineUncheckedUpdateManyWithoutCardNestedInput
-  members?: Prisma.CardMemberUncheckedUpdateManyWithoutCardNestedInput
-  attachments?: Prisma.CardAttachmentUncheckedUpdateManyWithoutCardNestedInput
 }
 
 export type CardCreateManyColumnInput = {

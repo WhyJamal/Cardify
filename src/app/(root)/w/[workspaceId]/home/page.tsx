@@ -27,7 +27,7 @@ export default async function WorkspaceHomePage({ params }: {
 
         <div className="border-t border-[#2c333a] mb-8" />
 
-        <RecentBoards />
+        {/* <RecentBoards /> */}
 
         <BoardsList
           initialBoards={workspace.boards ?? []}

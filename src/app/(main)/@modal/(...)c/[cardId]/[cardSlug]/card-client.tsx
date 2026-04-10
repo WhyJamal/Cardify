@@ -520,7 +520,7 @@ export default function CardClient({
                                                         </div>
                                                     </div>
                                                 ) : (
-                                                    <div className="bg-[#22272b] text-[#b6c2cf] text-sm px-3 py-2 rounded-lg mb-1">
+                                                    <div className="bg-[#22272b] text-[#b6c2cf] text-sm px-3 py-2 rounded-lg mb-1 min-w-0 wrap-break-word whitespace-pre-wrap">
                                                         {c.text}
                                                     </div>
                                                 )}

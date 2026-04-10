@@ -136,7 +136,7 @@ export function AccountDropdown({
 
                 <div className="px-3 py-2">
                     <button
-                        onClick={() => signOut()}
+                        onClick={() => signOut({ callbackUrl: "/" })}
                         className="w-full text-left px-3 py-2 text-[#b6b6b6] text-sm hover:bg-[#343a40] rounded"
                     >
                         Выйти

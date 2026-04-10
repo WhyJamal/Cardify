@@ -86,6 +86,8 @@ export interface CardTimeline {
   initials: string | null;
   text: string | null;
   activityText: string | null;
+  user: User;
+  
   createdAt: string;
   updatedAt: string;
 }

@@ -1,43 +1,103 @@
 "use client";
 
-import { Clock, AlignJustify, MoreHorizontal, Check, X, Send } from "lucide-react";
+import { Clock, AlignJustify, MoreHorizontal, Check, X, Send, AlignLeft, Paperclip, MessageSquare } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
-import { Button } from "@/shared/components";
-import { getInitials } from "@/shared/utils/getInitials";
+import { Button } from "@components/";
+import { getInitials } from "@shared/utils/getInitials";
 import Link from "next/link";
-import { PAGES } from "@/config/pages.config";
-import { slugify } from "@/shared/utils/slugify";
-import { CardData, CardTimeline } from "@/shared/types";
+import { PAGES } from "@config/pages.config";
+import { slugify } from "@utils/slugify";
+import { CardData, CardTimeline } from "@shared/types";
+import { useSession } from "next-auth/react";
+import { formatDueDate } from "@utils/date";
 
-function CardBg({ board }: { board: CardData["column"]["board"] }) {
+function CardBg({ card, board }: { card: CardData, board: CardData["column"]["board"] }) {
     return (
         <div
-            className="p-4"
+            className="p-2"
             style={{
                 background: board.isPhoto && board.bg
                     ? `url(${board.bg}) center/cover no-repeat`
                     : board.bg || "linear-gradient(135deg, #2c3e50 0%, #1a2533 100%)",
             }}
         >
-            <div className="bg-[#2B2C2F] py-3 px-3 rounded-md">
-                <div className="w-12 h-3 rounded-full mb-3 bg-[#22c55e]" />
-                <div className="flex gap-1 text-white text-sm font-medium mb-3">
-
-                    <div className="checkbox-round">
-                        <input type="checkbox" checked readOnly />
+            <div className="bg-[#2B2C2F] py-3 px-3 rounded-md"
+                style={{
+                    background: card
+                        ? card.isImage
+                            ? `url(${card.background}) center/cover no-repeat`
+                            : card.background ?? undefined
+                        : "#2B2C2F"
+                }}
+            >
+                {card.labels && card.labels.length > 0 && (
+                    <div className="flex w-full gap-2">
+                        {card.labels.map((label) => (
+                            <div
+                                key={label.id}
+                                className="flex w-12 h-4 rounded mb-3 items-center justify-center text-xs text-white"
+                                style={{ background: label.color || "#000000" }}
+                            >
+                                {label.name}
+                            </div>
+                        ))}
                     </div>
-                    <div className="line-clamp-2">{board.title}</div>
-                </div>
-                <div className="flex items-center gap-3">
-                    <span
-                        className="flex items-center gap-1.5 px-2 py-0.5 rounded text-xs"
-                        style={{ backgroundColor: "#2d2000", color: "#f59e0b", border: "1px solid #92400e" }}
+                )}
+                <div className="flex gap-2 text-white text-sm font-medium mb-3">
+                    {card.isCompleted && (
+                        <div className="checkbox-round mt-0.5">
+
+                            <input
+                                type="checkbox"
+                                id={`checkbox-${card.id}`}
+                                checked={card.isCompleted}
+                                className="peer cursor-pointer"
+                            />
+                            <label htmlFor={`checkbox-${card.id}`} />
+
+                        </div>
+                    )}
+                    
+                    <div 
+                        className="line-clamp-2"
+                        style={{color: card.textColor === "dark" ? "#000000" : "#fff"}}
                     >
-                        <Clock size={11} />
-                        Срок
-                    </span>
-                    <AlignJustify size={14} className="text-gray-500" />
+                        {board.title}
+                    </div>
+
+                </div>
+                <div className={`flex items-center gap-3 rounded
+                        ${card.isImage ? "bg-black/50 text-white" : "text-[#9fadbc]"}
+                    `}>
+                    {card.dueDate && (
+                        <span
+                            className="flex items-center gap-1.5 px-2 py-0.5 rounded text-xs"
+                            style={{ backgroundColor: "#2d2000", color: "#f59e0b", border: "1px solid #92400e" }}
+                        >
+                            <Clock size={11} />
+                            Срок {formatDueDate(card.dueDate)}
+                        </span>
+                    )}
+
+                    {card.description && (
+                        <span className="flex items-center gap-1 text-xs">
+                            <AlignLeft size={12} />
+                        </span>
+                    )}
+
+                    {card.attachments && card.attachments.length > 0 && (
+                        <span className="flex items-center gap-1 text-xs">
+                            <Paperclip size={12} />{card.attachments.length + (card.links?.length ?? 0)}
+                        </span>
+                    )}
+
+                    {card.comments && card.comments.length > 0 && (
+                        <span className="flex items-center gap-1 text-xs">
+                            <MessageSquare size={12} />{(card.comments.length)}
+                        </span>
+                    )}
+
                 </div>
             </div>
         </div>
@@ -97,7 +157,7 @@ export function AttentionTaskCard({ card, onComplete, onDismiss }: AttentionTask
                     query: { openCardPath },
                 }}
             >
-                <CardBg board={board} />
+                <CardBg card={card} board={board} />
             </Link>
 
             <CardFooterBreadcrumb board={board} column={column} />
@@ -144,6 +204,7 @@ interface HighlightTaskCardProps {
 }
 
 export function HighlightTaskCard({ card, onComment }: HighlightTaskCardProps) {
+    const { data: session } = useSession();
     const { column } = card;
     const { board } = column;
 
@@ -186,7 +247,7 @@ export function HighlightTaskCard({ card, onComment }: HighlightTaskCardProps) {
                     query: { openCardPath },
                 }}
             >
-                <CardBg board={board} />
+                <CardBg card={card} board={board} />
             </Link>
 
             <CardFooterBreadcrumb board={board} column={column} />
@@ -221,19 +282,43 @@ export function HighlightTaskCard({ card, onComment }: HighlightTaskCardProps) {
 
 
             {comments.length > 0 && (
-                <div className="px-4 pb-2 flex flex-col gap-2" style={{ backgroundColor: "#2c2e33" }}>
-                    {comments.map((c, i) => (
-                        <div key={i} className="flex gap-2 items-start">
-                            <div className="w-6 h-6 rounded-full bg-linear-to-br from-[#4bce97] to-[#0052cc] flex items-center justify-center text-[9px] font-bold text-white shrink-0 mt-0.5">
-                                {initials}
-                            </div>
+                <div className="px-4 pb-2 flex flex-col gap-3 bg-[#2c2e33]">
+                    {comments.map((c, i) => {
+                        const isOwner = session?.user?.id === c.user?.id;
+
+                        return (
                             <div
-                                className="flex-1 rounded-md px-3 py-2 text-sm text-gray-300 items-center"
+                                key={i}
+                                className={`flex w-full gap-2 ${isOwner ? "justify-end" : "justify-start"
+                                    }`}
                             >
-                                {c.text}
+                                {!isOwner && (
+                                    <div className="w-6 h-6 rounded-full bg-linear-to-br from-[#4bce97] to-[#0052cc] flex items-center justify-center text-[9px] font-bold text-white shrink-0 mt-1">
+                                        {c.initials || "CC"}
+                                    </div>
+                                )}
+
+                                <div
+                                    className="max-w-[70%] px-3 py-2 rounded-lg text-gray-200 text-sm min-w-0 wrap-break-word whitespace-pre-wrap"
+                                >
+                                    <div>{c.text || c.activityText}</div>
+                                    
+                                    <div
+                                        className={`text-[10px] opacity-60 mt-1 ${isOwner ? "text-right" : "text-left"}`}
+                                    >
+                                        {c.authorName}
+                                    </div>
+                                </div>
+
+
+                                {isOwner && (
+                                    <div className="w-6 h-6 rounded-full bg-linear-to-br from-[#4bce97] to-[#0052cc] flex items-center justify-center text-[9px] font-bold text-white shrink-0 mt-1">
+                                        {c.initials || "CC"}
+                                    </div>
+                                )}
                             </div>
-                        </div>
-                    ))}
+                        );
+                    })}
                 </div>
             )}
 

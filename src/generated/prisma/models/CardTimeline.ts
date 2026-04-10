@@ -27,6 +27,7 @@ export type AggregateCardTimeline = {
 export type CardTimelineMinAggregateOutputType = {
   id: string | null
   cardId: string | null
+  userId: string | null
   type: $Enums.CardTimelineType | null
   authorName: string | null
   initials: string | null
@@ -39,6 +40,7 @@ export type CardTimelineMinAggregateOutputType = {
 export type CardTimelineMaxAggregateOutputType = {
   id: string | null
   cardId: string | null
+  userId: string | null
   type: $Enums.CardTimelineType | null
   authorName: string | null
   initials: string | null
@@ -51,6 +53,7 @@ export type CardTimelineMaxAggregateOutputType = {
 export type CardTimelineCountAggregateOutputType = {
   id: number
   cardId: number
+  userId: number
   type: number
   authorName: number
   initials: number
@@ -65,6 +68,7 @@ export type CardTimelineCountAggregateOutputType = {
 export type CardTimelineMinAggregateInputType = {
   id?: true
   cardId?: true
+  userId?: true
   type?: true
   authorName?: true
   initials?: true
@@ -77,6 +81,7 @@ export type CardTimelineMinAggregateInputType = {
 export type CardTimelineMaxAggregateInputType = {
   id?: true
   cardId?: true
+  userId?: true
   type?: true
   authorName?: true
   initials?: true
@@ -89,6 +94,7 @@ export type CardTimelineMaxAggregateInputType = {
 export type CardTimelineCountAggregateInputType = {
   id?: true
   cardId?: true
+  userId?: true
   type?: true
   authorName?: true
   initials?: true
@@ -174,6 +180,7 @@ export type CardTimelineGroupByArgs<ExtArgs extends runtime.Types.Extensions.Int
 export type CardTimelineGroupByOutputType = {
   id: string
   cardId: string
+  userId: string | null
   type: $Enums.CardTimelineType
   authorName: string
   initials: string | null
@@ -207,6 +214,7 @@ export type CardTimelineWhereInput = {
   NOT?: Prisma.CardTimelineWhereInput | Prisma.CardTimelineWhereInput[]
   id?: Prisma.StringFilter<"CardTimeline"> | string
   cardId?: Prisma.StringFilter<"CardTimeline"> | string
+  userId?: Prisma.StringNullableFilter<"CardTimeline"> | string | null
   type?: Prisma.EnumCardTimelineTypeFilter<"CardTimeline"> | $Enums.CardTimelineType
   authorName?: Prisma.StringFilter<"CardTimeline"> | string
   initials?: Prisma.StringNullableFilter<"CardTimeline"> | string | null
@@ -215,11 +223,13 @@ export type CardTimelineWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"CardTimeline"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CardTimeline"> | Date | string
   card?: Prisma.XOR<Prisma.CardScalarRelationFilter, Prisma.CardWhereInput>
+  user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }
 
 export type CardTimelineOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   cardId?: Prisma.SortOrder
+  userId?: Prisma.SortOrderInput | Prisma.SortOrder
   type?: Prisma.SortOrder
   authorName?: Prisma.SortOrder
   initials?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -228,6 +238,7 @@ export type CardTimelineOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   card?: Prisma.CardOrderByWithRelationInput
+  user?: Prisma.UserOrderByWithRelationInput
 }
 
 export type CardTimelineWhereUniqueInput = Prisma.AtLeast<{
@@ -236,6 +247,7 @@ export type CardTimelineWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.CardTimelineWhereInput[]
   NOT?: Prisma.CardTimelineWhereInput | Prisma.CardTimelineWhereInput[]
   cardId?: Prisma.StringFilter<"CardTimeline"> | string
+  userId?: Prisma.StringNullableFilter<"CardTimeline"> | string | null
   type?: Prisma.EnumCardTimelineTypeFilter<"CardTimeline"> | $Enums.CardTimelineType
   authorName?: Prisma.StringFilter<"CardTimeline"> | string
   initials?: Prisma.StringNullableFilter<"CardTimeline"> | string | null
@@ -244,11 +256,13 @@ export type CardTimelineWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"CardTimeline"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CardTimeline"> | Date | string
   card?: Prisma.XOR<Prisma.CardScalarRelationFilter, Prisma.CardWhereInput>
+  user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }, "id">
 
 export type CardTimelineOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   cardId?: Prisma.SortOrder
+  userId?: Prisma.SortOrderInput | Prisma.SortOrder
   type?: Prisma.SortOrder
   authorName?: Prisma.SortOrder
   initials?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -267,6 +281,7 @@ export type CardTimelineScalarWhereWithAggregatesInput = {
   NOT?: Prisma.CardTimelineScalarWhereWithAggregatesInput | Prisma.CardTimelineScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"CardTimeline"> | string
   cardId?: Prisma.StringWithAggregatesFilter<"CardTimeline"> | string
+  userId?: Prisma.StringNullableWithAggregatesFilter<"CardTimeline"> | string | null
   type?: Prisma.EnumCardTimelineTypeWithAggregatesFilter<"CardTimeline"> | $Enums.CardTimelineType
   authorName?: Prisma.StringWithAggregatesFilter<"CardTimeline"> | string
   initials?: Prisma.StringNullableWithAggregatesFilter<"CardTimeline"> | string | null
@@ -286,11 +301,13 @@ export type CardTimelineCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   card: Prisma.CardCreateNestedOneWithoutCommentsInput
+  user?: Prisma.UserCreateNestedOneWithoutCardTimelinesInput
 }
 
 export type CardTimelineUncheckedCreateInput = {
   id?: string
   cardId: string
+  userId?: string | null
   type?: $Enums.CardTimelineType
   authorName: string
   initials?: string | null
@@ -310,11 +327,13 @@ export type CardTimelineUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   card?: Prisma.CardUpdateOneRequiredWithoutCommentsNestedInput
+  user?: Prisma.UserUpdateOneWithoutCardTimelinesNestedInput
 }
 
 export type CardTimelineUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   cardId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumCardTimelineTypeFieldUpdateOperationsInput | $Enums.CardTimelineType
   authorName?: Prisma.StringFieldUpdateOperationsInput | string
   initials?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -327,6 +346,7 @@ export type CardTimelineUncheckedUpdateInput = {
 export type CardTimelineCreateManyInput = {
   id?: string
   cardId: string
+  userId?: string | null
   type?: $Enums.CardTimelineType
   authorName: string
   initials?: string | null
@@ -350,6 +370,7 @@ export type CardTimelineUpdateManyMutationInput = {
 export type CardTimelineUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   cardId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumCardTimelineTypeFieldUpdateOperationsInput | $Enums.CardTimelineType
   authorName?: Prisma.StringFieldUpdateOperationsInput | string
   initials?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -372,6 +393,7 @@ export type CardTimelineOrderByRelationAggregateInput = {
 export type CardTimelineCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   cardId?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
   type?: Prisma.SortOrder
   authorName?: Prisma.SortOrder
   initials?: Prisma.SortOrder
@@ -384,6 +406,7 @@ export type CardTimelineCountOrderByAggregateInput = {
 export type CardTimelineMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   cardId?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
   type?: Prisma.SortOrder
   authorName?: Prisma.SortOrder
   initials?: Prisma.SortOrder
@@ -396,6 +419,7 @@ export type CardTimelineMaxOrderByAggregateInput = {
 export type CardTimelineMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   cardId?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
   type?: Prisma.SortOrder
   authorName?: Prisma.SortOrder
   initials?: Prisma.SortOrder
@@ -403,6 +427,48 @@ export type CardTimelineMinOrderByAggregateInput = {
   activityText?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+}
+
+export type CardTimelineCreateNestedManyWithoutUserInput = {
+  create?: Prisma.XOR<Prisma.CardTimelineCreateWithoutUserInput, Prisma.CardTimelineUncheckedCreateWithoutUserInput> | Prisma.CardTimelineCreateWithoutUserInput[] | Prisma.CardTimelineUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.CardTimelineCreateOrConnectWithoutUserInput | Prisma.CardTimelineCreateOrConnectWithoutUserInput[]
+  createMany?: Prisma.CardTimelineCreateManyUserInputEnvelope
+  connect?: Prisma.CardTimelineWhereUniqueInput | Prisma.CardTimelineWhereUniqueInput[]
+}
+
+export type CardTimelineUncheckedCreateNestedManyWithoutUserInput = {
+  create?: Prisma.XOR<Prisma.CardTimelineCreateWithoutUserInput, Prisma.CardTimelineUncheckedCreateWithoutUserInput> | Prisma.CardTimelineCreateWithoutUserInput[] | Prisma.CardTimelineUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.CardTimelineCreateOrConnectWithoutUserInput | Prisma.CardTimelineCreateOrConnectWithoutUserInput[]
+  createMany?: Prisma.CardTimelineCreateManyUserInputEnvelope
+  connect?: Prisma.CardTimelineWhereUniqueInput | Prisma.CardTimelineWhereUniqueInput[]
+}
+
+export type CardTimelineUpdateManyWithoutUserNestedInput = {
+  create?: Prisma.XOR<Prisma.CardTimelineCreateWithoutUserInput, Prisma.CardTimelineUncheckedCreateWithoutUserInput> | Prisma.CardTimelineCreateWithoutUserInput[] | Prisma.CardTimelineUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.CardTimelineCreateOrConnectWithoutUserInput | Prisma.CardTimelineCreateOrConnectWithoutUserInput[]
+  upsert?: Prisma.CardTimelineUpsertWithWhereUniqueWithoutUserInput | Prisma.CardTimelineUpsertWithWhereUniqueWithoutUserInput[]
+  createMany?: Prisma.CardTimelineCreateManyUserInputEnvelope
+  set?: Prisma.CardTimelineWhereUniqueInput | Prisma.CardTimelineWhereUniqueInput[]
+  disconnect?: Prisma.CardTimelineWhereUniqueInput | Prisma.CardTimelineWhereUniqueInput[]
+  delete?: Prisma.CardTimelineWhereUniqueInput | Prisma.CardTimelineWhereUniqueInput[]
+  connect?: Prisma.CardTimelineWhereUniqueInput | Prisma.CardTimelineWhereUniqueInput[]
+  update?: Prisma.CardTimelineUpdateWithWhereUniqueWithoutUserInput | Prisma.CardTimelineUpdateWithWhereUniqueWithoutUserInput[]
+  updateMany?: Prisma.CardTimelineUpdateManyWithWhereWithoutUserInput | Prisma.CardTimelineUpdateManyWithWhereWithoutUserInput[]
+  deleteMany?: Prisma.CardTimelineScalarWhereInput | Prisma.CardTimelineScalarWhereInput[]
+}
+
+export type CardTimelineUncheckedUpdateManyWithoutUserNestedInput = {
+  create?: Prisma.XOR<Prisma.CardTimelineCreateWithoutUserInput, Prisma.CardTimelineUncheckedCreateWithoutUserInput> | Prisma.CardTimelineCreateWithoutUserInput[] | Prisma.CardTimelineUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.CardTimelineCreateOrConnectWithoutUserInput | Prisma.CardTimelineCreateOrConnectWithoutUserInput[]
+  upsert?: Prisma.CardTimelineUpsertWithWhereUniqueWithoutUserInput | Prisma.CardTimelineUpsertWithWhereUniqueWithoutUserInput[]
+  createMany?: Prisma.CardTimelineCreateManyUserInputEnvelope
+  set?: Prisma.CardTimelineWhereUniqueInput | Prisma.CardTimelineWhereUniqueInput[]
+  disconnect?: Prisma.CardTimelineWhereUniqueInput | Prisma.CardTimelineWhereUniqueInput[]
+  delete?: Prisma.CardTimelineWhereUniqueInput | Prisma.CardTimelineWhereUniqueInput[]
+  connect?: Prisma.CardTimelineWhereUniqueInput | Prisma.CardTimelineWhereUniqueInput[]
+  update?: Prisma.CardTimelineUpdateWithWhereUniqueWithoutUserInput | Prisma.CardTimelineUpdateWithWhereUniqueWithoutUserInput[]
+  updateMany?: Prisma.CardTimelineUpdateManyWithWhereWithoutUserInput | Prisma.CardTimelineUpdateManyWithWhereWithoutUserInput[]
+  deleteMany?: Prisma.CardTimelineScalarWhereInput | Prisma.CardTimelineScalarWhereInput[]
 }
 
 export type CardTimelineCreateNestedManyWithoutCardInput = {
@@ -451,8 +517,21 @@ export type EnumCardTimelineTypeFieldUpdateOperationsInput = {
   set?: $Enums.CardTimelineType
 }
 
-export type CardTimelineCreateWithoutCardInput = {
+export type CardTimelineCreateWithoutUserInput = {
   id?: string
+  type?: $Enums.CardTimelineType
+  authorName: string
+  initials?: string | null
+  text?: string | null
+  activityText?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  card: Prisma.CardCreateNestedOneWithoutCommentsInput
+}
+
+export type CardTimelineUncheckedCreateWithoutUserInput = {
+  id?: string
+  cardId: string
   type?: $Enums.CardTimelineType
   authorName: string
   initials?: string | null
@@ -462,8 +541,62 @@ export type CardTimelineCreateWithoutCardInput = {
   updatedAt?: Date | string
 }
 
+export type CardTimelineCreateOrConnectWithoutUserInput = {
+  where: Prisma.CardTimelineWhereUniqueInput
+  create: Prisma.XOR<Prisma.CardTimelineCreateWithoutUserInput, Prisma.CardTimelineUncheckedCreateWithoutUserInput>
+}
+
+export type CardTimelineCreateManyUserInputEnvelope = {
+  data: Prisma.CardTimelineCreateManyUserInput | Prisma.CardTimelineCreateManyUserInput[]
+}
+
+export type CardTimelineUpsertWithWhereUniqueWithoutUserInput = {
+  where: Prisma.CardTimelineWhereUniqueInput
+  update: Prisma.XOR<Prisma.CardTimelineUpdateWithoutUserInput, Prisma.CardTimelineUncheckedUpdateWithoutUserInput>
+  create: Prisma.XOR<Prisma.CardTimelineCreateWithoutUserInput, Prisma.CardTimelineUncheckedCreateWithoutUserInput>
+}
+
+export type CardTimelineUpdateWithWhereUniqueWithoutUserInput = {
+  where: Prisma.CardTimelineWhereUniqueInput
+  data: Prisma.XOR<Prisma.CardTimelineUpdateWithoutUserInput, Prisma.CardTimelineUncheckedUpdateWithoutUserInput>
+}
+
+export type CardTimelineUpdateManyWithWhereWithoutUserInput = {
+  where: Prisma.CardTimelineScalarWhereInput
+  data: Prisma.XOR<Prisma.CardTimelineUpdateManyMutationInput, Prisma.CardTimelineUncheckedUpdateManyWithoutUserInput>
+}
+
+export type CardTimelineScalarWhereInput = {
+  AND?: Prisma.CardTimelineScalarWhereInput | Prisma.CardTimelineScalarWhereInput[]
+  OR?: Prisma.CardTimelineScalarWhereInput[]
+  NOT?: Prisma.CardTimelineScalarWhereInput | Prisma.CardTimelineScalarWhereInput[]
+  id?: Prisma.StringFilter<"CardTimeline"> | string
+  cardId?: Prisma.StringFilter<"CardTimeline"> | string
+  userId?: Prisma.StringNullableFilter<"CardTimeline"> | string | null
+  type?: Prisma.EnumCardTimelineTypeFilter<"CardTimeline"> | $Enums.CardTimelineType
+  authorName?: Prisma.StringFilter<"CardTimeline"> | string
+  initials?: Prisma.StringNullableFilter<"CardTimeline"> | string | null
+  text?: Prisma.StringNullableFilter<"CardTimeline"> | string | null
+  activityText?: Prisma.StringNullableFilter<"CardTimeline"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"CardTimeline"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"CardTimeline"> | Date | string
+}
+
+export type CardTimelineCreateWithoutCardInput = {
+  id?: string
+  type?: $Enums.CardTimelineType
+  authorName: string
+  initials?: string | null
+  text?: string | null
+  activityText?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user?: Prisma.UserCreateNestedOneWithoutCardTimelinesInput
+}
+
 export type CardTimelineUncheckedCreateWithoutCardInput = {
   id?: string
+  userId?: string | null
   type?: $Enums.CardTimelineType
   authorName: string
   initials?: string | null
@@ -498,23 +631,57 @@ export type CardTimelineUpdateManyWithWhereWithoutCardInput = {
   data: Prisma.XOR<Prisma.CardTimelineUpdateManyMutationInput, Prisma.CardTimelineUncheckedUpdateManyWithoutCardInput>
 }
 
-export type CardTimelineScalarWhereInput = {
-  AND?: Prisma.CardTimelineScalarWhereInput | Prisma.CardTimelineScalarWhereInput[]
-  OR?: Prisma.CardTimelineScalarWhereInput[]
-  NOT?: Prisma.CardTimelineScalarWhereInput | Prisma.CardTimelineScalarWhereInput[]
-  id?: Prisma.StringFilter<"CardTimeline"> | string
-  cardId?: Prisma.StringFilter<"CardTimeline"> | string
-  type?: Prisma.EnumCardTimelineTypeFilter<"CardTimeline"> | $Enums.CardTimelineType
-  authorName?: Prisma.StringFilter<"CardTimeline"> | string
-  initials?: Prisma.StringNullableFilter<"CardTimeline"> | string | null
-  text?: Prisma.StringNullableFilter<"CardTimeline"> | string | null
-  activityText?: Prisma.StringNullableFilter<"CardTimeline"> | string | null
-  createdAt?: Prisma.DateTimeFilter<"CardTimeline"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"CardTimeline"> | Date | string
+export type CardTimelineCreateManyUserInput = {
+  id?: string
+  cardId: string
+  type?: $Enums.CardTimelineType
+  authorName: string
+  initials?: string | null
+  text?: string | null
+  activityText?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type CardTimelineUpdateWithoutUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumCardTimelineTypeFieldUpdateOperationsInput | $Enums.CardTimelineType
+  authorName?: Prisma.StringFieldUpdateOperationsInput | string
+  initials?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activityText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  card?: Prisma.CardUpdateOneRequiredWithoutCommentsNestedInput
+}
+
+export type CardTimelineUncheckedUpdateWithoutUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  cardId?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumCardTimelineTypeFieldUpdateOperationsInput | $Enums.CardTimelineType
+  authorName?: Prisma.StringFieldUpdateOperationsInput | string
+  initials?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activityText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type CardTimelineUncheckedUpdateManyWithoutUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  cardId?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumCardTimelineTypeFieldUpdateOperationsInput | $Enums.CardTimelineType
+  authorName?: Prisma.StringFieldUpdateOperationsInput | string
+  initials?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activityText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type CardTimelineCreateManyCardInput = {
   id?: string
+  userId?: string | null
   type?: $Enums.CardTimelineType
   authorName: string
   initials?: string | null
@@ -533,10 +700,12 @@ export type CardTimelineUpdateWithoutCardInput = {
   activityText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneWithoutCardTimelinesNestedInput
 }
 
 export type CardTimelineUncheckedUpdateWithoutCardInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumCardTimelineTypeFieldUpdateOperationsInput | $Enums.CardTimelineType
   authorName?: Prisma.StringFieldUpdateOperationsInput | string
   initials?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -548,6 +717,7 @@ export type CardTimelineUncheckedUpdateWithoutCardInput = {
 
 export type CardTimelineUncheckedUpdateManyWithoutCardInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumCardTimelineTypeFieldUpdateOperationsInput | $Enums.CardTimelineType
   authorName?: Prisma.StringFieldUpdateOperationsInput | string
   initials?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -562,6 +732,7 @@ export type CardTimelineUncheckedUpdateManyWithoutCardInput = {
 export type CardTimelineSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   cardId?: boolean
+  userId?: boolean
   type?: boolean
   authorName?: boolean
   initials?: boolean
@@ -570,11 +741,13 @@ export type CardTimelineSelect<ExtArgs extends runtime.Types.Extensions.Internal
   createdAt?: boolean
   updatedAt?: boolean
   card?: boolean | Prisma.CardDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.CardTimeline$userArgs<ExtArgs>
 }, ExtArgs["result"]["cardTimeline"]>
 
 export type CardTimelineSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   cardId?: boolean
+  userId?: boolean
   type?: boolean
   authorName?: boolean
   initials?: boolean
@@ -583,11 +756,13 @@ export type CardTimelineSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   createdAt?: boolean
   updatedAt?: boolean
   card?: boolean | Prisma.CardDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.CardTimeline$userArgs<ExtArgs>
 }, ExtArgs["result"]["cardTimeline"]>
 
 export type CardTimelineSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   cardId?: boolean
+  userId?: boolean
   type?: boolean
   authorName?: boolean
   initials?: boolean
@@ -596,11 +771,13 @@ export type CardTimelineSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   createdAt?: boolean
   updatedAt?: boolean
   card?: boolean | Prisma.CardDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.CardTimeline$userArgs<ExtArgs>
 }, ExtArgs["result"]["cardTimeline"]>
 
 export type CardTimelineSelectScalar = {
   id?: boolean
   cardId?: boolean
+  userId?: boolean
   type?: boolean
   authorName?: boolean
   initials?: boolean
@@ -610,25 +787,30 @@ export type CardTimelineSelectScalar = {
   updatedAt?: boolean
 }
 
-export type CardTimelineOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "cardId" | "type" | "authorName" | "initials" | "text" | "activityText" | "createdAt" | "updatedAt", ExtArgs["result"]["cardTimeline"]>
+export type CardTimelineOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "cardId" | "userId" | "type" | "authorName" | "initials" | "text" | "activityText" | "createdAt" | "updatedAt", ExtArgs["result"]["cardTimeline"]>
 export type CardTimelineInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   card?: boolean | Prisma.CardDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.CardTimeline$userArgs<ExtArgs>
 }
 export type CardTimelineIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   card?: boolean | Prisma.CardDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.CardTimeline$userArgs<ExtArgs>
 }
 export type CardTimelineIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   card?: boolean | Prisma.CardDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.CardTimeline$userArgs<ExtArgs>
 }
 
 export type $CardTimelinePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "CardTimeline"
   objects: {
     card: Prisma.$CardPayload<ExtArgs>
+    user: Prisma.$UserPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     cardId: string
+    userId: string | null
     type: $Enums.CardTimelineType
     authorName: string
     initials: string | null
@@ -1031,6 +1213,7 @@ readonly fields: CardTimelineFieldRefs;
 export interface Prisma__CardTimelineClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   card<T extends Prisma.CardDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CardDefaultArgs<ExtArgs>>): Prisma.Prisma__CardClient<runtime.Types.Result.GetResult<Prisma.$CardPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  user<T extends Prisma.CardTimeline$userArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CardTimeline$userArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1062,6 +1245,7 @@ export interface Prisma__CardTimelineClient<T, Null = never, ExtArgs extends run
 export interface CardTimelineFieldRefs {
   readonly id: Prisma.FieldRef<"CardTimeline", 'String'>
   readonly cardId: Prisma.FieldRef<"CardTimeline", 'String'>
+  readonly userId: Prisma.FieldRef<"CardTimeline", 'String'>
   readonly type: Prisma.FieldRef<"CardTimeline", 'CardTimelineType'>
   readonly authorName: Prisma.FieldRef<"CardTimeline", 'String'>
   readonly initials: Prisma.FieldRef<"CardTimeline", 'String'>
@@ -1465,6 +1649,25 @@ export type CardTimelineDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.
    * Limit how many CardTimelines to delete.
    */
   limit?: number
+}
+
+/**
+ * CardTimeline.user
+ */
+export type CardTimeline$userArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
 }
 
 /**

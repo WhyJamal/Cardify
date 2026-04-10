@@ -52,6 +52,7 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   User: 'User',
+  UserTaskAction: 'UserTaskAction',
   Workspace: 'Workspace',
   WorkspaceType: 'WorkspaceType',
   WorkspaceMember: 'WorkspaceMember',
@@ -65,8 +66,7 @@ export const ModelName = {
   CardLink: 'CardLink',
   CardTimeline: 'CardTimeline',
   CardMember: 'CardMember',
-  CardAttachment: 'CardAttachment',
-  UserTaskAction: 'UserTaskAction'
+  CardAttachment: 'CardAttachment'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -92,6 +92,18 @@ export const UserScalarFieldEnum = {
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const UserTaskActionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  cardId: 'cardId',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UserTaskActionScalarFieldEnum = (typeof UserTaskActionScalarFieldEnum)[keyof typeof UserTaskActionScalarFieldEnum]
 
 
 export const WorkspaceScalarFieldEnum = {
@@ -254,6 +266,7 @@ export type CardLinkScalarFieldEnum = (typeof CardLinkScalarFieldEnum)[keyof typ
 export const CardTimelineScalarFieldEnum = {
   id: 'id',
   cardId: 'cardId',
+  userId: 'userId',
   type: 'type',
   authorName: 'authorName',
   initials: 'initials',
@@ -288,18 +301,6 @@ export const CardAttachmentScalarFieldEnum = {
 } as const
 
 export type CardAttachmentScalarFieldEnum = (typeof CardAttachmentScalarFieldEnum)[keyof typeof CardAttachmentScalarFieldEnum]
-
-
-export const UserTaskActionScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  cardId: 'cardId',
-  status: 'status',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type UserTaskActionScalarFieldEnum = (typeof UserTaskActionScalarFieldEnum)[keyof typeof UserTaskActionScalarFieldEnum]
 
 
 export const SortOrder = {

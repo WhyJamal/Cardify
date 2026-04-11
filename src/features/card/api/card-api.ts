@@ -1,4 +1,5 @@
 import { clientFetch } from "@/lib/client-api";
+import { Location } from "@/shared/types";
 
 export const cardApi = {
   getTimeline: (cardId: string) =>
@@ -107,6 +108,17 @@ export const cardApi = {
   updateIsArchive: (cardId: string, isArchive: boolean) =>
     clientFetch(`/api/cards/${cardId}`, {
       method: "PATCH",
-      body: JSON.stringify({isArchive}),
+      body: JSON.stringify({ isArchive }),
+    }),
+
+  addLocation: (cardId: string, location: Location) =>
+    clientFetch(`/api/cards/${cardId}/map-location`, {
+      method: "POST",
+      body: JSON.stringify({ location })
+    }),
+
+  removeLocation: (cardId: string) =>
+    clientFetch(`/api/cards/${cardId}/map-location`, {
+      method: "DELETE"
     }),
 };

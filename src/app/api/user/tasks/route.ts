@@ -65,6 +65,7 @@ export async function GET(req: NextRequest) {
         attachments: true,
         members: { include: { user: true } },
         comments: true,
+        location: true,
       },
       orderBy: { dueDate: "asc" },
     });
@@ -97,6 +98,7 @@ export async function GET(req: NextRequest) {
         attachments: true,
         members: { include: { user: true } },
         comments: { include: { user: true } },
+        location: true,
       },
       orderBy: { updatedAt: "desc" },
     });

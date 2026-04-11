@@ -27,6 +27,8 @@ import { CreateLabelMenu } from "@features/card/components/create-label-menu";
 import CoverSettings from "@features/card/components/cover-settings";
 import CustomCheckbox from "@components/custom-checkbox";
 import MoveCardMenu from "@features/card/components/move-card-menu";
+import { LocationEditMenu } from "@/features/card/components/location-menu";
+import { LocationDisplay } from "@/features/card/components/location-display";
 
 export default function CardClient({
     cardId,
@@ -92,6 +94,13 @@ export default function CardClient({
         inviteDivRef,
         dateBtnRef,
         labelDivRef,
+
+        showLocationEdit,
+        setShowLocationEdit,
+        cardLocation,
+        setCardLocation,
+        handleSaveLocation,
+        handleRemoveLocation,
 
         addBtnRef,
         showMenu,
@@ -408,6 +417,16 @@ export default function CardClient({
                                 </p>
                             )}
 
+                            {cardLocation ? (
+                                <LocationDisplay
+                                    location={cardLocation}
+                                    boardId={board?.id ?? 911}
+                                    boardSlug={board?.title ?? ""}
+                                    onEdit={() => setShowLocationEdit(true)}
+                                    onRemove={handleRemoveLocation}
+                                />
+                            ) : null}
+
                             {card.attachments && card.attachments.length > 0 && (
                                 <ListAttachments initialCard={initialCard} cardId={cardId} />
                             )}
@@ -524,7 +543,6 @@ export default function CardClient({
                                                         {c.text}
                                                     </div>
                                                 )}
-
                                                 {editingCommentId !== c.id && (
                                                     <>
                                                         <div className="flex items-center text-xs text-[#9fadbc]">
@@ -648,6 +666,10 @@ export default function CardClient({
                     onOpenDates={handleOpenDates}
                     onOpenLabels={handleOpenLabels}
                     onOpenInvites={handleOpenInvites}
+                    onOpenLocation={() => {
+                        addMenu()
+                        setShowLocationEdit(true)
+                    }}
                 />
             )}
 
@@ -706,6 +728,15 @@ export default function CardClient({
                     onAdd={handleAddMember}
                     onRemove={handleRemoveMember}
                     onClose={handleCloseInvites}
+                />
+            )}
+
+            {showLocationEdit && (
+                <LocationEditMenu
+                    triggerRef={addBtnRef}
+                    currentLocation={cardLocation}
+                    onSave={handleSaveLocation}
+                    onClose={() => setShowLocationEdit(false)}
                 />
             )}
 

@@ -30,6 +30,7 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ id: 
           }
         },
         attachments: true,
+        location: true,
         column: {
           include: {
             board: {

@@ -1,6 +1,6 @@
 "use client"
 
-import { X, Tag, Clock, User } from 'lucide-react';
+import { X, Tag, Clock, User, MapPin } from 'lucide-react';
 import { useEffect, useRef } from 'react';
 import { calcBelowPosition } from '@utils/floatingPosition';
 import { createPortal } from "react-dom";
@@ -18,9 +18,10 @@ interface AddToCardMenuProps {
     onOpenDates: () => void;
     onOpenLabels: () => void;
     onOpenInvites: () => void;
+    onOpenLocation: () => void;
 }
 
-export function AddToCardMenu({ triggerRef, onClose, onOpenDates, onOpenLabels, onOpenInvites }: AddToCardMenuProps) {
+export function AddToCardMenu({ triggerRef, onClose, onOpenDates, onOpenLabels, onOpenInvites, onOpenLocation }: AddToCardMenuProps) {
 
     const PANEL_WIDTH = 320;
     const PANEL_HEIGHT = 260;
@@ -72,6 +73,12 @@ export function AddToCardMenu({ triggerRef, onClose, onOpenDates, onOpenLabels, 
             title: 'Участники',
             description: 'Назначайте участников',
             onClick: onOpenInvites,
+        },
+        {
+            icon: <MapPin className="w-5 h-5" />,
+            title: 'Местоположение',
+            description: 'Показать эту карточку на карте',
+            onClick: onOpenLocation,
         },
     ];
 

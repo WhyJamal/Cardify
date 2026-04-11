@@ -1,6 +1,6 @@
 "use client";
 
-import { Eye, Paperclip, CheckSquare, AlignLeft, ExternalLink, Pencil, Clock, Archive } from "lucide-react";
+import { Eye, Paperclip, CheckSquare, AlignLeft, ExternalLink, Pencil, Clock, Archive, MapPin } from "lucide-react";
 import { useRef, useEffect, useState } from "react";
 import { useDrag, useDrop, useDragLayer } from "react-dnd";
 import { getEmptyImage } from "react-dnd-html5-backend";
@@ -169,6 +169,12 @@ export function CardContent({
               {card.attachments && card.attachments.length > 0 && (
                 <span className="flex items-center gap-1 text-[#9fadbc] text-xs">
                   <Paperclip size={12} />{(card.attachments?.length ?? 0) + (card.links?.length ?? 0)}
+                </span>
+              )}
+
+              {card.location && (
+                <span className="flex items-center gap-1 text-[#9fadbc] text-xs">
+                  <MapPin size={12} />
                 </span>
               )}
 

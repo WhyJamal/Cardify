@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
-import type { CardData, CardMember, CardTimeline, User } from "@shared/types";
+import type { CardData, CardMember, CardTimeline, Location, User } from "@shared/types";
 import { cardApi } from "@features/card/api/card-api";
 import { useCardActions } from "@hooks/use-card-actions";
 import { useBoardView } from "@/app/providers/BoardProvider";
@@ -49,6 +49,11 @@ export function useCardClient(initialCard: CardData, cardId: string) {
     const [showInvite, setShowInvite] = useState(false);
 
     const [showAttach, setShowAttach] = useState(false);
+
+    const [showLocationEdit, setShowLocationEdit] = useState(false);
+    const [cardLocation, setCardLocation] = useState<Location | null>(
+        initialCard.location ?? null
+    );
 
     useEscapeKey(() => router.back(), true);
 
@@ -261,6 +266,22 @@ export function useCardClient(initialCard: CardData, cardId: string) {
         [cardId, setColumns]
     );
 
+
+    const handleSaveLocation = async (location: Location) => {
+        setShowLocationEdit(false);
+        setCardLocation(location);
+        setCard((prev) => prev ? { ...prev, location } : prev);
+
+        await cardApi.addLocation(cardId, location);
+    };
+
+    const handleRemoveLocation = async () => {
+        setCardLocation(null);
+        //setCard((prev) => prev ? { ...prev, location: null } : prev);
+
+        await cardApi.removeLocation(cardId);
+    };
+
     const handleDeleteComment = async (cardId: string, commentId: string) => {
         cardApi.deleteComment(cardId, commentId);
         setComments(prev => prev.filter(f => f.id !== commentId));
@@ -407,6 +428,13 @@ export function useCardClient(initialCard: CardData, cardId: string) {
         inviteDivRef,
         dateBtnRef,
         labelDivRef,
+
+        showLocationEdit,
+        setShowLocationEdit,
+        cardLocation,
+        setCardLocation,
+        handleSaveLocation,
+        handleRemoveLocation,
 
         addBtnRef,
         showMenu,

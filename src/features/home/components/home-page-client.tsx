@@ -8,6 +8,7 @@ import { RecentBoardsSidebar } from "./recent-boards-sidebar";
 import { clientFetch } from "@/lib/client-api";
 import Image from "next/image";
 import { cardApi } from "@/features/card/api/card-api";
+import { useCardActions } from "@/shared/hooks/use-card-actions";
 
 const INITIAL_VISIBLE = 1;
 
@@ -25,6 +26,7 @@ export function HomePageClient({
     const [attentionCards, setAttentionCards] = useState<CardData[]>(initialAttentionCards);
     const [highlightCards, setHighlightCards] = useState<CardData[]>(initialHighlightCards);
     const [showAllAttention, setShowAllAttention] = useState(false);
+    const { toggleIsCompleted } = useCardActions();
 
     const handleTaskAction = async (cardId: string, status: TaskActionStatus) => {
         try {
@@ -33,7 +35,11 @@ export function HomePageClient({
                 body: JSON.stringify({ status }),
             });
 
-            if (status === "COMPLETED" || status === "DISMISSED") {
+            if (status === "COMPLETED") {
+                await toggleIsCompleted(cardId, true);
+            }
+
+            if (status === "DISMISSED") {
                 setAttentionCards((prev) => prev.filter((c) => c.id !== cardId));
             }
             if (status === "PENDING") {
@@ -77,6 +83,7 @@ export function HomePageClient({
                                         card={card}
                                         onComplete={() => handleTaskAction(card.id, "COMPLETED")}
                                         onDismiss={() => handleTaskAction(card.id, "DISMISSED")}
+                                        onComment={handleRepeatSubmit}
                                     />
                                 ))}
 

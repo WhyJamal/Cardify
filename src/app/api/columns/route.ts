@@ -47,6 +47,7 @@ export async function GET(req: NextRequest) {
               links: true,
               members: { include: { user: true } },
               attachments: true,
+              location: true,
             },
           },
         },

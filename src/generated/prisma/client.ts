@@ -121,3 +121,8 @@ export type CardMember = Prisma.CardMemberModel
  * 
  */
 export type CardAttachment = Prisma.CardAttachmentModel
+/**
+ * Model Location
+ * 
+ */
+export type Location = Prisma.LocationModel

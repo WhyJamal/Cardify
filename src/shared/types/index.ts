@@ -87,7 +87,7 @@ export interface CardTimeline {
   text: string | null;
   activityText: string | null;
   user: User;
-  
+
   createdAt: string;
   updatedAt: string;
 }
@@ -95,8 +95,8 @@ export interface CardTimeline {
 export interface CardMember {
   id: string;
   activityText?: string;
-  createdAt: string;
-  
+  createdAt?: string;
+
   user: User;
 }
 
@@ -109,6 +109,13 @@ export interface CardAttachment {
   mimeType?: string | null;
   uploadedBy?: string | null;
   createdAt: string;
+}
+
+export interface Location {
+  name: string;
+  fullAddress: string;
+  lat: number;
+  lng: number;
 }
 
 export type SizeOption = "WIDE" | "TALL";
@@ -142,6 +149,8 @@ export interface CardData {
 
   attachments: CardAttachment[];
   column: ColumnInt;
+
+  location?: Location;
 
   dueDate?: string | null;
   isCompleted: boolean;
@@ -185,7 +194,7 @@ export interface Board {
   visibility: Visibility;
 
   workspace: Workspace;
-  
+
   columns: ColumnInt[];
   labels: BoardLabel[];
   members: BoardMember[];

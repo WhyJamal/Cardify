@@ -66,7 +66,8 @@ export const ModelName = {
   CardLink: 'CardLink',
   CardTimeline: 'CardTimeline',
   CardMember: 'CardMember',
-  CardAttachment: 'CardAttachment'
+  CardAttachment: 'CardAttachment',
+  Location: 'Location'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -236,6 +237,7 @@ export const CardScalarFieldEnum = {
   size: 'size',
   textColor: 'textColor',
   isArchive: 'isArchive',
+  locationId: 'locationId',
   ownerId: 'ownerId'
 } as const
 
@@ -303,6 +305,19 @@ export const CardAttachmentScalarFieldEnum = {
 } as const
 
 export type CardAttachmentScalarFieldEnum = (typeof CardAttachmentScalarFieldEnum)[keyof typeof CardAttachmentScalarFieldEnum]
+
+
+export const LocationScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  fullAddress: 'fullAddress',
+  lat: 'lat',
+  lng: 'lng',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type LocationScalarFieldEnum = (typeof LocationScalarFieldEnum)[keyof typeof LocationScalarFieldEnum]
 
 
 export const SortOrder = {

@@ -1,7 +1,7 @@
 import { formatDueDate } from "@utils/date";
 import { getInitials } from "@shared/utils/getInitials";
 import { CardData } from "@shared/types";
-import { AlignLeft, Archive, Clock, MessageSquare, Paperclip } from "lucide-react";
+import { AlignLeft, Archive, Clock, MapPin, MessageSquare, Paperclip } from "lucide-react";
 
 function CardBg({ card, board }: { card: CardData; board: CardData["column"]["board"] }) {
     return (
@@ -48,31 +48,38 @@ function CardBg({ card, board }: { card: CardData; board: CardData["column"]["bo
                     </div>
                 </div>
                 <div className="flex items-center justify-between">
-                    <div className={`flex gap-2 px-2 rounded-md ${card.isImage ? "bg-black/50 text-white" : "text-[#9fadbc]"}`}>
+                    <div className={`flex gap-2 px-2 rounded-md text-[13px] ${card.isImage ? "bg-black/50 text-white" : "text-[#9fadbc]"}`}>
                         {card.dueDate && (
-                            <span className="flex items-center gap-1.5 rounded text-xs">
+                            <span className="flex items-center gap-1.5 rounded">
                                 <Clock size={11} />
                                 {formatDueDate(card.dueDate)}
                             </span>
                         )}
                         {card.description && (
-                            <span className="flex items-center gap-1 text-xs"><AlignLeft size={12} /></span>
+                            <span className="flex items-center gap-1"><AlignLeft size={12} /></span>
                         )}
                         {card.attachments && card.attachments.length > 0 && (
-                            <span className="flex items-center gap-1 text-xs">
+                            <span className="flex items-center gap-1">
                                 <Paperclip size={12} />{card.attachments.length + (card.links?.length ?? 0)}
                             </span>
                         )}
                         {card.comments && card.comments.length > 0 && (
-                            <span className="flex items-center gap-1 text-xs">
+                            <span className="flex items-center gap-1">
                                 <MessageSquare size={12} />{card.comments.length}
                             </span>
                         )}
                         {card.isArchive && (
-                            <span className="flex items-center gap-1 text-xs">
+                            <span className="flex items-center gap-1">
                                 <Archive size={12} />Архивировано
                             </span>
                         )}
+
+                        {card.location && (
+                            <span className="flex items-center gap-1">
+                                <MapPin size={12} />
+                            </span>
+                        )}
+
                     </div>
                     <div className="flex -space-x-1.5">
                         {card.members?.map((member) => (

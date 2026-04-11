@@ -18,7 +18,7 @@ function CardFooterBreadcrumb({ board, column }: { board: CardData["column"]["bo
     const workspaceName = board.workspace?.name || "Cardify";
     return (
         <div className="px-4 py-2 text-xs" style={{ backgroundColor: "#252629", color: "#6c9bd1" }}>
-            <span>Рабочее пространство {workspaceName}</span>
+            <span>{workspaceName}</span>
             <span className="text-gray-500 mx-1">|</span>
             <span style={{ color: "#6c9bd1", fontWeight: 600 }}>
                 {board.title}: {column.title}

@@ -14,4 +14,6 @@ export const PAGES = {
     BOARD: (boardId: number, slug: string) => `/b/${boardId}/${slug}`,
     
     CARD: (cardId: string, slug: string) => `/c/${cardId}/${slug}`,
+
+    MAP: ( boardId: number, slug: string, lat: string, lng: string, zoom: string ) => `/b/${boardId}/${slug}/map/${lat}/${lng}/${zoom}`
 }

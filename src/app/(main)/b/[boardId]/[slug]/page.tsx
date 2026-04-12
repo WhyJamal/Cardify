@@ -9,11 +9,11 @@ import { Column, BottomNav, ColumnDragPreview } from "@components/";
 import { CardDragPreview } from "@components/card-drag-preview";
 import { useBoardView } from "@/app/providers/BoardProvider";
 import { useBoardActions } from "@hooks/use-board-actions";
-import { useOpenCardFromQuery } from "@hooks/use-open-card-from-query";
+import { useOpenQuery } from "@hooks/use-open-card-from-query";
 import { useCardActions } from "@hooks/use-card-actions";
 
 export default function BoardPage() {
-  useOpenCardFromQuery();
+  useOpenQuery();
 
   const { board, columns } = useBoardView();
 

@@ -363,6 +363,16 @@ export type UserUncheckedUpdateManyInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+export type UserScalarRelationFilter = {
+  is?: Prisma.UserWhereInput
+  isNot?: Prisma.UserWhereInput
+}
+
+export type UserNullableScalarRelationFilter = {
+  is?: Prisma.UserWhereInput | null
+  isNot?: Prisma.UserWhereInput | null
+}
+
 export type UserCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
@@ -388,84 +398,6 @@ export type UserMinOrderByAggregateInput = {
   password?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-}
-
-export type UserScalarRelationFilter = {
-  is?: Prisma.UserWhereInput
-  isNot?: Prisma.UserWhereInput
-}
-
-export type UserNullableScalarRelationFilter = {
-  is?: Prisma.UserWhereInput | null
-  isNot?: Prisma.UserWhereInput | null
-}
-
-export type StringFieldUpdateOperationsInput = {
-  set?: string
-}
-
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
-}
-
-export type DateTimeFieldUpdateOperationsInput = {
-  set?: Date | string
-}
-
-export type UserCreateNestedOneWithoutUserTaskActionsInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutUserTaskActionsInput, Prisma.UserUncheckedCreateWithoutUserTaskActionsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUserTaskActionsInput
-  connect?: Prisma.UserWhereUniqueInput
-}
-
-export type UserUpdateOneRequiredWithoutUserTaskActionsNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutUserTaskActionsInput, Prisma.UserUncheckedCreateWithoutUserTaskActionsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUserTaskActionsInput
-  upsert?: Prisma.UserUpsertWithoutUserTaskActionsInput
-  connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutUserTaskActionsInput, Prisma.UserUpdateWithoutUserTaskActionsInput>, Prisma.UserUncheckedUpdateWithoutUserTaskActionsInput>
-}
-
-export type UserCreateNestedOneWithoutOwnedWorkspacesInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutOwnedWorkspacesInput, Prisma.UserUncheckedCreateWithoutOwnedWorkspacesInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutOwnedWorkspacesInput
-  connect?: Prisma.UserWhereUniqueInput
-}
-
-export type UserUpdateOneRequiredWithoutOwnedWorkspacesNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutOwnedWorkspacesInput, Prisma.UserUncheckedCreateWithoutOwnedWorkspacesInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutOwnedWorkspacesInput
-  upsert?: Prisma.UserUpsertWithoutOwnedWorkspacesInput
-  connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutOwnedWorkspacesInput, Prisma.UserUpdateWithoutOwnedWorkspacesInput>, Prisma.UserUncheckedUpdateWithoutOwnedWorkspacesInput>
-}
-
-export type UserCreateNestedOneWithoutWorkspaceMembershipsInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutWorkspaceMembershipsInput, Prisma.UserUncheckedCreateWithoutWorkspaceMembershipsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutWorkspaceMembershipsInput
-  connect?: Prisma.UserWhereUniqueInput
-}
-
-export type UserUpdateOneRequiredWithoutWorkspaceMembershipsNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutWorkspaceMembershipsInput, Prisma.UserUncheckedCreateWithoutWorkspaceMembershipsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutWorkspaceMembershipsInput
-  upsert?: Prisma.UserUpsertWithoutWorkspaceMembershipsInput
-  connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutWorkspaceMembershipsInput, Prisma.UserUpdateWithoutWorkspaceMembershipsInput>, Prisma.UserUncheckedUpdateWithoutWorkspaceMembershipsInput>
-}
-
-export type UserCreateNestedOneWithoutNotificationsInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutNotificationsInput, Prisma.UserUncheckedCreateWithoutNotificationsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNotificationsInput
-  connect?: Prisma.UserWhereUniqueInput
-}
-
-export type UserUpdateOneRequiredWithoutNotificationsNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutNotificationsInput, Prisma.UserUncheckedCreateWithoutNotificationsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNotificationsInput
-  upsert?: Prisma.UserUpsertWithoutNotificationsInput
-  connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutNotificationsInput, Prisma.UserUpdateWithoutNotificationsInput>, Prisma.UserUncheckedUpdateWithoutNotificationsInput>
 }
 
 export type UserCreateNestedOneWithoutBoardsInput = {
@@ -542,340 +474,60 @@ export type UserUpdateOneRequiredWithoutCardMembershipsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCardMembershipsInput, Prisma.UserUpdateWithoutCardMembershipsInput>, Prisma.UserUncheckedUpdateWithoutCardMembershipsInput>
 }
 
-export type UserCreateWithoutUserTaskActionsInput = {
-  id?: string
-  name?: string | null
-  email: string
-  password: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  ownedWorkspaces?: Prisma.WorkspaceCreateNestedManyWithoutOwnerInput
-  workspaceMemberships?: Prisma.WorkspaceMemberCreateNestedManyWithoutUserInput
-  boards?: Prisma.BoardCreateNestedManyWithoutOwnerInput
-  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
-  boardMembers?: Prisma.BoardMemberCreateNestedManyWithoutUserInput
-  cardMemberships?: Prisma.CardMemberCreateNestedManyWithoutUserInput
-  cardTimelines?: Prisma.CardTimelineCreateNestedManyWithoutUserInput
-  ownedCards?: Prisma.CardCreateNestedManyWithoutOwnerInput
+export type UserCreateNestedOneWithoutNotificationsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutNotificationsInput, Prisma.UserUncheckedCreateWithoutNotificationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNotificationsInput
+  connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUncheckedCreateWithoutUserTaskActionsInput = {
-  id?: string
-  name?: string | null
-  email: string
-  password: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  ownedWorkspaces?: Prisma.WorkspaceUncheckedCreateNestedManyWithoutOwnerInput
-  workspaceMemberships?: Prisma.WorkspaceMemberUncheckedCreateNestedManyWithoutUserInput
-  boards?: Prisma.BoardUncheckedCreateNestedManyWithoutOwnerInput
-  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
-  boardMembers?: Prisma.BoardMemberUncheckedCreateNestedManyWithoutUserInput
-  cardMemberships?: Prisma.CardMemberUncheckedCreateNestedManyWithoutUserInput
-  cardTimelines?: Prisma.CardTimelineUncheckedCreateNestedManyWithoutUserInput
-  ownedCards?: Prisma.CardUncheckedCreateNestedManyWithoutOwnerInput
+export type UserUpdateOneRequiredWithoutNotificationsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutNotificationsInput, Prisma.UserUncheckedCreateWithoutNotificationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNotificationsInput
+  upsert?: Prisma.UserUpsertWithoutNotificationsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutNotificationsInput, Prisma.UserUpdateWithoutNotificationsInput>, Prisma.UserUncheckedUpdateWithoutNotificationsInput>
 }
 
-export type UserCreateOrConnectWithoutUserTaskActionsInput = {
-  where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutUserTaskActionsInput, Prisma.UserUncheckedCreateWithoutUserTaskActionsInput>
+export type UserCreateNestedOneWithoutUserTaskActionsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUserTaskActionsInput, Prisma.UserUncheckedCreateWithoutUserTaskActionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUserTaskActionsInput
+  connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUpsertWithoutUserTaskActionsInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutUserTaskActionsInput, Prisma.UserUncheckedUpdateWithoutUserTaskActionsInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutUserTaskActionsInput, Prisma.UserUncheckedCreateWithoutUserTaskActionsInput>
-  where?: Prisma.UserWhereInput
+export type UserUpdateOneRequiredWithoutUserTaskActionsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUserTaskActionsInput, Prisma.UserUncheckedCreateWithoutUserTaskActionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUserTaskActionsInput
+  upsert?: Prisma.UserUpsertWithoutUserTaskActionsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutUserTaskActionsInput, Prisma.UserUpdateWithoutUserTaskActionsInput>, Prisma.UserUncheckedUpdateWithoutUserTaskActionsInput>
 }
 
-export type UserUpdateToOneWithWhereWithoutUserTaskActionsInput = {
-  where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutUserTaskActionsInput, Prisma.UserUncheckedUpdateWithoutUserTaskActionsInput>
+export type UserCreateNestedOneWithoutOwnedWorkspacesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutOwnedWorkspacesInput, Prisma.UserUncheckedCreateWithoutOwnedWorkspacesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutOwnedWorkspacesInput
+  connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUpdateWithoutUserTaskActionsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  ownedWorkspaces?: Prisma.WorkspaceUpdateManyWithoutOwnerNestedInput
-  workspaceMemberships?: Prisma.WorkspaceMemberUpdateManyWithoutUserNestedInput
-  boards?: Prisma.BoardUpdateManyWithoutOwnerNestedInput
-  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
-  boardMembers?: Prisma.BoardMemberUpdateManyWithoutUserNestedInput
-  cardMemberships?: Prisma.CardMemberUpdateManyWithoutUserNestedInput
-  cardTimelines?: Prisma.CardTimelineUpdateManyWithoutUserNestedInput
-  ownedCards?: Prisma.CardUpdateManyWithoutOwnerNestedInput
+export type UserUpdateOneRequiredWithoutOwnedWorkspacesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutOwnedWorkspacesInput, Prisma.UserUncheckedCreateWithoutOwnedWorkspacesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutOwnedWorkspacesInput
+  upsert?: Prisma.UserUpsertWithoutOwnedWorkspacesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutOwnedWorkspacesInput, Prisma.UserUpdateWithoutOwnedWorkspacesInput>, Prisma.UserUncheckedUpdateWithoutOwnedWorkspacesInput>
 }
 
-export type UserUncheckedUpdateWithoutUserTaskActionsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  ownedWorkspaces?: Prisma.WorkspaceUncheckedUpdateManyWithoutOwnerNestedInput
-  workspaceMemberships?: Prisma.WorkspaceMemberUncheckedUpdateManyWithoutUserNestedInput
-  boards?: Prisma.BoardUncheckedUpdateManyWithoutOwnerNestedInput
-  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
-  boardMembers?: Prisma.BoardMemberUncheckedUpdateManyWithoutUserNestedInput
-  cardMemberships?: Prisma.CardMemberUncheckedUpdateManyWithoutUserNestedInput
-  cardTimelines?: Prisma.CardTimelineUncheckedUpdateManyWithoutUserNestedInput
-  ownedCards?: Prisma.CardUncheckedUpdateManyWithoutOwnerNestedInput
+export type UserCreateNestedOneWithoutWorkspaceMembershipsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutWorkspaceMembershipsInput, Prisma.UserUncheckedCreateWithoutWorkspaceMembershipsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutWorkspaceMembershipsInput
+  connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserCreateWithoutOwnedWorkspacesInput = {
-  id?: string
-  name?: string | null
-  email: string
-  password: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  workspaceMemberships?: Prisma.WorkspaceMemberCreateNestedManyWithoutUserInput
-  boards?: Prisma.BoardCreateNestedManyWithoutOwnerInput
-  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
-  boardMembers?: Prisma.BoardMemberCreateNestedManyWithoutUserInput
-  cardMemberships?: Prisma.CardMemberCreateNestedManyWithoutUserInput
-  userTaskActions?: Prisma.UserTaskActionCreateNestedManyWithoutUserInput
-  cardTimelines?: Prisma.CardTimelineCreateNestedManyWithoutUserInput
-  ownedCards?: Prisma.CardCreateNestedManyWithoutOwnerInput
-}
-
-export type UserUncheckedCreateWithoutOwnedWorkspacesInput = {
-  id?: string
-  name?: string | null
-  email: string
-  password: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  workspaceMemberships?: Prisma.WorkspaceMemberUncheckedCreateNestedManyWithoutUserInput
-  boards?: Prisma.BoardUncheckedCreateNestedManyWithoutOwnerInput
-  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
-  boardMembers?: Prisma.BoardMemberUncheckedCreateNestedManyWithoutUserInput
-  cardMemberships?: Prisma.CardMemberUncheckedCreateNestedManyWithoutUserInput
-  userTaskActions?: Prisma.UserTaskActionUncheckedCreateNestedManyWithoutUserInput
-  cardTimelines?: Prisma.CardTimelineUncheckedCreateNestedManyWithoutUserInput
-  ownedCards?: Prisma.CardUncheckedCreateNestedManyWithoutOwnerInput
-}
-
-export type UserCreateOrConnectWithoutOwnedWorkspacesInput = {
-  where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutOwnedWorkspacesInput, Prisma.UserUncheckedCreateWithoutOwnedWorkspacesInput>
-}
-
-export type UserUpsertWithoutOwnedWorkspacesInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutOwnedWorkspacesInput, Prisma.UserUncheckedUpdateWithoutOwnedWorkspacesInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutOwnedWorkspacesInput, Prisma.UserUncheckedCreateWithoutOwnedWorkspacesInput>
-  where?: Prisma.UserWhereInput
-}
-
-export type UserUpdateToOneWithWhereWithoutOwnedWorkspacesInput = {
-  where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutOwnedWorkspacesInput, Prisma.UserUncheckedUpdateWithoutOwnedWorkspacesInput>
-}
-
-export type UserUpdateWithoutOwnedWorkspacesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  workspaceMemberships?: Prisma.WorkspaceMemberUpdateManyWithoutUserNestedInput
-  boards?: Prisma.BoardUpdateManyWithoutOwnerNestedInput
-  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
-  boardMembers?: Prisma.BoardMemberUpdateManyWithoutUserNestedInput
-  cardMemberships?: Prisma.CardMemberUpdateManyWithoutUserNestedInput
-  userTaskActions?: Prisma.UserTaskActionUpdateManyWithoutUserNestedInput
-  cardTimelines?: Prisma.CardTimelineUpdateManyWithoutUserNestedInput
-  ownedCards?: Prisma.CardUpdateManyWithoutOwnerNestedInput
-}
-
-export type UserUncheckedUpdateWithoutOwnedWorkspacesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  workspaceMemberships?: Prisma.WorkspaceMemberUncheckedUpdateManyWithoutUserNestedInput
-  boards?: Prisma.BoardUncheckedUpdateManyWithoutOwnerNestedInput
-  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
-  boardMembers?: Prisma.BoardMemberUncheckedUpdateManyWithoutUserNestedInput
-  cardMemberships?: Prisma.CardMemberUncheckedUpdateManyWithoutUserNestedInput
-  userTaskActions?: Prisma.UserTaskActionUncheckedUpdateManyWithoutUserNestedInput
-  cardTimelines?: Prisma.CardTimelineUncheckedUpdateManyWithoutUserNestedInput
-  ownedCards?: Prisma.CardUncheckedUpdateManyWithoutOwnerNestedInput
-}
-
-export type UserCreateWithoutWorkspaceMembershipsInput = {
-  id?: string
-  name?: string | null
-  email: string
-  password: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  ownedWorkspaces?: Prisma.WorkspaceCreateNestedManyWithoutOwnerInput
-  boards?: Prisma.BoardCreateNestedManyWithoutOwnerInput
-  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
-  boardMembers?: Prisma.BoardMemberCreateNestedManyWithoutUserInput
-  cardMemberships?: Prisma.CardMemberCreateNestedManyWithoutUserInput
-  userTaskActions?: Prisma.UserTaskActionCreateNestedManyWithoutUserInput
-  cardTimelines?: Prisma.CardTimelineCreateNestedManyWithoutUserInput
-  ownedCards?: Prisma.CardCreateNestedManyWithoutOwnerInput
-}
-
-export type UserUncheckedCreateWithoutWorkspaceMembershipsInput = {
-  id?: string
-  name?: string | null
-  email: string
-  password: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  ownedWorkspaces?: Prisma.WorkspaceUncheckedCreateNestedManyWithoutOwnerInput
-  boards?: Prisma.BoardUncheckedCreateNestedManyWithoutOwnerInput
-  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
-  boardMembers?: Prisma.BoardMemberUncheckedCreateNestedManyWithoutUserInput
-  cardMemberships?: Prisma.CardMemberUncheckedCreateNestedManyWithoutUserInput
-  userTaskActions?: Prisma.UserTaskActionUncheckedCreateNestedManyWithoutUserInput
-  cardTimelines?: Prisma.CardTimelineUncheckedCreateNestedManyWithoutUserInput
-  ownedCards?: Prisma.CardUncheckedCreateNestedManyWithoutOwnerInput
-}
-
-export type UserCreateOrConnectWithoutWorkspaceMembershipsInput = {
-  where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutWorkspaceMembershipsInput, Prisma.UserUncheckedCreateWithoutWorkspaceMembershipsInput>
-}
-
-export type UserUpsertWithoutWorkspaceMembershipsInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutWorkspaceMembershipsInput, Prisma.UserUncheckedUpdateWithoutWorkspaceMembershipsInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutWorkspaceMembershipsInput, Prisma.UserUncheckedCreateWithoutWorkspaceMembershipsInput>
-  where?: Prisma.UserWhereInput
-}
-
-export type UserUpdateToOneWithWhereWithoutWorkspaceMembershipsInput = {
-  where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutWorkspaceMembershipsInput, Prisma.UserUncheckedUpdateWithoutWorkspaceMembershipsInput>
-}
-
-export type UserUpdateWithoutWorkspaceMembershipsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  ownedWorkspaces?: Prisma.WorkspaceUpdateManyWithoutOwnerNestedInput
-  boards?: Prisma.BoardUpdateManyWithoutOwnerNestedInput
-  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
-  boardMembers?: Prisma.BoardMemberUpdateManyWithoutUserNestedInput
-  cardMemberships?: Prisma.CardMemberUpdateManyWithoutUserNestedInput
-  userTaskActions?: Prisma.UserTaskActionUpdateManyWithoutUserNestedInput
-  cardTimelines?: Prisma.CardTimelineUpdateManyWithoutUserNestedInput
-  ownedCards?: Prisma.CardUpdateManyWithoutOwnerNestedInput
-}
-
-export type UserUncheckedUpdateWithoutWorkspaceMembershipsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  ownedWorkspaces?: Prisma.WorkspaceUncheckedUpdateManyWithoutOwnerNestedInput
-  boards?: Prisma.BoardUncheckedUpdateManyWithoutOwnerNestedInput
-  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
-  boardMembers?: Prisma.BoardMemberUncheckedUpdateManyWithoutUserNestedInput
-  cardMemberships?: Prisma.CardMemberUncheckedUpdateManyWithoutUserNestedInput
-  userTaskActions?: Prisma.UserTaskActionUncheckedUpdateManyWithoutUserNestedInput
-  cardTimelines?: Prisma.CardTimelineUncheckedUpdateManyWithoutUserNestedInput
-  ownedCards?: Prisma.CardUncheckedUpdateManyWithoutOwnerNestedInput
-}
-
-export type UserCreateWithoutNotificationsInput = {
-  id?: string
-  name?: string | null
-  email: string
-  password: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  ownedWorkspaces?: Prisma.WorkspaceCreateNestedManyWithoutOwnerInput
-  workspaceMemberships?: Prisma.WorkspaceMemberCreateNestedManyWithoutUserInput
-  boards?: Prisma.BoardCreateNestedManyWithoutOwnerInput
-  boardMembers?: Prisma.BoardMemberCreateNestedManyWithoutUserInput
-  cardMemberships?: Prisma.CardMemberCreateNestedManyWithoutUserInput
-  userTaskActions?: Prisma.UserTaskActionCreateNestedManyWithoutUserInput
-  cardTimelines?: Prisma.CardTimelineCreateNestedManyWithoutUserInput
-  ownedCards?: Prisma.CardCreateNestedManyWithoutOwnerInput
-}
-
-export type UserUncheckedCreateWithoutNotificationsInput = {
-  id?: string
-  name?: string | null
-  email: string
-  password: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  ownedWorkspaces?: Prisma.WorkspaceUncheckedCreateNestedManyWithoutOwnerInput
-  workspaceMemberships?: Prisma.WorkspaceMemberUncheckedCreateNestedManyWithoutUserInput
-  boards?: Prisma.BoardUncheckedCreateNestedManyWithoutOwnerInput
-  boardMembers?: Prisma.BoardMemberUncheckedCreateNestedManyWithoutUserInput
-  cardMemberships?: Prisma.CardMemberUncheckedCreateNestedManyWithoutUserInput
-  userTaskActions?: Prisma.UserTaskActionUncheckedCreateNestedManyWithoutUserInput
-  cardTimelines?: Prisma.CardTimelineUncheckedCreateNestedManyWithoutUserInput
-  ownedCards?: Prisma.CardUncheckedCreateNestedManyWithoutOwnerInput
-}
-
-export type UserCreateOrConnectWithoutNotificationsInput = {
-  where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutNotificationsInput, Prisma.UserUncheckedCreateWithoutNotificationsInput>
-}
-
-export type UserUpsertWithoutNotificationsInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutNotificationsInput, Prisma.UserUncheckedUpdateWithoutNotificationsInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutNotificationsInput, Prisma.UserUncheckedCreateWithoutNotificationsInput>
-  where?: Prisma.UserWhereInput
-}
-
-export type UserUpdateToOneWithWhereWithoutNotificationsInput = {
-  where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutNotificationsInput, Prisma.UserUncheckedUpdateWithoutNotificationsInput>
-}
-
-export type UserUpdateWithoutNotificationsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  ownedWorkspaces?: Prisma.WorkspaceUpdateManyWithoutOwnerNestedInput
-  workspaceMemberships?: Prisma.WorkspaceMemberUpdateManyWithoutUserNestedInput
-  boards?: Prisma.BoardUpdateManyWithoutOwnerNestedInput
-  boardMembers?: Prisma.BoardMemberUpdateManyWithoutUserNestedInput
-  cardMemberships?: Prisma.CardMemberUpdateManyWithoutUserNestedInput
-  userTaskActions?: Prisma.UserTaskActionUpdateManyWithoutUserNestedInput
-  cardTimelines?: Prisma.CardTimelineUpdateManyWithoutUserNestedInput
-  ownedCards?: Prisma.CardUpdateManyWithoutOwnerNestedInput
-}
-
-export type UserUncheckedUpdateWithoutNotificationsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  ownedWorkspaces?: Prisma.WorkspaceUncheckedUpdateManyWithoutOwnerNestedInput
-  workspaceMemberships?: Prisma.WorkspaceMemberUncheckedUpdateManyWithoutUserNestedInput
-  boards?: Prisma.BoardUncheckedUpdateManyWithoutOwnerNestedInput
-  boardMembers?: Prisma.BoardMemberUncheckedUpdateManyWithoutUserNestedInput
-  cardMemberships?: Prisma.CardMemberUncheckedUpdateManyWithoutUserNestedInput
-  userTaskActions?: Prisma.UserTaskActionUncheckedUpdateManyWithoutUserNestedInput
-  cardTimelines?: Prisma.CardTimelineUncheckedUpdateManyWithoutUserNestedInput
-  ownedCards?: Prisma.CardUncheckedUpdateManyWithoutOwnerNestedInput
+export type UserUpdateOneRequiredWithoutWorkspaceMembershipsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutWorkspaceMembershipsInput, Prisma.UserUncheckedCreateWithoutWorkspaceMembershipsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutWorkspaceMembershipsInput
+  upsert?: Prisma.UserUpsertWithoutWorkspaceMembershipsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutWorkspaceMembershipsInput, Prisma.UserUpdateWithoutWorkspaceMembershipsInput>, Prisma.UserUncheckedUpdateWithoutWorkspaceMembershipsInput>
 }
 
 export type UserCreateWithoutBoardsInput = {
@@ -1293,6 +945,342 @@ export type UserUncheckedUpdateWithoutCardMembershipsInput = {
   boards?: Prisma.BoardUncheckedUpdateManyWithoutOwnerNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   boardMembers?: Prisma.BoardMemberUncheckedUpdateManyWithoutUserNestedInput
+  userTaskActions?: Prisma.UserTaskActionUncheckedUpdateManyWithoutUserNestedInput
+  cardTimelines?: Prisma.CardTimelineUncheckedUpdateManyWithoutUserNestedInput
+  ownedCards?: Prisma.CardUncheckedUpdateManyWithoutOwnerNestedInput
+}
+
+export type UserCreateWithoutNotificationsInput = {
+  id?: string
+  name?: string | null
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  ownedWorkspaces?: Prisma.WorkspaceCreateNestedManyWithoutOwnerInput
+  workspaceMemberships?: Prisma.WorkspaceMemberCreateNestedManyWithoutUserInput
+  boards?: Prisma.BoardCreateNestedManyWithoutOwnerInput
+  boardMembers?: Prisma.BoardMemberCreateNestedManyWithoutUserInput
+  cardMemberships?: Prisma.CardMemberCreateNestedManyWithoutUserInput
+  userTaskActions?: Prisma.UserTaskActionCreateNestedManyWithoutUserInput
+  cardTimelines?: Prisma.CardTimelineCreateNestedManyWithoutUserInput
+  ownedCards?: Prisma.CardCreateNestedManyWithoutOwnerInput
+}
+
+export type UserUncheckedCreateWithoutNotificationsInput = {
+  id?: string
+  name?: string | null
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  ownedWorkspaces?: Prisma.WorkspaceUncheckedCreateNestedManyWithoutOwnerInput
+  workspaceMemberships?: Prisma.WorkspaceMemberUncheckedCreateNestedManyWithoutUserInput
+  boards?: Prisma.BoardUncheckedCreateNestedManyWithoutOwnerInput
+  boardMembers?: Prisma.BoardMemberUncheckedCreateNestedManyWithoutUserInput
+  cardMemberships?: Prisma.CardMemberUncheckedCreateNestedManyWithoutUserInput
+  userTaskActions?: Prisma.UserTaskActionUncheckedCreateNestedManyWithoutUserInput
+  cardTimelines?: Prisma.CardTimelineUncheckedCreateNestedManyWithoutUserInput
+  ownedCards?: Prisma.CardUncheckedCreateNestedManyWithoutOwnerInput
+}
+
+export type UserCreateOrConnectWithoutNotificationsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutNotificationsInput, Prisma.UserUncheckedCreateWithoutNotificationsInput>
+}
+
+export type UserUpsertWithoutNotificationsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutNotificationsInput, Prisma.UserUncheckedUpdateWithoutNotificationsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutNotificationsInput, Prisma.UserUncheckedCreateWithoutNotificationsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutNotificationsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutNotificationsInput, Prisma.UserUncheckedUpdateWithoutNotificationsInput>
+}
+
+export type UserUpdateWithoutNotificationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ownedWorkspaces?: Prisma.WorkspaceUpdateManyWithoutOwnerNestedInput
+  workspaceMemberships?: Prisma.WorkspaceMemberUpdateManyWithoutUserNestedInput
+  boards?: Prisma.BoardUpdateManyWithoutOwnerNestedInput
+  boardMembers?: Prisma.BoardMemberUpdateManyWithoutUserNestedInput
+  cardMemberships?: Prisma.CardMemberUpdateManyWithoutUserNestedInput
+  userTaskActions?: Prisma.UserTaskActionUpdateManyWithoutUserNestedInput
+  cardTimelines?: Prisma.CardTimelineUpdateManyWithoutUserNestedInput
+  ownedCards?: Prisma.CardUpdateManyWithoutOwnerNestedInput
+}
+
+export type UserUncheckedUpdateWithoutNotificationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ownedWorkspaces?: Prisma.WorkspaceUncheckedUpdateManyWithoutOwnerNestedInput
+  workspaceMemberships?: Prisma.WorkspaceMemberUncheckedUpdateManyWithoutUserNestedInput
+  boards?: Prisma.BoardUncheckedUpdateManyWithoutOwnerNestedInput
+  boardMembers?: Prisma.BoardMemberUncheckedUpdateManyWithoutUserNestedInput
+  cardMemberships?: Prisma.CardMemberUncheckedUpdateManyWithoutUserNestedInput
+  userTaskActions?: Prisma.UserTaskActionUncheckedUpdateManyWithoutUserNestedInput
+  cardTimelines?: Prisma.CardTimelineUncheckedUpdateManyWithoutUserNestedInput
+  ownedCards?: Prisma.CardUncheckedUpdateManyWithoutOwnerNestedInput
+}
+
+export type UserCreateWithoutUserTaskActionsInput = {
+  id?: string
+  name?: string | null
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  ownedWorkspaces?: Prisma.WorkspaceCreateNestedManyWithoutOwnerInput
+  workspaceMemberships?: Prisma.WorkspaceMemberCreateNestedManyWithoutUserInput
+  boards?: Prisma.BoardCreateNestedManyWithoutOwnerInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  boardMembers?: Prisma.BoardMemberCreateNestedManyWithoutUserInput
+  cardMemberships?: Prisma.CardMemberCreateNestedManyWithoutUserInput
+  cardTimelines?: Prisma.CardTimelineCreateNestedManyWithoutUserInput
+  ownedCards?: Prisma.CardCreateNestedManyWithoutOwnerInput
+}
+
+export type UserUncheckedCreateWithoutUserTaskActionsInput = {
+  id?: string
+  name?: string | null
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  ownedWorkspaces?: Prisma.WorkspaceUncheckedCreateNestedManyWithoutOwnerInput
+  workspaceMemberships?: Prisma.WorkspaceMemberUncheckedCreateNestedManyWithoutUserInput
+  boards?: Prisma.BoardUncheckedCreateNestedManyWithoutOwnerInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  boardMembers?: Prisma.BoardMemberUncheckedCreateNestedManyWithoutUserInput
+  cardMemberships?: Prisma.CardMemberUncheckedCreateNestedManyWithoutUserInput
+  cardTimelines?: Prisma.CardTimelineUncheckedCreateNestedManyWithoutUserInput
+  ownedCards?: Prisma.CardUncheckedCreateNestedManyWithoutOwnerInput
+}
+
+export type UserCreateOrConnectWithoutUserTaskActionsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutUserTaskActionsInput, Prisma.UserUncheckedCreateWithoutUserTaskActionsInput>
+}
+
+export type UserUpsertWithoutUserTaskActionsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutUserTaskActionsInput, Prisma.UserUncheckedUpdateWithoutUserTaskActionsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutUserTaskActionsInput, Prisma.UserUncheckedCreateWithoutUserTaskActionsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutUserTaskActionsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutUserTaskActionsInput, Prisma.UserUncheckedUpdateWithoutUserTaskActionsInput>
+}
+
+export type UserUpdateWithoutUserTaskActionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ownedWorkspaces?: Prisma.WorkspaceUpdateManyWithoutOwnerNestedInput
+  workspaceMemberships?: Prisma.WorkspaceMemberUpdateManyWithoutUserNestedInput
+  boards?: Prisma.BoardUpdateManyWithoutOwnerNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  boardMembers?: Prisma.BoardMemberUpdateManyWithoutUserNestedInput
+  cardMemberships?: Prisma.CardMemberUpdateManyWithoutUserNestedInput
+  cardTimelines?: Prisma.CardTimelineUpdateManyWithoutUserNestedInput
+  ownedCards?: Prisma.CardUpdateManyWithoutOwnerNestedInput
+}
+
+export type UserUncheckedUpdateWithoutUserTaskActionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ownedWorkspaces?: Prisma.WorkspaceUncheckedUpdateManyWithoutOwnerNestedInput
+  workspaceMemberships?: Prisma.WorkspaceMemberUncheckedUpdateManyWithoutUserNestedInput
+  boards?: Prisma.BoardUncheckedUpdateManyWithoutOwnerNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  boardMembers?: Prisma.BoardMemberUncheckedUpdateManyWithoutUserNestedInput
+  cardMemberships?: Prisma.CardMemberUncheckedUpdateManyWithoutUserNestedInput
+  cardTimelines?: Prisma.CardTimelineUncheckedUpdateManyWithoutUserNestedInput
+  ownedCards?: Prisma.CardUncheckedUpdateManyWithoutOwnerNestedInput
+}
+
+export type UserCreateWithoutOwnedWorkspacesInput = {
+  id?: string
+  name?: string | null
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  workspaceMemberships?: Prisma.WorkspaceMemberCreateNestedManyWithoutUserInput
+  boards?: Prisma.BoardCreateNestedManyWithoutOwnerInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  boardMembers?: Prisma.BoardMemberCreateNestedManyWithoutUserInput
+  cardMemberships?: Prisma.CardMemberCreateNestedManyWithoutUserInput
+  userTaskActions?: Prisma.UserTaskActionCreateNestedManyWithoutUserInput
+  cardTimelines?: Prisma.CardTimelineCreateNestedManyWithoutUserInput
+  ownedCards?: Prisma.CardCreateNestedManyWithoutOwnerInput
+}
+
+export type UserUncheckedCreateWithoutOwnedWorkspacesInput = {
+  id?: string
+  name?: string | null
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  workspaceMemberships?: Prisma.WorkspaceMemberUncheckedCreateNestedManyWithoutUserInput
+  boards?: Prisma.BoardUncheckedCreateNestedManyWithoutOwnerInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  boardMembers?: Prisma.BoardMemberUncheckedCreateNestedManyWithoutUserInput
+  cardMemberships?: Prisma.CardMemberUncheckedCreateNestedManyWithoutUserInput
+  userTaskActions?: Prisma.UserTaskActionUncheckedCreateNestedManyWithoutUserInput
+  cardTimelines?: Prisma.CardTimelineUncheckedCreateNestedManyWithoutUserInput
+  ownedCards?: Prisma.CardUncheckedCreateNestedManyWithoutOwnerInput
+}
+
+export type UserCreateOrConnectWithoutOwnedWorkspacesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutOwnedWorkspacesInput, Prisma.UserUncheckedCreateWithoutOwnedWorkspacesInput>
+}
+
+export type UserUpsertWithoutOwnedWorkspacesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutOwnedWorkspacesInput, Prisma.UserUncheckedUpdateWithoutOwnedWorkspacesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutOwnedWorkspacesInput, Prisma.UserUncheckedCreateWithoutOwnedWorkspacesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutOwnedWorkspacesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutOwnedWorkspacesInput, Prisma.UserUncheckedUpdateWithoutOwnedWorkspacesInput>
+}
+
+export type UserUpdateWithoutOwnedWorkspacesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  workspaceMemberships?: Prisma.WorkspaceMemberUpdateManyWithoutUserNestedInput
+  boards?: Prisma.BoardUpdateManyWithoutOwnerNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  boardMembers?: Prisma.BoardMemberUpdateManyWithoutUserNestedInput
+  cardMemberships?: Prisma.CardMemberUpdateManyWithoutUserNestedInput
+  userTaskActions?: Prisma.UserTaskActionUpdateManyWithoutUserNestedInput
+  cardTimelines?: Prisma.CardTimelineUpdateManyWithoutUserNestedInput
+  ownedCards?: Prisma.CardUpdateManyWithoutOwnerNestedInput
+}
+
+export type UserUncheckedUpdateWithoutOwnedWorkspacesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  workspaceMemberships?: Prisma.WorkspaceMemberUncheckedUpdateManyWithoutUserNestedInput
+  boards?: Prisma.BoardUncheckedUpdateManyWithoutOwnerNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  boardMembers?: Prisma.BoardMemberUncheckedUpdateManyWithoutUserNestedInput
+  cardMemberships?: Prisma.CardMemberUncheckedUpdateManyWithoutUserNestedInput
+  userTaskActions?: Prisma.UserTaskActionUncheckedUpdateManyWithoutUserNestedInput
+  cardTimelines?: Prisma.CardTimelineUncheckedUpdateManyWithoutUserNestedInput
+  ownedCards?: Prisma.CardUncheckedUpdateManyWithoutOwnerNestedInput
+}
+
+export type UserCreateWithoutWorkspaceMembershipsInput = {
+  id?: string
+  name?: string | null
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  ownedWorkspaces?: Prisma.WorkspaceCreateNestedManyWithoutOwnerInput
+  boards?: Prisma.BoardCreateNestedManyWithoutOwnerInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  boardMembers?: Prisma.BoardMemberCreateNestedManyWithoutUserInput
+  cardMemberships?: Prisma.CardMemberCreateNestedManyWithoutUserInput
+  userTaskActions?: Prisma.UserTaskActionCreateNestedManyWithoutUserInput
+  cardTimelines?: Prisma.CardTimelineCreateNestedManyWithoutUserInput
+  ownedCards?: Prisma.CardCreateNestedManyWithoutOwnerInput
+}
+
+export type UserUncheckedCreateWithoutWorkspaceMembershipsInput = {
+  id?: string
+  name?: string | null
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  ownedWorkspaces?: Prisma.WorkspaceUncheckedCreateNestedManyWithoutOwnerInput
+  boards?: Prisma.BoardUncheckedCreateNestedManyWithoutOwnerInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  boardMembers?: Prisma.BoardMemberUncheckedCreateNestedManyWithoutUserInput
+  cardMemberships?: Prisma.CardMemberUncheckedCreateNestedManyWithoutUserInput
+  userTaskActions?: Prisma.UserTaskActionUncheckedCreateNestedManyWithoutUserInput
+  cardTimelines?: Prisma.CardTimelineUncheckedCreateNestedManyWithoutUserInput
+  ownedCards?: Prisma.CardUncheckedCreateNestedManyWithoutOwnerInput
+}
+
+export type UserCreateOrConnectWithoutWorkspaceMembershipsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutWorkspaceMembershipsInput, Prisma.UserUncheckedCreateWithoutWorkspaceMembershipsInput>
+}
+
+export type UserUpsertWithoutWorkspaceMembershipsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutWorkspaceMembershipsInput, Prisma.UserUncheckedUpdateWithoutWorkspaceMembershipsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutWorkspaceMembershipsInput, Prisma.UserUncheckedCreateWithoutWorkspaceMembershipsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutWorkspaceMembershipsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutWorkspaceMembershipsInput, Prisma.UserUncheckedUpdateWithoutWorkspaceMembershipsInput>
+}
+
+export type UserUpdateWithoutWorkspaceMembershipsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ownedWorkspaces?: Prisma.WorkspaceUpdateManyWithoutOwnerNestedInput
+  boards?: Prisma.BoardUpdateManyWithoutOwnerNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  boardMembers?: Prisma.BoardMemberUpdateManyWithoutUserNestedInput
+  cardMemberships?: Prisma.CardMemberUpdateManyWithoutUserNestedInput
+  userTaskActions?: Prisma.UserTaskActionUpdateManyWithoutUserNestedInput
+  cardTimelines?: Prisma.CardTimelineUpdateManyWithoutUserNestedInput
+  ownedCards?: Prisma.CardUpdateManyWithoutOwnerNestedInput
+}
+
+export type UserUncheckedUpdateWithoutWorkspaceMembershipsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ownedWorkspaces?: Prisma.WorkspaceUncheckedUpdateManyWithoutOwnerNestedInput
+  boards?: Prisma.BoardUncheckedUpdateManyWithoutOwnerNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  boardMembers?: Prisma.BoardMemberUncheckedUpdateManyWithoutUserNestedInput
+  cardMemberships?: Prisma.CardMemberUncheckedUpdateManyWithoutUserNestedInput
   userTaskActions?: Prisma.UserTaskActionUncheckedUpdateManyWithoutUserNestedInput
   cardTimelines?: Prisma.CardTimelineUncheckedUpdateManyWithoutUserNestedInput
   ownedCards?: Prisma.CardUncheckedUpdateManyWithoutOwnerNestedInput

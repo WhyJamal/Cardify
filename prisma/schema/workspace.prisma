@@ -1,0 +1,66 @@
+enum Visibility {
+  PRIVATE
+  PUBLIC
+  WORKSPACE
+}
+
+enum WorkspaceMemberRole {
+  OWNER
+  ADMIN
+  MEMBER
+  VIEWER
+}
+
+enum WorkspaceMemberStatus {
+  PENDING
+  ACCEPTED
+  DECLINED
+}
+
+model Workspace {
+  id          String         @id @default(cuid())
+  name        String
+  description String?
+  typeKey     String?
+  type        WorkspaceType? @relation(fields: [typeKey], references: [key])
+  ownerId     String
+  logo        String?
+  website     String?
+  visibility  Visibility     @default(PUBLIC)
+
+  owner   User              @relation("WorkspaceOwner", fields: [ownerId], references: [id], onDelete: Cascade)
+  members WorkspaceMember[]
+  boards  Board[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([ownerId])
+}
+
+model WorkspaceType {
+  id    String  @id @default(cuid())
+  key   String  @unique
+  label String
+  group String?
+
+  workspaces Workspace[]
+}
+
+model WorkspaceMember {
+  id          String                @id @default(cuid())
+  workspaceId String
+  userId      String
+  role        WorkspaceMemberRole   @default(MEMBER)
+  status      WorkspaceMemberStatus @default(PENDING)
+
+  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([workspaceId, userId])
+  @@index([workspaceId])
+  @@index([userId])
+}

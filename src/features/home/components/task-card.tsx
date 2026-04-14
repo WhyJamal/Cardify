@@ -146,6 +146,7 @@ export function HighlightTaskCard({ card, onComment }: HighlightTaskCardProps) {
     const members = card.members ?? [];
     const firstMember = members[0]?.user;
     const displayName = firstMember?.name || "User";
+    const formatData = formatTimeAgo(members[0]?.createdAt || "");
     const initials = getInitials(displayName);
 
     const { showReply, setShowReply, comment, setComment, loading, comments, handleSave } =
@@ -153,7 +154,7 @@ export function HighlightTaskCard({ card, onComment }: HighlightTaskCardProps) {
 
     return (
         <CardWrapper card={card}>
-            <div className="px-4 py-3 flex items-center justify-between" style={{ backgroundColor: "#2c2e33", borderTop: "1px solid #3d4148" }}>
+            <div className="px-4 py-3 flex items-center justify-between bg-[#2c2e33] border border-[#3d4148]">
                 <div className="flex gap-3 items-center">
                     {firstMember?.image ? (
                         <Image src={firstMember.image} alt={displayName} width={32} height={32} className="w-8 h-8 rounded-full object-cover" />
@@ -164,7 +165,7 @@ export function HighlightTaskCard({ card, onComment }: HighlightTaskCardProps) {
                     )}
                     <div className="flex flex-col">
                         <span className="text-gray-300 text-sm">{displayName}</span>
-                        <span className="text-gray-500 text-xs">выполнено</span>
+                        <span className="text-gray-500 text-xs">{formatData}</span>
                     </div>
                 </div>
                 <button className="text-gray-500 hover:text-gray-300">

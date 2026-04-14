@@ -51,23 +51,23 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
-  User: 'User',
-  UserTaskAction: 'UserTaskAction',
-  Workspace: 'Workspace',
-  WorkspaceType: 'WorkspaceType',
-  WorkspaceMember: 'WorkspaceMember',
-  Notification: 'Notification',
   Board: 'Board',
   BoardMember: 'BoardMember',
   BoardLabel: 'BoardLabel',
-  Column: 'Column',
   Card: 'Card',
   CardBoardLabel: 'CardBoardLabel',
   CardLink: 'CardLink',
   CardTimeline: 'CardTimeline',
   CardMember: 'CardMember',
   CardAttachment: 'CardAttachment',
-  Location: 'Location'
+  CardLocation: 'CardLocation',
+  Column: 'Column',
+  Notification: 'Notification',
+  User: 'User',
+  UserTaskAction: 'UserTaskAction',
+  Workspace: 'Workspace',
+  WorkspaceType: 'WorkspaceType',
+  WorkspaceMember: 'WorkspaceMember'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -81,84 +81,6 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 } as const)
 
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
-
-
-export const UserScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  email: 'email',
-  password: 'password',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
-
-
-export const UserTaskActionScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  cardId: 'cardId',
-  status: 'status',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type UserTaskActionScalarFieldEnum = (typeof UserTaskActionScalarFieldEnum)[keyof typeof UserTaskActionScalarFieldEnum]
-
-
-export const WorkspaceScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  description: 'description',
-  typeKey: 'typeKey',
-  ownerId: 'ownerId',
-  logo: 'logo',
-  website: 'website',
-  visibility: 'visibility',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type WorkspaceScalarFieldEnum = (typeof WorkspaceScalarFieldEnum)[keyof typeof WorkspaceScalarFieldEnum]
-
-
-export const WorkspaceTypeScalarFieldEnum = {
-  id: 'id',
-  key: 'key',
-  label: 'label',
-  group: 'group'
-} as const
-
-export type WorkspaceTypeScalarFieldEnum = (typeof WorkspaceTypeScalarFieldEnum)[keyof typeof WorkspaceTypeScalarFieldEnum]
-
-
-export const WorkspaceMemberScalarFieldEnum = {
-  id: 'id',
-  workspaceId: 'workspaceId',
-  userId: 'userId',
-  role: 'role',
-  status: 'status',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type WorkspaceMemberScalarFieldEnum = (typeof WorkspaceMemberScalarFieldEnum)[keyof typeof WorkspaceMemberScalarFieldEnum]
-
-
-export const NotificationScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  type: 'type',
-  title: 'title',
-  body: 'body',
-  data: 'data',
-  isRead: 'isRead',
-  isDismissed: 'isDismissed',
-  createdAt: 'createdAt'
-} as const
-
-export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
 
 
 export const BoardScalarFieldEnum = {
@@ -202,21 +124,8 @@ export const BoardLabelScalarFieldEnum = {
 export type BoardLabelScalarFieldEnum = (typeof BoardLabelScalarFieldEnum)[keyof typeof BoardLabelScalarFieldEnum]
 
 
-export const ColumnScalarFieldEnum = {
-  id: 'id',
-  boardId: 'boardId',
-  title: 'title',
-  position: 'position',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type ColumnScalarFieldEnum = (typeof ColumnScalarFieldEnum)[keyof typeof ColumnScalarFieldEnum]
-
-
 export const CardScalarFieldEnum = {
   id: 'id',
-  columnId: 'columnId',
   title: 'title',
   image: 'image',
   numberBadge: 'numberBadge',
@@ -237,6 +146,7 @@ export const CardScalarFieldEnum = {
   size: 'size',
   textColor: 'textColor',
   isArchive: 'isArchive',
+  columnId: 'columnId',
   locationId: 'locationId',
   ownerId: 'ownerId'
 } as const
@@ -307,7 +217,7 @@ export const CardAttachmentScalarFieldEnum = {
 export type CardAttachmentScalarFieldEnum = (typeof CardAttachmentScalarFieldEnum)[keyof typeof CardAttachmentScalarFieldEnum]
 
 
-export const LocationScalarFieldEnum = {
+export const CardLocationScalarFieldEnum = {
   id: 'id',
   name: 'name',
   fullAddress: 'fullAddress',
@@ -317,7 +227,97 @@ export const LocationScalarFieldEnum = {
   updatedAt: 'updatedAt'
 } as const
 
-export type LocationScalarFieldEnum = (typeof LocationScalarFieldEnum)[keyof typeof LocationScalarFieldEnum]
+export type CardLocationScalarFieldEnum = (typeof CardLocationScalarFieldEnum)[keyof typeof CardLocationScalarFieldEnum]
+
+
+export const ColumnScalarFieldEnum = {
+  id: 'id',
+  boardId: 'boardId',
+  title: 'title',
+  position: 'position',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ColumnScalarFieldEnum = (typeof ColumnScalarFieldEnum)[keyof typeof ColumnScalarFieldEnum]
+
+
+export const NotificationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  type: 'type',
+  title: 'title',
+  body: 'body',
+  data: 'data',
+  isRead: 'isRead',
+  isDismissed: 'isDismissed',
+  createdAt: 'createdAt'
+} as const
+
+export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
+
+
+export const UserScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  password: 'password',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const UserTaskActionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  cardId: 'cardId',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UserTaskActionScalarFieldEnum = (typeof UserTaskActionScalarFieldEnum)[keyof typeof UserTaskActionScalarFieldEnum]
+
+
+export const WorkspaceScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  typeKey: 'typeKey',
+  ownerId: 'ownerId',
+  logo: 'logo',
+  website: 'website',
+  visibility: 'visibility',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type WorkspaceScalarFieldEnum = (typeof WorkspaceScalarFieldEnum)[keyof typeof WorkspaceScalarFieldEnum]
+
+
+export const WorkspaceTypeScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  label: 'label',
+  group: 'group'
+} as const
+
+export type WorkspaceTypeScalarFieldEnum = (typeof WorkspaceTypeScalarFieldEnum)[keyof typeof WorkspaceTypeScalarFieldEnum]
+
+
+export const WorkspaceMemberScalarFieldEnum = {
+  id: 'id',
+  workspaceId: 'workspaceId',
+  userId: 'userId',
+  role: 'role',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type WorkspaceMemberScalarFieldEnum = (typeof WorkspaceMemberScalarFieldEnum)[keyof typeof WorkspaceMemberScalarFieldEnum]
 
 
 export const SortOrder = {

@@ -413,48 +413,6 @@ export type BoardMemberSumOrderByAggregateInput = {
   boardId?: Prisma.SortOrder
 }
 
-export type BoardMemberCreateNestedManyWithoutUserInput = {
-  create?: Prisma.XOR<Prisma.BoardMemberCreateWithoutUserInput, Prisma.BoardMemberUncheckedCreateWithoutUserInput> | Prisma.BoardMemberCreateWithoutUserInput[] | Prisma.BoardMemberUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.BoardMemberCreateOrConnectWithoutUserInput | Prisma.BoardMemberCreateOrConnectWithoutUserInput[]
-  createMany?: Prisma.BoardMemberCreateManyUserInputEnvelope
-  connect?: Prisma.BoardMemberWhereUniqueInput | Prisma.BoardMemberWhereUniqueInput[]
-}
-
-export type BoardMemberUncheckedCreateNestedManyWithoutUserInput = {
-  create?: Prisma.XOR<Prisma.BoardMemberCreateWithoutUserInput, Prisma.BoardMemberUncheckedCreateWithoutUserInput> | Prisma.BoardMemberCreateWithoutUserInput[] | Prisma.BoardMemberUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.BoardMemberCreateOrConnectWithoutUserInput | Prisma.BoardMemberCreateOrConnectWithoutUserInput[]
-  createMany?: Prisma.BoardMemberCreateManyUserInputEnvelope
-  connect?: Prisma.BoardMemberWhereUniqueInput | Prisma.BoardMemberWhereUniqueInput[]
-}
-
-export type BoardMemberUpdateManyWithoutUserNestedInput = {
-  create?: Prisma.XOR<Prisma.BoardMemberCreateWithoutUserInput, Prisma.BoardMemberUncheckedCreateWithoutUserInput> | Prisma.BoardMemberCreateWithoutUserInput[] | Prisma.BoardMemberUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.BoardMemberCreateOrConnectWithoutUserInput | Prisma.BoardMemberCreateOrConnectWithoutUserInput[]
-  upsert?: Prisma.BoardMemberUpsertWithWhereUniqueWithoutUserInput | Prisma.BoardMemberUpsertWithWhereUniqueWithoutUserInput[]
-  createMany?: Prisma.BoardMemberCreateManyUserInputEnvelope
-  set?: Prisma.BoardMemberWhereUniqueInput | Prisma.BoardMemberWhereUniqueInput[]
-  disconnect?: Prisma.BoardMemberWhereUniqueInput | Prisma.BoardMemberWhereUniqueInput[]
-  delete?: Prisma.BoardMemberWhereUniqueInput | Prisma.BoardMemberWhereUniqueInput[]
-  connect?: Prisma.BoardMemberWhereUniqueInput | Prisma.BoardMemberWhereUniqueInput[]
-  update?: Prisma.BoardMemberUpdateWithWhereUniqueWithoutUserInput | Prisma.BoardMemberUpdateWithWhereUniqueWithoutUserInput[]
-  updateMany?: Prisma.BoardMemberUpdateManyWithWhereWithoutUserInput | Prisma.BoardMemberUpdateManyWithWhereWithoutUserInput[]
-  deleteMany?: Prisma.BoardMemberScalarWhereInput | Prisma.BoardMemberScalarWhereInput[]
-}
-
-export type BoardMemberUncheckedUpdateManyWithoutUserNestedInput = {
-  create?: Prisma.XOR<Prisma.BoardMemberCreateWithoutUserInput, Prisma.BoardMemberUncheckedCreateWithoutUserInput> | Prisma.BoardMemberCreateWithoutUserInput[] | Prisma.BoardMemberUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.BoardMemberCreateOrConnectWithoutUserInput | Prisma.BoardMemberCreateOrConnectWithoutUserInput[]
-  upsert?: Prisma.BoardMemberUpsertWithWhereUniqueWithoutUserInput | Prisma.BoardMemberUpsertWithWhereUniqueWithoutUserInput[]
-  createMany?: Prisma.BoardMemberCreateManyUserInputEnvelope
-  set?: Prisma.BoardMemberWhereUniqueInput | Prisma.BoardMemberWhereUniqueInput[]
-  disconnect?: Prisma.BoardMemberWhereUniqueInput | Prisma.BoardMemberWhereUniqueInput[]
-  delete?: Prisma.BoardMemberWhereUniqueInput | Prisma.BoardMemberWhereUniqueInput[]
-  connect?: Prisma.BoardMemberWhereUniqueInput | Prisma.BoardMemberWhereUniqueInput[]
-  update?: Prisma.BoardMemberUpdateWithWhereUniqueWithoutUserInput | Prisma.BoardMemberUpdateWithWhereUniqueWithoutUserInput[]
-  updateMany?: Prisma.BoardMemberUpdateManyWithWhereWithoutUserInput | Prisma.BoardMemberUpdateManyWithWhereWithoutUserInput[]
-  deleteMany?: Prisma.BoardMemberScalarWhereInput | Prisma.BoardMemberScalarWhereInput[]
-}
-
 export type BoardMemberCreateNestedManyWithoutBoardInput = {
   create?: Prisma.XOR<Prisma.BoardMemberCreateWithoutBoardInput, Prisma.BoardMemberUncheckedCreateWithoutBoardInput> | Prisma.BoardMemberCreateWithoutBoardInput[] | Prisma.BoardMemberUncheckedCreateWithoutBoardInput[]
   connectOrCreate?: Prisma.BoardMemberCreateOrConnectWithoutBoardInput | Prisma.BoardMemberCreateOrConnectWithoutBoardInput[]
@@ -505,60 +463,46 @@ export type EnumBoardMemberStatusFieldUpdateOperationsInput = {
   set?: $Enums.BoardMemberStatus
 }
 
-export type BoardMemberCreateWithoutUserInput = {
-  id?: string
-  role?: $Enums.BoardMemberRole
-  status?: $Enums.BoardMemberStatus
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  board: Prisma.BoardCreateNestedOneWithoutMembersInput
+export type BoardMemberCreateNestedManyWithoutUserInput = {
+  create?: Prisma.XOR<Prisma.BoardMemberCreateWithoutUserInput, Prisma.BoardMemberUncheckedCreateWithoutUserInput> | Prisma.BoardMemberCreateWithoutUserInput[] | Prisma.BoardMemberUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.BoardMemberCreateOrConnectWithoutUserInput | Prisma.BoardMemberCreateOrConnectWithoutUserInput[]
+  createMany?: Prisma.BoardMemberCreateManyUserInputEnvelope
+  connect?: Prisma.BoardMemberWhereUniqueInput | Prisma.BoardMemberWhereUniqueInput[]
 }
 
-export type BoardMemberUncheckedCreateWithoutUserInput = {
-  id?: string
-  boardId: number
-  role?: $Enums.BoardMemberRole
-  status?: $Enums.BoardMemberStatus
-  createdAt?: Date | string
-  updatedAt?: Date | string
+export type BoardMemberUncheckedCreateNestedManyWithoutUserInput = {
+  create?: Prisma.XOR<Prisma.BoardMemberCreateWithoutUserInput, Prisma.BoardMemberUncheckedCreateWithoutUserInput> | Prisma.BoardMemberCreateWithoutUserInput[] | Prisma.BoardMemberUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.BoardMemberCreateOrConnectWithoutUserInput | Prisma.BoardMemberCreateOrConnectWithoutUserInput[]
+  createMany?: Prisma.BoardMemberCreateManyUserInputEnvelope
+  connect?: Prisma.BoardMemberWhereUniqueInput | Prisma.BoardMemberWhereUniqueInput[]
 }
 
-export type BoardMemberCreateOrConnectWithoutUserInput = {
-  where: Prisma.BoardMemberWhereUniqueInput
-  create: Prisma.XOR<Prisma.BoardMemberCreateWithoutUserInput, Prisma.BoardMemberUncheckedCreateWithoutUserInput>
+export type BoardMemberUpdateManyWithoutUserNestedInput = {
+  create?: Prisma.XOR<Prisma.BoardMemberCreateWithoutUserInput, Prisma.BoardMemberUncheckedCreateWithoutUserInput> | Prisma.BoardMemberCreateWithoutUserInput[] | Prisma.BoardMemberUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.BoardMemberCreateOrConnectWithoutUserInput | Prisma.BoardMemberCreateOrConnectWithoutUserInput[]
+  upsert?: Prisma.BoardMemberUpsertWithWhereUniqueWithoutUserInput | Prisma.BoardMemberUpsertWithWhereUniqueWithoutUserInput[]
+  createMany?: Prisma.BoardMemberCreateManyUserInputEnvelope
+  set?: Prisma.BoardMemberWhereUniqueInput | Prisma.BoardMemberWhereUniqueInput[]
+  disconnect?: Prisma.BoardMemberWhereUniqueInput | Prisma.BoardMemberWhereUniqueInput[]
+  delete?: Prisma.BoardMemberWhereUniqueInput | Prisma.BoardMemberWhereUniqueInput[]
+  connect?: Prisma.BoardMemberWhereUniqueInput | Prisma.BoardMemberWhereUniqueInput[]
+  update?: Prisma.BoardMemberUpdateWithWhereUniqueWithoutUserInput | Prisma.BoardMemberUpdateWithWhereUniqueWithoutUserInput[]
+  updateMany?: Prisma.BoardMemberUpdateManyWithWhereWithoutUserInput | Prisma.BoardMemberUpdateManyWithWhereWithoutUserInput[]
+  deleteMany?: Prisma.BoardMemberScalarWhereInput | Prisma.BoardMemberScalarWhereInput[]
 }
 
-export type BoardMemberCreateManyUserInputEnvelope = {
-  data: Prisma.BoardMemberCreateManyUserInput | Prisma.BoardMemberCreateManyUserInput[]
-}
-
-export type BoardMemberUpsertWithWhereUniqueWithoutUserInput = {
-  where: Prisma.BoardMemberWhereUniqueInput
-  update: Prisma.XOR<Prisma.BoardMemberUpdateWithoutUserInput, Prisma.BoardMemberUncheckedUpdateWithoutUserInput>
-  create: Prisma.XOR<Prisma.BoardMemberCreateWithoutUserInput, Prisma.BoardMemberUncheckedCreateWithoutUserInput>
-}
-
-export type BoardMemberUpdateWithWhereUniqueWithoutUserInput = {
-  where: Prisma.BoardMemberWhereUniqueInput
-  data: Prisma.XOR<Prisma.BoardMemberUpdateWithoutUserInput, Prisma.BoardMemberUncheckedUpdateWithoutUserInput>
-}
-
-export type BoardMemberUpdateManyWithWhereWithoutUserInput = {
-  where: Prisma.BoardMemberScalarWhereInput
-  data: Prisma.XOR<Prisma.BoardMemberUpdateManyMutationInput, Prisma.BoardMemberUncheckedUpdateManyWithoutUserInput>
-}
-
-export type BoardMemberScalarWhereInput = {
-  AND?: Prisma.BoardMemberScalarWhereInput | Prisma.BoardMemberScalarWhereInput[]
-  OR?: Prisma.BoardMemberScalarWhereInput[]
-  NOT?: Prisma.BoardMemberScalarWhereInput | Prisma.BoardMemberScalarWhereInput[]
-  id?: Prisma.StringFilter<"BoardMember"> | string
-  boardId?: Prisma.IntFilter<"BoardMember"> | number
-  userId?: Prisma.StringFilter<"BoardMember"> | string
-  role?: Prisma.EnumBoardMemberRoleFilter<"BoardMember"> | $Enums.BoardMemberRole
-  status?: Prisma.EnumBoardMemberStatusFilter<"BoardMember"> | $Enums.BoardMemberStatus
-  createdAt?: Prisma.DateTimeFilter<"BoardMember"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"BoardMember"> | Date | string
+export type BoardMemberUncheckedUpdateManyWithoutUserNestedInput = {
+  create?: Prisma.XOR<Prisma.BoardMemberCreateWithoutUserInput, Prisma.BoardMemberUncheckedCreateWithoutUserInput> | Prisma.BoardMemberCreateWithoutUserInput[] | Prisma.BoardMemberUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.BoardMemberCreateOrConnectWithoutUserInput | Prisma.BoardMemberCreateOrConnectWithoutUserInput[]
+  upsert?: Prisma.BoardMemberUpsertWithWhereUniqueWithoutUserInput | Prisma.BoardMemberUpsertWithWhereUniqueWithoutUserInput[]
+  createMany?: Prisma.BoardMemberCreateManyUserInputEnvelope
+  set?: Prisma.BoardMemberWhereUniqueInput | Prisma.BoardMemberWhereUniqueInput[]
+  disconnect?: Prisma.BoardMemberWhereUniqueInput | Prisma.BoardMemberWhereUniqueInput[]
+  delete?: Prisma.BoardMemberWhereUniqueInput | Prisma.BoardMemberWhereUniqueInput[]
+  connect?: Prisma.BoardMemberWhereUniqueInput | Prisma.BoardMemberWhereUniqueInput[]
+  update?: Prisma.BoardMemberUpdateWithWhereUniqueWithoutUserInput | Prisma.BoardMemberUpdateWithWhereUniqueWithoutUserInput[]
+  updateMany?: Prisma.BoardMemberUpdateManyWithWhereWithoutUserInput | Prisma.BoardMemberUpdateManyWithWhereWithoutUserInput[]
+  deleteMany?: Prisma.BoardMemberScalarWhereInput | Prisma.BoardMemberScalarWhereInput[]
 }
 
 export type BoardMemberCreateWithoutBoardInput = {
@@ -604,7 +548,29 @@ export type BoardMemberUpdateManyWithWhereWithoutBoardInput = {
   data: Prisma.XOR<Prisma.BoardMemberUpdateManyMutationInput, Prisma.BoardMemberUncheckedUpdateManyWithoutBoardInput>
 }
 
-export type BoardMemberCreateManyUserInput = {
+export type BoardMemberScalarWhereInput = {
+  AND?: Prisma.BoardMemberScalarWhereInput | Prisma.BoardMemberScalarWhereInput[]
+  OR?: Prisma.BoardMemberScalarWhereInput[]
+  NOT?: Prisma.BoardMemberScalarWhereInput | Prisma.BoardMemberScalarWhereInput[]
+  id?: Prisma.StringFilter<"BoardMember"> | string
+  boardId?: Prisma.IntFilter<"BoardMember"> | number
+  userId?: Prisma.StringFilter<"BoardMember"> | string
+  role?: Prisma.EnumBoardMemberRoleFilter<"BoardMember"> | $Enums.BoardMemberRole
+  status?: Prisma.EnumBoardMemberStatusFilter<"BoardMember"> | $Enums.BoardMemberStatus
+  createdAt?: Prisma.DateTimeFilter<"BoardMember"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"BoardMember"> | Date | string
+}
+
+export type BoardMemberCreateWithoutUserInput = {
+  id?: string
+  role?: $Enums.BoardMemberRole
+  status?: $Enums.BoardMemberStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  board: Prisma.BoardCreateNestedOneWithoutMembersInput
+}
+
+export type BoardMemberUncheckedCreateWithoutUserInput = {
   id?: string
   boardId: number
   role?: $Enums.BoardMemberRole
@@ -613,31 +579,29 @@ export type BoardMemberCreateManyUserInput = {
   updatedAt?: Date | string
 }
 
-export type BoardMemberUpdateWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.EnumBoardMemberRoleFieldUpdateOperationsInput | $Enums.BoardMemberRole
-  status?: Prisma.EnumBoardMemberStatusFieldUpdateOperationsInput | $Enums.BoardMemberStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  board?: Prisma.BoardUpdateOneRequiredWithoutMembersNestedInput
+export type BoardMemberCreateOrConnectWithoutUserInput = {
+  where: Prisma.BoardMemberWhereUniqueInput
+  create: Prisma.XOR<Prisma.BoardMemberCreateWithoutUserInput, Prisma.BoardMemberUncheckedCreateWithoutUserInput>
 }
 
-export type BoardMemberUncheckedUpdateWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  boardId?: Prisma.IntFieldUpdateOperationsInput | number
-  role?: Prisma.EnumBoardMemberRoleFieldUpdateOperationsInput | $Enums.BoardMemberRole
-  status?: Prisma.EnumBoardMemberStatusFieldUpdateOperationsInput | $Enums.BoardMemberStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+export type BoardMemberCreateManyUserInputEnvelope = {
+  data: Prisma.BoardMemberCreateManyUserInput | Prisma.BoardMemberCreateManyUserInput[]
 }
 
-export type BoardMemberUncheckedUpdateManyWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  boardId?: Prisma.IntFieldUpdateOperationsInput | number
-  role?: Prisma.EnumBoardMemberRoleFieldUpdateOperationsInput | $Enums.BoardMemberRole
-  status?: Prisma.EnumBoardMemberStatusFieldUpdateOperationsInput | $Enums.BoardMemberStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+export type BoardMemberUpsertWithWhereUniqueWithoutUserInput = {
+  where: Prisma.BoardMemberWhereUniqueInput
+  update: Prisma.XOR<Prisma.BoardMemberUpdateWithoutUserInput, Prisma.BoardMemberUncheckedUpdateWithoutUserInput>
+  create: Prisma.XOR<Prisma.BoardMemberCreateWithoutUserInput, Prisma.BoardMemberUncheckedCreateWithoutUserInput>
+}
+
+export type BoardMemberUpdateWithWhereUniqueWithoutUserInput = {
+  where: Prisma.BoardMemberWhereUniqueInput
+  data: Prisma.XOR<Prisma.BoardMemberUpdateWithoutUserInput, Prisma.BoardMemberUncheckedUpdateWithoutUserInput>
+}
+
+export type BoardMemberUpdateManyWithWhereWithoutUserInput = {
+  where: Prisma.BoardMemberScalarWhereInput
+  data: Prisma.XOR<Prisma.BoardMemberUpdateManyMutationInput, Prisma.BoardMemberUncheckedUpdateManyWithoutUserInput>
 }
 
 export type BoardMemberCreateManyBoardInput = {
@@ -670,6 +634,42 @@ export type BoardMemberUncheckedUpdateWithoutBoardInput = {
 export type BoardMemberUncheckedUpdateManyWithoutBoardInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumBoardMemberRoleFieldUpdateOperationsInput | $Enums.BoardMemberRole
+  status?: Prisma.EnumBoardMemberStatusFieldUpdateOperationsInput | $Enums.BoardMemberStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type BoardMemberCreateManyUserInput = {
+  id?: string
+  boardId: number
+  role?: $Enums.BoardMemberRole
+  status?: $Enums.BoardMemberStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type BoardMemberUpdateWithoutUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumBoardMemberRoleFieldUpdateOperationsInput | $Enums.BoardMemberRole
+  status?: Prisma.EnumBoardMemberStatusFieldUpdateOperationsInput | $Enums.BoardMemberStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  board?: Prisma.BoardUpdateOneRequiredWithoutMembersNestedInput
+}
+
+export type BoardMemberUncheckedUpdateWithoutUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  boardId?: Prisma.IntFieldUpdateOperationsInput | number
+  role?: Prisma.EnumBoardMemberRoleFieldUpdateOperationsInput | $Enums.BoardMemberRole
+  status?: Prisma.EnumBoardMemberStatusFieldUpdateOperationsInput | $Enums.BoardMemberStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type BoardMemberUncheckedUpdateManyWithoutUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  boardId?: Prisma.IntFieldUpdateOperationsInput | number
   role?: Prisma.EnumBoardMemberRoleFieldUpdateOperationsInput | $Enums.BoardMemberRole
   status?: Prisma.EnumBoardMemberStatusFieldUpdateOperationsInput | $Enums.BoardMemberStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string

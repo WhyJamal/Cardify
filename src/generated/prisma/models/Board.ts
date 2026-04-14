@@ -434,16 +434,6 @@ export type BoardUncheckedUpdateManyInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type BoardListRelationFilter = {
-  every?: Prisma.BoardWhereInput
-  some?: Prisma.BoardWhereInput
-  none?: Prisma.BoardWhereInput
-}
-
-export type BoardOrderByRelationAggregateInput = {
-  _count?: Prisma.SortOrder
-}
-
 export type BoardCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
@@ -494,6 +484,82 @@ export type BoardSumOrderByAggregateInput = {
 export type BoardScalarRelationFilter = {
   is?: Prisma.BoardWhereInput
   isNot?: Prisma.BoardWhereInput
+}
+
+export type BoardListRelationFilter = {
+  every?: Prisma.BoardWhereInput
+  some?: Prisma.BoardWhereInput
+  none?: Prisma.BoardWhereInput
+}
+
+export type BoardOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
+}
+
+export type StringFieldUpdateOperationsInput = {
+  set?: string
+}
+
+export type BoolFieldUpdateOperationsInput = {
+  set?: boolean
+}
+
+export type EnumVisibilityFieldUpdateOperationsInput = {
+  set?: $Enums.Visibility
+}
+
+export type DateTimeFieldUpdateOperationsInput = {
+  set?: Date | string
+}
+
+export type IntFieldUpdateOperationsInput = {
+  set?: number
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
+export type BoardCreateNestedOneWithoutMembersInput = {
+  create?: Prisma.XOR<Prisma.BoardCreateWithoutMembersInput, Prisma.BoardUncheckedCreateWithoutMembersInput>
+  connectOrCreate?: Prisma.BoardCreateOrConnectWithoutMembersInput
+  connect?: Prisma.BoardWhereUniqueInput
+}
+
+export type BoardUpdateOneRequiredWithoutMembersNestedInput = {
+  create?: Prisma.XOR<Prisma.BoardCreateWithoutMembersInput, Prisma.BoardUncheckedCreateWithoutMembersInput>
+  connectOrCreate?: Prisma.BoardCreateOrConnectWithoutMembersInput
+  upsert?: Prisma.BoardUpsertWithoutMembersInput
+  connect?: Prisma.BoardWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BoardUpdateToOneWithWhereWithoutMembersInput, Prisma.BoardUpdateWithoutMembersInput>, Prisma.BoardUncheckedUpdateWithoutMembersInput>
+}
+
+export type BoardCreateNestedOneWithoutLabelsInput = {
+  create?: Prisma.XOR<Prisma.BoardCreateWithoutLabelsInput, Prisma.BoardUncheckedCreateWithoutLabelsInput>
+  connectOrCreate?: Prisma.BoardCreateOrConnectWithoutLabelsInput
+  connect?: Prisma.BoardWhereUniqueInput
+}
+
+export type BoardUpdateOneRequiredWithoutLabelsNestedInput = {
+  create?: Prisma.XOR<Prisma.BoardCreateWithoutLabelsInput, Prisma.BoardUncheckedCreateWithoutLabelsInput>
+  connectOrCreate?: Prisma.BoardCreateOrConnectWithoutLabelsInput
+  upsert?: Prisma.BoardUpsertWithoutLabelsInput
+  connect?: Prisma.BoardWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BoardUpdateToOneWithWhereWithoutLabelsInput, Prisma.BoardUpdateWithoutLabelsInput>, Prisma.BoardUncheckedUpdateWithoutLabelsInput>
+}
+
+export type BoardCreateNestedOneWithoutColumnsInput = {
+  create?: Prisma.XOR<Prisma.BoardCreateWithoutColumnsInput, Prisma.BoardUncheckedCreateWithoutColumnsInput>
+  connectOrCreate?: Prisma.BoardCreateOrConnectWithoutColumnsInput
+  connect?: Prisma.BoardWhereUniqueInput
+}
+
+export type BoardUpdateOneRequiredWithoutColumnsNestedInput = {
+  create?: Prisma.XOR<Prisma.BoardCreateWithoutColumnsInput, Prisma.BoardUncheckedCreateWithoutColumnsInput>
+  connectOrCreate?: Prisma.BoardCreateOrConnectWithoutColumnsInput
+  upsert?: Prisma.BoardUpsertWithoutColumnsInput
+  connect?: Prisma.BoardWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BoardUpdateToOneWithWhereWithoutColumnsInput, Prisma.BoardUpdateWithoutColumnsInput>, Prisma.BoardUncheckedUpdateWithoutColumnsInput>
 }
 
 export type BoardCreateNestedManyWithoutOwnerInput = {
@@ -578,180 +644,6 @@ export type BoardUncheckedUpdateManyWithoutWorkspaceNestedInput = {
   update?: Prisma.BoardUpdateWithWhereUniqueWithoutWorkspaceInput | Prisma.BoardUpdateWithWhereUniqueWithoutWorkspaceInput[]
   updateMany?: Prisma.BoardUpdateManyWithWhereWithoutWorkspaceInput | Prisma.BoardUpdateManyWithWhereWithoutWorkspaceInput[]
   deleteMany?: Prisma.BoardScalarWhereInput | Prisma.BoardScalarWhereInput[]
-}
-
-export type IntFieldUpdateOperationsInput = {
-  set?: number
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
-export type BoardCreateNestedOneWithoutMembersInput = {
-  create?: Prisma.XOR<Prisma.BoardCreateWithoutMembersInput, Prisma.BoardUncheckedCreateWithoutMembersInput>
-  connectOrCreate?: Prisma.BoardCreateOrConnectWithoutMembersInput
-  connect?: Prisma.BoardWhereUniqueInput
-}
-
-export type BoardUpdateOneRequiredWithoutMembersNestedInput = {
-  create?: Prisma.XOR<Prisma.BoardCreateWithoutMembersInput, Prisma.BoardUncheckedCreateWithoutMembersInput>
-  connectOrCreate?: Prisma.BoardCreateOrConnectWithoutMembersInput
-  upsert?: Prisma.BoardUpsertWithoutMembersInput
-  connect?: Prisma.BoardWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.BoardUpdateToOneWithWhereWithoutMembersInput, Prisma.BoardUpdateWithoutMembersInput>, Prisma.BoardUncheckedUpdateWithoutMembersInput>
-}
-
-export type BoardCreateNestedOneWithoutLabelsInput = {
-  create?: Prisma.XOR<Prisma.BoardCreateWithoutLabelsInput, Prisma.BoardUncheckedCreateWithoutLabelsInput>
-  connectOrCreate?: Prisma.BoardCreateOrConnectWithoutLabelsInput
-  connect?: Prisma.BoardWhereUniqueInput
-}
-
-export type BoardUpdateOneRequiredWithoutLabelsNestedInput = {
-  create?: Prisma.XOR<Prisma.BoardCreateWithoutLabelsInput, Prisma.BoardUncheckedCreateWithoutLabelsInput>
-  connectOrCreate?: Prisma.BoardCreateOrConnectWithoutLabelsInput
-  upsert?: Prisma.BoardUpsertWithoutLabelsInput
-  connect?: Prisma.BoardWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.BoardUpdateToOneWithWhereWithoutLabelsInput, Prisma.BoardUpdateWithoutLabelsInput>, Prisma.BoardUncheckedUpdateWithoutLabelsInput>
-}
-
-export type BoardCreateNestedOneWithoutColumnsInput = {
-  create?: Prisma.XOR<Prisma.BoardCreateWithoutColumnsInput, Prisma.BoardUncheckedCreateWithoutColumnsInput>
-  connectOrCreate?: Prisma.BoardCreateOrConnectWithoutColumnsInput
-  connect?: Prisma.BoardWhereUniqueInput
-}
-
-export type BoardUpdateOneRequiredWithoutColumnsNestedInput = {
-  create?: Prisma.XOR<Prisma.BoardCreateWithoutColumnsInput, Prisma.BoardUncheckedCreateWithoutColumnsInput>
-  connectOrCreate?: Prisma.BoardCreateOrConnectWithoutColumnsInput
-  upsert?: Prisma.BoardUpsertWithoutColumnsInput
-  connect?: Prisma.BoardWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.BoardUpdateToOneWithWhereWithoutColumnsInput, Prisma.BoardUpdateWithoutColumnsInput>, Prisma.BoardUncheckedUpdateWithoutColumnsInput>
-}
-
-export type BoardCreateWithoutOwnerInput = {
-  title: string
-  bg: string
-  isPhoto?: boolean
-  isChoosen?: boolean
-  visibility?: $Enums.Visibility
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  workspace: Prisma.WorkspaceCreateNestedOneWithoutBoardsInput
-  columns?: Prisma.ColumnCreateNestedManyWithoutBoardInput
-  labels?: Prisma.BoardLabelCreateNestedManyWithoutBoardInput
-  members?: Prisma.BoardMemberCreateNestedManyWithoutBoardInput
-}
-
-export type BoardUncheckedCreateWithoutOwnerInput = {
-  id?: number
-  title: string
-  bg: string
-  isPhoto?: boolean
-  isChoosen?: boolean
-  visibility?: $Enums.Visibility
-  workspaceId: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  columns?: Prisma.ColumnUncheckedCreateNestedManyWithoutBoardInput
-  labels?: Prisma.BoardLabelUncheckedCreateNestedManyWithoutBoardInput
-  members?: Prisma.BoardMemberUncheckedCreateNestedManyWithoutBoardInput
-}
-
-export type BoardCreateOrConnectWithoutOwnerInput = {
-  where: Prisma.BoardWhereUniqueInput
-  create: Prisma.XOR<Prisma.BoardCreateWithoutOwnerInput, Prisma.BoardUncheckedCreateWithoutOwnerInput>
-}
-
-export type BoardCreateManyOwnerInputEnvelope = {
-  data: Prisma.BoardCreateManyOwnerInput | Prisma.BoardCreateManyOwnerInput[]
-}
-
-export type BoardUpsertWithWhereUniqueWithoutOwnerInput = {
-  where: Prisma.BoardWhereUniqueInput
-  update: Prisma.XOR<Prisma.BoardUpdateWithoutOwnerInput, Prisma.BoardUncheckedUpdateWithoutOwnerInput>
-  create: Prisma.XOR<Prisma.BoardCreateWithoutOwnerInput, Prisma.BoardUncheckedCreateWithoutOwnerInput>
-}
-
-export type BoardUpdateWithWhereUniqueWithoutOwnerInput = {
-  where: Prisma.BoardWhereUniqueInput
-  data: Prisma.XOR<Prisma.BoardUpdateWithoutOwnerInput, Prisma.BoardUncheckedUpdateWithoutOwnerInput>
-}
-
-export type BoardUpdateManyWithWhereWithoutOwnerInput = {
-  where: Prisma.BoardScalarWhereInput
-  data: Prisma.XOR<Prisma.BoardUpdateManyMutationInput, Prisma.BoardUncheckedUpdateManyWithoutOwnerInput>
-}
-
-export type BoardScalarWhereInput = {
-  AND?: Prisma.BoardScalarWhereInput | Prisma.BoardScalarWhereInput[]
-  OR?: Prisma.BoardScalarWhereInput[]
-  NOT?: Prisma.BoardScalarWhereInput | Prisma.BoardScalarWhereInput[]
-  id?: Prisma.IntFilter<"Board"> | number
-  title?: Prisma.StringFilter<"Board"> | string
-  bg?: Prisma.StringFilter<"Board"> | string
-  isPhoto?: Prisma.BoolFilter<"Board"> | boolean
-  isChoosen?: Prisma.BoolFilter<"Board"> | boolean
-  visibility?: Prisma.EnumVisibilityFilter<"Board"> | $Enums.Visibility
-  workspaceId?: Prisma.StringFilter<"Board"> | string
-  ownerId?: Prisma.StringFilter<"Board"> | string
-  createdAt?: Prisma.DateTimeFilter<"Board"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"Board"> | Date | string
-}
-
-export type BoardCreateWithoutWorkspaceInput = {
-  title: string
-  bg: string
-  isPhoto?: boolean
-  isChoosen?: boolean
-  visibility?: $Enums.Visibility
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  owner: Prisma.UserCreateNestedOneWithoutBoardsInput
-  columns?: Prisma.ColumnCreateNestedManyWithoutBoardInput
-  labels?: Prisma.BoardLabelCreateNestedManyWithoutBoardInput
-  members?: Prisma.BoardMemberCreateNestedManyWithoutBoardInput
-}
-
-export type BoardUncheckedCreateWithoutWorkspaceInput = {
-  id?: number
-  title: string
-  bg: string
-  isPhoto?: boolean
-  isChoosen?: boolean
-  visibility?: $Enums.Visibility
-  ownerId: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  columns?: Prisma.ColumnUncheckedCreateNestedManyWithoutBoardInput
-  labels?: Prisma.BoardLabelUncheckedCreateNestedManyWithoutBoardInput
-  members?: Prisma.BoardMemberUncheckedCreateNestedManyWithoutBoardInput
-}
-
-export type BoardCreateOrConnectWithoutWorkspaceInput = {
-  where: Prisma.BoardWhereUniqueInput
-  create: Prisma.XOR<Prisma.BoardCreateWithoutWorkspaceInput, Prisma.BoardUncheckedCreateWithoutWorkspaceInput>
-}
-
-export type BoardCreateManyWorkspaceInputEnvelope = {
-  data: Prisma.BoardCreateManyWorkspaceInput | Prisma.BoardCreateManyWorkspaceInput[]
-}
-
-export type BoardUpsertWithWhereUniqueWithoutWorkspaceInput = {
-  where: Prisma.BoardWhereUniqueInput
-  update: Prisma.XOR<Prisma.BoardUpdateWithoutWorkspaceInput, Prisma.BoardUncheckedUpdateWithoutWorkspaceInput>
-  create: Prisma.XOR<Prisma.BoardCreateWithoutWorkspaceInput, Prisma.BoardUncheckedCreateWithoutWorkspaceInput>
-}
-
-export type BoardUpdateWithWhereUniqueWithoutWorkspaceInput = {
-  where: Prisma.BoardWhereUniqueInput
-  data: Prisma.XOR<Prisma.BoardUpdateWithoutWorkspaceInput, Prisma.BoardUncheckedUpdateWithoutWorkspaceInput>
-}
-
-export type BoardUpdateManyWithWhereWithoutWorkspaceInput = {
-  where: Prisma.BoardScalarWhereInput
-  data: Prisma.XOR<Prisma.BoardUpdateManyMutationInput, Prisma.BoardUncheckedUpdateManyWithoutWorkspaceInput>
 }
 
 export type BoardCreateWithoutMembersInput = {
@@ -974,6 +866,130 @@ export type BoardUncheckedUpdateWithoutColumnsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   labels?: Prisma.BoardLabelUncheckedUpdateManyWithoutBoardNestedInput
   members?: Prisma.BoardMemberUncheckedUpdateManyWithoutBoardNestedInput
+}
+
+export type BoardCreateWithoutOwnerInput = {
+  title: string
+  bg: string
+  isPhoto?: boolean
+  isChoosen?: boolean
+  visibility?: $Enums.Visibility
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  workspace: Prisma.WorkspaceCreateNestedOneWithoutBoardsInput
+  columns?: Prisma.ColumnCreateNestedManyWithoutBoardInput
+  labels?: Prisma.BoardLabelCreateNestedManyWithoutBoardInput
+  members?: Prisma.BoardMemberCreateNestedManyWithoutBoardInput
+}
+
+export type BoardUncheckedCreateWithoutOwnerInput = {
+  id?: number
+  title: string
+  bg: string
+  isPhoto?: boolean
+  isChoosen?: boolean
+  visibility?: $Enums.Visibility
+  workspaceId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  columns?: Prisma.ColumnUncheckedCreateNestedManyWithoutBoardInput
+  labels?: Prisma.BoardLabelUncheckedCreateNestedManyWithoutBoardInput
+  members?: Prisma.BoardMemberUncheckedCreateNestedManyWithoutBoardInput
+}
+
+export type BoardCreateOrConnectWithoutOwnerInput = {
+  where: Prisma.BoardWhereUniqueInput
+  create: Prisma.XOR<Prisma.BoardCreateWithoutOwnerInput, Prisma.BoardUncheckedCreateWithoutOwnerInput>
+}
+
+export type BoardCreateManyOwnerInputEnvelope = {
+  data: Prisma.BoardCreateManyOwnerInput | Prisma.BoardCreateManyOwnerInput[]
+}
+
+export type BoardUpsertWithWhereUniqueWithoutOwnerInput = {
+  where: Prisma.BoardWhereUniqueInput
+  update: Prisma.XOR<Prisma.BoardUpdateWithoutOwnerInput, Prisma.BoardUncheckedUpdateWithoutOwnerInput>
+  create: Prisma.XOR<Prisma.BoardCreateWithoutOwnerInput, Prisma.BoardUncheckedCreateWithoutOwnerInput>
+}
+
+export type BoardUpdateWithWhereUniqueWithoutOwnerInput = {
+  where: Prisma.BoardWhereUniqueInput
+  data: Prisma.XOR<Prisma.BoardUpdateWithoutOwnerInput, Prisma.BoardUncheckedUpdateWithoutOwnerInput>
+}
+
+export type BoardUpdateManyWithWhereWithoutOwnerInput = {
+  where: Prisma.BoardScalarWhereInput
+  data: Prisma.XOR<Prisma.BoardUpdateManyMutationInput, Prisma.BoardUncheckedUpdateManyWithoutOwnerInput>
+}
+
+export type BoardScalarWhereInput = {
+  AND?: Prisma.BoardScalarWhereInput | Prisma.BoardScalarWhereInput[]
+  OR?: Prisma.BoardScalarWhereInput[]
+  NOT?: Prisma.BoardScalarWhereInput | Prisma.BoardScalarWhereInput[]
+  id?: Prisma.IntFilter<"Board"> | number
+  title?: Prisma.StringFilter<"Board"> | string
+  bg?: Prisma.StringFilter<"Board"> | string
+  isPhoto?: Prisma.BoolFilter<"Board"> | boolean
+  isChoosen?: Prisma.BoolFilter<"Board"> | boolean
+  visibility?: Prisma.EnumVisibilityFilter<"Board"> | $Enums.Visibility
+  workspaceId?: Prisma.StringFilter<"Board"> | string
+  ownerId?: Prisma.StringFilter<"Board"> | string
+  createdAt?: Prisma.DateTimeFilter<"Board"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Board"> | Date | string
+}
+
+export type BoardCreateWithoutWorkspaceInput = {
+  title: string
+  bg: string
+  isPhoto?: boolean
+  isChoosen?: boolean
+  visibility?: $Enums.Visibility
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  owner: Prisma.UserCreateNestedOneWithoutBoardsInput
+  columns?: Prisma.ColumnCreateNestedManyWithoutBoardInput
+  labels?: Prisma.BoardLabelCreateNestedManyWithoutBoardInput
+  members?: Prisma.BoardMemberCreateNestedManyWithoutBoardInput
+}
+
+export type BoardUncheckedCreateWithoutWorkspaceInput = {
+  id?: number
+  title: string
+  bg: string
+  isPhoto?: boolean
+  isChoosen?: boolean
+  visibility?: $Enums.Visibility
+  ownerId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  columns?: Prisma.ColumnUncheckedCreateNestedManyWithoutBoardInput
+  labels?: Prisma.BoardLabelUncheckedCreateNestedManyWithoutBoardInput
+  members?: Prisma.BoardMemberUncheckedCreateNestedManyWithoutBoardInput
+}
+
+export type BoardCreateOrConnectWithoutWorkspaceInput = {
+  where: Prisma.BoardWhereUniqueInput
+  create: Prisma.XOR<Prisma.BoardCreateWithoutWorkspaceInput, Prisma.BoardUncheckedCreateWithoutWorkspaceInput>
+}
+
+export type BoardCreateManyWorkspaceInputEnvelope = {
+  data: Prisma.BoardCreateManyWorkspaceInput | Prisma.BoardCreateManyWorkspaceInput[]
+}
+
+export type BoardUpsertWithWhereUniqueWithoutWorkspaceInput = {
+  where: Prisma.BoardWhereUniqueInput
+  update: Prisma.XOR<Prisma.BoardUpdateWithoutWorkspaceInput, Prisma.BoardUncheckedUpdateWithoutWorkspaceInput>
+  create: Prisma.XOR<Prisma.BoardCreateWithoutWorkspaceInput, Prisma.BoardUncheckedCreateWithoutWorkspaceInput>
+}
+
+export type BoardUpdateWithWhereUniqueWithoutWorkspaceInput = {
+  where: Prisma.BoardWhereUniqueInput
+  data: Prisma.XOR<Prisma.BoardUpdateWithoutWorkspaceInput, Prisma.BoardUncheckedUpdateWithoutWorkspaceInput>
+}
+
+export type BoardUpdateManyWithWhereWithoutWorkspaceInput = {
+  where: Prisma.BoardScalarWhereInput
+  data: Prisma.XOR<Prisma.BoardUpdateManyMutationInput, Prisma.BoardUncheckedUpdateManyWithoutWorkspaceInput>
 }
 
 export type BoardCreateManyOwnerInput = {

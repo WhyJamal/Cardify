@@ -18,36 +18,6 @@ export { Prisma }
 export * as $Enums from './enums'
 export * from './enums';
 /**
- * Model User
- * 
- */
-export type User = Prisma.UserModel
-/**
- * Model UserTaskAction
- * 
- */
-export type UserTaskAction = Prisma.UserTaskActionModel
-/**
- * Model Workspace
- * 
- */
-export type Workspace = Prisma.WorkspaceModel
-/**
- * Model WorkspaceType
- * 
- */
-export type WorkspaceType = Prisma.WorkspaceTypeModel
-/**
- * Model WorkspaceMember
- * 
- */
-export type WorkspaceMember = Prisma.WorkspaceMemberModel
-/**
- * Model Notification
- * 
- */
-export type Notification = Prisma.NotificationModel
-/**
  * Model Board
  * 
  */
@@ -62,11 +32,6 @@ export type BoardMember = Prisma.BoardMemberModel
  * 
  */
 export type BoardLabel = Prisma.BoardLabelModel
-/**
- * Model Column
- * 
- */
-export type Column = Prisma.ColumnModel
 /**
  * Model Card
  * 
@@ -98,7 +63,42 @@ export type CardMember = Prisma.CardMemberModel
  */
 export type CardAttachment = Prisma.CardAttachmentModel
 /**
- * Model Location
+ * Model CardLocation
  * 
  */
-export type Location = Prisma.LocationModel
+export type CardLocation = Prisma.CardLocationModel
+/**
+ * Model Column
+ * 
+ */
+export type Column = Prisma.ColumnModel
+/**
+ * Model Notification
+ * 
+ */
+export type Notification = Prisma.NotificationModel
+/**
+ * Model User
+ * 
+ */
+export type User = Prisma.UserModel
+/**
+ * Model UserTaskAction
+ * 
+ */
+export type UserTaskAction = Prisma.UserTaskActionModel
+/**
+ * Model Workspace
+ * 
+ */
+export type Workspace = Prisma.WorkspaceModel
+/**
+ * Model WorkspaceType
+ * 
+ */
+export type WorkspaceType = Prisma.WorkspaceTypeModel
+/**
+ * Model WorkspaceMember
+ * 
+ */
+export type WorkspaceMember = Prisma.WorkspaceMemberModel

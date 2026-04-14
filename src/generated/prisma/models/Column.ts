@@ -359,6 +359,11 @@ export type ColumnOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type ColumnScalarRelationFilter = {
+  is?: Prisma.ColumnWhereInput
+  isNot?: Prisma.ColumnWhereInput
+}
+
 export type ColumnCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   boardId?: Prisma.SortOrder
@@ -394,11 +399,6 @@ export type ColumnMinOrderByAggregateInput = {
 export type ColumnSumOrderByAggregateInput = {
   boardId?: Prisma.SortOrder
   position?: Prisma.SortOrder
-}
-
-export type ColumnScalarRelationFilter = {
-  is?: Prisma.ColumnWhereInput
-  isNot?: Prisma.ColumnWhereInput
 }
 
 export type ColumnCreateNestedManyWithoutBoardInput = {

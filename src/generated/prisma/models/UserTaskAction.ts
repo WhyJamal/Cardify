@@ -347,6 +347,48 @@ export type UserTaskActionMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
+export type UserTaskActionCreateNestedManyWithoutCardInput = {
+  create?: Prisma.XOR<Prisma.UserTaskActionCreateWithoutCardInput, Prisma.UserTaskActionUncheckedCreateWithoutCardInput> | Prisma.UserTaskActionCreateWithoutCardInput[] | Prisma.UserTaskActionUncheckedCreateWithoutCardInput[]
+  connectOrCreate?: Prisma.UserTaskActionCreateOrConnectWithoutCardInput | Prisma.UserTaskActionCreateOrConnectWithoutCardInput[]
+  createMany?: Prisma.UserTaskActionCreateManyCardInputEnvelope
+  connect?: Prisma.UserTaskActionWhereUniqueInput | Prisma.UserTaskActionWhereUniqueInput[]
+}
+
+export type UserTaskActionUncheckedCreateNestedManyWithoutCardInput = {
+  create?: Prisma.XOR<Prisma.UserTaskActionCreateWithoutCardInput, Prisma.UserTaskActionUncheckedCreateWithoutCardInput> | Prisma.UserTaskActionCreateWithoutCardInput[] | Prisma.UserTaskActionUncheckedCreateWithoutCardInput[]
+  connectOrCreate?: Prisma.UserTaskActionCreateOrConnectWithoutCardInput | Prisma.UserTaskActionCreateOrConnectWithoutCardInput[]
+  createMany?: Prisma.UserTaskActionCreateManyCardInputEnvelope
+  connect?: Prisma.UserTaskActionWhereUniqueInput | Prisma.UserTaskActionWhereUniqueInput[]
+}
+
+export type UserTaskActionUpdateManyWithoutCardNestedInput = {
+  create?: Prisma.XOR<Prisma.UserTaskActionCreateWithoutCardInput, Prisma.UserTaskActionUncheckedCreateWithoutCardInput> | Prisma.UserTaskActionCreateWithoutCardInput[] | Prisma.UserTaskActionUncheckedCreateWithoutCardInput[]
+  connectOrCreate?: Prisma.UserTaskActionCreateOrConnectWithoutCardInput | Prisma.UserTaskActionCreateOrConnectWithoutCardInput[]
+  upsert?: Prisma.UserTaskActionUpsertWithWhereUniqueWithoutCardInput | Prisma.UserTaskActionUpsertWithWhereUniqueWithoutCardInput[]
+  createMany?: Prisma.UserTaskActionCreateManyCardInputEnvelope
+  set?: Prisma.UserTaskActionWhereUniqueInput | Prisma.UserTaskActionWhereUniqueInput[]
+  disconnect?: Prisma.UserTaskActionWhereUniqueInput | Prisma.UserTaskActionWhereUniqueInput[]
+  delete?: Prisma.UserTaskActionWhereUniqueInput | Prisma.UserTaskActionWhereUniqueInput[]
+  connect?: Prisma.UserTaskActionWhereUniqueInput | Prisma.UserTaskActionWhereUniqueInput[]
+  update?: Prisma.UserTaskActionUpdateWithWhereUniqueWithoutCardInput | Prisma.UserTaskActionUpdateWithWhereUniqueWithoutCardInput[]
+  updateMany?: Prisma.UserTaskActionUpdateManyWithWhereWithoutCardInput | Prisma.UserTaskActionUpdateManyWithWhereWithoutCardInput[]
+  deleteMany?: Prisma.UserTaskActionScalarWhereInput | Prisma.UserTaskActionScalarWhereInput[]
+}
+
+export type UserTaskActionUncheckedUpdateManyWithoutCardNestedInput = {
+  create?: Prisma.XOR<Prisma.UserTaskActionCreateWithoutCardInput, Prisma.UserTaskActionUncheckedCreateWithoutCardInput> | Prisma.UserTaskActionCreateWithoutCardInput[] | Prisma.UserTaskActionUncheckedCreateWithoutCardInput[]
+  connectOrCreate?: Prisma.UserTaskActionCreateOrConnectWithoutCardInput | Prisma.UserTaskActionCreateOrConnectWithoutCardInput[]
+  upsert?: Prisma.UserTaskActionUpsertWithWhereUniqueWithoutCardInput | Prisma.UserTaskActionUpsertWithWhereUniqueWithoutCardInput[]
+  createMany?: Prisma.UserTaskActionCreateManyCardInputEnvelope
+  set?: Prisma.UserTaskActionWhereUniqueInput | Prisma.UserTaskActionWhereUniqueInput[]
+  disconnect?: Prisma.UserTaskActionWhereUniqueInput | Prisma.UserTaskActionWhereUniqueInput[]
+  delete?: Prisma.UserTaskActionWhereUniqueInput | Prisma.UserTaskActionWhereUniqueInput[]
+  connect?: Prisma.UserTaskActionWhereUniqueInput | Prisma.UserTaskActionWhereUniqueInput[]
+  update?: Prisma.UserTaskActionUpdateWithWhereUniqueWithoutCardInput | Prisma.UserTaskActionUpdateWithWhereUniqueWithoutCardInput[]
+  updateMany?: Prisma.UserTaskActionUpdateManyWithWhereWithoutCardInput | Prisma.UserTaskActionUpdateManyWithWhereWithoutCardInput[]
+  deleteMany?: Prisma.UserTaskActionScalarWhereInput | Prisma.UserTaskActionScalarWhereInput[]
+}
+
 export type UserTaskActionCreateNestedManyWithoutUserInput = {
   create?: Prisma.XOR<Prisma.UserTaskActionCreateWithoutUserInput, Prisma.UserTaskActionUncheckedCreateWithoutUserInput> | Prisma.UserTaskActionCreateWithoutUserInput[] | Prisma.UserTaskActionUncheckedCreateWithoutUserInput[]
   connectOrCreate?: Prisma.UserTaskActionCreateOrConnectWithoutUserInput | Prisma.UserTaskActionCreateOrConnectWithoutUserInput[]
@@ -393,46 +435,57 @@ export type EnumUserTaskStatusFieldUpdateOperationsInput = {
   set?: $Enums.UserTaskStatus
 }
 
-export type UserTaskActionCreateNestedManyWithoutCardInput = {
-  create?: Prisma.XOR<Prisma.UserTaskActionCreateWithoutCardInput, Prisma.UserTaskActionUncheckedCreateWithoutCardInput> | Prisma.UserTaskActionCreateWithoutCardInput[] | Prisma.UserTaskActionUncheckedCreateWithoutCardInput[]
-  connectOrCreate?: Prisma.UserTaskActionCreateOrConnectWithoutCardInput | Prisma.UserTaskActionCreateOrConnectWithoutCardInput[]
-  createMany?: Prisma.UserTaskActionCreateManyCardInputEnvelope
-  connect?: Prisma.UserTaskActionWhereUniqueInput | Prisma.UserTaskActionWhereUniqueInput[]
+export type UserTaskActionCreateWithoutCardInput = {
+  id?: string
+  status?: $Enums.UserTaskStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutUserTaskActionsInput
 }
 
-export type UserTaskActionUncheckedCreateNestedManyWithoutCardInput = {
-  create?: Prisma.XOR<Prisma.UserTaskActionCreateWithoutCardInput, Prisma.UserTaskActionUncheckedCreateWithoutCardInput> | Prisma.UserTaskActionCreateWithoutCardInput[] | Prisma.UserTaskActionUncheckedCreateWithoutCardInput[]
-  connectOrCreate?: Prisma.UserTaskActionCreateOrConnectWithoutCardInput | Prisma.UserTaskActionCreateOrConnectWithoutCardInput[]
-  createMany?: Prisma.UserTaskActionCreateManyCardInputEnvelope
-  connect?: Prisma.UserTaskActionWhereUniqueInput | Prisma.UserTaskActionWhereUniqueInput[]
+export type UserTaskActionUncheckedCreateWithoutCardInput = {
+  id?: string
+  userId: string
+  status?: $Enums.UserTaskStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
-export type UserTaskActionUpdateManyWithoutCardNestedInput = {
-  create?: Prisma.XOR<Prisma.UserTaskActionCreateWithoutCardInput, Prisma.UserTaskActionUncheckedCreateWithoutCardInput> | Prisma.UserTaskActionCreateWithoutCardInput[] | Prisma.UserTaskActionUncheckedCreateWithoutCardInput[]
-  connectOrCreate?: Prisma.UserTaskActionCreateOrConnectWithoutCardInput | Prisma.UserTaskActionCreateOrConnectWithoutCardInput[]
-  upsert?: Prisma.UserTaskActionUpsertWithWhereUniqueWithoutCardInput | Prisma.UserTaskActionUpsertWithWhereUniqueWithoutCardInput[]
-  createMany?: Prisma.UserTaskActionCreateManyCardInputEnvelope
-  set?: Prisma.UserTaskActionWhereUniqueInput | Prisma.UserTaskActionWhereUniqueInput[]
-  disconnect?: Prisma.UserTaskActionWhereUniqueInput | Prisma.UserTaskActionWhereUniqueInput[]
-  delete?: Prisma.UserTaskActionWhereUniqueInput | Prisma.UserTaskActionWhereUniqueInput[]
-  connect?: Prisma.UserTaskActionWhereUniqueInput | Prisma.UserTaskActionWhereUniqueInput[]
-  update?: Prisma.UserTaskActionUpdateWithWhereUniqueWithoutCardInput | Prisma.UserTaskActionUpdateWithWhereUniqueWithoutCardInput[]
-  updateMany?: Prisma.UserTaskActionUpdateManyWithWhereWithoutCardInput | Prisma.UserTaskActionUpdateManyWithWhereWithoutCardInput[]
-  deleteMany?: Prisma.UserTaskActionScalarWhereInput | Prisma.UserTaskActionScalarWhereInput[]
+export type UserTaskActionCreateOrConnectWithoutCardInput = {
+  where: Prisma.UserTaskActionWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserTaskActionCreateWithoutCardInput, Prisma.UserTaskActionUncheckedCreateWithoutCardInput>
 }
 
-export type UserTaskActionUncheckedUpdateManyWithoutCardNestedInput = {
-  create?: Prisma.XOR<Prisma.UserTaskActionCreateWithoutCardInput, Prisma.UserTaskActionUncheckedCreateWithoutCardInput> | Prisma.UserTaskActionCreateWithoutCardInput[] | Prisma.UserTaskActionUncheckedCreateWithoutCardInput[]
-  connectOrCreate?: Prisma.UserTaskActionCreateOrConnectWithoutCardInput | Prisma.UserTaskActionCreateOrConnectWithoutCardInput[]
-  upsert?: Prisma.UserTaskActionUpsertWithWhereUniqueWithoutCardInput | Prisma.UserTaskActionUpsertWithWhereUniqueWithoutCardInput[]
-  createMany?: Prisma.UserTaskActionCreateManyCardInputEnvelope
-  set?: Prisma.UserTaskActionWhereUniqueInput | Prisma.UserTaskActionWhereUniqueInput[]
-  disconnect?: Prisma.UserTaskActionWhereUniqueInput | Prisma.UserTaskActionWhereUniqueInput[]
-  delete?: Prisma.UserTaskActionWhereUniqueInput | Prisma.UserTaskActionWhereUniqueInput[]
-  connect?: Prisma.UserTaskActionWhereUniqueInput | Prisma.UserTaskActionWhereUniqueInput[]
-  update?: Prisma.UserTaskActionUpdateWithWhereUniqueWithoutCardInput | Prisma.UserTaskActionUpdateWithWhereUniqueWithoutCardInput[]
-  updateMany?: Prisma.UserTaskActionUpdateManyWithWhereWithoutCardInput | Prisma.UserTaskActionUpdateManyWithWhereWithoutCardInput[]
-  deleteMany?: Prisma.UserTaskActionScalarWhereInput | Prisma.UserTaskActionScalarWhereInput[]
+export type UserTaskActionCreateManyCardInputEnvelope = {
+  data: Prisma.UserTaskActionCreateManyCardInput | Prisma.UserTaskActionCreateManyCardInput[]
+}
+
+export type UserTaskActionUpsertWithWhereUniqueWithoutCardInput = {
+  where: Prisma.UserTaskActionWhereUniqueInput
+  update: Prisma.XOR<Prisma.UserTaskActionUpdateWithoutCardInput, Prisma.UserTaskActionUncheckedUpdateWithoutCardInput>
+  create: Prisma.XOR<Prisma.UserTaskActionCreateWithoutCardInput, Prisma.UserTaskActionUncheckedCreateWithoutCardInput>
+}
+
+export type UserTaskActionUpdateWithWhereUniqueWithoutCardInput = {
+  where: Prisma.UserTaskActionWhereUniqueInput
+  data: Prisma.XOR<Prisma.UserTaskActionUpdateWithoutCardInput, Prisma.UserTaskActionUncheckedUpdateWithoutCardInput>
+}
+
+export type UserTaskActionUpdateManyWithWhereWithoutCardInput = {
+  where: Prisma.UserTaskActionScalarWhereInput
+  data: Prisma.XOR<Prisma.UserTaskActionUpdateManyMutationInput, Prisma.UserTaskActionUncheckedUpdateManyWithoutCardInput>
+}
+
+export type UserTaskActionScalarWhereInput = {
+  AND?: Prisma.UserTaskActionScalarWhereInput | Prisma.UserTaskActionScalarWhereInput[]
+  OR?: Prisma.UserTaskActionScalarWhereInput[]
+  NOT?: Prisma.UserTaskActionScalarWhereInput | Prisma.UserTaskActionScalarWhereInput[]
+  id?: Prisma.StringFilter<"UserTaskAction"> | string
+  userId?: Prisma.StringFilter<"UserTaskAction"> | string
+  cardId?: Prisma.StringFilter<"UserTaskAction"> | string
+  status?: Prisma.EnumUserTaskStatusFilter<"UserTaskAction"> | $Enums.UserTaskStatus
+  createdAt?: Prisma.DateTimeFilter<"UserTaskAction"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"UserTaskAction"> | Date | string
 }
 
 export type UserTaskActionCreateWithoutUserInput = {
@@ -476,27 +529,7 @@ export type UserTaskActionUpdateManyWithWhereWithoutUserInput = {
   data: Prisma.XOR<Prisma.UserTaskActionUpdateManyMutationInput, Prisma.UserTaskActionUncheckedUpdateManyWithoutUserInput>
 }
 
-export type UserTaskActionScalarWhereInput = {
-  AND?: Prisma.UserTaskActionScalarWhereInput | Prisma.UserTaskActionScalarWhereInput[]
-  OR?: Prisma.UserTaskActionScalarWhereInput[]
-  NOT?: Prisma.UserTaskActionScalarWhereInput | Prisma.UserTaskActionScalarWhereInput[]
-  id?: Prisma.StringFilter<"UserTaskAction"> | string
-  userId?: Prisma.StringFilter<"UserTaskAction"> | string
-  cardId?: Prisma.StringFilter<"UserTaskAction"> | string
-  status?: Prisma.EnumUserTaskStatusFilter<"UserTaskAction"> | $Enums.UserTaskStatus
-  createdAt?: Prisma.DateTimeFilter<"UserTaskAction"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"UserTaskAction"> | Date | string
-}
-
-export type UserTaskActionCreateWithoutCardInput = {
-  id?: string
-  status?: $Enums.UserTaskStatus
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutUserTaskActionsInput
-}
-
-export type UserTaskActionUncheckedCreateWithoutCardInput = {
+export type UserTaskActionCreateManyCardInput = {
   id?: string
   userId: string
   status?: $Enums.UserTaskStatus
@@ -504,29 +537,28 @@ export type UserTaskActionUncheckedCreateWithoutCardInput = {
   updatedAt?: Date | string
 }
 
-export type UserTaskActionCreateOrConnectWithoutCardInput = {
-  where: Prisma.UserTaskActionWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserTaskActionCreateWithoutCardInput, Prisma.UserTaskActionUncheckedCreateWithoutCardInput>
+export type UserTaskActionUpdateWithoutCardInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserTaskStatusFieldUpdateOperationsInput | $Enums.UserTaskStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutUserTaskActionsNestedInput
 }
 
-export type UserTaskActionCreateManyCardInputEnvelope = {
-  data: Prisma.UserTaskActionCreateManyCardInput | Prisma.UserTaskActionCreateManyCardInput[]
+export type UserTaskActionUncheckedUpdateWithoutCardInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserTaskStatusFieldUpdateOperationsInput | $Enums.UserTaskStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type UserTaskActionUpsertWithWhereUniqueWithoutCardInput = {
-  where: Prisma.UserTaskActionWhereUniqueInput
-  update: Prisma.XOR<Prisma.UserTaskActionUpdateWithoutCardInput, Prisma.UserTaskActionUncheckedUpdateWithoutCardInput>
-  create: Prisma.XOR<Prisma.UserTaskActionCreateWithoutCardInput, Prisma.UserTaskActionUncheckedCreateWithoutCardInput>
-}
-
-export type UserTaskActionUpdateWithWhereUniqueWithoutCardInput = {
-  where: Prisma.UserTaskActionWhereUniqueInput
-  data: Prisma.XOR<Prisma.UserTaskActionUpdateWithoutCardInput, Prisma.UserTaskActionUncheckedUpdateWithoutCardInput>
-}
-
-export type UserTaskActionUpdateManyWithWhereWithoutCardInput = {
-  where: Prisma.UserTaskActionScalarWhereInput
-  data: Prisma.XOR<Prisma.UserTaskActionUpdateManyMutationInput, Prisma.UserTaskActionUncheckedUpdateManyWithoutCardInput>
+export type UserTaskActionUncheckedUpdateManyWithoutCardInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserTaskStatusFieldUpdateOperationsInput | $Enums.UserTaskStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type UserTaskActionCreateManyUserInput = {
@@ -556,38 +588,6 @@ export type UserTaskActionUncheckedUpdateWithoutUserInput = {
 export type UserTaskActionUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   cardId?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumUserTaskStatusFieldUpdateOperationsInput | $Enums.UserTaskStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type UserTaskActionCreateManyCardInput = {
-  id?: string
-  userId: string
-  status?: $Enums.UserTaskStatus
-  createdAt?: Date | string
-  updatedAt?: Date | string
-}
-
-export type UserTaskActionUpdateWithoutCardInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumUserTaskStatusFieldUpdateOperationsInput | $Enums.UserTaskStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutUserTaskActionsNestedInput
-}
-
-export type UserTaskActionUncheckedUpdateWithoutCardInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumUserTaskStatusFieldUpdateOperationsInput | $Enums.UserTaskStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type UserTaskActionUncheckedUpdateManyWithoutCardInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumUserTaskStatusFieldUpdateOperationsInput | $Enums.UserTaskStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string

@@ -1,0 +1,68 @@
+enum BoardMemberStatus {
+  PENDING
+  ACCEPTED
+  DECLINED
+}
+
+enum BoardMemberRole {
+  OWNER
+  MEMBER
+  VIEWER
+}
+
+model Board {
+  id         Int        @id @default(autoincrement())
+  title      String
+  bg         String
+  isPhoto    Boolean    @default(true)
+  isChoosen  Boolean    @default(false)
+  visibility Visibility @default(PUBLIC)
+
+  workspaceId String
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  ownerId String
+  owner   User   @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+
+  columns Column[]
+  labels  BoardLabel[]
+  members BoardMember[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([workspaceId])
+  @@index([ownerId])
+}
+
+model BoardMember {
+  id      String            @id @default(cuid())
+  boardId Int
+  userId  String
+  role    BoardMemberRole   @default(MEMBER)
+  status  BoardMemberStatus @default(PENDING)
+
+  board Board @relation(fields: [boardId], references: [id], onDelete: Cascade)
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([boardId, userId])
+  @@index([boardId])
+  @@index([userId])
+}
+
+model BoardLabel {
+  id        String   @id @default(cuid())
+  boardId   Int
+  color     String
+  name      String?
+  position  Int      @default(0)
+  createdAt DateTime @default(now())
+
+  board Board            @relation(fields: [boardId], references: [id], onDelete: Cascade)
+  cards CardBoardLabel[]
+
+  @@index([boardId])
+}

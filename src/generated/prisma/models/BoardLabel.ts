@@ -443,6 +443,10 @@ export type BoardLabelUncheckedUpdateManyWithoutBoardNestedInput = {
   deleteMany?: Prisma.BoardLabelScalarWhereInput | Prisma.BoardLabelScalarWhereInput[]
 }
 
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
+}
+
 export type BoardLabelCreateNestedOneWithoutCardsInput = {
   create?: Prisma.XOR<Prisma.BoardLabelCreateWithoutCardsInput, Prisma.BoardLabelUncheckedCreateWithoutCardsInput>
   connectOrCreate?: Prisma.BoardLabelCreateOrConnectWithoutCardsInput

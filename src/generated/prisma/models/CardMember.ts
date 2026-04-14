@@ -325,48 +325,6 @@ export type CardMemberMinOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
 }
 
-export type CardMemberCreateNestedManyWithoutUserInput = {
-  create?: Prisma.XOR<Prisma.CardMemberCreateWithoutUserInput, Prisma.CardMemberUncheckedCreateWithoutUserInput> | Prisma.CardMemberCreateWithoutUserInput[] | Prisma.CardMemberUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.CardMemberCreateOrConnectWithoutUserInput | Prisma.CardMemberCreateOrConnectWithoutUserInput[]
-  createMany?: Prisma.CardMemberCreateManyUserInputEnvelope
-  connect?: Prisma.CardMemberWhereUniqueInput | Prisma.CardMemberWhereUniqueInput[]
-}
-
-export type CardMemberUncheckedCreateNestedManyWithoutUserInput = {
-  create?: Prisma.XOR<Prisma.CardMemberCreateWithoutUserInput, Prisma.CardMemberUncheckedCreateWithoutUserInput> | Prisma.CardMemberCreateWithoutUserInput[] | Prisma.CardMemberUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.CardMemberCreateOrConnectWithoutUserInput | Prisma.CardMemberCreateOrConnectWithoutUserInput[]
-  createMany?: Prisma.CardMemberCreateManyUserInputEnvelope
-  connect?: Prisma.CardMemberWhereUniqueInput | Prisma.CardMemberWhereUniqueInput[]
-}
-
-export type CardMemberUpdateManyWithoutUserNestedInput = {
-  create?: Prisma.XOR<Prisma.CardMemberCreateWithoutUserInput, Prisma.CardMemberUncheckedCreateWithoutUserInput> | Prisma.CardMemberCreateWithoutUserInput[] | Prisma.CardMemberUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.CardMemberCreateOrConnectWithoutUserInput | Prisma.CardMemberCreateOrConnectWithoutUserInput[]
-  upsert?: Prisma.CardMemberUpsertWithWhereUniqueWithoutUserInput | Prisma.CardMemberUpsertWithWhereUniqueWithoutUserInput[]
-  createMany?: Prisma.CardMemberCreateManyUserInputEnvelope
-  set?: Prisma.CardMemberWhereUniqueInput | Prisma.CardMemberWhereUniqueInput[]
-  disconnect?: Prisma.CardMemberWhereUniqueInput | Prisma.CardMemberWhereUniqueInput[]
-  delete?: Prisma.CardMemberWhereUniqueInput | Prisma.CardMemberWhereUniqueInput[]
-  connect?: Prisma.CardMemberWhereUniqueInput | Prisma.CardMemberWhereUniqueInput[]
-  update?: Prisma.CardMemberUpdateWithWhereUniqueWithoutUserInput | Prisma.CardMemberUpdateWithWhereUniqueWithoutUserInput[]
-  updateMany?: Prisma.CardMemberUpdateManyWithWhereWithoutUserInput | Prisma.CardMemberUpdateManyWithWhereWithoutUserInput[]
-  deleteMany?: Prisma.CardMemberScalarWhereInput | Prisma.CardMemberScalarWhereInput[]
-}
-
-export type CardMemberUncheckedUpdateManyWithoutUserNestedInput = {
-  create?: Prisma.XOR<Prisma.CardMemberCreateWithoutUserInput, Prisma.CardMemberUncheckedCreateWithoutUserInput> | Prisma.CardMemberCreateWithoutUserInput[] | Prisma.CardMemberUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.CardMemberCreateOrConnectWithoutUserInput | Prisma.CardMemberCreateOrConnectWithoutUserInput[]
-  upsert?: Prisma.CardMemberUpsertWithWhereUniqueWithoutUserInput | Prisma.CardMemberUpsertWithWhereUniqueWithoutUserInput[]
-  createMany?: Prisma.CardMemberCreateManyUserInputEnvelope
-  set?: Prisma.CardMemberWhereUniqueInput | Prisma.CardMemberWhereUniqueInput[]
-  disconnect?: Prisma.CardMemberWhereUniqueInput | Prisma.CardMemberWhereUniqueInput[]
-  delete?: Prisma.CardMemberWhereUniqueInput | Prisma.CardMemberWhereUniqueInput[]
-  connect?: Prisma.CardMemberWhereUniqueInput | Prisma.CardMemberWhereUniqueInput[]
-  update?: Prisma.CardMemberUpdateWithWhereUniqueWithoutUserInput | Prisma.CardMemberUpdateWithWhereUniqueWithoutUserInput[]
-  updateMany?: Prisma.CardMemberUpdateManyWithWhereWithoutUserInput | Prisma.CardMemberUpdateManyWithWhereWithoutUserInput[]
-  deleteMany?: Prisma.CardMemberScalarWhereInput | Prisma.CardMemberScalarWhereInput[]
-}
-
 export type CardMemberCreateNestedManyWithoutCardInput = {
   create?: Prisma.XOR<Prisma.CardMemberCreateWithoutCardInput, Prisma.CardMemberUncheckedCreateWithoutCardInput> | Prisma.CardMemberCreateWithoutCardInput[] | Prisma.CardMemberUncheckedCreateWithoutCardInput[]
   connectOrCreate?: Prisma.CardMemberCreateOrConnectWithoutCardInput | Prisma.CardMemberCreateOrConnectWithoutCardInput[]
@@ -409,54 +367,46 @@ export type CardMemberUncheckedUpdateManyWithoutCardNestedInput = {
   deleteMany?: Prisma.CardMemberScalarWhereInput | Prisma.CardMemberScalarWhereInput[]
 }
 
-export type CardMemberCreateWithoutUserInput = {
-  id?: string
-  activityText?: string | null
-  createdAt?: Date | string
-  card: Prisma.CardCreateNestedOneWithoutMembersInput
+export type CardMemberCreateNestedManyWithoutUserInput = {
+  create?: Prisma.XOR<Prisma.CardMemberCreateWithoutUserInput, Prisma.CardMemberUncheckedCreateWithoutUserInput> | Prisma.CardMemberCreateWithoutUserInput[] | Prisma.CardMemberUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.CardMemberCreateOrConnectWithoutUserInput | Prisma.CardMemberCreateOrConnectWithoutUserInput[]
+  createMany?: Prisma.CardMemberCreateManyUserInputEnvelope
+  connect?: Prisma.CardMemberWhereUniqueInput | Prisma.CardMemberWhereUniqueInput[]
 }
 
-export type CardMemberUncheckedCreateWithoutUserInput = {
-  id?: string
-  cardId: string
-  activityText?: string | null
-  createdAt?: Date | string
+export type CardMemberUncheckedCreateNestedManyWithoutUserInput = {
+  create?: Prisma.XOR<Prisma.CardMemberCreateWithoutUserInput, Prisma.CardMemberUncheckedCreateWithoutUserInput> | Prisma.CardMemberCreateWithoutUserInput[] | Prisma.CardMemberUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.CardMemberCreateOrConnectWithoutUserInput | Prisma.CardMemberCreateOrConnectWithoutUserInput[]
+  createMany?: Prisma.CardMemberCreateManyUserInputEnvelope
+  connect?: Prisma.CardMemberWhereUniqueInput | Prisma.CardMemberWhereUniqueInput[]
 }
 
-export type CardMemberCreateOrConnectWithoutUserInput = {
-  where: Prisma.CardMemberWhereUniqueInput
-  create: Prisma.XOR<Prisma.CardMemberCreateWithoutUserInput, Prisma.CardMemberUncheckedCreateWithoutUserInput>
+export type CardMemberUpdateManyWithoutUserNestedInput = {
+  create?: Prisma.XOR<Prisma.CardMemberCreateWithoutUserInput, Prisma.CardMemberUncheckedCreateWithoutUserInput> | Prisma.CardMemberCreateWithoutUserInput[] | Prisma.CardMemberUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.CardMemberCreateOrConnectWithoutUserInput | Prisma.CardMemberCreateOrConnectWithoutUserInput[]
+  upsert?: Prisma.CardMemberUpsertWithWhereUniqueWithoutUserInput | Prisma.CardMemberUpsertWithWhereUniqueWithoutUserInput[]
+  createMany?: Prisma.CardMemberCreateManyUserInputEnvelope
+  set?: Prisma.CardMemberWhereUniqueInput | Prisma.CardMemberWhereUniqueInput[]
+  disconnect?: Prisma.CardMemberWhereUniqueInput | Prisma.CardMemberWhereUniqueInput[]
+  delete?: Prisma.CardMemberWhereUniqueInput | Prisma.CardMemberWhereUniqueInput[]
+  connect?: Prisma.CardMemberWhereUniqueInput | Prisma.CardMemberWhereUniqueInput[]
+  update?: Prisma.CardMemberUpdateWithWhereUniqueWithoutUserInput | Prisma.CardMemberUpdateWithWhereUniqueWithoutUserInput[]
+  updateMany?: Prisma.CardMemberUpdateManyWithWhereWithoutUserInput | Prisma.CardMemberUpdateManyWithWhereWithoutUserInput[]
+  deleteMany?: Prisma.CardMemberScalarWhereInput | Prisma.CardMemberScalarWhereInput[]
 }
 
-export type CardMemberCreateManyUserInputEnvelope = {
-  data: Prisma.CardMemberCreateManyUserInput | Prisma.CardMemberCreateManyUserInput[]
-}
-
-export type CardMemberUpsertWithWhereUniqueWithoutUserInput = {
-  where: Prisma.CardMemberWhereUniqueInput
-  update: Prisma.XOR<Prisma.CardMemberUpdateWithoutUserInput, Prisma.CardMemberUncheckedUpdateWithoutUserInput>
-  create: Prisma.XOR<Prisma.CardMemberCreateWithoutUserInput, Prisma.CardMemberUncheckedCreateWithoutUserInput>
-}
-
-export type CardMemberUpdateWithWhereUniqueWithoutUserInput = {
-  where: Prisma.CardMemberWhereUniqueInput
-  data: Prisma.XOR<Prisma.CardMemberUpdateWithoutUserInput, Prisma.CardMemberUncheckedUpdateWithoutUserInput>
-}
-
-export type CardMemberUpdateManyWithWhereWithoutUserInput = {
-  where: Prisma.CardMemberScalarWhereInput
-  data: Prisma.XOR<Prisma.CardMemberUpdateManyMutationInput, Prisma.CardMemberUncheckedUpdateManyWithoutUserInput>
-}
-
-export type CardMemberScalarWhereInput = {
-  AND?: Prisma.CardMemberScalarWhereInput | Prisma.CardMemberScalarWhereInput[]
-  OR?: Prisma.CardMemberScalarWhereInput[]
-  NOT?: Prisma.CardMemberScalarWhereInput | Prisma.CardMemberScalarWhereInput[]
-  id?: Prisma.StringFilter<"CardMember"> | string
-  cardId?: Prisma.StringFilter<"CardMember"> | string
-  userId?: Prisma.StringFilter<"CardMember"> | string
-  activityText?: Prisma.StringNullableFilter<"CardMember"> | string | null
-  createdAt?: Prisma.DateTimeFilter<"CardMember"> | Date | string
+export type CardMemberUncheckedUpdateManyWithoutUserNestedInput = {
+  create?: Prisma.XOR<Prisma.CardMemberCreateWithoutUserInput, Prisma.CardMemberUncheckedCreateWithoutUserInput> | Prisma.CardMemberCreateWithoutUserInput[] | Prisma.CardMemberUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.CardMemberCreateOrConnectWithoutUserInput | Prisma.CardMemberCreateOrConnectWithoutUserInput[]
+  upsert?: Prisma.CardMemberUpsertWithWhereUniqueWithoutUserInput | Prisma.CardMemberUpsertWithWhereUniqueWithoutUserInput[]
+  createMany?: Prisma.CardMemberCreateManyUserInputEnvelope
+  set?: Prisma.CardMemberWhereUniqueInput | Prisma.CardMemberWhereUniqueInput[]
+  disconnect?: Prisma.CardMemberWhereUniqueInput | Prisma.CardMemberWhereUniqueInput[]
+  delete?: Prisma.CardMemberWhereUniqueInput | Prisma.CardMemberWhereUniqueInput[]
+  connect?: Prisma.CardMemberWhereUniqueInput | Prisma.CardMemberWhereUniqueInput[]
+  update?: Prisma.CardMemberUpdateWithWhereUniqueWithoutUserInput | Prisma.CardMemberUpdateWithWhereUniqueWithoutUserInput[]
+  updateMany?: Prisma.CardMemberUpdateManyWithWhereWithoutUserInput | Prisma.CardMemberUpdateManyWithWhereWithoutUserInput[]
+  deleteMany?: Prisma.CardMemberScalarWhereInput | Prisma.CardMemberScalarWhereInput[]
 }
 
 export type CardMemberCreateWithoutCardInput = {
@@ -498,32 +448,54 @@ export type CardMemberUpdateManyWithWhereWithoutCardInput = {
   data: Prisma.XOR<Prisma.CardMemberUpdateManyMutationInput, Prisma.CardMemberUncheckedUpdateManyWithoutCardInput>
 }
 
-export type CardMemberCreateManyUserInput = {
+export type CardMemberScalarWhereInput = {
+  AND?: Prisma.CardMemberScalarWhereInput | Prisma.CardMemberScalarWhereInput[]
+  OR?: Prisma.CardMemberScalarWhereInput[]
+  NOT?: Prisma.CardMemberScalarWhereInput | Prisma.CardMemberScalarWhereInput[]
+  id?: Prisma.StringFilter<"CardMember"> | string
+  cardId?: Prisma.StringFilter<"CardMember"> | string
+  userId?: Prisma.StringFilter<"CardMember"> | string
+  activityText?: Prisma.StringNullableFilter<"CardMember"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"CardMember"> | Date | string
+}
+
+export type CardMemberCreateWithoutUserInput = {
+  id?: string
+  activityText?: string | null
+  createdAt?: Date | string
+  card: Prisma.CardCreateNestedOneWithoutMembersInput
+}
+
+export type CardMemberUncheckedCreateWithoutUserInput = {
   id?: string
   cardId: string
   activityText?: string | null
   createdAt?: Date | string
 }
 
-export type CardMemberUpdateWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  activityText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  card?: Prisma.CardUpdateOneRequiredWithoutMembersNestedInput
+export type CardMemberCreateOrConnectWithoutUserInput = {
+  where: Prisma.CardMemberWhereUniqueInput
+  create: Prisma.XOR<Prisma.CardMemberCreateWithoutUserInput, Prisma.CardMemberUncheckedCreateWithoutUserInput>
 }
 
-export type CardMemberUncheckedUpdateWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  cardId?: Prisma.StringFieldUpdateOperationsInput | string
-  activityText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+export type CardMemberCreateManyUserInputEnvelope = {
+  data: Prisma.CardMemberCreateManyUserInput | Prisma.CardMemberCreateManyUserInput[]
 }
 
-export type CardMemberUncheckedUpdateManyWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  cardId?: Prisma.StringFieldUpdateOperationsInput | string
-  activityText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+export type CardMemberUpsertWithWhereUniqueWithoutUserInput = {
+  where: Prisma.CardMemberWhereUniqueInput
+  update: Prisma.XOR<Prisma.CardMemberUpdateWithoutUserInput, Prisma.CardMemberUncheckedUpdateWithoutUserInput>
+  create: Prisma.XOR<Prisma.CardMemberCreateWithoutUserInput, Prisma.CardMemberUncheckedCreateWithoutUserInput>
+}
+
+export type CardMemberUpdateWithWhereUniqueWithoutUserInput = {
+  where: Prisma.CardMemberWhereUniqueInput
+  data: Prisma.XOR<Prisma.CardMemberUpdateWithoutUserInput, Prisma.CardMemberUncheckedUpdateWithoutUserInput>
+}
+
+export type CardMemberUpdateManyWithWhereWithoutUserInput = {
+  where: Prisma.CardMemberScalarWhereInput
+  data: Prisma.XOR<Prisma.CardMemberUpdateManyMutationInput, Prisma.CardMemberUncheckedUpdateManyWithoutUserInput>
 }
 
 export type CardMemberCreateManyCardInput = {
@@ -550,6 +522,34 @@ export type CardMemberUncheckedUpdateWithoutCardInput = {
 export type CardMemberUncheckedUpdateManyWithoutCardInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  activityText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type CardMemberCreateManyUserInput = {
+  id?: string
+  cardId: string
+  activityText?: string | null
+  createdAt?: Date | string
+}
+
+export type CardMemberUpdateWithoutUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  activityText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  card?: Prisma.CardUpdateOneRequiredWithoutMembersNestedInput
+}
+
+export type CardMemberUncheckedUpdateWithoutUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  cardId?: Prisma.StringFieldUpdateOperationsInput | string
+  activityText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type CardMemberUncheckedUpdateManyWithoutUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  cardId?: Prisma.StringFieldUpdateOperationsInput | string
   activityText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }

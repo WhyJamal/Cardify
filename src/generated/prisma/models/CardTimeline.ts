@@ -429,48 +429,6 @@ export type CardTimelineMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
-export type CardTimelineCreateNestedManyWithoutUserInput = {
-  create?: Prisma.XOR<Prisma.CardTimelineCreateWithoutUserInput, Prisma.CardTimelineUncheckedCreateWithoutUserInput> | Prisma.CardTimelineCreateWithoutUserInput[] | Prisma.CardTimelineUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.CardTimelineCreateOrConnectWithoutUserInput | Prisma.CardTimelineCreateOrConnectWithoutUserInput[]
-  createMany?: Prisma.CardTimelineCreateManyUserInputEnvelope
-  connect?: Prisma.CardTimelineWhereUniqueInput | Prisma.CardTimelineWhereUniqueInput[]
-}
-
-export type CardTimelineUncheckedCreateNestedManyWithoutUserInput = {
-  create?: Prisma.XOR<Prisma.CardTimelineCreateWithoutUserInput, Prisma.CardTimelineUncheckedCreateWithoutUserInput> | Prisma.CardTimelineCreateWithoutUserInput[] | Prisma.CardTimelineUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.CardTimelineCreateOrConnectWithoutUserInput | Prisma.CardTimelineCreateOrConnectWithoutUserInput[]
-  createMany?: Prisma.CardTimelineCreateManyUserInputEnvelope
-  connect?: Prisma.CardTimelineWhereUniqueInput | Prisma.CardTimelineWhereUniqueInput[]
-}
-
-export type CardTimelineUpdateManyWithoutUserNestedInput = {
-  create?: Prisma.XOR<Prisma.CardTimelineCreateWithoutUserInput, Prisma.CardTimelineUncheckedCreateWithoutUserInput> | Prisma.CardTimelineCreateWithoutUserInput[] | Prisma.CardTimelineUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.CardTimelineCreateOrConnectWithoutUserInput | Prisma.CardTimelineCreateOrConnectWithoutUserInput[]
-  upsert?: Prisma.CardTimelineUpsertWithWhereUniqueWithoutUserInput | Prisma.CardTimelineUpsertWithWhereUniqueWithoutUserInput[]
-  createMany?: Prisma.CardTimelineCreateManyUserInputEnvelope
-  set?: Prisma.CardTimelineWhereUniqueInput | Prisma.CardTimelineWhereUniqueInput[]
-  disconnect?: Prisma.CardTimelineWhereUniqueInput | Prisma.CardTimelineWhereUniqueInput[]
-  delete?: Prisma.CardTimelineWhereUniqueInput | Prisma.CardTimelineWhereUniqueInput[]
-  connect?: Prisma.CardTimelineWhereUniqueInput | Prisma.CardTimelineWhereUniqueInput[]
-  update?: Prisma.CardTimelineUpdateWithWhereUniqueWithoutUserInput | Prisma.CardTimelineUpdateWithWhereUniqueWithoutUserInput[]
-  updateMany?: Prisma.CardTimelineUpdateManyWithWhereWithoutUserInput | Prisma.CardTimelineUpdateManyWithWhereWithoutUserInput[]
-  deleteMany?: Prisma.CardTimelineScalarWhereInput | Prisma.CardTimelineScalarWhereInput[]
-}
-
-export type CardTimelineUncheckedUpdateManyWithoutUserNestedInput = {
-  create?: Prisma.XOR<Prisma.CardTimelineCreateWithoutUserInput, Prisma.CardTimelineUncheckedCreateWithoutUserInput> | Prisma.CardTimelineCreateWithoutUserInput[] | Prisma.CardTimelineUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.CardTimelineCreateOrConnectWithoutUserInput | Prisma.CardTimelineCreateOrConnectWithoutUserInput[]
-  upsert?: Prisma.CardTimelineUpsertWithWhereUniqueWithoutUserInput | Prisma.CardTimelineUpsertWithWhereUniqueWithoutUserInput[]
-  createMany?: Prisma.CardTimelineCreateManyUserInputEnvelope
-  set?: Prisma.CardTimelineWhereUniqueInput | Prisma.CardTimelineWhereUniqueInput[]
-  disconnect?: Prisma.CardTimelineWhereUniqueInput | Prisma.CardTimelineWhereUniqueInput[]
-  delete?: Prisma.CardTimelineWhereUniqueInput | Prisma.CardTimelineWhereUniqueInput[]
-  connect?: Prisma.CardTimelineWhereUniqueInput | Prisma.CardTimelineWhereUniqueInput[]
-  update?: Prisma.CardTimelineUpdateWithWhereUniqueWithoutUserInput | Prisma.CardTimelineUpdateWithWhereUniqueWithoutUserInput[]
-  updateMany?: Prisma.CardTimelineUpdateManyWithWhereWithoutUserInput | Prisma.CardTimelineUpdateManyWithWhereWithoutUserInput[]
-  deleteMany?: Prisma.CardTimelineScalarWhereInput | Prisma.CardTimelineScalarWhereInput[]
-}
-
 export type CardTimelineCreateNestedManyWithoutCardInput = {
   create?: Prisma.XOR<Prisma.CardTimelineCreateWithoutCardInput, Prisma.CardTimelineUncheckedCreateWithoutCardInput> | Prisma.CardTimelineCreateWithoutCardInput[] | Prisma.CardTimelineUncheckedCreateWithoutCardInput[]
   connectOrCreate?: Prisma.CardTimelineCreateOrConnectWithoutCardInput | Prisma.CardTimelineCreateOrConnectWithoutCardInput[]
@@ -517,69 +475,46 @@ export type EnumCardTimelineTypeFieldUpdateOperationsInput = {
   set?: $Enums.CardTimelineType
 }
 
-export type CardTimelineCreateWithoutUserInput = {
-  id?: string
-  type?: $Enums.CardTimelineType
-  authorName: string
-  initials?: string | null
-  text?: string | null
-  activityText?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  card: Prisma.CardCreateNestedOneWithoutCommentsInput
+export type CardTimelineCreateNestedManyWithoutUserInput = {
+  create?: Prisma.XOR<Prisma.CardTimelineCreateWithoutUserInput, Prisma.CardTimelineUncheckedCreateWithoutUserInput> | Prisma.CardTimelineCreateWithoutUserInput[] | Prisma.CardTimelineUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.CardTimelineCreateOrConnectWithoutUserInput | Prisma.CardTimelineCreateOrConnectWithoutUserInput[]
+  createMany?: Prisma.CardTimelineCreateManyUserInputEnvelope
+  connect?: Prisma.CardTimelineWhereUniqueInput | Prisma.CardTimelineWhereUniqueInput[]
 }
 
-export type CardTimelineUncheckedCreateWithoutUserInput = {
-  id?: string
-  cardId: string
-  type?: $Enums.CardTimelineType
-  authorName: string
-  initials?: string | null
-  text?: string | null
-  activityText?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
+export type CardTimelineUncheckedCreateNestedManyWithoutUserInput = {
+  create?: Prisma.XOR<Prisma.CardTimelineCreateWithoutUserInput, Prisma.CardTimelineUncheckedCreateWithoutUserInput> | Prisma.CardTimelineCreateWithoutUserInput[] | Prisma.CardTimelineUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.CardTimelineCreateOrConnectWithoutUserInput | Prisma.CardTimelineCreateOrConnectWithoutUserInput[]
+  createMany?: Prisma.CardTimelineCreateManyUserInputEnvelope
+  connect?: Prisma.CardTimelineWhereUniqueInput | Prisma.CardTimelineWhereUniqueInput[]
 }
 
-export type CardTimelineCreateOrConnectWithoutUserInput = {
-  where: Prisma.CardTimelineWhereUniqueInput
-  create: Prisma.XOR<Prisma.CardTimelineCreateWithoutUserInput, Prisma.CardTimelineUncheckedCreateWithoutUserInput>
+export type CardTimelineUpdateManyWithoutUserNestedInput = {
+  create?: Prisma.XOR<Prisma.CardTimelineCreateWithoutUserInput, Prisma.CardTimelineUncheckedCreateWithoutUserInput> | Prisma.CardTimelineCreateWithoutUserInput[] | Prisma.CardTimelineUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.CardTimelineCreateOrConnectWithoutUserInput | Prisma.CardTimelineCreateOrConnectWithoutUserInput[]
+  upsert?: Prisma.CardTimelineUpsertWithWhereUniqueWithoutUserInput | Prisma.CardTimelineUpsertWithWhereUniqueWithoutUserInput[]
+  createMany?: Prisma.CardTimelineCreateManyUserInputEnvelope
+  set?: Prisma.CardTimelineWhereUniqueInput | Prisma.CardTimelineWhereUniqueInput[]
+  disconnect?: Prisma.CardTimelineWhereUniqueInput | Prisma.CardTimelineWhereUniqueInput[]
+  delete?: Prisma.CardTimelineWhereUniqueInput | Prisma.CardTimelineWhereUniqueInput[]
+  connect?: Prisma.CardTimelineWhereUniqueInput | Prisma.CardTimelineWhereUniqueInput[]
+  update?: Prisma.CardTimelineUpdateWithWhereUniqueWithoutUserInput | Prisma.CardTimelineUpdateWithWhereUniqueWithoutUserInput[]
+  updateMany?: Prisma.CardTimelineUpdateManyWithWhereWithoutUserInput | Prisma.CardTimelineUpdateManyWithWhereWithoutUserInput[]
+  deleteMany?: Prisma.CardTimelineScalarWhereInput | Prisma.CardTimelineScalarWhereInput[]
 }
 
-export type CardTimelineCreateManyUserInputEnvelope = {
-  data: Prisma.CardTimelineCreateManyUserInput | Prisma.CardTimelineCreateManyUserInput[]
-}
-
-export type CardTimelineUpsertWithWhereUniqueWithoutUserInput = {
-  where: Prisma.CardTimelineWhereUniqueInput
-  update: Prisma.XOR<Prisma.CardTimelineUpdateWithoutUserInput, Prisma.CardTimelineUncheckedUpdateWithoutUserInput>
-  create: Prisma.XOR<Prisma.CardTimelineCreateWithoutUserInput, Prisma.CardTimelineUncheckedCreateWithoutUserInput>
-}
-
-export type CardTimelineUpdateWithWhereUniqueWithoutUserInput = {
-  where: Prisma.CardTimelineWhereUniqueInput
-  data: Prisma.XOR<Prisma.CardTimelineUpdateWithoutUserInput, Prisma.CardTimelineUncheckedUpdateWithoutUserInput>
-}
-
-export type CardTimelineUpdateManyWithWhereWithoutUserInput = {
-  where: Prisma.CardTimelineScalarWhereInput
-  data: Prisma.XOR<Prisma.CardTimelineUpdateManyMutationInput, Prisma.CardTimelineUncheckedUpdateManyWithoutUserInput>
-}
-
-export type CardTimelineScalarWhereInput = {
-  AND?: Prisma.CardTimelineScalarWhereInput | Prisma.CardTimelineScalarWhereInput[]
-  OR?: Prisma.CardTimelineScalarWhereInput[]
-  NOT?: Prisma.CardTimelineScalarWhereInput | Prisma.CardTimelineScalarWhereInput[]
-  id?: Prisma.StringFilter<"CardTimeline"> | string
-  cardId?: Prisma.StringFilter<"CardTimeline"> | string
-  userId?: Prisma.StringNullableFilter<"CardTimeline"> | string | null
-  type?: Prisma.EnumCardTimelineTypeFilter<"CardTimeline"> | $Enums.CardTimelineType
-  authorName?: Prisma.StringFilter<"CardTimeline"> | string
-  initials?: Prisma.StringNullableFilter<"CardTimeline"> | string | null
-  text?: Prisma.StringNullableFilter<"CardTimeline"> | string | null
-  activityText?: Prisma.StringNullableFilter<"CardTimeline"> | string | null
-  createdAt?: Prisma.DateTimeFilter<"CardTimeline"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"CardTimeline"> | Date | string
+export type CardTimelineUncheckedUpdateManyWithoutUserNestedInput = {
+  create?: Prisma.XOR<Prisma.CardTimelineCreateWithoutUserInput, Prisma.CardTimelineUncheckedCreateWithoutUserInput> | Prisma.CardTimelineCreateWithoutUserInput[] | Prisma.CardTimelineUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.CardTimelineCreateOrConnectWithoutUserInput | Prisma.CardTimelineCreateOrConnectWithoutUserInput[]
+  upsert?: Prisma.CardTimelineUpsertWithWhereUniqueWithoutUserInput | Prisma.CardTimelineUpsertWithWhereUniqueWithoutUserInput[]
+  createMany?: Prisma.CardTimelineCreateManyUserInputEnvelope
+  set?: Prisma.CardTimelineWhereUniqueInput | Prisma.CardTimelineWhereUniqueInput[]
+  disconnect?: Prisma.CardTimelineWhereUniqueInput | Prisma.CardTimelineWhereUniqueInput[]
+  delete?: Prisma.CardTimelineWhereUniqueInput | Prisma.CardTimelineWhereUniqueInput[]
+  connect?: Prisma.CardTimelineWhereUniqueInput | Prisma.CardTimelineWhereUniqueInput[]
+  update?: Prisma.CardTimelineUpdateWithWhereUniqueWithoutUserInput | Prisma.CardTimelineUpdateWithWhereUniqueWithoutUserInput[]
+  updateMany?: Prisma.CardTimelineUpdateManyWithWhereWithoutUserInput | Prisma.CardTimelineUpdateManyWithWhereWithoutUserInput[]
+  deleteMany?: Prisma.CardTimelineScalarWhereInput | Prisma.CardTimelineScalarWhereInput[]
 }
 
 export type CardTimelineCreateWithoutCardInput = {
@@ -631,7 +566,35 @@ export type CardTimelineUpdateManyWithWhereWithoutCardInput = {
   data: Prisma.XOR<Prisma.CardTimelineUpdateManyMutationInput, Prisma.CardTimelineUncheckedUpdateManyWithoutCardInput>
 }
 
-export type CardTimelineCreateManyUserInput = {
+export type CardTimelineScalarWhereInput = {
+  AND?: Prisma.CardTimelineScalarWhereInput | Prisma.CardTimelineScalarWhereInput[]
+  OR?: Prisma.CardTimelineScalarWhereInput[]
+  NOT?: Prisma.CardTimelineScalarWhereInput | Prisma.CardTimelineScalarWhereInput[]
+  id?: Prisma.StringFilter<"CardTimeline"> | string
+  cardId?: Prisma.StringFilter<"CardTimeline"> | string
+  userId?: Prisma.StringNullableFilter<"CardTimeline"> | string | null
+  type?: Prisma.EnumCardTimelineTypeFilter<"CardTimeline"> | $Enums.CardTimelineType
+  authorName?: Prisma.StringFilter<"CardTimeline"> | string
+  initials?: Prisma.StringNullableFilter<"CardTimeline"> | string | null
+  text?: Prisma.StringNullableFilter<"CardTimeline"> | string | null
+  activityText?: Prisma.StringNullableFilter<"CardTimeline"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"CardTimeline"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"CardTimeline"> | Date | string
+}
+
+export type CardTimelineCreateWithoutUserInput = {
+  id?: string
+  type?: $Enums.CardTimelineType
+  authorName: string
+  initials?: string | null
+  text?: string | null
+  activityText?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  card: Prisma.CardCreateNestedOneWithoutCommentsInput
+}
+
+export type CardTimelineUncheckedCreateWithoutUserInput = {
   id?: string
   cardId: string
   type?: $Enums.CardTimelineType
@@ -643,40 +606,29 @@ export type CardTimelineCreateManyUserInput = {
   updatedAt?: Date | string
 }
 
-export type CardTimelineUpdateWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.EnumCardTimelineTypeFieldUpdateOperationsInput | $Enums.CardTimelineType
-  authorName?: Prisma.StringFieldUpdateOperationsInput | string
-  initials?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  activityText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  card?: Prisma.CardUpdateOneRequiredWithoutCommentsNestedInput
+export type CardTimelineCreateOrConnectWithoutUserInput = {
+  where: Prisma.CardTimelineWhereUniqueInput
+  create: Prisma.XOR<Prisma.CardTimelineCreateWithoutUserInput, Prisma.CardTimelineUncheckedCreateWithoutUserInput>
 }
 
-export type CardTimelineUncheckedUpdateWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  cardId?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.EnumCardTimelineTypeFieldUpdateOperationsInput | $Enums.CardTimelineType
-  authorName?: Prisma.StringFieldUpdateOperationsInput | string
-  initials?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  activityText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+export type CardTimelineCreateManyUserInputEnvelope = {
+  data: Prisma.CardTimelineCreateManyUserInput | Prisma.CardTimelineCreateManyUserInput[]
 }
 
-export type CardTimelineUncheckedUpdateManyWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  cardId?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.EnumCardTimelineTypeFieldUpdateOperationsInput | $Enums.CardTimelineType
-  authorName?: Prisma.StringFieldUpdateOperationsInput | string
-  initials?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  activityText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+export type CardTimelineUpsertWithWhereUniqueWithoutUserInput = {
+  where: Prisma.CardTimelineWhereUniqueInput
+  update: Prisma.XOR<Prisma.CardTimelineUpdateWithoutUserInput, Prisma.CardTimelineUncheckedUpdateWithoutUserInput>
+  create: Prisma.XOR<Prisma.CardTimelineCreateWithoutUserInput, Prisma.CardTimelineUncheckedCreateWithoutUserInput>
+}
+
+export type CardTimelineUpdateWithWhereUniqueWithoutUserInput = {
+  where: Prisma.CardTimelineWhereUniqueInput
+  data: Prisma.XOR<Prisma.CardTimelineUpdateWithoutUserInput, Prisma.CardTimelineUncheckedUpdateWithoutUserInput>
+}
+
+export type CardTimelineUpdateManyWithWhereWithoutUserInput = {
+  where: Prisma.CardTimelineScalarWhereInput
+  data: Prisma.XOR<Prisma.CardTimelineUpdateManyMutationInput, Prisma.CardTimelineUncheckedUpdateManyWithoutUserInput>
 }
 
 export type CardTimelineCreateManyCardInput = {
@@ -718,6 +670,54 @@ export type CardTimelineUncheckedUpdateWithoutCardInput = {
 export type CardTimelineUncheckedUpdateManyWithoutCardInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumCardTimelineTypeFieldUpdateOperationsInput | $Enums.CardTimelineType
+  authorName?: Prisma.StringFieldUpdateOperationsInput | string
+  initials?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activityText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type CardTimelineCreateManyUserInput = {
+  id?: string
+  cardId: string
+  type?: $Enums.CardTimelineType
+  authorName: string
+  initials?: string | null
+  text?: string | null
+  activityText?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type CardTimelineUpdateWithoutUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumCardTimelineTypeFieldUpdateOperationsInput | $Enums.CardTimelineType
+  authorName?: Prisma.StringFieldUpdateOperationsInput | string
+  initials?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activityText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  card?: Prisma.CardUpdateOneRequiredWithoutCommentsNestedInput
+}
+
+export type CardTimelineUncheckedUpdateWithoutUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  cardId?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumCardTimelineTypeFieldUpdateOperationsInput | $Enums.CardTimelineType
+  authorName?: Prisma.StringFieldUpdateOperationsInput | string
+  initials?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activityText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type CardTimelineUncheckedUpdateManyWithoutUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  cardId?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumCardTimelineTypeFieldUpdateOperationsInput | $Enums.CardTimelineType
   authorName?: Prisma.StringFieldUpdateOperationsInput | string
   initials?: Prisma.NullableStringFieldUpdateOperationsInput | string | null

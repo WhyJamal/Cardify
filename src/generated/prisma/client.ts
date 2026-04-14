@@ -31,8 +31,8 @@ export * from "./enums"
  * const prisma = new PrismaClient({
  *   adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL })
  * })
- * // Fetch zero or more Users
- * const users = await prisma.user.findMany()
+ * // Fetch zero or more Boards
+ * const boards = await prisma.board.findMany()
  * ```
  * 
  * Read more in our [docs](https://pris.ly/d/client).
@@ -41,36 +41,6 @@ export const PrismaClient = $Class.getPrismaClientClass()
 export type PrismaClient<LogOpts extends Prisma.LogLevel = never, OmitOpts extends Prisma.PrismaClientOptions["omit"] = Prisma.PrismaClientOptions["omit"], ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = $Class.PrismaClient<LogOpts, OmitOpts, ExtArgs>
 export { Prisma }
 
-/**
- * Model User
- * 
- */
-export type User = Prisma.UserModel
-/**
- * Model UserTaskAction
- * 
- */
-export type UserTaskAction = Prisma.UserTaskActionModel
-/**
- * Model Workspace
- * 
- */
-export type Workspace = Prisma.WorkspaceModel
-/**
- * Model WorkspaceType
- * 
- */
-export type WorkspaceType = Prisma.WorkspaceTypeModel
-/**
- * Model WorkspaceMember
- * 
- */
-export type WorkspaceMember = Prisma.WorkspaceMemberModel
-/**
- * Model Notification
- * 
- */
-export type Notification = Prisma.NotificationModel
 /**
  * Model Board
  * 
@@ -86,11 +56,6 @@ export type BoardMember = Prisma.BoardMemberModel
  * 
  */
 export type BoardLabel = Prisma.BoardLabelModel
-/**
- * Model Column
- * 
- */
-export type Column = Prisma.ColumnModel
 /**
  * Model Card
  * 
@@ -122,7 +87,42 @@ export type CardMember = Prisma.CardMemberModel
  */
 export type CardAttachment = Prisma.CardAttachmentModel
 /**
- * Model Location
+ * Model CardLocation
  * 
  */
-export type Location = Prisma.LocationModel
+export type CardLocation = Prisma.CardLocationModel
+/**
+ * Model Column
+ * 
+ */
+export type Column = Prisma.ColumnModel
+/**
+ * Model Notification
+ * 
+ */
+export type Notification = Prisma.NotificationModel
+/**
+ * Model User
+ * 
+ */
+export type User = Prisma.UserModel
+/**
+ * Model UserTaskAction
+ * 
+ */
+export type UserTaskAction = Prisma.UserTaskActionModel
+/**
+ * Model Workspace
+ * 
+ */
+export type Workspace = Prisma.WorkspaceModel
+/**
+ * Model WorkspaceType
+ * 
+ */
+export type WorkspaceType = Prisma.WorkspaceTypeModel
+/**
+ * Model WorkspaceMember
+ * 
+ */
+export type WorkspaceMember = Prisma.WorkspaceMemberModel

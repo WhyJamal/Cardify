@@ -1,0 +1,142 @@
+enum SizeOption {
+  WIDE
+  TALL
+}
+
+enum CardTimelineType {
+  COMMENT
+  ACTIVITY
+}
+
+model Card {
+  id               String    @id @default(cuid())
+  title            String?
+  image            String?
+  numberBadge      Int?
+  description      String?
+  hasDescription   Boolean   @default(false)
+  watching         Boolean   @default(false)
+  checklistDone    Int       @default(0)
+  checklistTotal   Int       @default(0)
+  assigneeInitials String?
+  assigneeColor    String?
+  position         Int       @default(0)
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+  dueDate          DateTime?
+  isCompleted      Boolean   @default(false)
+
+  isImage    Boolean    @default(false)
+  background String?
+  size       SizeOption @default(WIDE)
+  textColor  String?
+
+  isArchive Boolean @default(false)
+
+  columnId         String
+  column      Column           @relation(fields: [columnId], references: [id], onDelete: Cascade)
+
+  labels      CardBoardLabel[]
+  links       CardLink[]
+  comments    CardTimeline[]
+  members     CardMember[]
+  attachments CardAttachment[]
+
+  locationId String?   @unique
+  location   CardLocation? @relation(fields: [locationId], references: [id])
+
+  ownerId String?
+  owner   User?   @relation("CardOwner", fields: [ownerId], references: [id])
+
+  userTaskActions UserTaskAction[]
+
+  @@index([columnId, position])
+}
+
+model CardBoardLabel {
+  id           String @id @default(cuid())
+  cardId       String
+  boardLabelId String
+
+  card       Card       @relation(fields: [cardId], references: [id], onDelete: Cascade)
+  boardLabel BoardLabel @relation(fields: [boardLabelId], references: [id])
+
+  @@unique([cardId, boardLabelId])
+  @@index([cardId, boardLabelId])
+}
+
+model CardLink {
+  id        String   @id @default(cuid())
+  cardId    String
+  icon      String?
+  text      String
+  url       String?
+  position  Int      @default(0)
+  createdAt DateTime @default(now())
+
+  card Card @relation(fields: [cardId], references: [id], onDelete: Cascade)
+
+  @@index([cardId])
+}
+
+model CardTimeline {
+  id           String           @id @default(cuid())
+  cardId       String
+  userId       String?
+  type         CardTimelineType @default(COMMENT)
+  authorName   String
+  initials     String?
+  text         String?
+  activityText String?
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+
+  card Card  @relation(fields: [cardId], references: [id], onDelete: Cascade)
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([cardId, createdAt])
+  @@index([userId])
+}
+
+model CardMember {
+  id     String @id @default(cuid())
+  cardId String
+  userId String
+
+  card Card @relation(fields: [cardId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  activityText String?
+  createdAt    DateTime @default(now())
+
+  @@unique([cardId, userId])
+  @@index([cardId])
+  @@index([userId])
+}
+
+model CardAttachment {
+  id         String   @id @default(cuid())
+  cardId     String
+  fileName   String
+  fileUrl    String
+  fileSize   Int?
+  mimeType   String?
+  uploadedBy String?
+  createdAt  DateTime @default(now())
+
+  card Card @relation(fields: [cardId], references: [id], onDelete: Cascade)
+
+  @@index([cardId])
+}
+
+model CardLocation {
+  id          String   @id @default(cuid())
+  name        String
+  fullAddress String
+  lat         Float
+  lng         Float
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  card Card?
+}
